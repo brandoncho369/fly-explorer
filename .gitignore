@@ -1,0 +1,9 @@
+node_modules/
+.next/
+out/
+.env*
+*.log
+# real connectome exports are big; regenerate with `flybench export`
+public/data/*
+!public/data/toy/
+!public/data/.gitkeep
