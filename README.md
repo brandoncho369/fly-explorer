@@ -12,7 +12,8 @@ Nothing is scripted. There is no per-neuron tuning. When MN9 lights up, the wiri
 
 ```
 public/data/<name>/      compact binary export (positions, CSR graph, classes, population index)
-src/workers/lif.worker   the simulation — LIF integration + event-driven synaptic propagation
+src/lib/lif              the simulation core (pure TypeScript, unit-tested): LIF integration + event-driven propagation
+src/workers/lif.worker   Web Worker wrapper: loads the export, steps the core, posts activity per frame
 src/components/Brain     three.js point cloud; per-neuron activity → colour/size via a small shader
 src/app/page             controls, readouts, worker plumbing
 ```
@@ -34,9 +35,18 @@ npm install
 npm run dev        # http://localhost:3000, loads the toy connectome
 ```
 
+## Tests
+
+```bash
+npm test                 # vitest: the LIF core (propagation, inhibition, refractory, delay, gain, determinism)
+npm run lint && npm run build
+npm start -- -p 3123 &   # then, with playwright available:
+node scripts/smoke.mjs   # headless click-through: hints, stimulate, reset, pause, real-dataset reflexes
+```
+
 ## Loading FlyWire
 
-The real export is ~35 MB and isn't committed. Build it once with [flybench](../flybench):
+The real v783 export (32 MB) is committed so the site deploys as-is. To rebuild it, or export another connectome, use [flybench](../flybench):
 
 ```bash
 # in ../flybench, after downloading the Codex v783 CSVs (free account) — see its README
