@@ -115,7 +115,7 @@ export default function Page() {
     <main className="h-dvh w-full grid grid-cols-1 lg:grid-cols-[360px_1fr] bg-[#07080c] text-zinc-200">
       <aside className="order-2 lg:order-1 overflow-y-auto border-t lg:border-t-0 lg:border-r border-zinc-800 p-4 space-y-5 text-sm">
         <header>
-          <h1 className="text-lg font-semibold tracking-tight">fly-explorer</h1>
+          <div className="flex items-baseline justify-between"><h1 className="text-lg font-semibold tracking-tight">fly-explorer</h1><a href="/bench" className="text-xs text-amber-300 hover:text-amber-200">benchmark →</a></div>
           <p className="text-zinc-400 text-xs mt-1">A fruit-fly connectome running as a leaky integrate-and-fire network, live, in your browser. Poke a sense; watch the wiring answer.</p>
         </header>
 
@@ -184,7 +184,7 @@ export default function Page() {
             <div className="space-y-2 leading-relaxed">
               <p>Each dot is a neuron from the FlyWire connectome (or the synthetic toy). Edges are synapse counts; each neuron is the same 5-constant leaky integrate-and-fire unit from Shiu et al. 2024. Nothing is learned or hand-tuned per neuron: when sugar lights up MN9, the wiring did that.</p>
               <p>It is <b>not</b> a fly. No neuromodulators, no gap junctions, no plasticity, no spontaneous activity, no body. Firing rates are only meaningful relative to each other. Nothing in here experiences anything — it is a very large, very fast truth table of &ldquo;if these fire, those fire.&rdquo;</p>
-              <p>Benchmark whether a parameter choice still reproduces known reflexes with the sibling project <b>flybench</b>.</p>
+              <p>Benchmark whether a parameter choice still reproduces known reflexes on the <a href="/bench" className="underline text-amber-300">flybench</a> page, or on <a href="https://github.com/brandoncho369/fly-explorer" className="underline">GitHub</a>.</p>
             </div>
           )}
         </section>

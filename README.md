@@ -1,6 +1,6 @@
 # fly-explorer
 
-**A fruit fly connectome running as a spiking neural network, live, in your browser.**
+**A fruit fly connectome running as a spiking neural network, live, in your browser.** Live at [www.fly-bench.com](https://www.fly-bench.com); the benchmark that keeps it honest is at [/bench](https://www.fly-bench.com/bench).
 
 Each dot is one of the ~140,000 neurons in the [FlyWire](https://flywire.ai) adult *Drosophila* connectome. Each edge is a real synapse count. Every neuron is the same five-constant leaky integrate-and-fire unit from [Shiu et al. 2024 (Nature)](https://www.nature.com/articles/s41586-024-07763-9). Press **sugar GRNs** and watch the activity propagate from the taste receptors through the subesophageal zone to **MN9**, the motor neuron that extends the proboscis. Press **looming** and watch the **Giant Fiber** fire. Add **bitter** on top of sugar and watch MN9 go quiet.
 
