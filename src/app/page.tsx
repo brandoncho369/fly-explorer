@@ -5,6 +5,7 @@ import Link from "next/link";
 import { guideKey, type GuideKey } from "@/lib/guide";
 import { Meta, SHIU_2024, WorkerCommand, WorkerEvent } from "@/lib/types";
 import { Explain, HELP, HelpPanel, HelpProvider } from "@/components/Hint";
+import { CellTypes } from "@/components/CellTypes";
 
 const Brain = dynamic(() => import("@/components/Brain"), { ssr: false });
 
@@ -56,6 +57,7 @@ function PageInner() {
   const [pressed, setPressed] = useState(false);           // has the visitor fired any sense yet
   const [stimEndT, setStimEndT] = useState<number | null>(null);   // sim time when the last stimulus ended
   const urlGain = useRef<number | null>(null);             // ?gain=0.45 from /submit's preview link
+  const [report, setReport] = useState<{ counts: Uint32Array; sinceMs: number } | null>(null);
   const loading = !meta && !error;
 
   const send = useCallback((cmd: WorkerCommand, transfer?: Transferable[]) => workerRef.current?.postMessage(cmd, transfer ?? []), []);
@@ -66,6 +68,7 @@ function PageInner() {
     w.onmessage = (ev: MessageEvent<WorkerEvent>) => {
       const e = ev.data;
       if (e.type === "progress") setStatus(e.message);
+      else if (e.type === "report") setReport({ counts: e.counts, sinceMs: e.sinceMs });
       else if (e.type === "error") { setError(e.message); setStatus("error"); setRunning(false); }
       else if (e.type === "loaded") {
         setMeta(e.meta); setPositions(e.positions); setClasses(e.classes); setError(null); setDataset(e.meta.name);
@@ -114,21 +117,22 @@ function PageInner() {
     send({ type: "load", base: `/data/${id}` });
   };
 
-  const stimulate = (name: string, durationMs = 500) => {
-    const idx = meta?.populations[name];
+  const stimulate = (name: string, durationMs = 500, neurons?: Int32Array) => {
+    const idx = neurons ?? (meta?.populations[name] ? Int32Array.from(meta.populations[name]) : undefined);
     if (!idx?.length) return;
     setPressed(true);
-    send({ type: "stim", name, neurons: Int32Array.from(idx), rateHz, durationMs });
+    send({ type: "stim", name, neurons: idx, rateHz, durationMs });
   };
   const [held, setHeld] = useState<Set<string>>(new Set());
-  const toggleHold = (name: string) => {
+  const toggleHold = (name: string, neurons?: Int32Array) => {
     setHeld((prev) => {
       const s = new Set(prev);
       if (s.has(name)) { s.delete(name); send({ type: "stopStim", name }); }
-      else { s.add(name); stimulate(name, Number.POSITIVE_INFINITY); }
+      else { s.add(name); stimulate(name, Number.POSITIVE_INFINITY, neurons); }
       return s;
     });
   };
+  const requestReport = useCallback(() => send({ type: "report" }), [send]);
   const releaseAll = () => { held.forEach((name) => send({ type: "stopStim", name })); setHeld(new Set()); };
 
   const stimSets = useMemo(() => (meta ? Object.keys(meta.populations).filter((k) => !READOUTS.includes(k)) : []), [meta]);
@@ -199,6 +203,10 @@ function PageInner() {
           </Explain>
         </section>
 
+        <CellTypes base={`/data/${dataset}`} ready={!!meta} gain={gain} activeStims={frame?.activeStims ?? []} held={held}
+          onFire={(name, neurons, hold) => (hold ? toggleHold(name, neurons) : stimulate(name, 500, neurons))}
+          requestReport={requestReport} report={report} onClear={() => { send({ type: "clearCounts" }); setReport(null); }} />
+
         <section className="space-y-2">
           <Explain title="readouts" text={HELP.readouts}><label className="text-xs uppercase tracking-wide text-zinc-500 block">readouts <span className="normal-case tracking-normal text-zinc-600">· Hz per neuron, last 100 ms</span></label></Explain>
           {readouts.map((k) => (
@@ -223,7 +231,7 @@ function PageInner() {
           <Explain title="speed" text={HELP.speed}><Slider label="speed" value={speedIdx} min={0} max={SPEEDS.length - 1} step={1} onChange={setSpeedIdx} fmt={(i) => `${SPEEDS[i]}× real time (target)`} /></Explain>
           <div className="flex flex-wrap gap-2 pt-1">
             <Explain title="pause / run" text={HELP.pause}><button onClick={() => setRunning((r) => !r)} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">{running ? "pause" : "run"}</button></Explain>
-            <Explain title="reset" text={HELP.reset}><button onClick={() => { setHeld(new Set()); setStimEndT(null); send({ type: "reset" }); }} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
+            <Explain title="reset" text={HELP.reset}><button onClick={() => { setHeld(new Set()); setStimEndT(null); setReport(null); send({ type: "reset" }); }} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
             <Explain title="gain preset: Shiu 2024" text={HELP.presetShiu}><button onClick={() => setGain(SHIU_2024.gain)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: Shiu 2024</button></Explain>
             <Explain title="gain preset: flybench" text={HELP.presetFlybench}><button onClick={() => setGain(0.45)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: flybench</button></Explain>
           </div>

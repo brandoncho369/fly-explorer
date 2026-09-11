@@ -70,6 +70,18 @@ await p.getByRole("button", { name: "reset", exact: true }).click();
 await p.waitForTimeout(500);
 check(/Quiet/.test(await guide()), "guide: quiet after reset");
 
+// cell-type search: find and fire a type by name, then see it in the "what fired" table
+await p.getByRole("button", { name: "reset", exact: true }).click();
+const search = p.getByLabel("cell type search");
+await search.fill("ORN");
+await p.getByRole("listbox").getByRole("option").first().click();
+check(/fire ORN/.test(await p.getByTestId("celltypes").innerText()), "cell type picked from search");
+await p.getByRole("button", { name: /^fire ORN/ }).click();
+let fired = ""; for (let i = 0; i < 20 && !/ORN/.test(fired); i++) { await p.waitForTimeout(400); fired = (await p.getByTestId("fired-table").innerText().catch(() => "")); }
+check(/ORN.*input/.test(fired.replace(/\n/g, " ")), "what-fired table lists the stimulated type as input");
+check(/Toy network/.test(await p.getByTestId("trust").innerText()), "trust line: toy disclaimer");
+await p.getByRole("button", { name: "reset", exact: true }).click();
+
 // hold toggle: sense stays on, release stops it
 await p.getByRole("button", { name: "reset", exact: true }).click();
 await p.getByRole("button", { name: "hold sugar GRNs" }).click();
@@ -93,6 +105,9 @@ if (r.ok()) {
   // the real brain steps slowly in headless Chromium (~0.01x real time), so poll until it fires or 20 s pass
   peak = 0; for (let i = 0; i < 50 && peak <= 10; i++) { await p.waitForTimeout(400); peak = Math.max(peak, await mn9()); }
   check(peak > 10, `flywire: sugar drives MN9 (peak ${peak} Hz)`);
+  check(/gain 0.45.*5\/5 core/.test(await p.getByTestId("trust").innerText()), "trust line quotes the benchmark at this gain");
+  await p.getByLabel("cell type search").fill("DNp0");
+  check((await p.getByRole("listbox").getByRole("option").count()) >= 3, "real cell types searchable (DNp0…)");
   await p.getByRole("button", { name: "reset", exact: true }).click();
   await p.waitForTimeout(500);
   await p.getByRole("button", { name: /^looming/ }).click();

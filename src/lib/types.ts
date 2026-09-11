@@ -43,12 +43,15 @@ export type WorkerCommand =
   | { type: "run"; running: boolean }
   | { type: "speed"; target: number }   // target simulated-seconds per wall-second (1 = real time)
   | { type: "ack" }
+  | { type: "report" }          // ask for per-neuron spike counts since the last reset/clearCounts
+  | { type: "clearCounts" }
   | { type: "reset" };
 
 // ---- worker -> main
 export type WorkerEvent =
   | { type: "loaded"; meta: Meta; positions: Float32Array; classes: Uint8Array }
   | { type: "progress"; message: string }
+  | { type: "report"; counts: Uint32Array; sinceMs: number; t: number }
   | {
       type: "frame";
       t: number;

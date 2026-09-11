@@ -23,6 +23,8 @@ const TICK_MS = 16, BUDGET_MS = 12;
 let simMsWindow = 0, wallMsWindow = 0, achieved = 0;
 let timer: ReturnType<typeof setTimeout> | null = null;
 let loadToken = 0;
+let spikeCounts: Uint32Array | null = null;   // per-neuron spikes since the last reset / clearCounts, for the "what fired" table
+let countsSince = 0;
 let awaitingAck = false;   // back-pressure: never let frames pile up on a slow main thread
 
 function frame() {
@@ -36,6 +38,7 @@ function frame() {
     const f = net.step();
     steps++;
     fired += f.length;
+    if (spikeCounts) for (let a = 0; a < f.length; a++) spikeCounts[f[a]]++;
     netRate.push(f.length);
     for (let p = 0; p < popNames.length; p++) {
       let c = 0;
@@ -99,6 +102,7 @@ async function load(base: string) {
     return mask;
   });
   net = new LIFNetwork({ n: m.n, indptr, indices, weights }, { ...SHIU_2024 });
+  spikeCounts = new Uint32Array(m.n); countsSince = 0;
   popRates = popNames.map((name) => new RateWindow(RATE_WINDOW_STEPS, net!.params.dt, m.populations[name].length));
   netRate = new RateWindow(RATE_WINDOW_STEPS, net.params.dt, m.n);
   const positions = new Float32Array(pos);
@@ -136,6 +140,13 @@ ctx.onmessage = async (ev: MessageEvent<WorkerCommand>) => {
         net?.reset();
         netRate?.clear();
         popRates.forEach((r) => r.clear());
+        if (spikeCounts) { spikeCounts.fill(0); countsSince = 0; }
+        break;
+      case "clearCounts":
+        if (spikeCounts && net) { spikeCounts.fill(0); countsSince = net.t; }
+        break;
+      case "report":
+        if (spikeCounts && net) post({ type: "report", counts: spikeCounts.slice(), sinceMs: net.t - countsSince, t: net.t });
         break;
     }
   } catch (e) {
