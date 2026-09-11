@@ -3,6 +3,272 @@
  "source": "https://github.com/brandoncho369/flybench",
  "runs": [
   {
+   "label": "Adaptive LIF (b 2 mV, tau 200 ms)",
+   "connectome": "flywire783",
+   "simulator": "flybench.models.adaptive_lif.AdaptiveLIFSimulator",
+   "gain": 0.45,
+   "w_syn": 0.275,
+   "core": 1.0,
+   "hard": 0.8214285714285714,
+   "seeds": 3,
+   "verified": true,
+   "max_active": 0.1052673153567197,
+   "tasks": {
+    "stability": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "sugar_to_proboscis": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 25]",
+       "v": 43.63636363636363,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar] / rate[baseline] > 5.0  [3/3 seeds, sd 2.5e+04]",
+       "v": 43637.363636363625,
+       "ok": true
+      },
+      {
+       "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 0.00354]",
+       "v": 0.007154740105083002,
+       "ok": true
+      }
+     ]
+    },
+    "bitter_suppression": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 25]",
+       "v": 43.63636363636363,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [3/3 seeds, sd 4.4e-05]",
+       "v": 4.772851415439324e-05,
+       "ok": true
+      }
+     ]
+    },
+    "looming_to_giant_fiber": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 3.67]",
+       "v": 390.4761904761904,
+       "ok": true
+      },
+      {
+       "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 3.67e+03]",
+       "v": 390477.1904761905,
+       "ok": true
+      },
+      {
+       "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 2.89e-05]",
+       "v": 0.008966763611121085,
+       "ok": true
+      }
+     ]
+    },
+    "taste_specificity": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[bitter] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 8.96e-06]",
+       "v": 0.0006558711237178797,
+       "ok": true
+      }
+     ]
+    },
+    "dose_response": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[strong] > 5.0 Hz  [3/3 seeds, sd 25]",
+       "v": 43.63636363636363,
+       "ok": true
+      },
+      {
+       "d": "rate[weak] / rate[strong] < 0.6  [3/3 seeds, sd 4.4e-05]",
+       "v": 4.772851415439324e-05,
+       "ok": true
+      },
+      {
+       "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 25]",
+       "v": 43.63636363636363,
+       "ok": true
+      }
+     ]
+    },
+    "adaptation": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[two_pulses] > 5.0 Hz  [3/3 seeds, sd 39.2]",
+       "v": 68.57142857142857,
+       "ok": true
+      },
+      {
+       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [2/3 seeds, sd 3.44]",
+       "v": 2.5411481695934364,
+       "ok": false
+      }
+     ]
+    },
+    "olfactory_sparse_coding": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.269]",
+       "v": 233.11546840958604,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 269]",
+       "v": 233116.46840958603,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0]",
+       "v": 0.8811188811188811,
+       "ok": false
+      },
+      {
+       "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 0.000312]",
+       "v": 0.05972017761181526,
+       "ok": false
+      }
+     ]
+    },
+    "crosstalk": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 25]",
+       "v": 43.63636363636363,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 5.95]",
+       "v": 336.06060606060606,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, mn9] < 2.0 Hz  [3/3 seeds, sd 0.429]",
+       "v": 0.6060606060606061,
+       "ok": true
+      }
+     ]
+    },
+    "looming_dn_ensemble": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 3.67]",
+       "v": 390.4761904761904,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 2.76]",
+       "v": 131.84523809523807,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[loom, all_dn] < 0.15  [3/3 seeds, sd 0.00289]",
+       "v": 0.1289910600255428,
+       "ok": true
+      }
+     ]
+    },
+    "flash_is_not_loom": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 0.000291]",
+       "v": 0.1052673153567197,
+       "ok": true
+      }
+     ]
+    },
+    "return_to_rest": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 30.5]",
+       "v": 53.333333333333336,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[sugar, 1700-2000ms] < 0.01  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    }
+   }
+  },
+  {
    "label": "LIF gain 0.3",
    "connectome": "flywire783",
    "simulator": "LIFSimulator",
