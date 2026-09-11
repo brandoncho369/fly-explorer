@@ -23,6 +23,12 @@ export function bestPerGain(runs: Run[]): Run[] {
   return [...by.values()].sort((a, b) => a.gain - b.gain);
 }
 
+/** The dataset the headline findings are computed on; other connectomes are shown as separate experiments, never mixed into the sweep. */
+export const PRIMARY_CONNECTOME = "flywire783";
+export const CONNECTOME_NAMES: Record<string, string> = { flywire783: "FlyWire v783 (female brain)", malecns: "MaleCNS v1.0 (male CNS, the Minecraft brain)" };
+export const byConnectome = (runs: Run[], name: string): Run[] => runs.filter((r) => r.connectome === name);
+export const otherConnectomes = (runs: Run[]): string[] => [...new Set(runs.map((r) => r.connectome))].filter((c) => c !== PRIMARY_CONNECTOME).sort();
+
 export function gainWindow(runs: Run[]): { lo: number; hi: number } | null {
   const ok = bestPerGain(runs).filter((r) => r.core === 1).map((r) => r.gain).sort((a, b) => a - b);
   if (!ok.length) return null;
@@ -36,6 +42,7 @@ export function verdict(run: Run): string {
   const failed = (n: string) => t[n] && !t[n].passed;
   if (failed("stability")) return "fires with no input at all";
   if (failed("sugar_to_proboscis") && (t.sugar_to_proboscis?.checks[0]?.v ?? 0) === 0) return "taste never reaches the proboscis";
+  if (failed("sugar_to_proboscis") && t.sugar_to_proboscis?.checks[2]?.ok) return "taste barely reaches the proboscis";
   if (failed("sugar_to_proboscis") || failed("looming_to_giant_fiber")) return "too much of the brain fires";
   if (failed("bitter_suppression")) return "bitter can no longer cancel sugar";
   if (failed("taste_specificity")) return "bitter alone extends the proboscis";

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import snapshot from "@/data/leaderboard.json";
 import GainChart from "@/components/GainChart";
-import { bestPerGain, gainWindow, pct, rankRuns, score2, validateSnapshot, verdict, type Snapshot } from "@/lib/bench";
+import { CONNECTOME_NAMES, PRIMARY_CONNECTOME, bestPerGain, byConnectome, gainWindow, otherConnectomes, pct, rankRuns, score2, validateSnapshot, verdict, type Snapshot } from "@/lib/bench";
 
 export const metadata: Metadata = {
   title: "flybench — does the simulated fly still behave like a fly?",
@@ -15,12 +15,14 @@ const problems = validateSnapshot(snap);
 if (problems.length) throw new Error("leaderboard.json is inconsistent:\n" + problems.join("\n"));
 
 export default function Bench() {
-  const runs = rankRuns(snap.runs);
+  const primary = byConnectome(snap.runs, PRIMARY_CONNECTOME);
+  const runs = rankRuns(primary);
   const tasks = snap.tasks;
   const core = tasks.filter((t) => t.tier === "core"), hard = tasks.filter((t) => t.tier === "hard");
-  const win = gainWindow(snap.runs);
+  const win = gainWindow(primary);
   const best = runs[0];
-  const sweep = bestPerGain(snap.runs);
+  const sweep = bestPerGain(primary);
+  const others = otherConnectomes(snap.runs).map((c) => ({ name: c, title: CONNECTOME_NAMES[c] ?? c, runs: bestPerGain(byConnectome(snap.runs, c)) }));
   const shiu = sweep.find((r) => r.gain === 1);
   const cls = "rounded-lg border border-zinc-800 bg-zinc-900/40";
 
@@ -101,11 +103,41 @@ flybench submit results/mine.json   # validates, commits, opens the PR`}</code><
           </p>
         </section>
 
+        {/* other connectomes: same instrument, different animal */}
+        {others.map((o) => (
+          <section key={o.name} className="space-y-4">
+            <h2 className="text-2xl font-semibold tracking-tight">Same model, {o.name === "malecns" ? "the Minecraft brain" : o.title}</h2>
+            {o.name === "malecns" && (
+              <p className="text-zinc-400 max-w-2xl leading-relaxed">
+                The viral Minecraft and Beat Saber demos ran this same model on Janelia&apos;s <b className="text-zinc-300">male</b> CNS connectome at gain 0.65. We pulled that exact dataset from neuPrint (176k neurons, brain plus nerve cord) and scored it. There is no single gain that works: at 0.45 looming is clean but sugar never reaches the proboscis; at 0.65 sugar works but bitter also triggers feeding, 39% of descending neurons fire at a shadow, and the brain never quiets down. In between, sugar passes on one seed out of three. The taste pathway is also handicapped by the dataset itself: 13% of the male sugar neurons are predicted glutamatergic, which the model treats as inhibitory. Different animal, different annotations, same five constants. Details in <a className="underline hover:text-zinc-300" href={`${REPO}/blob/HEAD/docs/MALECNS.md`}>docs/MALECNS.md</a>.
+              </p>
+            )}
+            <div className={`${cls} overflow-x-auto`}>
+              <table className="w-full text-sm">
+                <thead className="text-zinc-500 text-left text-xs uppercase tracking-wide"><tr>
+                  <th className="p-3">gain</th><th className="p-3">core</th><th className="p-3">hard</th><th className="p-3">CNS firing</th><th className="p-3">what happens</th>
+                </tr></thead>
+                <tbody>
+                  {o.runs.map((r) => (
+                    <tr key={r.label} className={`border-t border-zinc-800 ${r.core === 1 ? "bg-amber-300/[0.06]" : ""}`}>
+                      <td className="p-3 font-mono">{r.gain.toFixed(2)}{r.gain === 0.65 && o.name === "malecns" && <span className="text-zinc-500 font-sans"> · Minecraft demo</span>}{(r.seeds ?? 1) > 1 && <span className="text-zinc-500 font-sans"> · {r.seeds} seeds</span>}</td>
+                      <td className="p-3"><Bar v={r.core ?? 0} /></td><td className="p-3"><Bar v={r.hard ?? 0} /></td>
+                      <td className="p-3 font-mono text-zinc-300">{pct(r.max_active)}</td>
+                      <td className="p-3 text-zinc-400">{verdict(r)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-zinc-600">Rows from other connectomes are separate experiments on the same instrument, not entries in the ranking above: the thresholds were set on FlyWire, and &quot;fraction firing&quot; is over a different denominator (this dataset includes the ventral nerve cord).</p>
+          </section>
+        ))}
+
         {/* leaderboard */}
         <section id="leaderboard" className="space-y-3 scroll-mt-6">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 className="text-2xl font-semibold tracking-tight">Leaderboard</h2>
-            <span className="text-xs text-zinc-500">ranked by core, then hard · snapshot {snap.generated}</span>
+            <span className="text-xs text-zinc-500">{CONNECTOME_NAMES[PRIMARY_CONNECTOME]} · ranked by core, then hard · snapshot {snap.generated}</span>
           </div>
           <p className="text-zinc-500 text-sm max-w-2xl">A model must reproduce the known reflexes before its hard-tier wins count. Submissions are pull requests: CI validates the report, a maintainer re-runs it, and rows that reproduce are marked verified. <a className="underline hover:text-zinc-300" href={`${REPO}/blob/HEAD/CONTRIBUTING.md`}>How to submit →</a></p>
           <div className={`${cls} overflow-x-auto`}>

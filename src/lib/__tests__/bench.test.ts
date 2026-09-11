@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import snapshot from "../../data/leaderboard.json";
-import { gainWindow, rankRuns, tierScore, validateSnapshot, verdict, type Run, type Snapshot } from "../bench";
+import { PRIMARY_CONNECTOME, byConnectome, gainWindow, otherConnectomes, rankRuns, tierScore, validateSnapshot, verdict, type Run, type Snapshot } from "../bench";
 
 const snap = snapshot as unknown as Snapshot;
 
@@ -18,16 +18,24 @@ describe("committed snapshot", () => {
     for (const r of snap.runs) for (const t of snap.tasks) expect(r.tasks[t.name], `${r.label} missing ${t.name}`).toBeDefined();
   });
   it("reproduces the headline finding: robust window is 0.45 (0.40 fails with 3 seeds), Shiu 1.0 fails core", () => {
-    expect(gainWindow(snap.runs)).toEqual({ lo: 0.45, hi: 0.45 });
-    const g04 = snap.runs.filter((r) => r.gain === 0.4);
+    const fw = byConnectome(snap.runs, PRIMARY_CONNECTOME);
+    expect(gainWindow(fw)).toEqual({ lo: 0.45, hi: 0.45 });
+    const g04 = fw.filter((r) => r.gain === 0.4);
     expect(g04.some((r) => (r.seeds ?? 1) >= 3 && (r.core ?? 1) < 1)).toBe(true);
-    const shiu = snap.runs.find((r) => r.gain === 1)!;
+    const shiu = fw.find((r) => r.gain === 1)!;
     expect(shiu.core).toBeLessThan(1);
     expect(shiu.max_active).toBeGreaterThan(0.15);
   });
   it("ranks a robust 0.45 run at the top", () => {
-    const top = rankRuns(snap.runs)[0];
+    const top = rankRuns(byConnectome(snap.runs, PRIMARY_CONNECTOME))[0];
     expect(top.gain).toBe(0.45);
+  });
+  it("other connectomes never leak into the primary sweep", () => {
+    const fake = mk({ label: "male", connectome: "malecns", gain: 0.45, core: 0.5, seeds: 5 });
+    const fw = byConnectome([...snap.runs, fake], PRIMARY_CONNECTOME);
+    expect(fw.some((r) => r.connectome === "malecns")).toBe(false);
+    expect(gainWindow(fw)).toEqual({ lo: 0.45, hi: 0.45 });
+    expect(otherConnectomes([...snap.runs, fake])).toEqual(["malecns"]);
   });
 });
 
@@ -77,6 +85,8 @@ describe("helpers", () => {
     expect(verdict(mk({ core: 1 }))).toBe("passes every known reflex");
     expect(verdict(mk({ core: 0.5, tasks: { sugar_to_proboscis: fail0 } }))).toBe("taste never reaches the proboscis");
     expect(verdict(mk({ core: 0.5, tasks: { sugar_to_proboscis: failHi } }))).toBe("too much of the brain fires");
+    const weak = { passed: false, score: 0.33, checks: [{ d: "", v: 4.5, ok: false }, { d: "", v: 4500, ok: false }, { d: "", v: 0.004, ok: true }] };
+    expect(verdict(mk({ core: 0.5, tasks: { sugar_to_proboscis: weak } }))).toBe("taste barely reaches the proboscis");
     expect(verdict(mk({ core: 0.5, tasks: { sugar_to_proboscis: pass, bitter_suppression: fail0 } }))).toBe("bitter can no longer cancel sugar");
     expect(verdict(mk({ core: 0.5, tasks: { stability: fail0 } }))).toBe("fires with no input at all");
   });

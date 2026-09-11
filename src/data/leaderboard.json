@@ -2661,6 +2661,1070 @@
      ]
     }
    }
+  },
+  {
+   "label": "MaleCNS gain 0.45",
+   "connectome": "malecns",
+   "simulator": "LIFSimulator",
+   "gain": 0.45,
+   "w_syn": 0.275,
+   "core": 0.5666666666666667,
+   "hard": 0.5595238095238095,
+   "seeds": 3,
+   "verified": false,
+   "max_active": 0.08566769828403864,
+   "tasks": {
+    "stability": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "sugar_to_proboscis": {
+     "passed": false,
+     "score": 0.3333333333333333,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar] / rate[baseline] > 5.0  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 8.15e-05]",
+       "v": 0.0008200035520891197,
+       "ok": true
+      }
+     ]
+    },
+    "bitter_suppression": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [0/3 seeds, sd 1.29e+03]",
+       "v": 15455.545454545454,
+       "ok": false
+      }
+     ]
+    },
+    "looming_to_giant_fiber": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 433.9285714285714,
+       "ok": true
+      },
+      {
+       "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 0]",
+       "v": 433929.57142857136,
+       "ok": true
+      },
+      {
+       "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 0.00675]",
+       "v": 0.06052911012609916,
+       "ok": true
+      }
+     ]
+    },
+    "taste_specificity": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[bitter] < 2.0 Hz  [2/3 seeds, sd 1.71]",
+       "v": 1.2121212121212122,
+       "ok": false
+      },
+      {
+       "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 0.000561]",
+       "v": 0.08132583615799995,
+       "ok": true
+      }
+     ]
+    },
+    "dose_response": {
+     "passed": false,
+     "score": 0.25,
+     "checks": [
+      {
+       "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[strong] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[weak] / rate[strong] < 0.6  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "adaptation": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[two_pulses] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "olfactory_sparse_coding": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.121]",
+       "v": 435.11111111111114,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 121]",
+       "v": 435112.11111111107,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0]",
+       "v": 0.8779661016949153,
+       "ok": false
+      },
+      {
+       "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 0.000158]",
+       "v": 0.08181141429829235,
+       "ok": false
+      }
+     ]
+    },
+    "crosstalk": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "rate[sugar, mn9] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 0.429]",
+       "v": 435.1515151515152,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, mn9] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "looming_dn_ensemble": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 433.9285714285714,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 0.421]",
+       "v": 430.9523809523809,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.0047]",
+       "v": 0.22391084093211752,
+       "ok": false
+      }
+     ]
+    },
+    "flash_is_not_loom": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 2.45e-05]",
+       "v": 0.03913344140753421,
+       "ok": true
+      }
+     ]
+    },
+    "return_to_rest": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[sugar, 1700-2000ms] < 0.01  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    }
+   }
+  },
+  {
+   "label": "MaleCNS gain 0.50",
+   "connectome": "malecns",
+   "simulator": "LIFSimulator",
+   "gain": 0.5,
+   "w_syn": 0.275,
+   "core": 0.5666666666666667,
+   "hard": 0.41666666666666663,
+   "seeds": 3,
+   "verified": false,
+   "max_active": 0.09415303457996545,
+   "tasks": {
+    "stability": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "sugar_to_proboscis": {
+     "passed": false,
+     "score": 0.3333333333333333,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [1/3 seeds, sd 6.43]",
+       "v": 4.545454545454545,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar] / rate[baseline] > 5.0  [1/3 seeds, sd 6.43e+03]",
+       "v": 4546.454545454545,
+       "ok": false
+      },
+      {
+       "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 0.00518]",
+       "v": 0.004428774944923725,
+       "ok": true
+      }
+     ]
+    },
+    "bitter_suppression": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [1/3 seeds, sd 6.43]",
+       "v": 4.545454545454545,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [0/3 seeds, sd 4.42e+04]",
+       "v": 61821.381656860314,
+       "ok": false
+      }
+     ]
+    },
+    "looming_to_giant_fiber": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 1.46]",
+       "v": 433.9285714285714,
+       "ok": true
+      },
+      {
+       "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 1.46e+03]",
+       "v": 433929.57142857136,
+       "ok": true
+      },
+      {
+       "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 0.000588]",
+       "v": 0.0939414207600715,
+       "ok": true
+      }
+     ]
+    },
+    "taste_specificity": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[bitter] < 2.0 Hz  [0/3 seeds, sd 7.73]",
+       "v": 72.42424242424242,
+       "ok": false
+      },
+      {
+       "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 0.000558]",
+       "v": 0.08869642108127103,
+       "ok": true
+      }
+     ]
+    },
+    "dose_response": {
+     "passed": false,
+     "score": 0.25,
+     "checks": [
+      {
+       "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[strong] > 5.0 Hz  [1/3 seeds, sd 6.43]",
+       "v": 4.545454545454545,
+       "ok": false
+      },
+      {
+       "d": "rate[weak] / rate[strong] < 0.6  [1/3 seeds, sd 0.471]",
+       "v": 0.6666911093186499,
+       "ok": false
+      },
+      {
+       "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 6.43]",
+       "v": 4.545454545454545,
+       "ok": true
+      }
+     ]
+    },
+    "adaptation": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[two_pulses] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "olfactory_sparse_coding": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.121]",
+       "v": 435.11111111111114,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 121]",
+       "v": 435112.11111111107,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 1.11e-16]",
+       "v": 0.8881355932203391,
+       "ok": false
+      },
+      {
+       "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 0.000171]",
+       "v": 0.09049891736858214,
+       "ok": false
+      }
+     ]
+    },
+    "crosstalk": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[sugar, mn9] > 5.0 Hz  [1/3 seeds, sd 6.43]",
+       "v": 4.545454545454545,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 1.55]",
+       "v": 433.030303030303,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, mn9] < 2.0 Hz  [2/3 seeds, sd 4.29]",
+       "v": 3.03030303030303,
+       "ok": false
+      }
+     ]
+    },
+    "looming_dn_ensemble": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 1.46]",
+       "v": 433.9285714285714,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 2.34]",
+       "v": 428.27380952380946,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00251]",
+       "v": 0.30952380952380953,
+       "ok": false
+      }
+     ]
+    },
+    "flash_is_not_loom": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 3.24e-05]",
+       "v": 0.03999501195995964,
+       "ok": true
+      }
+     ]
+    },
+    "return_to_rest": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0.524]",
+       "v": 0.3703703703703704,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [2/3 seeds, sd 7.86]",
+       "v": 5.555555555555556,
+       "ok": false
+      },
+      {
+       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [2/3 seeds, sd 4.71]",
+       "v": 3.3328798751478463,
+       "ok": false
+      },
+      {
+       "d": "active fraction[sugar, 1700-2000ms] < 0.01  [2/3 seeds, sd 0.0347]",
+       "v": 0.024533977243956725,
+       "ok": false
+      }
+     ]
+    }
+   }
+  },
+  {
+   "label": "MaleCNS gain 0.55",
+   "connectome": "malecns",
+   "simulator": "LIFSimulator",
+   "gain": 0.55,
+   "w_syn": 0.275,
+   "core": 0.5,
+   "hard": 0.5238095238095238,
+   "seeds": 3,
+   "verified": false,
+   "max_active": 0.12616718247535266,
+   "tasks": {
+    "stability": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "sugar_to_proboscis": {
+     "passed": false,
+     "score": 0.3333333333333333,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar] / rate[baseline] > 5.0  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 3.85e-05]",
+       "v": 0.0008067776883457469,
+       "ok": true
+      }
+     ]
+    },
+    "bitter_suppression": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [0/3 seeds, sd 3.81e+03]",
+       "v": 173334.33333333328,
+       "ok": false
+      }
+     ]
+    },
+    "looming_to_giant_fiber": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 1.46]",
+       "v": 433.9285714285714,
+       "ok": true
+      },
+      {
+       "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 1.46e+03]",
+       "v": 433929.57142857136,
+       "ok": true
+      },
+      {
+       "d": "active fraction[loom] < 0.1  [0/3 seeds, sd 0.000371]",
+       "v": 0.10255712628432584,
+       "ok": false
+      }
+     ]
+    },
+    "taste_specificity": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[bitter] < 2.0 Hz  [0/3 seeds, sd 10.4]",
+       "v": 129.39393939393938,
+       "ok": false
+      },
+      {
+       "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 0.000372]",
+       "v": 0.09751240397078219,
+       "ok": true
+      }
+     ]
+    },
+    "dose_response": {
+     "passed": false,
+     "score": 0.25,
+     "checks": [
+      {
+       "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[strong] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[weak] / rate[strong] < 0.6  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "adaptation": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[two_pulses] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "olfactory_sparse_coding": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.121]",
+       "v": 434.9629629629629,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 121]",
+       "v": 434963.9629629629,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 1.11e-16]",
+       "v": 0.8983050847457626,
+       "ok": false
+      },
+      {
+       "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 4.24e-05]",
+       "v": 0.10041831517611183,
+       "ok": false
+      }
+     ]
+    },
+    "crosstalk": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[sugar, mn9] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 0.429]",
+       "v": 433.030303030303,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, mn9] < 2.0 Hz  [0/3 seeds, sd 1.55]",
+       "v": 48.48484848484848,
+       "ok": false
+      }
+     ]
+    },
+    "looming_dn_ensemble": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 1.46]",
+       "v": 433.9285714285714,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 2.23]",
+       "v": 426.19047619047615,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00124]",
+       "v": 0.33966565349544076,
+       "ok": false
+      }
+     ]
+    },
+    "flash_is_not_loom": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 0.0176]",
+       "v": 0.12616718247535266,
+       "ok": true
+      }
+     ]
+    },
+    "return_to_rest": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[sugar, 1700-2000ms] < 0.01  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    }
+   }
+  },
+  {
+   "label": "MaleCNS gain 0.65 (Minecraft demo)",
+   "connectome": "malecns",
+   "simulator": "LIFSimulator",
+   "gain": 0.65,
+   "w_syn": 0.275,
+   "core": 0.5666666666666667,
+   "hard": 0.5595238095238095,
+   "seeds": 3,
+   "verified": false,
+   "max_active": 0.1596626271099976,
+   "tasks": {
+    "stability": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "sugar_to_proboscis": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 72.1]",
+       "v": 175.4545454545454,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar] / rate[baseline] > 5.0  [3/3 seeds, sd 7.21e+04]",
+       "v": 175455.5454545454,
+       "ok": true
+      },
+      {
+       "d": "active fraction[sugar] < 0.1  [0/3 seeds, sd 0.00161]",
+       "v": 0.1159473686199378,
+       "ok": false
+      }
+     ]
+    },
+    "bitter_suppression": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 72.1]",
+       "v": 175.4545454545454,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [0/3 seeds, sd 0.23]",
+       "v": 0.8041940010093586,
+       "ok": false
+      }
+     ]
+    },
+    "looming_to_giant_fiber": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 5.12]",
+       "v": 427.3809523809523,
+       "ok": true
+      },
+      {
+       "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 5.12e+03]",
+       "v": 427381.95238095225,
+       "ok": true
+      },
+      {
+       "d": "active fraction[loom] < 0.1  [0/3 seeds, sd 0.000277]",
+       "v": 0.11858876255039998,
+       "ok": false
+      }
+     ]
+    },
+    "taste_specificity": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[bitter] < 2.0 Hz  [0/3 seeds, sd 30.2]",
+       "v": 55.15151515151515,
+       "ok": false
+      },
+      {
+       "d": "active fraction[bitter] < 0.1  [0/3 seeds, sd 0.00128]",
+       "v": 0.1142903568338038,
+       "ok": false
+      }
+     ]
+    },
+    "dose_response": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[strong] > 5.0 Hz  [3/3 seeds, sd 72.1]",
+       "v": 175.4545454545454,
+       "ok": true
+      },
+      {
+       "d": "rate[weak] / rate[strong] < 0.6  [3/3 seeds, sd 3.09e-06]",
+       "v": 6.915852704046275e-06,
+       "ok": true
+      },
+      {
+       "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 72.1]",
+       "v": 175.4545454545454,
+       "ok": true
+      }
+     ]
+    },
+    "adaptation": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[two_pulses] > 5.0 Hz  [2/3 seeds, sd 111]",
+       "v": 120.47619047619048,
+       "ok": false
+      },
+      {
+       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 1.01]",
+       "v": 1.7189466354074368,
+       "ok": false
+      }
+     ]
+    },
+    "olfactory_sparse_coding": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.0698]",
+       "v": 435.1604938271605,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 69.8]",
+       "v": 435161.49382716045,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0.0016]",
+       "v": 0.9062146892655368,
+       "ok": false
+      },
+      {
+       "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 0.000786]",
+       "v": 0.1136536259650157,
+       "ok": false
+      }
+     ]
+    },
+    "crosstalk": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 72.1]",
+       "v": 175.4545454545454,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 2.97]",
+       "v": 430.9090909090908,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, mn9] < 2.0 Hz  [0/3 seeds, sd 31.4]",
+       "v": 58.18181818181818,
+       "ok": false
+      }
+     ]
+    },
+    "looming_dn_ensemble": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 5.12]",
+       "v": 427.3809523809523,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 2.63]",
+       "v": 421.4285714285714,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00379]",
+       "v": 0.38703140830800403,
+       "ok": false
+      }
+     ]
+    },
+    "flash_is_not_loom": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 0.00154]",
+       "v": 0.1596626271099976,
+       "ok": true
+      }
+     ]
+    },
+    "return_to_rest": {
+     "passed": false,
+     "score": 0.25,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 92.4]",
+       "v": 150.74074074074073,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [0/3 seeds, sd 19.7]",
+       "v": 292.77777777777777,
+       "ok": false
+      },
+      {
+       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [0/3 seeds, sd 0.0257]",
+       "v": 14.659314346031424,
+       "ok": false
+      },
+      {
+       "d": "active fraction[sugar, 1700-2000ms] < 0.01  [0/3 seeds, sd 0.000929]",
+       "v": 0.09448557058265598,
+       "ok": false
+      }
+     ]
+    }
+   }
   }
  ],
  "tasks": [
@@ -2675,7 +3739,7 @@
    "name": "sugar_to_proboscis",
    "title": "Sugar \u2192 proboscis extension",
    "tier": "core",
-   "description": "The canonical reflex. Activating sugar-sensing gustatory receptor neurons should drive MN9, the motor neuron that extends the proboscis. This is the headline result of Shiu et al. 2024 and a behaviour every fly lab can reproduce with a drop of sucrose.",
+   "description": "The canonical reflex. Activating sugar-sensing gustatory receptor neurons should drive MN9, the motor neuron that extends the proboscis. This is the headline result of Shiu et al. 2024 and a behaviour every fly lab can reproduce with a drop of sucrose. Selector provenance \u2014 FlyWire v783: sub_class \"sugar/water\" (Engert et al. 2022 annotations). MaleCNS v1.0: no modality label exists, so we identify sugar GRNs by connectivity onto the second-order sugar neurons named in Shiu et al. 2022 (G2N-1, Clavicle, Zorro, Usnea, Phantom, Fudog): labellar bristle types LB3a\u2013d carry >95% of GRN input to those cells, and LB1a\u2013d instead target Scapula (the bitter second-order neuron). See docs/MALECNS.md for the table.",
    "citation": "Dethier 1976; Shiu et al. 2024 (Nature) Fig. 2"
   },
   {
