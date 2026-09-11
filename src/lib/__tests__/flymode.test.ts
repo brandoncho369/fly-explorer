@@ -45,3 +45,33 @@ describe("readouts → body", () => {
     expect(corner.x).toBeGreaterThanOrEqual(60); expect(corner.y).toBeGreaterThanOrEqual(60);   // clamped, never off-screen
   });
 });
+
+import { newWalker, walkModulation, walkStep } from "../flymode";
+
+describe("scripted walking (labelled as ours)", () => {
+  const seq = (vals: number[]) => { let i = 0; return () => vals[i++ % vals.length]; };
+  it("runs straight, then turns, then runs again", () => {
+    let s = newWalker(400, 250, seq([0.5]));
+    const h0 = s.heading, x0 = s.x;
+    s = walkStep(s, 0.1, 800, 500, { stop: false, speedMul: 1 }, seq([0.5]));
+    expect(s.phase).toBe("run"); expect(s.heading).toBe(h0); expect(s.x).not.toBe(x0);
+    for (let i = 0; i < 30; i++) s = walkStep(s, 0.1, 800, 500, { stop: false, speedMul: 1 }, seq([0.5]));
+    // after enough time it has been through a turn and is running on a new heading
+    expect(s.heading).not.toBe(h0);
+    expect(["run", "turn"]).toContain(s.phase);
+  });
+  it("stands still while feeding, walks faster with descending activity", () => {
+    const s = newWalker(400, 250, seq([0.5]));
+    const still = walkStep(s, 0.5, 800, 500, walkModulation({ "MN9 (proboscis)": 40 }));
+    expect(still.x).toBe(s.x); expect(still.y).toBe(s.y);
+    const slow = walkStep(s, 0.5, 800, 500, walkModulation({}));
+    const fast = walkStep(s, 0.5, 800, 500, walkModulation({ "descending neurons": 5 }));
+    expect(Math.hypot(fast.x - s.x, fast.y - s.y)).toBeGreaterThan(Math.hypot(slow.x - s.x, slow.y - s.y));
+  });
+  it("never leaves the arena", () => {
+    let s = { ...newWalker(20, 20), heading: Math.PI * 1.25 };   // pointed at the corner
+    for (let i = 0; i < 600; i++) s = walkStep(s, 0.05, 800, 500, { stop: false, speedMul: 2 });
+    expect(s.x).toBeGreaterThanOrEqual(10); expect(s.y).toBeGreaterThanOrEqual(10);
+    expect(s.x).toBeLessThanOrEqual(790); expect(s.y).toBeLessThanOrEqual(490);
+  });
+});

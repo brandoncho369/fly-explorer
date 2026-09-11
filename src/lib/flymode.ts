@@ -43,3 +43,54 @@ export function landing(fly: { x: number; y: number }, threat: { x: number; y: n
   const y = Math.min(h - min, Math.max(min, fly.y + Math.sin(ang) * hop));
   return { x, y };
 }
+
+/* ---------------- locomotion: OURS, and labelled as such in the UI ----------------
+ * FlyWire is brain-only: the ventral nerve cord that actually paces the legs is not in it, so
+ * where the fly walks cannot come from the wiring. We use a run-and-turn random walk with the
+ * statistics reported for walking Drosophila (bouts of straight walking at ~10–20 mm/s, i.e.
+ * a few body lengths per second, broken by sharp turns; Katsov & Clandinin 2008, Robie et al.
+ * 2010). The brain modulates it: feeding stops walking, descending activity speeds it up, and
+ * an escape (giant fiber) overrides everything.
+ */
+export interface Walker { x: number; y: number; heading: number; phase: "run" | "turn"; left: number; speed: number; turnRate: number }
+
+export interface WalkMod { stop: boolean; speedMul: number }
+
+export function newWalker(x: number, y: number, rng: () => number = Math.random): Walker {
+  return { x, y, heading: rng() * Math.PI * 2, phase: "run", left: 0.4 + rng() * 1.6, speed: 40 + rng() * 50, turnRate: 0 };
+}
+
+/** Advance the walk by dt seconds inside a w×h arena (margin px from the edge). Pure given rng. */
+export function walkStep(s: Walker, dt: number, w: number, h: number, mod: WalkMod, rng: () => number = Math.random, margin = 50): Walker {
+  const n = { ...s };
+  if (mod.stop) return n;                                      // proboscis out: the fly stands still
+  n.left -= dt;
+  if (n.phase === "run") {
+    const v = n.speed * mod.speedMul;
+    n.x += Math.cos(n.heading) * v * dt;
+    n.y += Math.sin(n.heading) * v * dt;
+    // near an edge: steer back toward the centre rather than walking into it
+    if (n.x < margin || n.x > w - margin || n.y < margin || n.y > h - margin) {
+      const toC = Math.atan2(h / 2 - n.y, w / 2 - n.x);
+      let d = toC - n.heading; d = Math.atan2(Math.sin(d), Math.cos(d));
+      n.heading += d * Math.min(1, 4 * dt);
+      n.x = Math.min(w - 10, Math.max(10, n.x)); n.y = Math.min(h - 10, Math.max(10, n.y));
+    }
+    if (n.left <= 0) {
+      n.phase = "turn";
+      const ang = (0.5 + rng() * 1.6) * (rng() < 0.5 ? -1 : 1);   // 30°–120° either way
+      n.left = 0.15 + rng() * 0.15;
+      n.turnRate = ang / n.left;
+    }
+  } else {
+    n.heading += n.turnRate * dt;
+    if (n.left <= 0) { n.phase = "run"; n.left = 0.4 + rng() * 1.6; n.speed = 40 + rng() * 50; n.turnRate = 0; }
+  }
+  return n;
+}
+
+/** How the readouts modulate walking. */
+export function walkModulation(rates: Record<string, number>): WalkMod {
+  const mn9 = rates["MN9 (proboscis)"] ?? 0, dn = rates["descending neurons"] ?? 0;
+  return { stop: mn9 > 5, speedMul: dn > 2 ? 1.6 : 1 };
+}
