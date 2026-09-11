@@ -30,7 +30,7 @@ export default function Bench() {
         <nav className="flex items-center justify-between text-sm">
           <Link href="/" className="text-zinc-400 hover:text-white">← fly-explorer</Link>
           <div className="flex gap-5 text-zinc-400">
-            <a href="#contribute" className="hover:text-white">contribute</a>
+            <Link href="/submit" className="hover:text-white">submit</Link>
             <a href="#leaderboard" className="hover:text-white">leaderboard</a>
             <a href="#tasks" className="hover:text-white">tasks</a>
             <a href={REPO} className="hover:text-white">github</a>
@@ -45,7 +45,8 @@ export default function Bench() {
             An open benchmark for whole-brain fruit fly simulations: {tasks.length} behaviours from the literature, one score per model. The reference model already fails half of them. Beat it.
           </p>
           <div className="flex flex-wrap gap-3">
-            <a href={`${REPO}/blob/HEAD/CONTRIBUTING.md`} className="rounded-md bg-amber-300 px-5 py-2.5 text-sm font-semibold text-black hover:bg-amber-200">Contribute a model, task or result →</a>
+            <Link href="/submit" className="rounded-md bg-amber-300 px-5 py-2.5 text-sm font-semibold text-black hover:bg-amber-200">Submit a result — no install →</Link>
+            <a href={`${REPO}/blob/HEAD/CONTRIBUTING.md`} className="rounded-md border border-zinc-700 px-5 py-2.5 text-sm text-zinc-200 hover:border-zinc-400">Add a task or a model</a>
             <a href={REPO} className="rounded-md border border-zinc-700 px-5 py-2.5 text-sm text-zinc-200 hover:border-zinc-400">Get the code</a>
             <Link href="/" className="rounded-md border border-zinc-700 px-5 py-2.5 text-sm text-zinc-200 hover:border-zinc-400">Watch the brain run</Link>
           </div>
@@ -61,7 +62,7 @@ export default function Bench() {
         <section id="contribute" className="space-y-3 scroll-mt-6">
           <h2 className="text-2xl font-semibold tracking-tight">Three ways in</h2>
           <div className="grid md:grid-cols-3 gap-3 text-sm">
-            <Card title="Submit a result" href={`${REPO}/blob/HEAD/CONTRIBUTING.md#1-submit-a-result`}>Change the parameters, run the suite, then <code>flybench submit</code> opens the pull request for you. Two commands.</Card>
+            <Card title="Submit a result" href="/submit">Pick parameters in a form. GitHub opens the pull request, our CI runs the real brain, the scores land on your PR. Nothing to install.</Card>
             <Card title="Add a behaviour" href={`${REPO}/blob/HEAD/CONTRIBUTING.md#2-add-a-task`}>Know a fly reflex with a paper behind it? One YAML file makes it a task. <code>flybench lint</code> checks it.</Card>
             <Card title="Plug in your model" href={`${REPO}/blob/HEAD/CONTRIBUTING.md#3-plug-in-a-different-model`}>Any class with <code>run(duration, stimuli)</code>. Adaptation, gap junctions, neuromodulation: the hard tier is waiting.</Card>
           </div>
@@ -96,7 +97,7 @@ flybench submit results/mine.json   # validates, commits, opens the PR`}</code><
             </table>
           </div>
           <p className="text-zinc-400 max-w-2xl leading-relaxed">
-            Three random seeds sharpen it: 0.40 fires the proboscis on only two of three, so it is a knife edge, while 0.45 passes every core task on every seed. Inside the window the model still fails most of the hard tier, and the starkest failure is the simplest: after a half-second taste of sugar, about 8% of the brain keeps firing at a constant rate forever. A real fly is at rest a second later. No dose response, no adaptation, no lateral inhibition, no selectivity, no off switch. Each one is a concrete thing your model could add.
+            <b className="text-zinc-300">A higher score is not the same as a more accurate fly.</b> It means more of the listed behaviours are reproduced; every row is a hypothesis with its constants attached. Three random seeds sharpen it: 0.40 fires the proboscis on only two of three, so it is a knife edge, while 0.45 passes every core task on every seed. Inside the window the model still fails most of the hard tier, and the starkest failure is the simplest: after a half-second taste of sugar, about 8% of the brain keeps firing at a constant rate forever. A real fly is at rest a second later. No dose response, no adaptation, no lateral inhibition, no selectivity, no off switch. Each one is a concrete thing your model could add.
           </p>
         </section>
 
@@ -204,10 +205,7 @@ function TaskGroup({ title, sub, tasks, color }: { tier: string; title: string; 
 }
 
 function Card({ title, href, children }: { title: string; href: string; children: React.ReactNode }) {
-  return (
-    <a href={href} className="block rounded-lg border border-zinc-800 bg-zinc-900/40 p-4 space-y-1 hover:border-amber-300/60 transition-colors">
-      <h3 className="font-medium text-zinc-100">{title} <span className="text-amber-300">→</span></h3>
-      <p className="text-zinc-400 leading-relaxed">{children}</p>
-    </a>
-  );
+  const cls = "block rounded-lg border border-zinc-800 bg-zinc-900/40 p-4 space-y-1 hover:border-amber-300/60 transition-colors";
+  const inner = <><h3 className="font-medium text-zinc-100">{title} <span className="text-amber-300">→</span></h3><p className="text-zinc-400 leading-relaxed">{children}</p></>;
+  return href.startsWith("/") ? <Link href={href} className={cls}>{inner}</Link> : <a href={href} className={cls}>{inner}</a>;
 }

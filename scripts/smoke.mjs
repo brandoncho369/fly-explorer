@@ -88,11 +88,30 @@ for (const w of [1300, 400]) {
   check((await q.locator("svg[role=img]").count()) === 2, `/bench @${w}px: two gain charts`);
   check((await q.locator("#leaderboard tbody tr").count()) >= 5, `/bench @${w}px: leaderboard rows`);
   check((await q.locator("#tasks article").count()) === 12, `/bench @${w}px: 12 task cards`);
-  const cta = q.getByRole("link", { name: /Contribute a model/ });
+  const cta = q.getByRole("link", { name: /Submit a result/ }).first();
   check((await cta.boundingBox())?.y < 900, `/bench @${w}px: contribute CTA above the fold`);
-  check((await cta.getAttribute("href")).includes("/blob/HEAD/"), `/bench @${w}px: links use HEAD not main`);
+  check((await q.getByRole("link", { name: /Add a task or a model/ }).getAttribute("href")).includes("/blob/HEAD/"), `/bench @${w}px: links use HEAD not main`);
   await q.locator("svg[role=img] rect[tabindex]").first().hover();
   check((await q.locator("svg[role=img] text").filter({ hasText: /gain 0\.3 ·/ }).count()) >= 1, `/bench @${w}px: chart hover tooltip`);
+  await q.close();
+}
+
+// /submit page: form -> GitHub new-file URL
+{
+  const q = await b.newPage({ viewport: { width: 1300, height: 1000 } });
+  await q.goto(`${URL}/submit`, { waitUntil: "networkidle" });
+  const btn = q.getByText(/Open pull request/);
+  check((await btn.getAttribute("aria-disabled")) === "true", "/submit: button disabled until the form is valid");
+  await q.getByPlaceholder(/jane/).fill("smoke test run");
+  await q.getByPlaceholder(/otherwise Shiu/).fill("just a smoke test");
+  const href = await btn.getAttribute("href");
+  check(!!href && href.startsWith("https://github.com/brandoncho369/flybench/new/") && href.includes("configs%2Fsubmissions%2Fsmoke-test-run.yaml"), "/submit: builds a GitHub new-file URL");
+  const yaml = decodeURIComponent(href.split("value=")[1]);
+  check(yaml.includes("label: smoke test run") && yaml.includes("gain: 0.45") && yaml.includes("seeds: 3"), "/submit: YAML carries the form values");
+  await q.getByLabel("model").selectOption({ index: 1 });
+  check((await q.getByTestId("yaml").innerText()).includes("b_mv: 2"), "/submit: adaptive model adds its constants");
+  const sw = await q.evaluate(() => document.documentElement.scrollWidth);
+  check(sw <= 1300, "/submit: no horizontal overflow");
   await q.close();
 }
 
