@@ -59,5 +59,20 @@ if (r.ok()) {
   await p.screenshot({ path: "smoke-flywire.png" });
 } else console.log("· flywire783 export not present, skipped");
 
+// /bench page
+for (const w of [1300, 400]) {
+  const q = await b.newPage({ viewport: { width: w, height: 1200 } });
+  await q.goto(`${URL}/bench`, { waitUntil: "networkidle" });
+  const sw = await q.evaluate(() => document.documentElement.scrollWidth);
+  check(sw <= w, `/bench @${w}px: no horizontal overflow (scrollWidth ${sw})`);
+  check((await q.locator("h1").innerText()).includes("simulated fly"), `/bench @${w}px: headline`);
+  check((await q.locator("svg[role=img]").count()) === 2, `/bench @${w}px: two gain charts`);
+  check((await q.locator("#leaderboard tbody tr").count()) >= 5, `/bench @${w}px: leaderboard rows`);
+  check((await q.locator("#tasks article").count()) === 11, `/bench @${w}px: 11 task cards`);
+  await q.locator("svg[role=img] rect[tabindex]").first().hover();
+  check((await q.locator("svg[role=img] text").filter({ hasText: /gain 0\.3 ·/ }).count()) >= 1, `/bench @${w}px: chart hover tooltip`);
+  await q.close();
+}
+
 check(errs.length === 0, "no page/console errors" + (errs.length ? ": " + errs.join(" | ") : ""));
 await b.close();

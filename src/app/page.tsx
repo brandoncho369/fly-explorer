@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { Meta, SHIU_2024, WorkerCommand, WorkerEvent } from "@/lib/types";
 import Hint, { HELP } from "@/components/Hint";
 
@@ -115,7 +116,7 @@ export default function Page() {
     <main className="h-dvh w-full grid grid-cols-1 lg:grid-cols-[360px_1fr] bg-[#07080c] text-zinc-200">
       <aside className="order-2 lg:order-1 overflow-y-auto border-t lg:border-t-0 lg:border-r border-zinc-800 p-4 space-y-5 text-sm">
         <header>
-          <div className="flex items-baseline justify-between"><h1 className="text-lg font-semibold tracking-tight">fly-explorer</h1><a href="/bench" className="text-xs text-amber-300 hover:text-amber-200">benchmark →</a></div>
+          <div className="flex items-baseline justify-between"><h1 className="text-lg font-semibold tracking-tight">fly-explorer</h1><Link href="/bench" className="text-xs text-amber-300 hover:text-amber-200">benchmark →</Link></div>
           <p className="text-zinc-400 text-xs mt-1">A fruit-fly connectome running as a leaky integrate-and-fire network, live, in your browser. Poke a sense; watch the wiring answer.</p>
         </header>
 
@@ -128,15 +129,15 @@ export default function Page() {
         </section>
 
         <section className="space-y-2">
-          <label className="text-xs uppercase tracking-wide text-zinc-500">stimulate ({rateHz} Hz Poisson, 500 ms)<Hint title="stimulate" text={HELP.stimulate} /></label>
+          <label className="text-xs uppercase tracking-wide text-zinc-500">stimulate<Hint title="stimulate" text={HELP.stimulate} /></label>
           <div className="grid grid-cols-2 gap-1.5">
             {stimSets.filter((s) => STIMULI.includes(s)).concat(stimSets.filter((s) => !STIMULI.includes(s))).map((name) => (
-              <div key={name} className="flex">
+              <div key={name} className="flex items-stretch">
                 <button onClick={() => stimulate(name)} disabled={!meta}
                   className={`flex-1 text-left px-2 py-1.5 rounded-l border border-zinc-700 hover:border-zinc-400 bg-zinc-900 disabled:opacity-40 ${frame?.activeStims.includes(name) ? "bg-amber-300/20 border-amber-300" : ""}`}>
                   {name} <span className="text-zinc-500">({meta?.populations[name].length})</span>
-                  {POP_HELP[name] && <Hint title={name} text={POP_HELP[name]} />}
                 </button>
+                {POP_HELP[name] && <span className="flex items-center border border-l-0 border-zinc-700 bg-zinc-900 pr-1"><Hint title={name} text={POP_HELP[name]} /></span>}
                 <button title="highlight these neurons in the 3D view" aria-label={`highlight ${name}`} onClick={() => toggleHighlight(name)} className="px-2 rounded-r border border-l-0 border-zinc-700 bg-zinc-900 hover:border-zinc-400 text-cyan-300">◉</button>
               </div>
             ))}
@@ -167,14 +168,14 @@ export default function Page() {
           <Slider label="gain" help={HELP.gain} value={gain} min={0.1} max={3} step={0.05} onChange={setGain} fmt={(v) => v.toFixed(2) + "×"} />
           <Slider label="speed" help={HELP.speed} value={speed} min={1} max={50} step={1} onChange={setSpeed} fmt={(v) => `${v} steps/frame`} />
           <div className="flex flex-wrap gap-2 pt-1">
-            <span><button onClick={() => setRunning((r) => !r)} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">{running ? "pause" : "run"}</button><Hint title="pause / run" text={HELP.pause} /></span>
-            <span><button onClick={() => send({ type: "reset" })} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button><Hint title="reset" text={HELP.reset} /></span>
-            <span><button onClick={() => setGain(SHIU_2024.gain)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">Shiu 2024</button><Hint title="Shiu 2024 preset" text={HELP.presetShiu} /></span>
-            <span><button onClick={() => setGain(0.45)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">flybench</button><Hint title="flybench preset" text={HELP.presetFlybench} /></span>
+            <button onClick={() => setRunning((r) => !r)} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">{running ? "pause" : "run"}</button>
+            <button onClick={() => send({ type: "reset" })} disabled={!meta} title="back to a resting brain" className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button>
+            <button onClick={() => setGain(SHIU_2024.gain)} title="gain 1.0, the 2024 Nature paper's value" className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: Shiu 2024</button>
+            <button onClick={() => setGain(0.45)} title="gain 0.45, the flybench reflex window on this data" className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: flybench</button>
+            <Hint title="presets" text={HELP.presets} />
           </div>
           <p className="text-xs text-zinc-500 font-mono">
             t = {((frame?.t ?? 0) / 1000).toFixed(2)} s · {frame?.stepMs.toFixed(2) ?? "–"} ms/step · dt 0.1 ms · τm 20 · τs 5 · Vth −45 · w 0.275 mV
-            <Hint title="status line" text={HELP.status} />
           </p>
         </section>
 
@@ -184,7 +185,7 @@ export default function Page() {
             <div className="space-y-2 leading-relaxed">
               <p>Each dot is a neuron from the FlyWire connectome (or the synthetic toy). Edges are synapse counts; each neuron is the same 5-constant leaky integrate-and-fire unit from Shiu et al. 2024. Nothing is learned or hand-tuned per neuron: when sugar lights up MN9, the wiring did that.</p>
               <p>It is <b>not</b> a fly. No neuromodulators, no gap junctions, no plasticity, no spontaneous activity, no body. Firing rates are only meaningful relative to each other. Nothing in here experiences anything — it is a very large, very fast truth table of &ldquo;if these fire, those fire.&rdquo;</p>
-              <p>Benchmark whether a parameter choice still reproduces known reflexes on the <a href="/bench" className="underline text-amber-300">flybench</a> page, or on <a href="https://github.com/brandoncho369/fly-explorer" className="underline">GitHub</a>.</p>
+              <p>Benchmark whether a parameter choice still reproduces known reflexes on the <Link href="/bench" className="underline text-amber-300">flybench</Link> page, or on <a href="https://github.com/brandoncho369/fly-explorer" className="underline">GitHub</a>.</p>
             </div>
           )}
         </section>
@@ -227,7 +228,6 @@ function Legend() {
     <div className="absolute bottom-3 right-3 flex flex-wrap gap-3 text-[11px] text-zinc-400 bg-black/40 rounded px-2 py-1">
       {items.map(([k, c]) => <span key={k} className="flex items-center gap-1"><i className="inline-block w-2 h-2 rounded-full" style={{ background: c }} />{k}</span>)}
       <span className="flex items-center gap-1"><i className="inline-block w-2 h-2 rounded-full bg-amber-200" />firing</span>
-      <Hint title="legend" text={HELP.legend} />
     </div>
   );
 }
