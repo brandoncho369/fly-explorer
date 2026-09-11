@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Meta, SHIU_2024, WorkerCommand, WorkerEvent } from "@/lib/types";
-import Hint, { HELP, HelpPanel, HelpProvider } from "@/components/Hint";
+import { Explain, HELP, HelpPanel, HelpProvider } from "@/components/Hint";
 
 const Brain = dynamic(() => import("@/components/Brain"), { ssr: false });
 
@@ -14,7 +14,8 @@ const DATASETS = [
   { id: "flywire783", label: "FlyWire v783 (140k, real)", gain: 0.45 },
 ];
 
-interface Frame { t: number; firedThisFrame: number; rates: Record<string, number>; networkRate: number; activeStims: string[]; stepMs: number }
+interface Frame { t: number; firedThisFrame: number; rates: Record<string, number>; networkRate: number; activeStims: string[]; stepMs: number; achieved: number }
+const SPEEDS = [0.05, 0.1, 0.25, 0.5, 1, 2];   // × real time
 
 const READOUTS = ["MN9 (proboscis)", "Giant Fiber", "descending neurons"];
 const POP_HELP: Record<string, string> = {
@@ -34,6 +35,7 @@ const STIMULI = ["sugar GRNs", "bitter GRNs", "water GRNs", "looming (LPLC2/LC4)
 function PageInner() {
   const workerRef = useRef<Worker | null>(null);
   const activityRef = useRef<Uint8Array | null>(null);
+  const lastUi = useRef(0);
   const [dataset, setDataset] = useState("toy");
   const [meta, setMeta] = useState<Meta | null>(null);
   const [positions, setPositions] = useState<Float32Array | null>(null);
@@ -43,11 +45,12 @@ function PageInner() {
   const [frame, setFrame] = useState<Frame | null>(null);
   const [running, setRunning] = useState(true);
   const [gain, setGain] = useState(SHIU_2024.gain);
-  const [speed, setSpeed] = useState(10);
+  const [speedIdx, setSpeedIdx] = useState(2);   // 0.25× real time by default: smooth on most laptops with the real brain
   const [rateHz, setRateHz] = useState(100);
   const [highlight, setHighlight] = useState<Set<number>>(new Set());
   const [showAbout, setShowAbout] = useState(false);
   const [spin, setSpin] = useState(true);
+  const stopSpin = useCallback(() => setSpin(false), []);
   const [history, setHistory] = useState<Record<string, number[]>>({});
   const loading = !meta && !error;
 
@@ -67,16 +70,21 @@ function PageInner() {
         const g = DATASETS.find((d) => d.id === e.meta.name)?.gain ?? SHIU_2024.gain;
         setGain(g);
         w.postMessage({ type: "params", params: { gain: g } } satisfies WorkerCommand);
-        w.postMessage({ type: "speed", stepsPerFrame: 10 } satisfies WorkerCommand);
+        w.postMessage({ type: "speed", target: SPEEDS[2] } satisfies WorkerCommand);
         w.postMessage({ type: "run", running: true } satisfies WorkerCommand);
       } else if (e.type === "frame") {
-        activityRef.current = e.activity;
-        setFrame(e);
-        setHistory((h) => {
-          const next = { ...h };
-          for (const k of READOUTS) { const arr = (next[k] ?? []).concat(e.rates[k] ?? 0); next[k] = arr.slice(-120); }
-          return next;
-        });
+        activityRef.current = e.activity;          // the 3D view reads this every draw
+        w.postMessage({ type: "ack" } satisfies WorkerCommand);
+        const now = performance.now();
+        if (now - lastUi.current >= 80) {          // sidebar numbers at ~12 Hz is plenty; React re-renders are the expensive part
+          lastUi.current = now;
+          setFrame(e);
+          setHistory((h) => {
+            const next = { ...h };
+            for (const k of READOUTS) { const arr = (next[k] ?? []).concat(e.rates[k] ?? 0); next[k] = arr.slice(-120); }
+            return next;
+          });
+        }
       }
     };
     w.postMessage({ type: "load", base: "/data/toy" } satisfies WorkerCommand);
@@ -84,7 +92,7 @@ function PageInner() {
   }, []);
 
   useEffect(() => { send({ type: "params", params: { gain } }); }, [gain, send]);
-  useEffect(() => { send({ type: "speed", stepsPerFrame: speed }); }, [speed, send]);
+  useEffect(() => { send({ type: "speed", target: SPEEDS[speedIdx] }); }, [speedIdx, send]);
   useEffect(() => { send({ type: "run", running }); }, [running, send]);
 
   const loadDataset = (id: string) => {
@@ -123,61 +131,75 @@ function PageInner() {
         <HelpPanel />
 
         <section className="space-y-2">
-          <label className="text-xs uppercase tracking-wide text-zinc-500">connectome<Hint title="connectome" text={HELP.connectome} /></label>
-          <select value={dataset} disabled={loading} onChange={(e) => loadDataset(e.target.value)} className="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1.5 disabled:opacity-50">
-            {DATASETS.map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
-          </select>
+          <label className="text-xs uppercase tracking-wide text-zinc-500">connectome</label>
+          <Explain title="connectome" text={HELP.connectome}>
+            <select value={dataset} disabled={loading} onChange={(e) => loadDataset(e.target.value)} className="w-full bg-zinc-900 border border-zinc-700 rounded px-2 py-1.5 disabled:opacity-50">
+              {DATASETS.map((d) => <option key={d.id} value={d.id}>{d.label}</option>)}
+            </select>
+          </Explain>
           <p className="text-xs text-zinc-500">{error ? <span className="text-red-400">couldn&apos;t load: {error}. {dataset !== "toy" && <button className="underline" onClick={() => loadDataset("toy")}>back to toy</button>}</span> : status}</p>
         </section>
 
         <section className="space-y-2">
-          <label className="text-xs uppercase tracking-wide text-zinc-500">stimulate<Hint title="stimulate" text={HELP.stimulate} /></label>
-          <div className="grid grid-cols-2 gap-1.5">
-            {stimSets.filter((s) => STIMULI.includes(s)).concat(stimSets.filter((s) => !STIMULI.includes(s))).map((name) => (
-              <div key={name} className="flex items-stretch">
-                <button onClick={() => stimulate(name)} disabled={!meta}
-                  className={`flex-1 text-left px-2 py-1.5 rounded-l border border-zinc-700 hover:border-zinc-400 bg-zinc-900 disabled:opacity-40 ${frame?.activeStims.includes(name) ? "bg-amber-300/20 border-amber-300" : ""}`}>
-                  {name} <span className="text-zinc-500">({meta?.populations[name].length})</span>
-                </button>
-                {POP_HELP[name] && <span className="flex items-center border border-l-0 border-zinc-700 bg-zinc-900 pr-1"><Hint title={name} text={POP_HELP[name]} /></span>}
-                <button title="highlight these neurons in the 3D view" aria-label={`highlight ${name}`} onClick={() => toggleHighlight(name)} className="px-2 rounded-r border border-l-0 border-zinc-700 bg-zinc-900 hover:border-zinc-400 text-cyan-300">◉</button>
-              </div>
-            ))}
+          <Explain title="stimulate" text={HELP.stimulate}><label className="text-xs uppercase tracking-wide text-zinc-500 block">stimulate <span className="normal-case tracking-normal text-zinc-600">· press to fire a sense for 500 ms</span></label></Explain>
+          <div className="flex flex-col gap-1">
+            {stimSets.filter((s) => STIMULI.includes(s)).concat(stimSets.filter((s) => !STIMULI.includes(s))).map((name) => {
+              const on = highlight.size > 0 && (meta?.populations[name] ?? []).every((i) => highlight.has(i));
+              return (
+                <div key={name} className="flex items-stretch gap-1">
+                  <Explain title={name} text={POP_HELP[name] ?? HELP.stimulate}>
+                    <button onClick={() => stimulate(name)} disabled={!meta}
+                      className={`flex-1 min-w-0 flex items-baseline justify-between gap-2 text-left px-2.5 py-1.5 rounded border border-zinc-700 hover:border-zinc-400 bg-zinc-900 disabled:opacity-40 ${frame?.activeStims.includes(name) ? "bg-amber-300/20 border-amber-300" : ""}`}>
+                      <span className="truncate">{name}</span><span className="text-zinc-500 text-xs shrink-0">{meta?.populations[name].length.toLocaleString()}</span>
+                    </button>
+                  </Explain>
+                  <Explain title={`highlight ${name}`} text={HELP.highlight}>
+                    <button aria-label={`highlight ${name}`} aria-pressed={on} onClick={() => toggleHighlight(name)}
+                      className={`w-9 shrink-0 rounded border bg-zinc-900 hover:border-zinc-400 ${on ? "border-cyan-300 text-cyan-300" : "border-zinc-700 text-cyan-300/60"}`}>◉</button>
+                  </Explain>
+                </div>
+              );
+            })}
           </div>
-          <div className="flex items-center gap-2 text-xs text-zinc-400">
-            <span>input rate<Hint title="input rate" text={HELP.inputRate} /></span>
-            <input type="range" min={10} max={300} step={10} value={rateHz} onChange={(e) => setRateHz(+e.target.value)} className="flex-1" aria-label="input rate (Hz)" />
-            <span className="w-12 text-right">{rateHz} Hz</span>
-          </div>
+          <Explain title="input rate" text={HELP.inputRate}>
+            <div className="flex items-center gap-2 text-xs text-zinc-400 pt-1">
+              <span className="w-16 whitespace-nowrap">input rate</span>
+              <input type="range" min={10} max={300} step={10} value={rateHz} onChange={(e) => setRateHz(+e.target.value)} className="flex-1" aria-label="input rate (Hz)" />
+              <span className="w-12 text-right">{rateHz} Hz</span>
+            </div>
+          </Explain>
         </section>
 
         <section className="space-y-2">
-          <label className="text-xs uppercase tracking-wide text-zinc-500">readouts (mean Hz / neuron, last 100 ms)<Hint title="readouts" text={HELP.readouts} /></label>
+          <Explain title="readouts" text={HELP.readouts}><label className="text-xs uppercase tracking-wide text-zinc-500 block">readouts <span className="normal-case tracking-normal text-zinc-600">· Hz per neuron, last 100 ms</span></label></Explain>
           {readouts.map((k) => (
-            <div key={k} className="flex items-center gap-2">
-              <span className="w-36 flex items-center"><button onClick={() => toggleHighlight(k)} className="truncate text-left hover:text-cyan-300" title="highlight these neurons in the 3D view">{k}</button>{POP_HELP[k] && <Hint title={k} text={POP_HELP[k]} />}</span>
-              <Spark values={history[k] ?? []} />
-              <span className="w-16 text-right tabular-nums font-mono">{(frame?.rates[k] ?? 0).toFixed(0)}</span>
-            </div>
+            <Explain key={k} title={k} text={POP_HELP[k] ?? HELP.readouts}>
+              <div className="flex items-center gap-2">
+                <button onClick={() => toggleHighlight(k)} className="w-36 truncate text-left hover:text-cyan-300" aria-label={`highlight ${k}`}>{k}</button>
+                <Spark values={history[k] ?? []} />
+                <span className="w-16 text-right tabular-nums font-mono">{(frame?.rates[k] ?? 0).toFixed(0)}</span>
+              </div>
+            </Explain>
           ))}
-          <div className="flex justify-between text-xs text-zinc-500 pt-1">
-            <span>whole network<Hint title="whole network" text={HELP.network} /></span><span className="font-mono">{(frame?.networkRate ?? 0).toFixed(2)} Hz</span>
-          </div>
+          <Explain title="whole network" text={HELP.network}>
+            <div className="flex justify-between text-xs text-zinc-500 pt-1">
+              <span>whole network</span><span className="font-mono">{(frame?.networkRate ?? 0).toFixed(2)} Hz</span>
+            </div>
+          </Explain>
         </section>
 
         <section className="space-y-2">
           <label className="text-xs uppercase tracking-wide text-zinc-500">model</label>
-          <Slider label="gain" help={HELP.gain} value={gain} min={0.1} max={3} step={0.05} onChange={setGain} fmt={(v) => v.toFixed(2) + "×"} />
-          <Slider label="speed" help={HELP.speed} value={speed} min={1} max={50} step={1} onChange={setSpeed} fmt={(v) => `${v} steps/frame`} />
+          <Explain title="gain" text={HELP.gain}><Slider label="gain" value={gain} min={0.1} max={3} step={0.05} onChange={setGain} fmt={(v) => v.toFixed(2) + "×"} /></Explain>
+          <Explain title="speed" text={HELP.speed}><Slider label="speed" value={speedIdx} min={0} max={SPEEDS.length - 1} step={1} onChange={setSpeedIdx} fmt={(i) => `${SPEEDS[i]}× real time`} /></Explain>
           <div className="flex flex-wrap gap-2 pt-1">
-            <button onClick={() => setRunning((r) => !r)} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">{running ? "pause" : "run"}</button>
-            <button onClick={() => send({ type: "reset" })} disabled={!meta} title="back to a resting brain" className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button>
-            <button onClick={() => setGain(SHIU_2024.gain)} title="gain 1.0, the 2024 Nature paper's value" className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: Shiu 2024</button>
-            <button onClick={() => setGain(0.45)} title="gain 0.45, the flybench reflex window on this data" className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: flybench</button>
-            <Hint title="presets" text={HELP.presets} />
+            <Explain title="pause / run" text={HELP.pause}><button onClick={() => setRunning((r) => !r)} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">{running ? "pause" : "run"}</button></Explain>
+            <Explain title="reset" text={HELP.reset}><button onClick={() => send({ type: "reset" })} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
+            <Explain title="gain preset: Shiu 2024" text={HELP.presetShiu}><button onClick={() => setGain(SHIU_2024.gain)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: Shiu 2024</button></Explain>
+            <Explain title="gain preset: flybench" text={HELP.presetFlybench}><button onClick={() => setGain(0.45)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: flybench</button></Explain>
           </div>
           <p className="text-xs text-zinc-500 font-mono">
-            t = {((frame?.t ?? 0) / 1000).toFixed(2)} s · {frame?.stepMs.toFixed(2) ?? "–"} ms/step · dt 0.1 ms · τm 20 · τs 5 · Vth −45 · w 0.275 mV
+            t = {((frame?.t ?? 0) / 1000).toFixed(2)} s · running at {frame?.achieved ? `${frame.achieved.toFixed(2)}×` : "–"} · {frame?.stepMs.toFixed(2) ?? "–"} ms/step · dt 0.1 ms
           </p>
         </section>
 
@@ -194,23 +216,25 @@ function PageInner() {
       </aside>
 
       <section className="order-1 lg:order-2 relative min-h-[50dvh]">
-        {positions && classes ? <Brain positions={positions} classes={classes} activityRef={activityRef} highlight={highlight} spin={spin} onUserRotate={() => setSpin(false)} /> : (
+        {positions && classes ? <Brain positions={positions} classes={classes} activityRef={activityRef} highlight={highlight} spin={spin} onUserRotate={stopSpin} /> : (
           <div className="absolute inset-0 grid place-items-center text-zinc-500 text-sm">{status}</div>
         )}
-        <button onClick={() => setSpin((v) => !v)} aria-pressed={spin} title={spin ? "stop the slow rotation" : "resume the slow rotation"}
-          className={`absolute top-3 right-3 rounded border px-2 py-1 text-xs bg-black/50 ${spin ? "border-amber-300/60 text-amber-300" : "border-zinc-700 text-zinc-400 hover:border-zinc-400"}`}>
-          {spin ? "⟳ spinning" : "⟳ spin"}
-        </button>
+        <Explain title="spin" text={HELP.spin}>
+          <button onClick={() => setSpin((v) => !v)} aria-pressed={spin}
+            className={`absolute top-3 right-3 rounded border px-2 py-1 text-xs bg-black/50 ${spin ? "border-amber-300/60 text-amber-300" : "border-zinc-700 text-zinc-400 hover:border-zinc-400"}`}>
+            {spin ? "⟳ spinning" : "⟳ spin"}
+          </button>
+        </Explain>
         <Legend />
       </section>
     </main>
   );
 }
 
-function Slider({ label, help, value, min, max, step, onChange, fmt }: { label: string; help?: string; value: number; min: number; max: number; step: number; onChange: (v: number) => void; fmt: (v: number) => string }) {
+function Slider({ label, value, min, max, step, onChange, fmt }: { label: string; value: number; min: number; max: number; step: number; onChange: (v: number) => void; fmt: (v: number) => string }) {
   return (
     <div className="flex items-center gap-2 text-xs text-zinc-400">
-      <span className="w-14 flex items-center">{label}{help && <Hint title={label} text={help} />}</span>
+      <span className="w-14">{label}</span>
       <input type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(+e.target.value)} className="flex-1" aria-label={label} />
       <span className="w-24 text-right font-mono">{fmt(value)}</span>
     </div>

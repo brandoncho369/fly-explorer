@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import snapshot from "@/data/leaderboard.json";
 import GainChart from "@/components/GainChart";
-import { gainWindow, pct, rankRuns, score2, validateSnapshot, verdict, type Snapshot } from "@/lib/bench";
+import { bestPerGain, gainWindow, pct, rankRuns, score2, validateSnapshot, verdict, type Snapshot } from "@/lib/bench";
 
 export const metadata: Metadata = {
   title: "flybench — does the simulated fly still behave like a fly?",
@@ -20,7 +20,8 @@ export default function Bench() {
   const core = tasks.filter((t) => t.tier === "core"), hard = tasks.filter((t) => t.tier === "hard");
   const win = gainWindow(snap.runs);
   const best = runs[0];
-  const shiu = snap.runs.find((r) => r.gain === 1);
+  const sweep = bestPerGain(snap.runs);
+  const shiu = sweep.find((r) => r.gain === 1);
   const cls = "rounded-lg border border-zinc-800 bg-zinc-900/40";
 
   return (
@@ -74,16 +75,16 @@ flybench toy && flybench run        # synthetic brain, 10 s — then see the REA
           <p className="text-zinc-400 max-w-2xl leading-relaxed">
             The published model uses gain 1.0. FlyWire re-predicted every synapse in July 2025 and the connections got heavier; nobody re-tuned. On today&apos;s data that gain makes {shiu ? pct(shiu.max_active) : "a fifth"} of the brain fire at a taste of sugar. Sweep the one knob:
           </p>
-          <GainChart runs={snap.runs} window={win} />
+          <GainChart runs={sweep} window={win} />
           <div className={`${cls} overflow-x-auto`}>
             <table className="w-full text-sm">
               <thead className="text-zinc-500 text-left text-xs uppercase tracking-wide"><tr>
                 <th className="p-3">gain</th><th className="p-3">core</th><th className="p-3">hard</th><th className="p-3">brain firing</th><th className="p-3">what happens</th>
               </tr></thead>
               <tbody>
-                {[...snap.runs].sort((a, b) => a.gain - b.gain).map((r) => (
+                {sweep.map((r) => (
                   <tr key={r.label} className={`border-t border-zinc-800 ${r.core === 1 ? "bg-amber-300/[0.06]" : ""}`}>
-                    <td className="p-3 font-mono">{r.gain.toFixed(2)}{r.gain === 1 && <span className="text-zinc-500 font-sans"> · Shiu 2024</span>}</td>
+                    <td className="p-3 font-mono">{r.gain.toFixed(2)}{r.gain === 1 && <span className="text-zinc-500 font-sans"> · Shiu 2024</span>}{(r.seeds ?? 1) > 1 && <span className="text-zinc-500 font-sans"> · {r.seeds} seeds</span>}</td>
                     <td className="p-3"><Bar v={r.core ?? 0} /></td><td className="p-3"><Bar v={r.hard ?? 0} /></td>
                     <td className="p-3 font-mono text-zinc-300">{pct(r.max_active)}</td>
                     <td className="p-3 text-zinc-400">{verdict(r)}</td>
@@ -93,7 +94,7 @@ flybench toy && flybench run        # synthetic brain, 10 s — then see the REA
             </table>
           </div>
           <p className="text-zinc-400 max-w-2xl leading-relaxed">
-            Inside the window the model still fails most of the hard tier: no dose response, no adaptation, no lateral inhibition, no selectivity. Each one is a concrete thing your model could add.
+            Three random seeds sharpen it: 0.40 fires the proboscis on only two of three, so it is a knife edge, while 0.45 passes every core task on every seed. Inside the window the model still fails most of the hard tier: no dose response, no adaptation, no lateral inhibition, no selectivity. Each one is a concrete thing your model could add.
           </p>
         </section>
 
@@ -103,11 +104,11 @@ flybench toy && flybench run        # synthetic brain, 10 s — then see the REA
             <h2 className="text-2xl font-semibold tracking-tight">Leaderboard</h2>
             <span className="text-xs text-zinc-500">ranked by core, then hard · snapshot {snap.generated}</span>
           </div>
-          <p className="text-zinc-500 text-sm max-w-2xl">A model must reproduce the known reflexes before its hard-tier wins count. Every row so far is the reference LIF model at a different gain on FlyWire v783. <a className="underline hover:text-zinc-300" href={`${REPO}/blob/HEAD/CONTRIBUTING.md`}>Submit yours</a> with a pull request.</p>
+          <p className="text-zinc-500 text-sm max-w-2xl">A model must reproduce the known reflexes before its hard-tier wins count. Submissions are pull requests: CI validates the report, a maintainer re-runs it, and rows that reproduce are marked verified. <a className="underline hover:text-zinc-300" href={`${REPO}/blob/HEAD/CONTRIBUTING.md`}>How to submit →</a></p>
           <div className={`${cls} overflow-x-auto`}>
             <table className="w-full text-sm whitespace-nowrap">
               <thead className="text-zinc-500 text-left text-xs uppercase tracking-wide"><tr>
-                <th className="p-3">#</th><th className="p-3">run</th><th className="p-3">model</th><th className="p-3">core</th><th className="p-3">hard</th>
+                <th className="p-3">#</th><th className="p-3">run</th><th className="p-3">model</th><th className="p-3">core</th><th className="p-3">hard</th><th className="p-3">status</th>
                 <th className="p-3 font-normal normal-case tracking-normal text-zinc-600"><span className="text-amber-300/80">●</span> core tasks</th>
                 <th className="p-3 font-normal normal-case tracking-normal text-zinc-600"><span className="text-sky-300/80">●</span> hard tasks</th>
               </tr></thead>
@@ -119,6 +120,7 @@ flybench toy && flybench run        # synthetic brain, 10 s — then see the REA
                     <td className="p-3 text-zinc-400">{r.simulator}</td>
                     <td className="p-3 font-mono">{score2(r.core)}</td>
                     <td className="p-3 font-mono">{score2(r.hard)}</td>
+                    <td className="p-3 text-xs">{r.verified ? <span className="text-emerald-300" title="a maintainer re-ran this and got the same scores">✓ verified</span> : <span className="text-zinc-500" title="not yet re-run by a maintainer">self-reported</span>}{r.seeds && r.seeds > 1 ? <span className="text-zinc-500"> · {r.seeds} seeds</span> : ""}</td>
                     <td className="p-3"><Dots run={r} tasks={core} color="amber" /></td>
                     <td className="p-3"><Dots run={r} tasks={hard} color="sky" /></td>
                   </tr>

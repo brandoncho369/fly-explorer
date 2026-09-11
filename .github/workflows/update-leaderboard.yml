@@ -1,0 +1,30 @@
+# Rebuilds src/data/leaderboard.json from the flybench repo and commits it, which makes Vercel redeploy /bench.
+# Triggered by flybench's leaderboard workflow (repository_dispatch), nightly, or by hand from the Actions tab.
+name: update-leaderboard
+on:
+  repository_dispatch:
+    types: [flybench-results]
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with: { repository: brandoncho369/flybench, path: flybench }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install pyyaml
+      - run: python scripts/leaderboard-snapshot.py flybench
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci && npm test
+      - name: commit if changed
+        run: |
+          git config user.name "flybench-bot" && git config user.email "bot@fly-bench.com"
+          git add src/data/leaderboard.json
+          git diff --cached --quiet || git commit -m "leaderboard: sync from flybench" && git push

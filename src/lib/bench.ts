@@ -5,19 +5,26 @@ export interface TaskResult { passed: boolean; score: number; checks: Check[] }
 export interface Run {
   label: string; connectome: string; simulator: string; gain: number; w_syn: number;
   core: number | null; hard: number | null; max_active: number;
+  seeds?: number; verified?: boolean;
   tasks: Record<string, TaskResult>;
 }
 export interface Task { name: string; title: string; tier: "core" | "hard" | string; description: string; citation: string }
 export interface Snapshot { generated: string; source: string; runs: Run[]; tasks: Task[] }
 
-/** Leaderboard order: core score desc, then hard score desc, then lower gain first (tie-break, deterministic). */
+/** Leaderboard order: core desc, hard desc, more seeds first, verified before self-reported, then lower gain (deterministic). */
 export function rankRuns(runs: Run[]): Run[] {
-  return [...runs].sort((a, b) => (b.core ?? -1) - (a.core ?? -1) || (b.hard ?? -1) - (a.hard ?? -1) || a.gain - b.gain);
+  return [...runs].sort((a, b) => (b.core ?? -1) - (a.core ?? -1) || (b.hard ?? -1) - (a.hard ?? -1) || (b.seeds ?? 1) - (a.seeds ?? 1) || Number(!!b.verified) - Number(!!a.verified) || a.gain - b.gain);
 }
 
-/** The contiguous range of gains (sorted ascending) at which every core task passes. Null if none. */
+/** For each gain keep the best-evidenced run (most seeds); the window is the range of those with a perfect core score. */
+export function bestPerGain(runs: Run[]): Run[] {
+  const by = new Map<number, Run>();
+  for (const r of runs) { const cur = by.get(r.gain); if (!cur || (r.seeds ?? 1) > (cur.seeds ?? 1)) by.set(r.gain, r); }
+  return [...by.values()].sort((a, b) => a.gain - b.gain);
+}
+
 export function gainWindow(runs: Run[]): { lo: number; hi: number } | null {
-  const ok = runs.filter((r) => r.core === 1).map((r) => r.gain).sort((a, b) => a - b);
+  const ok = bestPerGain(runs).filter((r) => r.core === 1).map((r) => r.gain).sort((a, b) => a - b);
   if (!ok.length) return null;
   return { lo: ok[0], hi: ok[ok.length - 1] };
 }

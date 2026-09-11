@@ -41,7 +41,8 @@ export type WorkerCommand =
   | { type: "stim"; name: string; neurons: Int32Array; rateHz: number; durationMs: number }
   | { type: "stopStim"; name: string }
   | { type: "run"; running: boolean }
-  | { type: "speed"; stepsPerFrame: number }
+  | { type: "speed"; target: number }   // target simulated-seconds per wall-second (1 = real time)
+  | { type: "ack" }
   | { type: "reset" };
 
 // ---- worker -> main
@@ -57,5 +58,6 @@ export type WorkerEvent =
       networkRate: number;
       activeStims: string[];
       stepMs: number;
+      achieved: number;   // simulated-seconds per wall-second actually reached
     }
   | { type: "error"; message: string };

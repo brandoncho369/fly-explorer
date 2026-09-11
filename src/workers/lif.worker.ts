@@ -18,17 +18,23 @@ let popMasks: Uint8Array[] = [];
 let popRates: RateWindow[] = [];
 let netRate: RateWindow | null = null;
 let running = false;
-let stepsPerFrame = 10;
+let target = 0.25;          // × real time
+const TICK_MS = 16, BUDGET_MS = 12;
+let simMsWindow = 0, wallMsWindow = 0, achieved = 0;
 let timer: ReturnType<typeof setTimeout> | null = null;
 let loadToken = 0;
+let awaitingAck = false;   // back-pressure: never let frames pile up on a slow main thread
 
 function frame() {
   timer = null;
   if (!running || !net || !meta || !netRate) return;
   const t0 = performance.now();
-  let fired = 0;
-  for (let s = 0; s < stepsPerFrame; s++) {
+  const dt = net.params.dt;
+  const wanted = Math.max(1, Math.round((target * TICK_MS) / dt));   // steps needed this tick to hit the target speed
+  let fired = 0, steps = 0;
+  while (steps < wanted) {
     const f = net.step();
+    steps++;
     fired += f.length;
     netRate.push(f.length);
     for (let p = 0; p < popNames.length; p++) {
@@ -37,19 +43,27 @@ function frame() {
       for (let a = 0; a < f.length; a++) c += m[f[a]];
       popRates[p].push(c);
     }
+    if ((steps & 7) === 0 && performance.now() - t0 > BUDGET_MS) break;   // out of time: yield, keep the UI alive
   }
-  const stepMs = (performance.now() - t0) / stepsPerFrame;
-  const n = net.n, act = net.act;
-  const activity = new Uint8Array(n);
-  for (let i = 0; i < n; i++) activity[i] = (act[i] * 255) | 0;
-  const rates: Record<string, number> = {};
-  for (let p = 0; p < popNames.length; p++) rates[popNames[p]] = popRates[p].hz();
-  post(
-    { type: "frame", t: net.t, activity, firedThisFrame: fired, rates, networkRate: netRate.hz(), activeStims: net.stims.map((s) => s.name), stepMs },
-    [activity.buffer],
-  );
-  // adaptive pacing: if a frame of brain-time costs more than a display frame, don't queue up a backlog
-  timer = setTimeout(frame, 16);
+  const spent = performance.now() - t0;
+  const stepMs = spent / steps;
+  // rolling estimate of achieved speed over ~0.5 s of wall time
+  simMsWindow += steps * dt; wallMsWindow += Math.max(spent, TICK_MS);
+  if (wallMsWindow >= 500) { achieved = simMsWindow / wallMsWindow; simMsWindow = 0; wallMsWindow = 0; }
+  if (!awaitingAck) {
+    const n = net.n, act = net.act;
+    const activity = new Uint8Array(n);
+    for (let i = 0; i < n; i++) activity[i] = (act[i] * 255) | 0;
+    const rates: Record<string, number> = {};
+    for (let p = 0; p < popNames.length; p++) rates[popNames[p]] = popRates[p].hz();
+    awaitingAck = true;
+    post(
+      { type: "frame", t: net.t, activity, firedThisFrame: fired, rates, networkRate: netRate.hz(), activeStims: net.stims.map((s) => s.name), stepMs, achieved },
+      [activity.buffer],
+    );
+  }
+  // the simulation keeps its own pace; frames are only *posted* when the page is ready for one
+  timer = setTimeout(frame, Math.max(0, TICK_MS - spent));
 }
 
 async function fetchBin(base: string, name: string) {
@@ -62,6 +76,7 @@ async function load(base: string) {
   const token = ++loadToken;
   running = false;
   net = null;
+  awaitingAck = false;
   post({ type: "progress", message: "fetching meta" });
   const mr = await fetch(`${base}/meta.json`);
   if (!mr.ok) throw new Error(`${base}/meta.json: HTTP ${mr.status} — dataset not exported? see README`);
@@ -111,8 +126,11 @@ ctx.onmessage = async (ev: MessageEvent<WorkerCommand>) => {
         running = msg.running && !!net;
         if (running && timer === null) frame();
         break;
+      case "ack":
+        awaitingAck = false;
+        break;
       case "speed":
-        stepsPerFrame = Math.min(200, Math.max(1, msg.stepsPerFrame | 0));
+        target = Math.min(4, Math.max(0.01, msg.target));
         break;
       case "reset":
         net?.reset();

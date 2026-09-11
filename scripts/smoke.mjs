@@ -17,14 +17,26 @@ await p.goto(URL, { waitUntil: "networkidle" });
 await p.waitForFunction(() => document.body.innerText.includes("2,004"), null, { timeout: 30000 });
 check(true, "toy loads");
 
-// help panel: opens in one fixed place, never widens the page, closes
-await p.getByRole("button", { name: "What is gain?" }).click();
-check(await p.getByRole("status").isVisible(), "gain help opens in the panel");
+// hover help: one panel, never widens the page, can be turned off
+await p.getByLabel("gain", { exact: true }).hover();
+check((await p.getByRole("status").innerText()).includes("volume knob"), "hovering gain explains it in the panel");
+await p.getByRole("button", { name: /^bitter GRNs/ }).hover();
+check((await p.getByRole("status").innerText()).includes("bitter"), "hovering another control swaps the topic");
 check((await p.evaluate(() => document.documentElement.scrollWidth)) <= 1400, "help panel does not widen the page");
-await p.getByRole("button", { name: "What is bitter GRNs?", exact: true }).click();
-check((await p.getByRole("status").innerText()).includes("bitter"), "clicking another ? swaps the topic");
-await p.getByRole("button", { name: "close help" }).click();
-check((await p.getByRole("status").count()) === 0, "help panel closes");
+{ // hovering must never move the controls (the help panel has a fixed height)
+  const btn = p.getByRole("button", { name: "reset", exact: true });
+  const y0 = (await btn.boundingBox()).y;
+  await p.getByRole("button", { name: /^photoreceptors|^olfactory/ }).first().hover();
+  await p.waitForTimeout(150);
+  check(Math.abs((await btn.boundingBox()).y - y0) < 1, "hovering a control does not shift the layout");
+}
+await p.getByRole("button", { name: "turn off" }).click();
+check((await p.getByRole("status").innerText()).includes("help is off"), "help can be turned off");
+await p.getByRole("button", { name: "turn on" }).click();
+for (const name of ["sugar GRNs", "bitter GRNs", "looming (LPLC2/LC4)"]) {
+  const hl = p.getByRole("button", { name: `highlight ${name}` });
+  check(await hl.isVisible() && (await hl.boundingBox()).width >= 30, `highlight button reachable: ${name}`);
+}
 
 // spin toggle
 await p.getByRole("button", { name: /spinning/ }).click();

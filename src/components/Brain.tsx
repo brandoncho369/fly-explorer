@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
@@ -124,7 +124,7 @@ function Cloud({ positions, classes, activityRef, highlight }: Omit<Props, "spin
   return <points ref={geomRef as never} geometry={geom} material={material} />;
 }
 
-export default function Brain({ spin = true, onUserRotate, ...props }: Props) {
+function Brain({ spin = true, onUserRotate, ...props }: Props) {
   return (
     <Canvas camera={{ position: [0, 0.4, 2.6], fov: 45, near: 0.01, far: 50 }} dpr={[1, 2]} gl={{ antialias: false, alpha: false }} style={{ background: "#07080c" }}>
       <color attach="background" args={["#07080c"]} />
@@ -133,3 +133,6 @@ export default function Brain({ spin = true, onUserRotate, ...props }: Props) {
     </Canvas>
   );
 }
+
+// The sidebar re-renders every animation frame; the canvas must not.
+export default memo(Brain);

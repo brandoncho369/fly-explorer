@@ -17,6 +17,7 @@ for f in sorted(glob.glob(os.path.join(root, "results", "*.json"))):
         "simulator": r.get("simulator", "flybench.sim.LIFSimulator").replace("flybench.sim.", ""),
         "gain": r["params"]["gain"], "w_syn": r["params"]["w_syn_mv"],
         "core": r.get("core_score"), "hard": r.get("hard_score"),
+        "seeds": int(r.get("seeds", 1)), "verified": bool(r.get("verified", False)),
         "max_active": max((m["active_fraction"] for t in r["tasks"] for m in t["measurements"].values()), default=0),
         "tasks": {t["task"]: {"passed": t["passed"], "score": t["score"],
                               "checks": [{"d": c["description"], "v": c["value"], "ok": c["passed"]} for c in t["checks"]]}

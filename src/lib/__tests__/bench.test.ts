@@ -17,15 +17,17 @@ describe("committed snapshot", () => {
     expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(6);
     for (const r of snap.runs) for (const t of snap.tasks) expect(r.tasks[t.name], `${r.label} missing ${t.name}`).toBeDefined();
   });
-  it("reproduces the headline finding: window 0.40–0.45, Shiu 1.0 fails core", () => {
-    expect(gainWindow(snap.runs)).toEqual({ lo: 0.4, hi: 0.45 });
+  it("reproduces the headline finding: robust window is 0.45 (0.40 fails with 3 seeds), Shiu 1.0 fails core", () => {
+    expect(gainWindow(snap.runs)).toEqual({ lo: 0.45, hi: 0.45 });
+    const g04 = snap.runs.filter((r) => r.gain === 0.4);
+    expect(g04.some((r) => (r.seeds ?? 1) >= 3 && (r.core ?? 1) < 1)).toBe(true);
     const shiu = snap.runs.find((r) => r.gain === 1)!;
     expect(shiu.core).toBeLessThan(1);
     expect(shiu.max_active).toBeGreaterThan(0.15);
   });
-  it("ranks the window at the top", () => {
+  it("ranks a robust 0.45 run at the top", () => {
     const top = rankRuns(snap.runs)[0];
-    expect(top.gain).toBe(0.4);
+    expect(top.gain).toBe(0.45);
   });
 });
 
@@ -54,9 +56,14 @@ describe("validateSnapshot catches corruption", () => {
 });
 
 describe("helpers", () => {
-  it("rankRuns: core first, then hard, then lower gain; nulls last", () => {
-    const rs = [mk({ label: "a", core: 0.8, hard: 0.9 }), mk({ label: "b", core: 1, hard: 0.5, gain: 0.5 }), mk({ label: "c", core: 1, hard: 0.5, gain: 0.4 }), mk({ label: "d", core: null, hard: null })];
-    expect(rankRuns(rs).map((r) => r.label)).toEqual(["c", "b", "a", "d"]);
+  it("rankRuns: core first, then hard, verified before self-reported, then lower gain; nulls last", () => {
+    const rs = [mk({ label: "a", core: 0.8, hard: 0.9 }), mk({ label: "b", core: 1, hard: 0.5, gain: 0.5 }), mk({ label: "c", core: 1, hard: 0.5, gain: 0.4 }), mk({ label: "d", core: null, hard: null }),
+      mk({ label: "e", core: 1, hard: 0.5, gain: 0.9, verified: true }), mk({ label: "f", core: 1, hard: 0.5, gain: 0.95, seeds: 3 })];
+    expect(rankRuns(rs).map((r) => r.label)).toEqual(["f", "e", "c", "b", "a", "d"]);
+  });
+  it("gainWindow uses the best-evidenced run per gain", () => {
+    const rs = [mk({ gain: 0.4, core: 1, seeds: 1 }), mk({ gain: 0.4, core: 0.8, seeds: 3 }), mk({ gain: 0.45, core: 1, seeds: 3 })];
+    expect(gainWindow(rs)).toEqual({ lo: 0.45, hi: 0.45 });
   });
   it("gainWindow: null when nothing passes; single point; range", () => {
     expect(gainWindow([mk({ core: 0.5 })])).toBeNull();
