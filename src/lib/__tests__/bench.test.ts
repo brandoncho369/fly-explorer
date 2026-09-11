@@ -14,7 +14,7 @@ describe("committed snapshot", () => {
   });
   it("has 5 core + 6 hard tasks and every run covers all of them", () => {
     expect(snap.tasks.filter((t) => t.tier === "core")).toHaveLength(5);
-    expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(6);
+    expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(7);
     for (const r of snap.runs) for (const t of snap.tasks) expect(r.tasks[t.name], `${r.label} missing ${t.name}`).toBeDefined();
   });
   it("reproduces the headline finding: robust window is 0.45 (0.40 fails with 3 seeds), Shiu 1.0 fails core", () => {

@@ -209,6 +209,7 @@ function PageInner() {
             <div className="space-y-2 leading-relaxed">
               <p>Each dot is a neuron from the FlyWire connectome (or the synthetic toy). Edges are synapse counts; each neuron is the same 5-constant leaky integrate-and-fire unit from Shiu et al. 2024. Nothing is learned or hand-tuned per neuron: when sugar lights up MN9, the wiring did that.</p>
               <p>It is <b>not</b> a fly. No neuromodulators, no gap junctions, no plasticity, no spontaneous activity, no body. Firing rates are only meaningful relative to each other. Nothing in here experiences anything — it is a very large, very fast truth table of &ldquo;if these fire, those fire.&rdquo;</p>
+              <p>You will notice that once you poke a sense, part of the brain keeps firing forever. A real fly is back at rest within a second. The model has nothing that can switch a circuit off (no adaptation, no fatigue, no neuromodulation), so the activity is a self-sustaining loop. That is a real result, not a bug; it is measured on the benchmark page as <em>return_to_rest</em>, and it is one of the clearest things a better model would have to fix.</p>
               <p>Benchmark whether a parameter choice still reproduces known reflexes on the <Link href="/bench" className="underline text-amber-300">flybench</Link> page, or on <a href="https://github.com/brandoncho369/fly-explorer" className="underline">GitHub</a>.</p>
             </div>
           )}

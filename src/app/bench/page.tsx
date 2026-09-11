@@ -61,12 +61,14 @@ export default function Bench() {
         <section id="contribute" className="space-y-3 scroll-mt-6">
           <h2 className="text-2xl font-semibold tracking-tight">Three ways in</h2>
           <div className="grid md:grid-cols-3 gap-3 text-sm">
-            <Card title="Submit a result" href={`${REPO}/blob/HEAD/CONTRIBUTING.md#1-submit-a-result`}>Change the parameters, run the suite, open a pull request with the JSON report. Twenty minutes.</Card>
+            <Card title="Submit a result" href={`${REPO}/blob/HEAD/CONTRIBUTING.md#1-submit-a-result`}>Change the parameters, run the suite, then <code>flybench submit</code> opens the pull request for you. Two commands.</Card>
             <Card title="Add a behaviour" href={`${REPO}/blob/HEAD/CONTRIBUTING.md#2-add-a-task`}>Know a fly reflex with a paper behind it? One YAML file makes it a task. <code>flybench lint</code> checks it.</Card>
             <Card title="Plug in your model" href={`${REPO}/blob/HEAD/CONTRIBUTING.md#3-plug-in-a-different-model`}>Any class with <code>run(duration, stimuli)</code>. Adaptation, gap junctions, neuromodulation: the hard tier is waiting.</Card>
           </div>
           <pre className={`${cls} p-4 text-xs overflow-x-auto leading-relaxed`}><code>{`git clone ${REPO} && cd flybench && pip install -e ".[dev]"
-flybench toy && flybench run        # synthetic brain, 10 s — then see the README for the real one`}</code></pre>
+flybench toy && flybench run        # synthetic brain, 10 s — then see the README for the real one
+flybench run -c flywire783 --gain 0.42 --seeds 3 -o results/mine.json --label "my run"
+flybench submit results/mine.json   # validates, commits, opens the PR`}</code></pre>
         </section>
 
         {/* finding */}
@@ -94,7 +96,7 @@ flybench toy && flybench run        # synthetic brain, 10 s — then see the REA
             </table>
           </div>
           <p className="text-zinc-400 max-w-2xl leading-relaxed">
-            Three random seeds sharpen it: 0.40 fires the proboscis on only two of three, so it is a knife edge, while 0.45 passes every core task on every seed. Inside the window the model still fails most of the hard tier: no dose response, no adaptation, no lateral inhibition, no selectivity. Each one is a concrete thing your model could add.
+            Three random seeds sharpen it: 0.40 fires the proboscis on only two of three, so it is a knife edge, while 0.45 passes every core task on every seed. Inside the window the model still fails most of the hard tier, and the starkest failure is the simplest: after a half-second taste of sugar, about 8% of the brain keeps firing at a constant rate forever. A real fly is at rest a second later. No dose response, no adaptation, no lateral inhibition, no selectivity, no off switch. Each one is a concrete thing your model could add.
           </p>
         </section>
 

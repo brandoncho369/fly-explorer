@@ -56,13 +56,13 @@ export const HELP = {
   readouts:
     "The output neurons we watch. The number is how many times per second each neuron in the group fired, averaged over the last tenth of a second.",
   network:
-    "Average firing rate across every neuron in the whole brain. A resting fly brain in this model is 0 Hz (it has no spontaneous activity); a few Hz means a specific circuit is active; tens of Hz means most of the brain is firing, which is a seizure, not a thought.",
+    "Average firing rate across every neuron in the whole brain. A resting fly brain in this model is 0 Hz (it has no spontaneous activity); a few Hz means a specific circuit is active; tens of Hz means most of the brain is firing, which is a seizure, not a thought. Once a circuit ignites it never switches off by itself: this model has no adaptation or fatigue, so activity that a real fly would end in a second runs forever. Press reset to quiet it. flybench measures this failure as the task 'return_to_rest'.",
   gain:
     "A volume knob on every connection at once. Each synapse adds a fixed voltage kick to the receiving neuron; gain multiplies that kick. Too low and signals die out before reaching the output; too high and everything fires. flybench measured the window where the real reflexes work on this dataset (about 0.4–0.45). The 2024 Nature paper used 1.0 on an older version of the data.",
   speed:
     "How fast simulated time should run compared with your clock. 1× means one second of brain per second. The status line shows the speed actually reached; the real brain is heavy, so a laptop typically manages 0.1–0.5× and the toy runs faster than life.",
   pause: "Freeze or resume the simulation. State is kept, so resuming continues where it stopped.",
-  reset: "Wipe all activity back to a resting brain and cancel any running stimulus. The connectome and settings are kept.",
+  reset: "Wipe all activity back to a resting brain and cancel any running stimulus. You will need this: a stimulated circuit in this model keeps firing indefinitely, because nothing in a wiring diagram plus five constants can switch it off. The connectome and settings are kept.",
   presetShiu: "Set gain to 1.0, the value from the 2024 Nature paper. On the current data this makes about a fifth of the brain fire at a taste of sugar.",
   presetFlybench: "Set gain to 0.45, the middle of the window where flybench's reflex tests pass on this dataset.",
   spin: "Slowly rotate the brain. Dragging it yourself also stops the rotation.",

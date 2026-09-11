@@ -87,7 +87,7 @@ for (const w of [1300, 400]) {
   check((await q.locator("h1").innerText()).includes("simulated fly"), `/bench @${w}px: headline`);
   check((await q.locator("svg[role=img]").count()) === 2, `/bench @${w}px: two gain charts`);
   check((await q.locator("#leaderboard tbody tr").count()) >= 5, `/bench @${w}px: leaderboard rows`);
-  check((await q.locator("#tasks article").count()) === 11, `/bench @${w}px: 11 task cards`);
+  check((await q.locator("#tasks article").count()) === 12, `/bench @${w}px: 12 task cards`);
   const cta = q.getByRole("link", { name: /Contribute a model/ });
   check((await cta.boundingBox())?.y < 900, `/bench @${w}px: contribute CTA above the fold`);
   check((await cta.getAttribute("href")).includes("/blob/HEAD/"), `/bench @${w}px: links use HEAD not main`);
