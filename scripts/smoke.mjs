@@ -16,6 +16,8 @@ const check = (ok, msg) => { console.log((ok ? "✓ " : "✗ ") + msg); if (!ok)
 await p.goto(URL, { waitUntil: "networkidle" });
 await p.waitForFunction(() => document.body.innerText.includes("2,004"), null, { timeout: 30000 });
 check(true, "toy loads");
+const guide = async () => (await p.getByTestId("guide").innerText());
+check(/Try it: press sugar GRNs/.test(await guide()), "guide: first-run prompt");
 
 // hover help: one panel, never widens the page, can be turned off
 await p.getByLabel("gain", { exact: true }).hover();
@@ -59,6 +61,14 @@ await p.waitForTimeout(500);
 const t2 = (await aside()).match(/t = ([\d.]+) s/)[1];
 check(t1 === t2, "pause freezes simulated time");
 await p.getByRole("button", { name: "run", exact: true }).click();
+
+// guide narrates MN9, then notices that activity never stops
+await p.getByRole("button", { name: /^sugar GRNs/ }).click();
+let g = ""; for (let i = 0; i < 20 && !/MN9 is firing/.test(g); i++) { await p.waitForTimeout(250); g = await guide(); }
+check(/MN9 is firing/.test(g), "guide: MN9 caption");
+await p.getByRole("button", { name: "reset", exact: true }).click();
+await p.waitForTimeout(500);
+check(/Quiet/.test(await guide()), "guide: quiet after reset");
 
 // hold toggle: sense stays on, release stops it
 await p.getByRole("button", { name: "reset", exact: true }).click();
@@ -112,7 +122,11 @@ for (const w of [1300, 400]) {
 // /submit page: form -> GitHub new-file URL
 {
   const q = await b.newPage({ viewport: { width: 1300, height: 1000 } });
+  await q.goto(`${URL}/?gain=0.4`, { waitUntil: "networkidle" });
+  await q.waitForFunction(() => document.querySelector('input[aria-label="gain"]')?.value === "0.4", null, { timeout: 15000 }).catch(() => {});
+  check((await q.getByLabel("gain", { exact: true }).inputValue()) === "0.4", "?gain= sets the explorer gain");
   await q.goto(`${URL}/submit`, { waitUntil: "networkidle" });
+  check((await q.getByRole("link", { name: /Watch this gain in the explorer/ }).getAttribute("href")) === "/?dataset=flywire783&gain=0.45", "submit links to the explorer with its gain");
   const btn = q.getByText(/Open pull request/);
   check((await btn.getAttribute("aria-disabled")) === "true", "/submit: button disabled until the form is valid");
   await q.getByPlaceholder(/jane/).fill("smoke test run");

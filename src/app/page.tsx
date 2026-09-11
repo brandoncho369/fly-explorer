@@ -2,6 +2,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { guideKey, type GuideKey } from "@/lib/guide";
 import { Meta, SHIU_2024, WorkerCommand, WorkerEvent } from "@/lib/types";
 import { Explain, HELP, HelpPanel, HelpProvider } from "@/components/Hint";
 
@@ -52,6 +53,9 @@ function PageInner() {
   const [spin, setSpin] = useState(true);
   const stopSpin = useCallback(() => setSpin(false), []);
   const [history, setHistory] = useState<Record<string, number[]>>({});
+  const [pressed, setPressed] = useState(false);           // has the visitor fired any sense yet
+  const [stimEndT, setStimEndT] = useState<number | null>(null);   // sim time when the last stimulus ended
+  const urlGain = useRef<number | null>(null);             // ?gain=0.45 from /submit's preview link
   const loading = !meta && !error;
 
   const send = useCallback((cmd: WorkerCommand, transfer?: Transferable[]) => workerRef.current?.postMessage(cmd, transfer ?? []), []);
@@ -64,10 +68,11 @@ function PageInner() {
       if (e.type === "progress") setStatus(e.message);
       else if (e.type === "error") { setError(e.message); setStatus("error"); setRunning(false); }
       else if (e.type === "loaded") {
-        setMeta(e.meta); setPositions(e.positions); setClasses(e.classes); setError(null);
+        setMeta(e.meta); setPositions(e.positions); setClasses(e.classes); setError(null); setDataset(e.meta.name);
         setStatus(`${e.meta.name}: ${e.meta.n.toLocaleString()} neurons · ${e.meta.n_edges.toLocaleString()} edges`);
         setHistory({});
-        const g = DATASETS.find((d) => d.id === e.meta.name)?.gain ?? SHIU_2024.gain;
+        const g = urlGain.current ?? DATASETS.find((d) => d.id === e.meta.name)?.gain ?? SHIU_2024.gain;
+        urlGain.current = null;
         setGain(g);
         w.postMessage({ type: "params", params: { gain: g } } satisfies WorkerCommand);
         w.postMessage({ type: "speed", target: SPEEDS[2] } satisfies WorkerCommand);
@@ -78,6 +83,7 @@ function PageInner() {
         const now = performance.now();
         if (now - lastUi.current >= 80) {          // sidebar numbers at ~12 Hz is plenty; React re-renders are the expensive part
           lastUi.current = now;
+          if (e.activeStims.length) setStimEndT(e.t);   // still stimulating: keep pushing the "ended at" forward
           setFrame(e);
           setHistory((h) => {
             const next = { ...h };
@@ -87,7 +93,13 @@ function PageInner() {
         }
       }
     };
-    w.postMessage({ type: "load", base: "/data/toy" } satisfies WorkerCommand);
+    // /submit links here with ?dataset=flywire783&gain=0.42 so a submitter can watch a setting before opening a PR
+    const q = new URLSearchParams(window.location.search);
+    const g = parseFloat(q.get("gain") ?? "");
+    if (g > 0 && g <= 5) urlGain.current = g;
+    const ds = q.get("dataset");
+    const base = ds && DATASETS.some((d) => d.id === ds) ? `/data/${ds}` : "/data/toy";
+    w.postMessage({ type: "load", base } satisfies WorkerCommand);
     return () => w.terminate();
   }, []);
 
@@ -105,6 +117,7 @@ function PageInner() {
   const stimulate = (name: string, durationMs = 500) => {
     const idx = meta?.populations[name];
     if (!idx?.length) return;
+    setPressed(true);
     send({ type: "stim", name, neurons: Int32Array.from(idx), rateHz, durationMs });
   };
   const [held, setHeld] = useState<Set<string>>(new Set());
@@ -139,6 +152,7 @@ function PageInner() {
           <p className="text-zinc-400 text-xs mt-1">A fruit-fly connectome running as a leaky integrate-and-fire network, live, in your browser. Poke a sense; watch the wiring answer.</p>
         </header>
         <HelpPanel />
+        <Guide frame={frame} pressed={pressed} stimEndT={stimEndT} ready={!!meta} dataset={dataset} />
 
         <section className="space-y-2">
           <label className="text-xs uppercase tracking-wide text-zinc-500">connectome</label>
@@ -209,7 +223,7 @@ function PageInner() {
           <Explain title="speed" text={HELP.speed}><Slider label="speed" value={speedIdx} min={0} max={SPEEDS.length - 1} step={1} onChange={setSpeedIdx} fmt={(i) => `${SPEEDS[i]}× real time (target)`} /></Explain>
           <div className="flex flex-wrap gap-2 pt-1">
             <Explain title="pause / run" text={HELP.pause}><button onClick={() => setRunning((r) => !r)} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">{running ? "pause" : "run"}</button></Explain>
-            <Explain title="reset" text={HELP.reset}><button onClick={() => { setHeld(new Set()); send({ type: "reset" }); }} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
+            <Explain title="reset" text={HELP.reset}><button onClick={() => { setHeld(new Set()); setStimEndT(null); send({ type: "reset" }); }} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
             <Explain title="gain preset: Shiu 2024" text={HELP.presetShiu}><button onClick={() => setGain(SHIU_2024.gain)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: Shiu 2024</button></Explain>
             <Explain title="gain preset: flybench" text={HELP.presetFlybench}><button onClick={() => setGain(0.45)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: flybench</button></Explain>
           </div>
@@ -283,5 +297,35 @@ export default function Page() {
     <HelpProvider>
       <PageInner />
     </HelpProvider>
+  );
+}
+
+/**
+ * A one-line narrator for first-time visitors. It never explains what the buttons are (the hover help does that);
+ * it says what is happening in the fly right now, and it points out the one result people otherwise miss:
+ * that activity in this model never stops. Fixed height so it cannot shift the layout.
+ */
+function Guide({ frame, pressed, stimEndT, ready, dataset }: { frame: Frame | null; pressed: boolean; stimEndT: number | null; ready: boolean; dataset: string }) {
+  const mn9 = frame?.rates["MN9 (proboscis)"] ?? 0, gf = frame?.rates["Giant Fiber"] ?? 0, dn = frame?.rates["descending neurons"] ?? 0;
+  const net = frame?.networkRate ?? 0;
+  const stimming = (frame?.activeStims.length ?? 0) > 0;
+  const sinceEndMs = frame && stimEndT != null && !stimming ? frame.t - stimEndT : 0;
+  const key = guideKey({ ready, pressed, mn9, gf, dn, net, stimming, sinceEndMs });
+  const tone = { never_stops: "text-amber-300", escape: "text-cyan-300", feed: "text-amber-200" }[key as string] ?? "text-zinc-400";
+  const text: Record<GuideKey, React.ReactNode> = {
+    loading: "loading the brain…",
+    prompt: <>Try it: press <b className="text-zinc-200">sugar GRNs</b>, then watch <b className="text-zinc-200">MN9</b> in the readouts.</>,
+    never_stops: <>Notice it never stops. {net.toFixed(1)} Hz across the brain, {(sinceEndMs / 1000).toFixed(1)} s after the stimulus ended. A real fly is at rest within a second; this model has nothing that can switch a circuit off. Press <b>reset</b>. flybench scores this as <em>return_to_rest</em>.</>,
+    both: <>Both the escape neuron and the feeding neuron are firing. A real fly never does both at once{dataset === "toy" ? "" : "; the model has lost the ability to say no"}.</>,
+    escape: <>The <b>Giant Fiber</b> fired. That is the escape command: a real fly would be airborne in about 10 ms.</>,
+    feed: <><b>MN9</b> is firing at {mn9.toFixed(0)} Hz. That is the proboscis motor neuron: a real fly would be extending its mouth toward the sugar right now.</>,
+    descending: <>Descending neurons are active: commands are leaving the brain for the body.</>,
+    stimulating: <>Sensory neurons are firing. Watch whether the signal reaches a readout.</>,
+    quiet: <>Quiet. Press a sense, or hold one with ⏺ to keep it on.</>,
+  };
+  return (
+    <div className={`h-20 overflow-hidden rounded border border-zinc-800 bg-zinc-900/60 px-3 py-2 text-xs leading-relaxed ${tone}`} aria-live="polite" data-testid="guide">
+      {text[key]}
+    </div>
   );
 }

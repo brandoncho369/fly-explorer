@@ -54,7 +54,7 @@ export default function Bench() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-1">
             <Stat label="behaviours tested" value={String(tasks.length)} sub={`${core.length} core · ${hard.length} hard`} />
-            <Stat label="best hard-tier score" value={score2(best?.hard ?? null)} sub="reference model — beatable" accent />
+            <Stat label="best hard-tier score" value={score2(best?.hard ?? null)} sub={best ? `${best.label} — beatable` : "—"} accent />
             <Stat label="working gain window" value={win ? `${win.lo}–${win.hi}` : "–"} sub="published value: 1.0" />
             <Stat label="brain firing at gain 1.0" value={shiu ? pct(shiu.max_active) : "–"} sub="on one taste of sugar" />
           </div>
