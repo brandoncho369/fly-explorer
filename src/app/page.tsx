@@ -6,6 +6,7 @@ import { guideKey, type GuideKey } from "@/lib/guide";
 import { Meta, SHIU_2024, WorkerCommand, WorkerEvent } from "@/lib/types";
 import { Explain, HELP, HelpPanel, HelpProvider } from "@/components/Hint";
 import { CellTypes } from "@/components/CellTypes";
+import { FlyMode } from "@/components/FlyMode";
 
 const Brain = dynamic(() => import("@/components/Brain"), { ssr: false });
 
@@ -52,6 +53,7 @@ function PageInner() {
   const [highlight, setHighlight] = useState<Set<number>>(new Set());
   const [showAbout, setShowAbout] = useState(false);
   const [spin, setSpin] = useState(true);
+  const [flyMode, setFlyMode] = useState(false);
   const stopSpin = useCallback(() => setSpin(false), []);
   const [history, setHistory] = useState<Record<string, number[]>>({});
   const [pressed, setPressed] = useState(false);           // has the visitor fired any sense yet
@@ -133,6 +135,14 @@ function PageInner() {
     });
   };
   const requestReport = useCallback(() => send({ type: "report" }), [send]);
+  // fly mode drives named populations at its own rates (the cursor sets the looming rate)
+  const stimAt = useCallback((name: string, hz: number, ms: number) => {
+    const idx = meta?.populations[name];
+    if (!idx?.length) return;
+    setPressed(true);
+    send({ type: "stim", name, neurons: Int32Array.from(idx), rateHz: hz, durationMs: ms });
+  }, [send, meta]);
+  const stopStim = useCallback((name: string) => send({ type: "stopStim", name }), [send]);
   const releaseAll = () => { held.forEach((name) => send({ type: "stopStim", name })); setHeld(new Set()); };
 
   const stimSets = useMemo(() => (meta ? Object.keys(meta.populations).filter((k) => !READOUTS.includes(k)) : []), [meta]);
@@ -254,9 +264,18 @@ function PageInner() {
       </aside>
 
       <section className="order-1 lg:order-2 relative min-h-[50dvh]">
-        {positions && classes ? <Brain positions={positions} classes={classes} activityRef={activityRef} highlight={highlight} spin={spin} onUserRotate={stopSpin} /> : (
-          <div className="absolute inset-0 grid place-items-center text-zinc-500 text-sm">{status}</div>
-        )}
+        <div className={`absolute inset-0 transition-opacity ${flyMode ? "opacity-30 pointer-events-none" : ""}`}>
+          {positions && classes ? <Brain positions={positions} classes={classes} activityRef={activityRef} highlight={highlight} spin={spin} onUserRotate={stopSpin} /> : (
+            <div className="absolute inset-0 grid place-items-center text-zinc-500 text-sm">{status}</div>
+          )}
+        </div>
+        {flyMode && meta && <FlyMode rates={frame?.rates ?? {}} populations={Object.keys(meta.populations)} stim={stimAt} stop={stopStim} />}
+        <Explain title="fly mode" text={HELP.flyMode}>
+          <button onClick={() => setFlyMode((v) => !v)} aria-pressed={flyMode} disabled={!meta}
+            className={`absolute top-3 left-3 rounded border px-2 py-1 text-xs bg-black/50 disabled:opacity-40 ${flyMode ? "border-amber-300/60 text-amber-300" : "border-zinc-700 text-zinc-400 hover:border-zinc-400"}`}>
+            {flyMode ? "🪰 fly mode on" : "🪰 fly mode"}
+          </button>
+        </Explain>
         <Explain title="spin" text={HELP.spin}>
           <button onClick={() => setSpin((v) => !v)} aria-pressed={spin}
             className={`absolute top-3 right-3 rounded border px-2 py-1 text-xs bg-black/50 ${spin ? "border-amber-300/60 text-amber-300" : "border-zinc-700 text-zinc-400 hover:border-zinc-400"}`}>

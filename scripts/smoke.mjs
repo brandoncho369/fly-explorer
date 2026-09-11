@@ -70,6 +70,32 @@ await p.getByRole("button", { name: "reset", exact: true }).click();
 await p.waitForTimeout(500);
 check(/Quiet/.test(await guide()), "guide: quiet after reset");
 
+// fly mode: rush the cursor at the fly; the giant fiber should fire and the fly should move
+await p.getByRole("button", { name: "reset", exact: true }).click();
+await p.getByRole("button", { name: /fly mode/ }).click();
+const arena = p.getByTestId("fly-arena");
+const ab = await arena.boundingBox();
+const flyEl = p.getByLabel("fly", { exact: true });
+const before = await flyEl.boundingBox();
+// approach from the left edge to the fly's centre in a fast sweep, repeated; sample the HUD as we go
+let loomPeak = 0, gfPeak = 0;
+for (let rep = 0; rep < 4; rep++) {
+  const cx = before.x + before.width / 2, cy = before.y + before.height / 2;
+  await p.mouse.move(ab.x + 5, cy);
+  for (let k = 1; k <= 12; k++) {
+    await p.mouse.move(ab.x + 5 + (cx - ab.x - 5) * (k / 12), cy); await p.waitForTimeout(12);
+    loomPeak = Math.max(loomPeak, +((await p.getByTestId("fly-hud").innerText()).match(/cursor: (\d+)/)?.[1] ?? 0));
+  }
+  for (let i = 0; i < 8; i++) { await p.waitForTimeout(100); gfPeak = Math.max(gfPeak, +((await p.getByTestId("fly-hud").innerText()).match(/giant fiber: (\d+)/)?.[1] ?? 0)); }
+}
+check(/looming detectors/.test(await p.getByTestId("fly-hud").innerText()), "fly mode: HUD present");
+check(loomPeak >= 30, `fly mode: rushing the cursor drives the looming detectors (peak ${loomPeak} Hz)`);
+check(gfPeak > 5, `fly mode: the giant fiber fires (peak ${gfPeak} Hz)`);
+const after = await flyEl.boundingBox();
+check(Math.hypot(after.x - before.x, after.y - before.y) > 30, "fly mode: the fly jumped away");
+await p.getByRole("button", { name: /fly mode/ }).click();
+await p.getByRole("button", { name: "reset", exact: true }).click();
+
 // cell-type search: find and fire a type by name, then see it in the "what fired" table
 await p.getByRole("button", { name: "reset", exact: true }).click();
 const search = p.getByLabel("cell type search");

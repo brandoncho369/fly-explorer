@@ -68,4 +68,6 @@ export const HELP = {
   presetShiu: "Set gain to 1.0, the value from the 2024 Nature paper. On the current data this makes about a fifth of the brain fire at a taste of sugar.",
   presetFlybench: "Set gain to 0.45, the middle of the window where flybench's reflex tests pass on this dataset.",
   spin: "Slowly rotate the brain. Dragging it yourself also stops the rotation.",
+  flyMode:
+    "Put a fly on screen with this brain behind it. Your cursor is an object it can see: rush at the fly and its looming detectors fire at a rate set by how fast the cursor is expanding in its view; if the giant fiber then fires, it jumps. A click is a flash of light on every photoreceptor (a real fly does not escape from a flash — watch whether this one does). Drag the sugar drop to its head to feed it. The body is a puppet driven by the same readouts in this panel; the mapping from cursor to looming is ours, everything after the sensory neurons is the wiring.",
 } as const;
