@@ -5,6 +5,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.fly-bench.com"),
   title: "fly-explorer — a fruit fly connectome, live in your browser",
   description: "The FlyWire Drosophila connectome (139k neurons, 3.7M synapses) running as a spiking network in your browser. Poke a sense; watch the wiring answer.",
+  icons: { icon: "/icon.svg" },
   openGraph: { title: "fly-bench", description: "A fruit fly brain running live in your browser, and a benchmark for whether it still behaves like a fly.", url: "https://www.fly-bench.com", siteName: "fly-bench" },
 };
 
