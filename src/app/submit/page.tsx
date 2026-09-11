@@ -35,7 +35,7 @@ export default function Submit() {
   useEffect(() => {
     fetch(`https://api.github.com/repos/${OWNER}/${REPO}`).then((r) => r.json()).then((j) => { if (j?.default_branch) setBranch(j.default_branch); }).catch(() => {});
   }, []);
-  useEffect(() => { setExtra(Object.fromEntries(sim.extra.map((e) => [e.key, e.def]))); }, [simIdx, sim.extra]);
+  const pickSim = (i: number) => { setSimIdx(i); setExtra(Object.fromEntries(SIMULATORS[i].extra.map((e) => [e.key, e.def]))); };
 
   const yaml = useMemo(() => {
     const lines = [`label: ${label || "…"}`, `note: ${note.replace(/\n/g, " ") || "…"}`, "connectome: flywire783", `seeds: ${seeds}`, "params:", `  gain: ${gain}`];
@@ -74,7 +74,7 @@ export default function Submit() {
               <input className={field} value={note} onChange={(e) => setNote(e.target.value)} placeholder="e.g. gain 0.42, otherwise Shiu 2024 defaults" maxLength={300} />
             </Field>
             <Field label="model" hint="built-in simulators only; custom code goes through a normal PR">
-              <select className={field} value={simIdx} onChange={(e) => setSimIdx(+e.target.value)}>
+              <select className={field} value={simIdx} onChange={(e) => pickSim(+e.target.value)}>
                 {SIMULATORS.map((s, i) => <option key={s.id} value={i}>{s.label}</option>)}
               </select>
             </Field>

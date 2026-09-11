@@ -48,7 +48,9 @@ export const HELP = {
   connectome:
     "The wiring diagram being simulated. 'toy' is a 2,000-neuron fake network we hand-wired so the app works instantly. 'FlyWire v783' is the real map of an adult fruit fly brain: 139,255 neurons and 3.7 million connections, traced from electron-microscope images by the FlyWire project.",
   stimulate:
-    "Each button fakes a sense. Pressing it makes that group of sensory neurons fire randomly for half a second, the way they would if the fly tasted sugar, saw a shadow rush at it, and so on. Nothing else is scripted: what happens next is decided only by the wiring.",
+    "Each row fakes a sense. The main button fires that group of sensory neurons randomly for half a second, the way they would if the fly tasted sugar, saw a shadow rush at it, and so on. The ⏺ button holds the sense on until you press it again, so you can layer senses: hold sugar, then hold bitter, and watch whether bitter can push the proboscis neuron back down. Nothing else is scripted: what happens next is decided only by the wiring.",
+  hold:
+    "Hold this sense on continuously instead of a half-second pulse. Press again to release. Use it to overlap two senses (hold sugar, then hold bitter) — that overlap is how flybench tests bitter suppression.",
   highlight:
     "Paint these neurons blue in the 3D view so you can see where they sit. Click again to un-paint.",
   inputRate:
@@ -60,7 +62,7 @@ export const HELP = {
   gain:
     "A volume knob on every connection at once. Each synapse adds a fixed voltage kick to the receiving neuron; gain multiplies that kick. Too low and signals die out before reaching the output; too high and everything fires. flybench measured the window where the real reflexes work on this dataset (about 0.4–0.45). The 2024 Nature paper used 1.0 on an older version of the data.",
   speed:
-    "How fast simulated time should run compared with your clock. 1× means one second of brain per second. The status line shows the speed actually reached; the real brain is heavy, so a laptop typically manages 0.1–0.5× and the toy runs faster than life.",
+    "The speed you are asking for, compared with your clock. 1× means one second of brain per second. What you actually get is on the status line, and it depends on how busy the brain is: a quiet real brain runs at 0.1–0.5× on a laptop, but once thousands of neurons are firing every step has to push all their spikes through the wiring, and it can drop to 0.01×. The toy runs faster than life. The seizing brain is the slow one.",
   pause: "Freeze or resume the simulation. State is kept, so resuming continues where it stopped.",
   reset: "Wipe all activity back to a resting brain and cancel any running stimulus. You will need this: a stimulated circuit in this model keeps firing indefinitely, because nothing in a wiring diagram plus five constants can switch it off. The connectome and settings are kept.",
   presetShiu: "Set gain to 1.0, the value from the 2024 Nature paper. On the current data this makes about a fifth of the brain fire at a taste of sugar.",

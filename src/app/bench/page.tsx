@@ -163,7 +163,7 @@ flybench submit results/mine.json   # validates, commits, opens the PR`}</code><
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-zinc-600">Filled dot = task passed; hollow = failed (hover for the task name and partial score). Full per-check values in <a className="underline" href={`${REPO}/blob/HEAD/LEADERBOARD.md`}>LEADERBOARD.md</a> and <code>results/*.json</code>.</p>
+          <p className="text-xs text-zinc-600">Filled dot = task passed; hollow = failed; dashed = task added after this result was run (hover for the task name and partial score). Full per-check values in <a className="underline" href={`${REPO}/blob/HEAD/LEADERBOARD.md`}>LEADERBOARD.md</a> and <code>results/*.json</code>.</p>
         </section>
 
         {/* tasks */}
@@ -207,8 +207,9 @@ function Dots({ run, tasks, color }: { run: Snapshot["runs"][number]; tasks: Sna
     <span className="flex gap-1.5">
       {tasks.map((t) => {
         const x = run.tasks[t.name];
-        const ok = !!x?.passed;
-        return <span key={t.name} title={`${t.title}${ok ? "" : x ? ` · ${pct(x.score)} of checks` : " · no result"}`} className={`inline-block h-3 w-3 rounded-full border ${ok ? fill : ring}`} aria-label={`${t.name}: ${ok ? "pass" : "fail"}`} />;
+        if (!x) return <span key={t.name} title={`${t.title} · not run on this result yet (task added later)`} className="inline-block h-3 w-3 rounded-full border border-dashed border-zinc-700" aria-label={`${t.name}: not run`} />;
+        const ok = !!x.passed;
+        return <span key={t.name} title={`${t.title}${ok ? "" : ` · ${pct(x.score)} of checks`}`} className={`inline-block h-3 w-3 rounded-full border ${ok ? fill : ring}`} aria-label={`${t.name}: ${ok ? "pass" : "fail"}`} />;
       })}
     </span>
   );

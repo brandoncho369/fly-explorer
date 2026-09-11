@@ -12,10 +12,14 @@ describe("committed snapshot", () => {
   it("is internally consistent", () => {
     expect(validateSnapshot(snap)).toEqual([]);
   });
-  it("has 5 core + 6 hard tasks and every run covers all of them", () => {
+  it("has 5 core + 9 hard tasks; every run's tasks are known tasks and every run covers the core tier", () => {
     expect(snap.tasks.filter((t) => t.tier === "core")).toHaveLength(5);
-    expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(7);
-    for (const r of snap.runs) for (const t of snap.tasks) expect(r.tasks[t.name], `${r.label} missing ${t.name}`).toBeDefined();
+    expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(9);
+    const known = new Set(snap.tasks.map((t) => t.name));
+    for (const r of snap.runs) {
+      for (const name of Object.keys(r.tasks)) expect(known.has(name), `${r.label} has unknown task ${name}`).toBe(true);
+      for (const t of snap.tasks.filter((t) => t.tier === "core")) expect(r.tasks[t.name], `${r.label} missing core task ${t.name}`).toBeDefined();
+    }
   });
   it("reproduces the headline finding: robust window is 0.45 (0.40 fails with 3 seeds), Shiu 1.0 fails core", () => {
     const fw = byConnectome(snap.runs, PRIMARY_CONNECTOME);

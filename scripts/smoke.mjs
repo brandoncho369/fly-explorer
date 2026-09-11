@@ -60,6 +60,18 @@ const t2 = (await aside()).match(/t = ([\d.]+) s/)[1];
 check(t1 === t2, "pause freezes simulated time");
 await p.getByRole("button", { name: "run", exact: true }).click();
 
+// hold toggle: sense stays on, release stops it
+await p.getByRole("button", { name: "reset", exact: true }).click();
+await p.getByRole("button", { name: "hold sugar GRNs" }).click();
+await p.waitForTimeout(1500);
+check((await p.getByRole("button", { name: "hold sugar GRNs" }).getAttribute("aria-pressed")) === "true", "hold button shows pressed");
+check((await p.getByText("release all held senses").count()) === 1, "release-all appears while holding");
+let heldPeak = 0; for (let i = 0; i < 6; i++) { await p.waitForTimeout(300); heldPeak = Math.max(heldPeak, await mn9()); }
+check(heldPeak > 10, `held sugar keeps MN9 firing (peak ${heldPeak} Hz)`);
+await p.getByRole("button", { name: "hold sugar GRNs" }).click();
+check((await p.getByRole("button", { name: "hold sugar GRNs" }).getAttribute("aria-pressed")) === "false", "hold released");
+await p.getByRole("button", { name: "reset", exact: true }).click();
+
 // real dataset if present
 const r = await p.request.get(`${URL}/data/flywire783/meta.json`);
 if (r.ok()) {
@@ -68,7 +80,8 @@ if (r.ok()) {
   await p.waitForFunction(() => document.querySelector('input[aria-label="gain"]')?.value === "0.45", null, { timeout: 10000 }).catch(() => {});
   check((await p.getByLabel("gain", { exact: true }).inputValue()) === "0.45", "flywire preset gain applied");
   await p.getByRole("button", { name: /^sugar GRNs/ }).click();
-  peak = 0; for (let i = 0; i < 12; i++) { await p.waitForTimeout(400); peak = Math.max(peak, await mn9()); }
+  // the real brain steps slowly in headless Chromium (~0.01x real time), so poll until it fires or 20 s pass
+  peak = 0; for (let i = 0; i < 50 && peak <= 10; i++) { await p.waitForTimeout(400); peak = Math.max(peak, await mn9()); }
   check(peak > 10, `flywire: sugar drives MN9 (peak ${peak} Hz)`);
   await p.getByRole("button", { name: "reset", exact: true }).click();
   await p.waitForTimeout(500);
@@ -87,7 +100,7 @@ for (const w of [1300, 400]) {
   check((await q.locator("h1").innerText()).includes("simulated fly"), `/bench @${w}px: headline`);
   check((await q.locator("svg[role=img]").count()) === 2, `/bench @${w}px: two gain charts`);
   check((await q.locator("#leaderboard tbody tr").count()) >= 5, `/bench @${w}px: leaderboard rows`);
-  check((await q.locator("#tasks article").count()) === 12, `/bench @${w}px: 12 task cards`);
+  check((await q.locator("#tasks article").count()) === 14, `/bench @${w}px: 14 task cards`);
   const cta = q.getByRole("link", { name: /Submit a result/ }).first();
   check((await cta.boundingBox())?.y < 900, `/bench @${w}px: contribute CTA above the fold`);
   check((await q.getByRole("link", { name: /Add a task or a model/ }).getAttribute("href")).includes("/blob/HEAD/"), `/bench @${w}px: links use HEAD not main`);

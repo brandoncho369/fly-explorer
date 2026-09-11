@@ -20,7 +20,7 @@ for f in sorted(glob.glob(os.path.join(root, "results", "*.json"))):
         "seeds": int(r.get("seeds", 1)), "verified": bool(r.get("verified", False)),
         "max_active": max((m["active_fraction"] for t in r["tasks"] for m in t["measurements"].values()), default=0),
         "tasks": {t["task"]: {"passed": t["passed"], "score": t["score"],
-                              "checks": [{"d": c["description"], "v": c["value"], "ok": c["passed"]} for c in t["checks"]]}
+                              "checks": [{"d": c["description"], "v": c["value"], "ok": c["passed"], **({"m": round(c["margin"], 2)} if isinstance(c.get("margin"), float) and c["margin"] == c["margin"] else {})} for c in t["checks"]]}
                   for t in r["tasks"]},
     })
 tasks = []

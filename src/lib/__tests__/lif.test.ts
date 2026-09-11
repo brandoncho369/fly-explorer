@@ -85,6 +85,26 @@ describe("LIFNetwork", () => {
     expect(net.stims).toHaveLength(0);
   });
 
+  it("a held stimulus (infinite duration) never expires until removed, and reset clears it", () => {
+    const net = new LIFNetwork(csrFromEdges(3, []), SHIU_2024, always);
+    net.addStimulus("hold", Int32Array.from([0]), 1e6, Number.POSITIVE_INFINITY);
+    const spikes = run(net, 2000);
+    expect(net.stims).toHaveLength(1);
+    expect(spikes.length).toBeGreaterThan(500);            // kept firing for two seconds
+    net.removeStimulus("hold");
+    expect(net.stims).toHaveLength(0);
+    expect(run(net, 50).length).toBe(0);                   // silent once released (no wiring)
+    net.addStimulus("hold", Int32Array.from([0]), 1e6, Number.POSITIVE_INFINITY);
+    net.reset();
+    expect(net.stims).toHaveLength(0);
+  });
+  it("two overlapping stimuli both drive their neurons", () => {
+    const net = new LIFNetwork(csrFromEdges(3, []), SHIU_2024, always);
+    net.addStimulus("sugar", Int32Array.from([0]), 1e6, 100);
+    net.addStimulus("bitter", Int32Array.from([1]), 1e6, 100);
+    const ids = new Set(run(net, 50).map(([, i]) => i));
+    expect(ids.has(0) && ids.has(1)).toBe(true);
+  });
   it("ignores degenerate stimuli and expires finished ones", () => {
     const net = new LIFNetwork(csrFromEdges(3, []), SHIU_2024, always);
     net.addStimulus("empty", new Int32Array(0), 100, 100);

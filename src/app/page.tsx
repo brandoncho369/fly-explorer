@@ -107,6 +107,16 @@ function PageInner() {
     if (!idx?.length) return;
     send({ type: "stim", name, neurons: Int32Array.from(idx), rateHz, durationMs });
   };
+  const [held, setHeld] = useState<Set<string>>(new Set());
+  const toggleHold = (name: string) => {
+    setHeld((prev) => {
+      const s = new Set(prev);
+      if (s.has(name)) { s.delete(name); send({ type: "stopStim", name }); }
+      else { s.add(name); stimulate(name, Number.POSITIVE_INFINITY); }
+      return s;
+    });
+  };
+  const releaseAll = () => { held.forEach((name) => send({ type: "stopStim", name })); setHeld(new Set()); };
 
   const stimSets = useMemo(() => (meta ? Object.keys(meta.populations).filter((k) => !READOUTS.includes(k)) : []), [meta]);
   const readouts = useMemo(() => (meta ? READOUTS.filter((k) => meta.populations[k]) : []), [meta]);
@@ -141,7 +151,7 @@ function PageInner() {
         </section>
 
         <section className="space-y-2">
-          <Explain title="stimulate" text={HELP.stimulate}><label className="text-xs uppercase tracking-wide text-zinc-500 block">stimulate <span className="normal-case tracking-normal text-zinc-600">· press to fire a sense for 500 ms</span></label></Explain>
+          <Explain title="stimulate" text={HELP.stimulate}><label className="text-xs uppercase tracking-wide text-zinc-500 block">stimulate <span className="normal-case tracking-normal text-zinc-600">· press = 500 ms pulse · ⏺ = hold on</span></label></Explain>
           <div className="flex flex-col gap-1">
             {stimSets.filter((s) => STIMULI.includes(s)).concat(stimSets.filter((s) => !STIMULI.includes(s))).map((name) => {
               const on = highlight.size > 0 && (meta?.populations[name] ?? []).every((i) => highlight.has(i));
@@ -153,6 +163,10 @@ function PageInner() {
                       <span className="truncate">{name}</span><span className="text-zinc-500 text-xs shrink-0">{meta?.populations[name].length.toLocaleString()}</span>
                     </button>
                   </Explain>
+                  <Explain title={`hold ${name}`} text={HELP.hold}>
+                    <button aria-label={`hold ${name}`} aria-pressed={held.has(name)} onClick={() => toggleHold(name)} disabled={!meta}
+                      className={`w-9 shrink-0 rounded border bg-zinc-900 hover:border-zinc-400 disabled:opacity-40 ${held.has(name) ? "border-amber-300 text-amber-300 bg-amber-300/20" : "border-zinc-700 text-zinc-400"}`}>{held.has(name) ? "■" : "⏺"}</button>
+                  </Explain>
                   <Explain title={`highlight ${name}`} text={HELP.highlight}>
                     <button aria-label={`highlight ${name}`} aria-pressed={on} onClick={() => toggleHighlight(name)}
                       className={`w-9 shrink-0 rounded border bg-zinc-900 hover:border-zinc-400 ${on ? "border-cyan-300 text-cyan-300" : "border-zinc-700 text-cyan-300/60"}`}>◉</button>
@@ -161,6 +175,7 @@ function PageInner() {
               );
             })}
           </div>
+          {held.size > 0 && <button onClick={releaseAll} className="px-2.5 py-1.5 rounded border border-amber-300/60 text-amber-300 bg-zinc-900 hover:border-amber-300 text-xs">release all held senses</button>}
           <Explain title="input rate" text={HELP.inputRate}>
             <div className="flex items-center gap-2 text-xs text-zinc-400 pt-1">
               <span className="w-16 whitespace-nowrap">input rate</span>
@@ -191,15 +206,15 @@ function PageInner() {
         <section className="space-y-2">
           <label className="text-xs uppercase tracking-wide text-zinc-500">model</label>
           <Explain title="gain" text={HELP.gain}><Slider label="gain" value={gain} min={0.1} max={3} step={0.05} onChange={setGain} fmt={(v) => v.toFixed(2) + "×"} /></Explain>
-          <Explain title="speed" text={HELP.speed}><Slider label="speed" value={speedIdx} min={0} max={SPEEDS.length - 1} step={1} onChange={setSpeedIdx} fmt={(i) => `${SPEEDS[i]}× real time`} /></Explain>
+          <Explain title="speed" text={HELP.speed}><Slider label="speed" value={speedIdx} min={0} max={SPEEDS.length - 1} step={1} onChange={setSpeedIdx} fmt={(i) => `${SPEEDS[i]}× real time (target)`} /></Explain>
           <div className="flex flex-wrap gap-2 pt-1">
             <Explain title="pause / run" text={HELP.pause}><button onClick={() => setRunning((r) => !r)} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">{running ? "pause" : "run"}</button></Explain>
-            <Explain title="reset" text={HELP.reset}><button onClick={() => send({ type: "reset" })} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
+            <Explain title="reset" text={HELP.reset}><button onClick={() => { setHeld(new Set()); send({ type: "reset" }); }} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
             <Explain title="gain preset: Shiu 2024" text={HELP.presetShiu}><button onClick={() => setGain(SHIU_2024.gain)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: Shiu 2024</button></Explain>
             <Explain title="gain preset: flybench" text={HELP.presetFlybench}><button onClick={() => setGain(0.45)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: flybench</button></Explain>
           </div>
           <p className="text-xs text-zinc-500 font-mono">
-            t = {((frame?.t ?? 0) / 1000).toFixed(2)} s · running at {frame?.achieved ? `${frame.achieved.toFixed(2)}×` : "–"} · {frame?.stepMs.toFixed(2) ?? "–"} ms/step · dt 0.1 ms
+            t = {((frame?.t ?? 0) / 1000).toFixed(2)} s · asked {SPEEDS[speedIdx]}× · getting {frame?.achieved ? `${frame.achieved.toFixed(2)}×` : "–"}{frame && frame.achieved < SPEEDS[speedIdx] * 0.5 ? <span className="text-amber-300/80"> (brain busy: {frame.firedThisFrame.toLocaleString()} spikes/frame)</span> : null} · {frame?.stepMs.toFixed(2) ?? "–"} ms/step
           </p>
         </section>
 
