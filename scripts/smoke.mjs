@@ -17,11 +17,18 @@ await p.goto(URL, { waitUntil: "networkidle" });
 await p.waitForFunction(() => document.body.innerText.includes("2,004"), null, { timeout: 30000 });
 check(true, "toy loads");
 
-// hints open and close
+// help panel: opens in one fixed place, never widens the page, closes
 await p.getByRole("button", { name: "What is gain?" }).click();
-check(await p.getByRole("tooltip").isVisible(), "gain hint opens");
-await p.keyboard.press("Escape");
-check((await p.getByRole("tooltip").count()) === 0, "hint closes on Escape");
+check(await p.getByRole("status").isVisible(), "gain help opens in the panel");
+check((await p.evaluate(() => document.documentElement.scrollWidth)) <= 1400, "help panel does not widen the page");
+await p.getByRole("button", { name: "What is bitter GRNs?", exact: true }).click();
+check((await p.getByRole("status").innerText()).includes("bitter"), "clicking another ? swaps the topic");
+await p.getByRole("button", { name: "close help" }).click();
+check((await p.getByRole("status").count()) === 0, "help panel closes");
+
+// spin toggle
+await p.getByRole("button", { name: /spinning/ }).click();
+check((await p.getByRole("button", { name: /^⟳ spin$/ }).count()) === 1, "spin toggle stops rotation");
 
 // stimulate on toy
 await p.getByRole("button", { name: /^sugar GRNs/ }).click();
@@ -69,6 +76,9 @@ for (const w of [1300, 400]) {
   check((await q.locator("svg[role=img]").count()) === 2, `/bench @${w}px: two gain charts`);
   check((await q.locator("#leaderboard tbody tr").count()) >= 5, `/bench @${w}px: leaderboard rows`);
   check((await q.locator("#tasks article").count()) === 11, `/bench @${w}px: 11 task cards`);
+  const cta = q.getByRole("link", { name: /Contribute a model/ });
+  check((await cta.boundingBox())?.y < 900, `/bench @${w}px: contribute CTA above the fold`);
+  check((await cta.getAttribute("href")).includes("/blob/HEAD/"), `/bench @${w}px: links use HEAD not main`);
   await q.locator("svg[role=img] rect[tabindex]").first().hover();
   check((await q.locator("svg[role=img] text").filter({ hasText: /gain 0\.3 ·/ }).count()) >= 1, `/bench @${w}px: chart hover tooltip`);
   await q.close();

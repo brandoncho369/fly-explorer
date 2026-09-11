@@ -29,32 +29,50 @@ export default function Bench() {
         <nav className="flex items-center justify-between text-sm">
           <Link href="/" className="text-zinc-400 hover:text-white">← fly-explorer</Link>
           <div className="flex gap-5 text-zinc-400">
+            <a href="#contribute" className="hover:text-white">contribute</a>
             <a href="#leaderboard" className="hover:text-white">leaderboard</a>
             <a href="#tasks" className="hover:text-white">tasks</a>
             <a href={REPO} className="hover:text-white">github</a>
           </div>
         </nav>
 
-        {/* hero */}
-        <header className="space-y-5">
+        {/* hero: what it is + how to take part, above the fold */}
+        <header className="space-y-6">
           <p className="text-xs uppercase tracking-[0.2em] text-amber-300">flybench</p>
           <h1 className="text-3xl sm:text-5xl font-semibold tracking-tight leading-tight max-w-3xl">Does the simulated fly still do the things a real fly does?</h1>
-          <p className="text-zinc-400 max-w-2xl leading-relaxed">
-            FlyWire mapped every neuron and synapse in a fruit fly brain. Anyone can drop that map into a spiking-neuron model and wire it to a game; every one of those demos hand-tunes the same knobs until something looks alive. flybench replaces the vibe with a score: {tasks.length} behaviours from the fly literature, each with a stimulus, a readout and a threshold.
+          <p className="text-zinc-400 max-w-2xl leading-relaxed text-lg">
+            An open benchmark for whole-brain fruit fly simulations: {tasks.length} behaviours from the literature, one score per model. The reference model already fails half of them. Beat it.
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+          <div className="flex flex-wrap gap-3">
+            <a href={`${REPO}/blob/HEAD/CONTRIBUTING.md`} className="rounded-md bg-amber-300 px-5 py-2.5 text-sm font-semibold text-black hover:bg-amber-200">Contribute a model, task or result →</a>
+            <a href={REPO} className="rounded-md border border-zinc-700 px-5 py-2.5 text-sm text-zinc-200 hover:border-zinc-400">Get the code</a>
+            <Link href="/" className="rounded-md border border-zinc-700 px-5 py-2.5 text-sm text-zinc-200 hover:border-zinc-400">Watch the brain run</Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-1">
             <Stat label="behaviours tested" value={String(tasks.length)} sub={`${core.length} core · ${hard.length} hard`} />
-            <Stat label="working gain window" value={win ? `${win.lo}–${win.hi}` : "–"} sub="published value: 1.0" accent />
-            <Stat label="reference model, hard tier" value={score2(best?.hard ?? null)} sub={`core ${score2(best?.core ?? null)}`} />
+            <Stat label="best hard-tier score" value={score2(best?.hard ?? null)} sub="reference model — beatable" accent />
+            <Stat label="working gain window" value={win ? `${win.lo}–${win.hi}` : "–"} sub="published value: 1.0" />
             <Stat label="brain firing at gain 1.0" value={shiu ? pct(shiu.max_active) : "–"} sub="on one taste of sugar" />
           </div>
         </header>
 
+        {/* three ways in — short, before any explanation */}
+        <section id="contribute" className="space-y-3 scroll-mt-6">
+          <h2 className="text-2xl font-semibold tracking-tight">Three ways in</h2>
+          <div className="grid md:grid-cols-3 gap-3 text-sm">
+            <Card title="Submit a result" href={`${REPO}/blob/HEAD/CONTRIBUTING.md#1-submit-a-result`}>Change the parameters, run the suite, open a pull request with the JSON report. Twenty minutes.</Card>
+            <Card title="Add a behaviour" href={`${REPO}/blob/HEAD/CONTRIBUTING.md#2-add-a-task`}>Know a fly reflex with a paper behind it? One YAML file makes it a task. <code>flybench lint</code> checks it.</Card>
+            <Card title="Plug in your model" href={`${REPO}/blob/HEAD/CONTRIBUTING.md#3-plug-in-a-different-model`}>Any class with <code>run(duration, stimuli)</code>. Adaptation, gap junctions, neuromodulation: the hard tier is waiting.</Card>
+          </div>
+          <pre className={`${cls} p-4 text-xs overflow-x-auto leading-relaxed`}><code>{`git clone ${REPO} && cd flybench && pip install -e ".[dev]"
+flybench toy && flybench run        # synthetic brain, 10 s — then see the README for the real one`}</code></pre>
+        </section>
+
         {/* finding */}
         <section className="space-y-4">
-          <h2 className="text-2xl font-semibold tracking-tight">The finding so far</h2>
+          <h2 className="text-2xl font-semibold tracking-tight">What it found so far</h2>
           <p className="text-zinc-400 max-w-2xl leading-relaxed">
-            The 2024 <em>Nature</em> model (Shiu et al.) uses one global synaptic gain, 1.0. In July 2025 FlyWire re-predicted every synapse with a new method and the connections came out heavier. Nobody re-tuned. On today&apos;s data, gain 1.0 makes {shiu ? pct(shiu.max_active) : "a fifth"} of the brain fire at a taste of sugar. Sweep only that one knob and the reflexes come and go:
+            The published model uses gain 1.0. FlyWire re-predicted every synapse in July 2025 and the connections got heavier; nobody re-tuned. On today&apos;s data that gain makes {shiu ? pct(shiu.max_active) : "a fifth"} of the brain fire at a taste of sugar. Sweep the one knob:
           </p>
           <GainChart runs={snap.runs} window={win} />
           <div className={`${cls} overflow-x-auto`}>
@@ -75,7 +93,7 @@ export default function Bench() {
             </table>
           </div>
           <p className="text-zinc-400 max-w-2xl leading-relaxed">
-            Inside the window the reference model then fails most of the hard tier, and every failure names something a better model has to add: the proboscis response is all-or-nothing (no dose response), a second sugar pulse gets exactly the response of the first (no adaptation), one odour channel lights up 84% of all olfactory projection neurons (no lateral inhibition), and looming recruits a third of all descending neurons (no selectivity).
+            Inside the window the model still fails most of the hard tier: no dose response, no adaptation, no lateral inhibition, no selectivity. Each one is a concrete thing your model could add.
           </p>
         </section>
 
@@ -85,7 +103,7 @@ export default function Bench() {
             <h2 className="text-2xl font-semibold tracking-tight">Leaderboard</h2>
             <span className="text-xs text-zinc-500">ranked by core, then hard · snapshot {snap.generated}</span>
           </div>
-          <p className="text-zinc-500 text-sm max-w-2xl">A model must reproduce the known reflexes before its hard-tier wins count. Every row so far is the reference LIF model at a different gain on FlyWire v783. <a className="underline hover:text-zinc-300" href={`${REPO}/blob/main/CONTRIBUTING.md`}>Submit yours</a> with a pull request.</p>
+          <p className="text-zinc-500 text-sm max-w-2xl">A model must reproduce the known reflexes before its hard-tier wins count. Every row so far is the reference LIF model at a different gain on FlyWire v783. <a className="underline hover:text-zinc-300" href={`${REPO}/blob/HEAD/CONTRIBUTING.md`}>Submit yours</a> with a pull request.</p>
           <div className={`${cls} overflow-x-auto`}>
             <table className="w-full text-sm whitespace-nowrap">
               <thead className="text-zinc-500 text-left text-xs uppercase tracking-wide"><tr>
@@ -108,7 +126,7 @@ export default function Bench() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-zinc-600">Filled dot = task passed; hollow = failed (hover for the task name and partial score). Full per-check values in <a className="underline" href={`${REPO}/blob/main/LEADERBOARD.md`}>LEADERBOARD.md</a> and <code>results/*.json</code>.</p>
+          <p className="text-xs text-zinc-600">Filled dot = task passed; hollow = failed (hover for the task name and partial score). Full per-check values in <a className="underline" href={`${REPO}/blob/HEAD/LEADERBOARD.md`}>LEADERBOARD.md</a> and <code>results/*.json</code>.</p>
         </section>
 
         {/* tasks */}
@@ -116,21 +134,6 @@ export default function Bench() {
           <h2 className="text-2xl font-semibold tracking-tight">The tasks</h2>
           <TaskGroup tier="core" color="amber" title="Core" sub="Reflexes the reference model must reproduce. A model that fails these is broken." tasks={core} />
           <TaskGroup tier="hard" color="sky" title="Hard" sub="Behaviours a wiring diagram plus five constants is not expected to give you. The reference model fails most of these on purpose; they are the research agenda." tasks={hard} />
-        </section>
-
-        {/* run it */}
-        <section className="space-y-3">
-          <h2 className="text-2xl font-semibold tracking-tight">Run it yourself</h2>
-          <pre className={`${cls} p-4 text-xs overflow-x-auto leading-relaxed`}><code>{`git clone ${REPO} && cd flybench && pip install -e ".[dev]"
-flybench toy && flybench run                 # 2k-neuron synthetic brain, ~10 s
-# the real brain: six CSVs from codex.flywire.ai (free account), then
-flybench build data/ && flybench run -c flywire783 --gain 0.45 --tier all`}</code></pre>
-          <div className="grid md:grid-cols-3 gap-3 text-sm">
-            <Card title="Submit a result">Run with your parameters, add the JSON report to <code>results/</code>, open a PR. State what you changed.</Card>
-            <Card title="Add a task">One YAML file: a stimulus, a readout, checks, and a citation to published fly behaviour. <code>flybench lint</code> checks it.</Card>
-            <Card title="Plug in a model">Any class with <code>run(duration_ms, stimuli)</code>. Use <code>--simulator mymodule:MyModel</code>; the leaderboard records which model produced each row.</Card>
-          </div>
-          <p className="text-xs text-zinc-500 max-w-2xl">Never tune per-neuron parameters to pass a task; that is fitting the test, and it defeats the point. Details in <a className="underline" href={`${REPO}/blob/main/CONTRIBUTING.md`}>CONTRIBUTING.md</a>.</p>
         </section>
 
         <footer className="text-xs text-zinc-600 border-t border-zinc-800 pt-4 leading-relaxed">
@@ -196,11 +199,11 @@ function TaskGroup({ title, sub, tasks, color }: { tier: string; title: string; 
   );
 }
 
-function Card({ title, children }: { title: string; children: React.ReactNode }) {
+function Card({ title, href, children }: { title: string; href: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-lg border border-zinc-800 bg-zinc-900/40 p-4 space-y-1">
-      <h3 className="font-medium">{title}</h3>
+    <a href={href} className="block rounded-lg border border-zinc-800 bg-zinc-900/40 p-4 space-y-1 hover:border-amber-300/60 transition-colors">
+      <h3 className="font-medium text-zinc-100">{title} <span className="text-amber-300">→</span></h3>
       <p className="text-zinc-400 leading-relaxed">{children}</p>
-    </div>
+    </a>
   );
 }

@@ -56,9 +56,11 @@ interface Props {
   classes: Uint8Array | null;
   activityRef: React.MutableRefObject<Uint8Array | null>;
   highlight: Set<number>;
+  spin?: boolean;
+  onUserRotate?: () => void;
 }
 
-function Cloud({ positions, classes, activityRef, highlight }: Props) {
+function Cloud({ positions, classes, activityRef, highlight }: Omit<Props, "spin" | "onUserRotate">) {
   const geomRef = useRef<THREE.BufferGeometry>(null);
 
   const { geom, scale } = useMemo(() => {
@@ -122,12 +124,12 @@ function Cloud({ positions, classes, activityRef, highlight }: Props) {
   return <points ref={geomRef as never} geometry={geom} material={material} />;
 }
 
-export default function Brain(props: Props) {
+export default function Brain({ spin = true, onUserRotate, ...props }: Props) {
   return (
     <Canvas camera={{ position: [0, 0.4, 2.6], fov: 45, near: 0.01, far: 50 }} dpr={[1, 2]} gl={{ antialias: false, alpha: false }} style={{ background: "#07080c" }}>
       <color attach="background" args={["#07080c"]} />
       <Cloud {...props} />
-      <OrbitControls enableDamping dampingFactor={0.08} autoRotate autoRotateSpeed={0.4} minDistance={0.5} maxDistance={8} />
+      <OrbitControls enableDamping dampingFactor={0.08} autoRotate={spin} autoRotateSpeed={0.4} minDistance={0.5} maxDistance={8} onStart={onUserRotate} />
     </Canvas>
   );
 }

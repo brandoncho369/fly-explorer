@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Meta, SHIU_2024, WorkerCommand, WorkerEvent } from "@/lib/types";
-import Hint, { HELP } from "@/components/Hint";
+import Hint, { HELP, HelpPanel, HelpProvider } from "@/components/Hint";
 
 const Brain = dynamic(() => import("@/components/Brain"), { ssr: false });
 
@@ -31,7 +31,7 @@ const POP_HELP: Record<string, string> = {
 };
 const STIMULI = ["sugar GRNs", "bitter GRNs", "water GRNs", "looming (LPLC2/LC4)", "olfactory RNs"];
 
-export default function Page() {
+function PageInner() {
   const workerRef = useRef<Worker | null>(null);
   const activityRef = useRef<Uint8Array | null>(null);
   const [dataset, setDataset] = useState("toy");
@@ -47,6 +47,7 @@ export default function Page() {
   const [rateHz, setRateHz] = useState(100);
   const [highlight, setHighlight] = useState<Set<number>>(new Set());
   const [showAbout, setShowAbout] = useState(false);
+  const [spin, setSpin] = useState(true);
   const [history, setHistory] = useState<Record<string, number[]>>({});
   const loading = !meta && !error;
 
@@ -119,6 +120,7 @@ export default function Page() {
           <div className="flex items-baseline justify-between"><h1 className="text-lg font-semibold tracking-tight">fly-explorer</h1><Link href="/bench" className="text-xs text-amber-300 hover:text-amber-200">benchmark →</Link></div>
           <p className="text-zinc-400 text-xs mt-1">A fruit-fly connectome running as a leaky integrate-and-fire network, live, in your browser. Poke a sense; watch the wiring answer.</p>
         </header>
+        <HelpPanel />
 
         <section className="space-y-2">
           <label className="text-xs uppercase tracking-wide text-zinc-500">connectome<Hint title="connectome" text={HELP.connectome} /></label>
@@ -192,9 +194,13 @@ export default function Page() {
       </aside>
 
       <section className="order-1 lg:order-2 relative min-h-[50dvh]">
-        {positions && classes ? <Brain positions={positions} classes={classes} activityRef={activityRef} highlight={highlight} /> : (
+        {positions && classes ? <Brain positions={positions} classes={classes} activityRef={activityRef} highlight={highlight} spin={spin} onUserRotate={() => setSpin(false)} /> : (
           <div className="absolute inset-0 grid place-items-center text-zinc-500 text-sm">{status}</div>
         )}
+        <button onClick={() => setSpin((v) => !v)} aria-pressed={spin} title={spin ? "stop the slow rotation" : "resume the slow rotation"}
+          className={`absolute top-3 right-3 rounded border px-2 py-1 text-xs bg-black/50 ${spin ? "border-amber-300/60 text-amber-300" : "border-zinc-700 text-zinc-400 hover:border-zinc-400"}`}>
+          {spin ? "⟳ spinning" : "⟳ spin"}
+        </button>
         <Legend />
       </section>
     </main>
@@ -229,5 +235,13 @@ function Legend() {
       {items.map(([k, c]) => <span key={k} className="flex items-center gap-1"><i className="inline-block w-2 h-2 rounded-full" style={{ background: c }} />{k}</span>)}
       <span className="flex items-center gap-1"><i className="inline-block w-2 h-2 rounded-full bg-amber-200" />firing</span>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <HelpProvider>
+      <PageInner />
+    </HelpProvider>
   );
 }
