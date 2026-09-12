@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { expansionRate, landing, loomRateHz } from "@/lib/flymode";
+import { track } from "@/lib/track";
 
 /**
  * A fly with the brain behind it. It sits still (FlyWire has no ventral cord, so there is no
@@ -83,7 +84,7 @@ export function FlyMode({ rates, populations, stim, stop, reset }: FlyModeProps)
       else {
         setFly({ x: flight.to.x / size.w, y: flight.to.y / size.h });
         setHeading(Math.atan2(flight.to.y - flight.from.y, flight.to.x - flight.from.x));
-        setFlight(null); setLandings((n) => n + 1);
+        setFlight(null); setLandings((n) => n + 1); track({ name: "fly_escape" });
         feeding.current = false;
         last.current = null;
         reset();

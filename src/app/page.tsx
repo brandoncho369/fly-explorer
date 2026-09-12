@@ -7,6 +7,7 @@ import { Meta, SHIU_2024, WorkerCommand, WorkerEvent } from "@/lib/types";
 import { Explain, HELP, HelpPanel, HelpProvider } from "@/components/Hint";
 import { CellTypes } from "@/components/CellTypes";
 import { FlyMode } from "@/components/FlyMode";
+import { track } from "@/lib/track";
 
 const Brain = dynamic(() => import("@/components/Brain"), { ssr: false });
 
@@ -74,6 +75,7 @@ function PageInner() {
       else if (e.type === "error") { setError(e.message); setStatus("error"); setRunning(false); }
       else if (e.type === "loaded") {
         setMeta(e.meta); setPositions(e.positions); setClasses(e.classes); setError(null); setDataset(e.meta.name);
+        track({ name: "dataset_load", dataset: e.meta.name });
         setStatus(`${e.meta.name}: ${e.meta.n.toLocaleString()} neurons · ${e.meta.n_edges.toLocaleString()} edges`);
         setHistory({});
         const g = urlGain.current ?? DATASETS.find((d) => d.id === e.meta.name)?.gain ?? SHIU_2024.gain;
@@ -123,6 +125,7 @@ function PageInner() {
     const idx = neurons ?? (meta?.populations[name] ? Int32Array.from(meta.populations[name]) : undefined);
     if (!idx?.length) return;
     setPressed(true);
+    if (!neurons) track({ name: "stimulate", population: name, hold: !isFinite(durationMs) });
     send({ type: "stim", name, neurons: idx, rateHz, durationMs });
   };
   const [held, setHeld] = useState<Set<string>>(new Set());
@@ -215,7 +218,7 @@ function PageInner() {
         </section>
 
         <CellTypes base={`/data/${dataset}`} ready={!!meta} gain={gain} activeStims={frame?.activeStims ?? []} held={held}
-          onFire={(name, neurons, hold) => (hold ? toggleHold(name, neurons) : stimulate(name, 500, neurons))}
+          onFire={(name, neurons, hold) => { track({ name: "cell_type_fire", cellType: name, hold }); return hold ? toggleHold(name, neurons) : stimulate(name, 500, neurons); }}
           requestReport={requestReport} report={report} onClear={() => { send({ type: "clearCounts" }); setReport(null); }} />
 
         <section className="space-y-2">
@@ -272,7 +275,7 @@ function PageInner() {
         </div>
         {flyMode && meta && <FlyMode rates={frame?.rates ?? {}} populations={Object.keys(meta.populations)} stim={stimAt} stop={stopStim} reset={resetBrain} />}
         <Explain title="fly mode" text={HELP.flyMode}>
-          <button onClick={() => setFlyMode((v) => !v)} aria-pressed={flyMode} disabled={!meta}
+          <button onClick={() => setFlyMode((v) => { track({ name: "fly_mode", on: !v }); return !v; })} aria-pressed={flyMode} disabled={!meta}
             className={`absolute top-3 left-3 rounded border px-2 py-1 text-xs bg-black/50 disabled:opacity-40 ${flyMode ? "border-amber-300/60 text-amber-300" : "border-zinc-700 text-zinc-400 hover:border-zinc-400"}`}>
             {flyMode ? "🪰 fly mode on" : "🪰 fly mode"}
           </button>
@@ -339,6 +342,8 @@ function Guide({ frame, pressed, stimEndT, ready, dataset }: { frame: Frame | nu
   const stimming = (frame?.activeStims.length ?? 0) > 0;
   const sinceEndMs = frame && stimEndT != null && !stimming ? frame.t - stimEndT : 0;
   const key = guideKey({ ready, pressed, mn9, gf, dn, net, stimming, sinceEndMs });
+  const shownNeverStops = useRef(false);
+  useEffect(() => { if (key === "never_stops" && !shownNeverStops.current) { shownNeverStops.current = true; track({ name: "guide_never_stops_shown" }); } }, [key]);
   const tone = { never_stops: "text-amber-300", escape: "text-cyan-300", feed: "text-amber-200" }[key as string] ?? "text-zinc-400";
   const text: Record<GuideKey, React.ReactNode> = {
     loading: "loading the brain…",

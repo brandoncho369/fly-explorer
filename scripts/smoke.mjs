@@ -8,7 +8,8 @@ const b = await chromium.launch({ executablePath: exe, args: ["--use-gl=swiftsha
 const p = await b.newPage({ viewport: { width: 1400, height: 860 } });
 const errs = [];
 p.on("pageerror", (e) => errs.push("pageerror: " + e.message));
-p.on("console", (m) => { if (m.type() === "error") errs.push("console: " + m.text()); });
+// the Vercel Analytics script only exists on Vercel; its 404 locally is expected
+p.on("console", (m) => { if (m.type() === "error" && !/_vercel\/insights/.test(m.location()?.url ?? "")) errs.push("console: " + m.text()); });
 const aside = () => p.locator("aside").innerText();
 const mn9 = async () => +((await aside()).match(/MN9 \(proboscis\)[^\d]*?(\d+)\s*$/m)?.[1] ?? NaN);
 const check = (ok, msg) => { console.log((ok ? "✓ " : "✗ ") + msg); if (!ok) process.exitCode = 1; };

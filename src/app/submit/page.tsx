@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
+import { track } from "@/lib/track";
 
 /**
  * Zero-install submission. The form writes a flybench submission config; the button opens
@@ -95,10 +96,10 @@ export default function Submit() {
             <p className="text-xs uppercase tracking-wide text-zinc-500">the file GitHub will open for you</p>
             <pre className="rounded border border-zinc-800 bg-zinc-900/60 p-3 text-xs text-zinc-300 overflow-x-auto leading-relaxed" data-testid="yaml">{yaml}</pre>
             {problems.length > 0 && <ul className="text-xs text-amber-300 space-y-1">{problems.map((p) => <li key={p}>· {p}</li>)}</ul>}
-            <Link href={`/?dataset=flywire783&gain=${gain}`} target="_blank" className="block text-center rounded-md border border-zinc-700 px-5 py-2.5 text-sm text-zinc-200 hover:border-zinc-400">
+            <Link href={`/?dataset=flywire783&gain=${gain}`} target="_blank" onClick={() => track({ name: "submit_preview_click", gain })} className="block text-center rounded-md border border-zinc-700 px-5 py-2.5 text-sm text-zinc-200 hover:border-zinc-400">
               Watch this gain in the explorer first →
             </Link>
-            <a href={ok ? href : undefined} aria-disabled={!ok} target="_blank" rel="noreferrer"
+            <a href={ok ? href : undefined} aria-disabled={!ok} target="_blank" rel="noreferrer" onClick={() => { if (ok) track({ name: "submit_pr_click", gain, simulator: sim.id, seeds }); }}
               className={`block text-center rounded-md px-5 py-3 text-sm font-semibold ${ok ? "bg-amber-300 text-black hover:bg-amber-200" : "bg-zinc-800 text-zinc-500 cursor-not-allowed"}`}>
               Open pull request on GitHub →
             </a>
