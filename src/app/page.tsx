@@ -16,12 +16,15 @@ const Brain = dynamic(() => import("@/components/Brain"), { ssr: false });
 const DATASETS = [
   { id: "toy", label: "toy (2k, synthetic)", gain: 1.0 },
   { id: "flywire783", label: "FlyWire v783 (140k, real)", gain: 0.45 },
+  // MaleCNS: brain + ventral nerve cord, so the muscle motor neurons are in here. flybench found no single gain that
+  // does both taste and vision on it; 0.65 is the setting the Minecraft demo used and the one most people have seen.
+  { id: "malecns", label: "MaleCNS v1.0 (176k, brain + nerve cord)", gain: 0.65 },
 ];
 
 interface Frame { t: number; firedThisFrame: number; rates: Record<string, number>; networkRate: number; activeStims: string[]; stepMs: number; achieved: number }
 const SPEEDS = [0.05, 0.1, 0.25, 0.5, 1, 2];   // × real time
 
-const READOUTS = ["MN9 (proboscis)", "Giant Fiber", "descending neurons"];
+const READOUTS = ["MN9 (proboscis)", "Giant Fiber", "descending neurons", "jump muscle MN (TTMn)", "flight power MNs (DLMn)", "leg motor neurons", "wing motor neurons"];
 const POP_HELP: Record<string, string> = {
   "sugar GRNs": "Gustatory receptor neurons on the fly's mouthparts and legs that respond to sugar. Firing them is 'tasting sugar'. Real flies respond by extending the proboscis.",
   "bitter GRNs": "Taste neurons that detect bitter compounds. Real flies reject food when these fire; in the model they should shut down the sugar response.",
@@ -33,6 +36,10 @@ const POP_HELP: Record<string, string> = {
   "descending neurons": "The ~1,300 neurons that carry commands from the brain down to the body. Every behaviour goes through them.",
   "MN9 (proboscis)": "Motor neuron 9, which extends the proboscis (the fly's tongue). Its firing means 'feed'.",
   "Giant Fiber": "A pair of huge neurons that trigger the fastest escape a fly has: legs push, wings open, it's airborne in ~10 ms.",
+  "jump muscle MN (TTMn)": "The tergotrochanteral motor neuron, in the ventral nerve cord. The giant fiber synapses onto it directly; when it fires, the jump muscle contracts and the fly leaves the ground. Only in MaleCNS, which includes the nerve cord.",
+  "flight power MNs (DLMn)": "The dorsal longitudinal motor neurons that drive the big flight muscles. The giant fiber reaches them through one interneuron (the PSI). Only in MaleCNS.",
+  "leg motor neurons": "About 275 motor neurons in the nerve cord that move the six legs: flexors, extensors, rotators. Walking would be patterns across these. Only in MaleCNS.",
+  "wing motor neurons": "The motor neurons for the wing and flight muscles, including DLMn, DVMn and the steering muscles. Only in MaleCNS.",
 };
 const STIMULI = ["sugar GRNs", "bitter GRNs", "water GRNs", "looming (LPLC2/LC4)", "olfactory RNs"];
 
@@ -338,10 +345,11 @@ export default function Page() {
  */
 function Guide({ frame, pressed, stimEndT, ready, dataset }: { frame: Frame | null; pressed: boolean; stimEndT: number | null; ready: boolean; dataset: string }) {
   const mn9 = frame?.rates["MN9 (proboscis)"] ?? 0, gf = frame?.rates["Giant Fiber"] ?? 0, dn = frame?.rates["descending neurons"] ?? 0;
+  const ttmn = frame?.rates["jump muscle MN (TTMn)"] ?? 0;
   const net = frame?.networkRate ?? 0;
   const stimming = (frame?.activeStims.length ?? 0) > 0;
   const sinceEndMs = frame && stimEndT != null && !stimming ? frame.t - stimEndT : 0;
-  const key = guideKey({ ready, pressed, mn9, gf, dn, net, stimming, sinceEndMs });
+  const key = guideKey({ ready, pressed, mn9, gf, dn, net, stimming, sinceEndMs, ttmn });
   const shownNeverStops = useRef(false);
   useEffect(() => { if (key === "never_stops" && !shownNeverStops.current) { shownNeverStops.current = true; track({ name: "guide_never_stops_shown" }); } }, [key]);
   const tone = { never_stops: "text-amber-300", escape: "text-cyan-300", feed: "text-amber-200" }[key as string] ?? "text-zinc-400";
@@ -349,6 +357,7 @@ function Guide({ frame, pressed, stimEndT, ready, dataset }: { frame: Frame | nu
     loading: "loading the brain…",
     prompt: <>Try it: press <b className="text-zinc-200">sugar GRNs</b>, then watch <b className="text-zinc-200">MN9</b> in the readouts.</>,
     never_stops: <>Notice it never stops. {net.toFixed(1)} Hz across the brain, {(sinceEndMs / 1000).toFixed(1)} s after the stimulus ended. A real fly is at rest within a second; this model has nothing that can switch a circuit off. Press <b>reset</b>. flybench scores this as <em>return_to_rest</em>.</>,
+    jump: <>The <b>jump muscle motor neuron</b> fired, in the nerve cord. That is the brain reaching the body: the giant fiber&apos;s command arrived at the legs. A real fly is airborne now.</>,
     both: <>Both the escape neuron and the feeding neuron are firing. A real fly never does both at once{dataset === "toy" ? "" : "; the model has lost the ability to say no"}.</>,
     escape: <>The <b>Giant Fiber</b> fired. That is the escape command: a real fly would be airborne in about 10 ms.</>,
     feed: <><b>MN9</b> is firing at {mn9.toFixed(0)} Hz. That is the proboscis motor neuron: a real fly would be extending its mouth toward the sugar right now.</>,

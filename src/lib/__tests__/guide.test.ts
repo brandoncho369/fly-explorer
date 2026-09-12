@@ -13,6 +13,7 @@ describe("guide narration", () => {
     expect(guideKey({ ...base, mn9: 40 })).toBe("feed");
     expect(guideKey({ ...base, gf: 300 })).toBe("escape");
     expect(guideKey({ ...base, gf: 300, mn9: 40 })).toBe("both");
+    expect(guideKey({ ...base, gf: 300, ttmn: 50 })).toBe("jump");     // the body wins over the brain-only caption
     expect(guideKey({ ...base, dn: 5 })).toBe("descending");
     expect(guideKey({ ...base, stimming: true })).toBe("stimulating");
   });
