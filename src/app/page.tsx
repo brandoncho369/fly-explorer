@@ -143,6 +143,7 @@ function PageInner() {
     send({ type: "stim", name, neurons: Int32Array.from(idx), rateHz: hz, durationMs: ms });
   }, [send, meta]);
   const stopStim = useCallback((name: string) => send({ type: "stopStim", name }), [send]);
+  const resetBrain = useCallback(() => { setHeld(new Set()); setStimEndT(null); setReport(null); send({ type: "reset" }); }, [send]);
   const releaseAll = () => { held.forEach((name) => send({ type: "stopStim", name })); setHeld(new Set()); };
 
   const stimSets = useMemo(() => (meta ? Object.keys(meta.populations).filter((k) => !READOUTS.includes(k)) : []), [meta]);
@@ -269,7 +270,7 @@ function PageInner() {
             <div className="absolute inset-0 grid place-items-center text-zinc-500 text-sm">{status}</div>
           )}
         </div>
-        {flyMode && meta && <FlyMode rates={frame?.rates ?? {}} populations={Object.keys(meta.populations)} stim={stimAt} stop={stopStim} />}
+        {flyMode && meta && <FlyMode rates={frame?.rates ?? {}} populations={Object.keys(meta.populations)} stim={stimAt} stop={stopStim} reset={resetBrain} />}
         <Explain title="fly mode" text={HELP.flyMode}>
           <button onClick={() => setFlyMode((v) => !v)} aria-pressed={flyMode} disabled={!meta}
             className={`absolute top-3 left-3 rounded border px-2 py-1 text-xs bg-black/50 disabled:opacity-40 ${flyMode ? "border-amber-300/60 text-amber-300" : "border-zinc-700 text-zinc-400 hover:border-zinc-400"}`}>

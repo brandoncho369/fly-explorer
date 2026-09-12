@@ -92,7 +92,8 @@ check(/looming detectors/.test(await p.getByTestId("fly-hud").innerText()), "fly
 check(loomPeak >= 30, `fly mode: rushing the cursor drives the looming detectors (peak ${loomPeak} Hz)`);
 check(gfPeak > 5, `fly mode: the giant fiber fires (peak ${gfPeak} Hz)`);
 const after = await flyEl.boundingBox();
-check(Math.hypot(after.x - before.x, after.y - before.y) > 30, "fly mode: the fly jumped away");
+check(Math.hypot(after.x - before.x, after.y - before.y) > 30, "fly mode: the fly flew away");
+check(/escapes: \d/.test(await p.getByTestId("fly-hud").innerText()), "fly mode: landing counted and brain reset");
 await p.getByRole("button", { name: /fly mode/ }).click();
 await p.getByRole("button", { name: "reset", exact: true }).click();
 
@@ -129,7 +130,7 @@ if (r.ok()) {
   check((await p.getByLabel("gain", { exact: true }).inputValue()) === "0.45", "flywire preset gain applied");
   await p.getByRole("button", { name: /^sugar GRNs/ }).click();
   // the real brain steps slowly in headless Chromium (~0.01x real time), so poll until it fires or 20 s pass
-  peak = 0; for (let i = 0; i < 50 && peak <= 10; i++) { await p.waitForTimeout(400); peak = Math.max(peak, await mn9()); }
+  peak = 0; for (let i = 0; i < 90 && peak <= 10; i++) { await p.waitForTimeout(400); peak = Math.max(peak, await mn9()); }
   check(peak > 10, `flywire: sugar drives MN9 (peak ${peak} Hz)`);
   check(/gain 0.45.*5\/5 core/.test(await p.getByTestId("trust").innerText()), "trust line quotes the benchmark at this gain");
   await p.getByLabel("cell type search").fill("DNp0");
