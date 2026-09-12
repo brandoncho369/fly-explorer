@@ -167,7 +167,7 @@ function PageInner() {
       <aside className="order-2 lg:order-1 overflow-y-auto border-t lg:border-t-0 lg:border-r border-zinc-800 p-4 space-y-5 text-sm">
         <header>
           <div className="flex items-baseline justify-between"><h1 className="text-lg font-semibold tracking-tight">fly-explorer</h1><Link href="/bench" className="text-xs text-amber-300 hover:text-amber-200">benchmark →</Link></div>
-          <p className="text-zinc-400 text-xs mt-1">A fruit-fly connectome running as a leaky integrate-and-fire network, live, in your browser. Poke a sense; watch the wiring answer.</p>
+          <p className="text-zinc-400 text-xs mt-1">The real fruit-fly connectome running as a spiking network in your browser. Fire a sense or any cell type, see what the wiring does with it, and notice the one thing it can never do: stop.</p>
         </header>
         <HelpPanel />
         <Guide frame={frame} pressed={pressed} stimEndT={stimEndT} ready={!!meta} dataset={dataset} />

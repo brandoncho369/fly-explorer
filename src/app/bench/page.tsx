@@ -180,7 +180,7 @@ flybench submit results/mine.json   # validates, commits, opens the PR`}</code><
         </section>
 
         <footer className="text-xs text-zinc-600 border-t border-zinc-800 pt-4 leading-relaxed">
-          Connectome: FlyWire (Dorkenwald et al. 2024; Schlegel et al. 2024). Model: Shiu et al. 2024. Not a fly: no neuromodulation, no plasticity, no body. Nothing in here experiences anything. MIT · <Link className="underline" href="/">fly-explorer</Link> runs the same model live.
+          Connectome: FlyWire (Dorkenwald et al. 2024; Schlegel et al. 2024). Model: Shiu et al. 2024. Not a fly: no neuromodulation, no plasticity, no body. Nothing in here experiences anything. MIT · <Link className="underline" href="/">fly-explorer</Link> runs the same model live. Built by Brandon Cho (Rice) — <a className="underline" href="mailto:brandon@leafrushmarketing.com">email</a> · <a className="underline" href="https://github.com/brandoncho369">github</a>. If a threshold is wrong, tell me; a citation fixes it in one line.
         </footer>
       </div>
     </main>
