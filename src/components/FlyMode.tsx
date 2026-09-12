@@ -93,7 +93,7 @@ export function FlyMode({ rates, populations, stim, stop, reset }: FlyModeProps)
     return () => cancelAnimationFrame(raf);
   }, [flight]);   // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ---- cursor → looming detectors; the fly also turns to face something close
+  // ---- cursor → looming detectors. (It does NOT turn to face the cursor: no neuron in the model decides that.)
   const onMove = useCallback((e: React.PointerEvent) => {
     const r = box.current?.getBoundingClientRect(); if (!r) return;
     const x = e.clientX - r.left, y = e.clientY - r.top, t = performance.now();
@@ -105,10 +105,6 @@ export function FlyMode({ rates, populations, stim, stop, reset }: FlyModeProps)
       const hz = loomRateHz(expansionRate({ dist, prevDist: p.dist, dtMs: t - p.t, reach: REACH }));
       setLoomHz(hz);
       if (hz > 0 && has(LOOM)) stim(LOOM, hz, 120);
-    }
-    if (dist < REACH) {
-      const want = Math.atan2(y - rest.y, x - rest.x);
-      setHeading((h) => h + Math.atan2(Math.sin(want - h), Math.cos(want - h)) * 0.25);   // eases round, no spin
     }
     last.current = { x, y, t, dist };
   }, [rest.x, rest.y, flight, stim, populations]);   // eslint-disable-line react-hooks/exhaustive-deps
@@ -153,6 +149,7 @@ export function FlyMode({ rates, populations, stim, stop, reset }: FlyModeProps)
         <div>giant fiber: <span className={gf > 5 ? "text-cyan-300" : ""}>{gf.toFixed(0)} Hz</span> · MN9: <span className={mn9 > 5 ? "text-amber-200" : ""}>{mn9.toFixed(0)} Hz</span> · descending: {dn.toFixed(0)} Hz{landings > 0 ? ` · escapes: ${landings}` : ""}</div>
         <div className="text-zinc-600">rush the cursor at it · click = flash · drag sugar to its head</div>
         <div className="text-zinc-600">brain reset on every landing — this model cannot quiet itself (flybench: return_to_rest)</div>
+        <div className="text-zinc-600">body moves only on a readout: giant fiber → flight · MN9 → proboscis · descending → wings</div>
       </div>
 
       <style>{`@keyframes flash { from { opacity: .55 } to { opacity: 0 } }
