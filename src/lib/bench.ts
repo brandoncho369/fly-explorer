@@ -6,6 +6,9 @@ export interface Run {
   label: string; connectome: string; simulator: string; gain: number; w_syn: number;
   core: number | null; hard: number | null; max_active: number;
   seeds?: number; verified?: boolean;
+  // cliff-free graded score (IQM over tasks) with a seed-bootstrap 95% CI, shuffled-wiring specificity,
+  // public − hold-out gap, and closed/open division; absent on results that predate them
+  graded?: number; graded_ci?: [number, number]; specificity?: number; holdout_gap?: number; division?: string;
   tasks: Record<string, TaskResult>;
 }
 export interface Task { name: string; title: string; tier: "core" | "hard" | string; description: string; citation: string }

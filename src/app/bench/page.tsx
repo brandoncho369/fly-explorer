@@ -149,7 +149,10 @@ flybench submit results/mine.json   # validates, commits, opens the PR`}</code><
           <div className={`${cls} overflow-x-auto`}>
             <table className="w-full text-sm whitespace-nowrap">
               <thead className="text-zinc-500 text-left text-xs uppercase tracking-wide"><tr>
-                <th className="p-3">#</th><th className="p-3">run</th><th className="p-3">model</th><th className="p-3">core</th><th className="p-3">hard</th><th className="p-3">status</th>
+                <th className="p-3">#</th><th className="p-3">run</th><th className="p-3">model</th><th className="p-3">core</th><th className="p-3">hard</th>
+                <th className="p-3" title="graded score: every check scored 0–1 by how far it sits from its threshold (no pass/fail cliff), interquartile mean over tasks, 95% CI from resampling seeds">graded</th>
+                <th className="p-3" title="specificity: score on the real wiring minus the best score on shuffled wiring (degree-preserving rewire). Near zero means the tasks were passed by any brain at this gain">spec.</th>
+                <th className="p-3">status</th>
                 <th className="p-3 font-normal normal-case tracking-normal text-zinc-600"><span className="text-amber-300/80">●</span> core tasks</th>
                 <th className="p-3 font-normal normal-case tracking-normal text-zinc-600"><span className="text-sky-300/80">●</span> hard tasks</th>
               </tr></thead>
@@ -161,7 +164,9 @@ flybench submit results/mine.json   # validates, commits, opens the PR`}</code><
                     <td className="p-3 text-zinc-400">{r.simulator}</td>
                     <td className="p-3 font-mono">{score2(r.core)}</td>
                     <td className="p-3 font-mono">{score2(r.hard)}</td>
-                    <td className="p-3 text-xs">{r.verified ? <span className="text-emerald-300" title="a maintainer re-ran this and got the same scores">✓ verified</span> : <span className="text-zinc-500" title="not yet re-run by a maintainer">self-reported</span>}{r.seeds && r.seeds > 1 ? <span className="text-zinc-500"> · {r.seeds} seeds</span> : ""}</td>
+                    <td className="p-3 font-mono text-zinc-300">{r.graded == null ? <span className="text-zinc-600">–</span> : <>{r.graded.toFixed(2)}{r.graded_ci ? <span className="text-zinc-500 text-xs"> [{r.graded_ci[0].toFixed(2)}, {r.graded_ci[1].toFixed(2)}]</span> : null}</>}</td>
+                    <td className="p-3 font-mono text-zinc-300">{r.specificity == null ? <span className="text-zinc-600">–</span> : (r.specificity >= 0 ? "+" : "") + r.specificity.toFixed(2)}</td>
+                    <td className="p-3 text-xs">{r.division ? <span className="text-zinc-500" title="closed = reference LIF, gain only; open = other dynamics or fitted constants (declared)">{r.division} · </span> : null}{r.verified ? <span className="text-emerald-300" title="a maintainer re-ran this and got the same scores">✓ verified</span> : <span className="text-zinc-500" title="not yet re-run by a maintainer">self-reported</span>}{r.seeds && r.seeds > 1 ? <span className="text-zinc-500"> · {r.seeds} seeds</span> : ""}</td>
                     <td className="p-3"><Dots run={r} tasks={core} color="amber" /></td>
                     <td className="p-3"><Dots run={r} tasks={hard} color="sky" /></td>
                   </tr>

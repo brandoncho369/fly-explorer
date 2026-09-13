@@ -124,10 +124,14 @@ function PageInner() {
   const loadDataset = (id: string) => {
     setDataset(id); setMeta(null); setPositions(null); setClasses(null); setFrame(null); setError(null); setStatus("loading…"); setHighlight(new Set());
     activityRef.current = null;
+    // a new brain starts with nothing held: the worker drops every stimulus on load, so the UI must too
+    setHeld(new Set()); setStimEndT(null); setReport(null); setPressed(false);
     setRunning(true);
     send({ type: "load", base: `/data/${id}` });
   };
 
+  const [held, setHeld] = useState<Set<string>>(new Set());
+  const heldNeurons = useRef<Map<string, Int32Array>>(new Map());   // what each held name drives (cell types pass their own neuron list)
   const stimulate = (name: string, durationMs = 500, neurons?: Int32Array) => {
     const idx = neurons ?? (meta?.populations[name] ? Int32Array.from(meta.populations[name]) : undefined);
     if (!idx?.length) return;
@@ -135,15 +139,24 @@ function PageInner() {
     if (!neurons) track({ name: "stimulate", population: name, hold: !isFinite(durationMs) });
     send({ type: "stim", name, neurons: idx, rateHz, durationMs });
   };
-  const [held, setHeld] = useState<Set<string>>(new Set());
   const toggleHold = (name: string, neurons?: Int32Array) => {
-    setHeld((prev) => {
-      const s = new Set(prev);
-      if (s.has(name)) { s.delete(name); send({ type: "stopStim", name }); }
-      else { s.add(name); stimulate(name, Number.POSITIVE_INFINITY, neurons); }
-      return s;
-    });
+    if (held.has(name)) {
+      heldNeurons.current.delete(name);
+      send({ type: "stopStim", name });
+      setHeld((prev) => { const s = new Set(prev); s.delete(name); return s; });
+    } else {
+      const idx = neurons ?? (meta?.populations[name] ? Int32Array.from(meta.populations[name]) : undefined);
+      if (!idx?.length) return;
+      heldNeurons.current.set(name, idx);
+      stimulate(name, Number.POSITIVE_INFINITY, idx);
+      setHeld((prev) => new Set(prev).add(name));
+    }
   };
+  // the worker bakes the input rate into a stimulus when it is added, so a held sense must be re-issued
+  // when the slider moves; otherwise the slider says 300 Hz while the held drive stays at 100
+  useEffect(() => {
+    for (const [name, idx] of heldNeurons.current) send({ type: "stim", name, neurons: idx, rateHz, durationMs: Number.POSITIVE_INFINITY });
+  }, [rateHz, send]);
   const requestReport = useCallback(() => send({ type: "report" }), [send]);
   // fly mode drives named populations at its own rates (the cursor sets the looming rate)
   const stimAt = useCallback((name: string, hz: number, ms: number) => {
@@ -153,8 +166,8 @@ function PageInner() {
     send({ type: "stim", name, neurons: Int32Array.from(idx), rateHz: hz, durationMs: ms });
   }, [send, meta]);
   const stopStim = useCallback((name: string) => send({ type: "stopStim", name }), [send]);
-  const resetBrain = useCallback(() => { setHeld(new Set()); setStimEndT(null); setReport(null); send({ type: "reset" }); }, [send]);
-  const releaseAll = () => { held.forEach((name) => send({ type: "stopStim", name })); setHeld(new Set()); };
+  const resetBrain = () => { heldNeurons.current.clear(); setHeld(new Set()); setStimEndT(null); setReport(null); send({ type: "reset" }); };
+  const releaseAll = () => { held.forEach((name) => send({ type: "stopStim", name })); heldNeurons.current.clear(); setHeld(new Set()); };
 
   const stimSets = useMemo(() => (meta ? Object.keys(meta.populations).filter((k) => !READOUTS.includes(k)) : []), [meta]);
   const readouts = useMemo(() => (meta ? READOUTS.filter((k) => meta.populations[k]) : []), [meta]);
@@ -252,7 +265,7 @@ function PageInner() {
           <Explain title="speed" text={HELP.speed}><Slider label="speed" value={speedIdx} min={0} max={SPEEDS.length - 1} step={1} onChange={setSpeedIdx} fmt={(i) => `${SPEEDS[i]}× real time (target)`} /></Explain>
           <div className="flex flex-wrap gap-2 pt-1">
             <Explain title="pause / run" text={HELP.pause}><button onClick={() => setRunning((r) => !r)} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">{running ? "pause" : "run"}</button></Explain>
-            <Explain title="reset" text={HELP.reset}><button onClick={() => { setHeld(new Set()); setStimEndT(null); setReport(null); send({ type: "reset" }); }} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
+            <Explain title="reset" text={HELP.reset}><button onClick={resetBrain} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
             <Explain title="gain preset: Shiu 2024" text={HELP.presetShiu}><button onClick={() => setGain(SHIU_2024.gain)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: Shiu 2024</button></Explain>
             <Explain title="gain preset: flybench" text={HELP.presetFlybench}><button onClick={() => setGain(0.45)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: flybench</button></Explain>
           </div>

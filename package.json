@@ -9,7 +9,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "smoke": "node scripts/smoke.mjs",
+    "stress": "node scripts/stress.mjs"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.8",
