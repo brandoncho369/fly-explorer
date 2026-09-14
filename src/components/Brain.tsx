@@ -51,6 +51,63 @@ const frag = /* glsl */ `
   }
 `;
 
+// Highlight markers: a second point layer drawn on top of the cloud (no depth test), so that a
+// two-neuron set like MN9 or the Giant Fiber is findable inside 140k other dots. Small sets get
+// large rings; big sets (thousands of olfactory RNs) get small filled dots so they do not paint
+// over the whole brain.
+const markerVert = /* glsl */ `
+  uniform float uSize;
+  uniform float uPixelRatio;
+  void main() {
+    vec4 mv = modelViewMatrix * vec4(position, 1.0);
+    gl_PointSize = uSize * uPixelRatio * (2.6 / -mv.z);
+    gl_Position = projectionMatrix * mv;
+  }
+`;
+const markerFrag = /* glsl */ `
+  uniform float uRing;
+  void main() {
+    vec2 d = gl_PointCoord - 0.5;
+    float r = length(d);
+    if (r > 0.5) discard;
+    // uRing = 1: hollow ring with a bright centre dot; uRing = 0: solid dot
+    float ring = smoothstep(0.30, 0.36, r) * smoothstep(0.5, 0.44, r);
+    float core = smoothstep(0.14, 0.06, r);
+    float a = mix(smoothstep(0.5, 0.3, r), max(ring, core), uRing);
+    gl_FragColor = vec4(0.35, 0.95, 1.0, a);
+  }
+`;
+
+function Markers({ geom, highlight, n }: { geom: THREE.BufferGeometry; highlight: Set<number>; n: number }) {
+  const markerGeom = useMemo(() => {
+    const g = new THREE.BufferGeometry();
+    const src = geom.getAttribute("position") as THREE.BufferAttribute | undefined;
+    const idx = [...highlight].filter((i) => src && i < src.count);
+    const pos = new Float32Array(idx.length * 3);
+    idx.forEach((i, k) => { if (src) { pos[3 * k] = src.getX(i); pos[3 * k + 1] = src.getY(i); pos[3 * k + 2] = src.getZ(i); } });
+    g.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+    return g;
+  }, [geom, highlight]);
+  const material = useMemo(() => {
+    const small = highlight.size <= 64;
+    const bigBrain = n > 20000;
+    return new THREE.ShaderMaterial({
+      uniforms: {
+        uSize: { value: small ? 22 : bigBrain ? 4 : 7 },
+        uRing: { value: small ? 1 : 0 },
+        uPixelRatio: { value: typeof window !== "undefined" ? Math.min(window.devicePixelRatio, 2) : 1 },
+      },
+      vertexShader: markerVert,
+      fragmentShader: markerFrag,
+      transparent: true,
+      depthTest: false,
+      depthWrite: false,
+    });
+  }, [highlight, n]);
+  if (highlight.size === 0) return null;
+  return <points geometry={markerGeom} material={material} renderOrder={10} />;
+}
+
 interface Props {
   positions: Float32Array | null;
   classes: Uint8Array | null;
@@ -121,7 +178,12 @@ function Cloud({ positions, classes, activityRef, highlight }: Omit<Props, "spin
   );
 
   void scale;
-  return <points ref={geomRef as never} geometry={geom} material={material} />;
+  return (
+    <>
+      <points ref={geomRef as never} geometry={geom} material={material} />
+      <Markers geom={geom} highlight={highlight} n={positions ? positions.length / 3 : 0} />
+    </>
+  );
 }
 
 function Brain({ spin = true, onUserRotate, ...props }: Props) {

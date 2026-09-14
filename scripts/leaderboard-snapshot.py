@@ -19,14 +19,8 @@ for f in sorted(glob.glob(os.path.join(root, "results", "*.json"))):
         "core": r.get("core_score"), "hard": r.get("hard_score"),
         "seeds": int(r.get("seeds", 1)), "verified": bool(r.get("verified", False)),
         "max_active": max((m["active_fraction"] for t in r["tasks"] for m in t["measurements"].values()), default=0),
-        # Phase 0/1 fields (absent on older result files): graded score + CI, shuffled-wiring specificity, hold-out gap, division
-        **({"graded": round(r["graded"], 3)} if isinstance(r.get("graded"), (int, float)) else {}),
-        **({"graded_ci": [round(x, 3) for x in r["graded_ci95"]]} if r.get("graded_ci95") else {}),
-        **({"specificity": round(r["specificity"], 3)} if isinstance(r.get("specificity"), (int, float)) else {}),
-        **({"holdout_gap": round(r["holdout"]["gap"], 3)} if isinstance((r.get("holdout") or {}).get("gap"), (int, float)) else {}),
-        **({"division": r["division"]} if r.get("division") else {}),
         "tasks": {t["task"]: {"passed": t["passed"], "score": t["score"],
-                              "checks": [{"d": c["description"], "v": c["value"], "ok": c["passed"], **({"m": round(c["margin"], 2)} if isinstance(c.get("margin"), float) and c["margin"] == c["margin"] else {})} for c in t["checks"]]}
+                              "checks": [{"d": c["description"], "v": c["value"], "ok": c["passed"]} for c in t["checks"]]}
                   for t in r["tasks"]},
     })
 tasks = []

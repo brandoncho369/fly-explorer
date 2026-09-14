@@ -52,7 +52,7 @@ export const HELP = {
   hold:
     "Hold this sense on continuously instead of a half-second pulse. Press again to release. Use it to overlap two senses (hold sugar, then hold bitter) — that overlap is how flybench tests bitter suppression.",
   highlight:
-    "Paint these neurons blue in the 3D view so you can see where they sit. Click again to un-paint.",
+    "Mark these neurons in cyan in the 3D view so you can see where they sit. Small groups (MN9 and the Giant Fiber are two neurons each, one per side) get a ring so they are findable among 140k dots; big groups get a dot per neuron. Click again to clear. The bright white spots you may see are not activity: they are dense clusters of cell bodies adding up on screen.",
   inputRate:
     "How hard the stimulated neurons are pushed, in spikes per second per neuron. Real sensory neurons fire anywhere from a few to a few hundred times a second; 100 is a strong but realistic 'taste of sugar'.",
   readouts:

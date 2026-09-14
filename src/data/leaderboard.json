@@ -9,11 +9,10 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.8388888888888889,
+   "hard": 0.8272727272727273,
    "seeds": 3,
    "verified": false,
    "max_active": 0.1052673153567197,
-   "graded": 0.963,
    "tasks": {
     "stability": {
      "passed": true,
@@ -22,14 +21,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -40,20 +37,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 25]",
        "v": 43.63636363636363,
-       "ok": true,
-       "m": 0.94
+       "ok": true
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0  [3/3 seeds, sd 2.5e+04]",
        "v": 43637.363636363625,
-       "ok": true,
-       "m": 3.94
+       "ok": true
       },
       {
        "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 0.00354]",
        "v": 0.007154740105083002,
-       "ok": true,
-       "m": 1.15
+       "ok": true
       }
      ]
     },
@@ -64,14 +58,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 25]",
        "v": 43.63636363636363,
-       "ok": true,
-       "m": 0.94
+       "ok": true
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [3/3 seeds, sd 4.4e-05]",
        "v": 4.772851415439324e-05,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       }
      ]
     },
@@ -82,20 +74,17 @@
       {
        "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 3.67]",
        "v": 390.4761904761904,
-       "ok": true,
-       "m": 1.89
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 3.67e+03]",
        "v": 390477.1904761905,
-       "ok": true,
-       "m": 4.89
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 2.89e-05]",
        "v": 0.008966763611121085,
-       "ok": true,
-       "m": 1.05
+       "ok": true
       }
      ]
     },
@@ -106,44 +95,43 @@
       {
        "d": "rate[bitter] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 8.96e-06]",
        "v": 0.0006558711237178797,
-       "ok": true,
-       "m": 2.0
+       "ok": true
       }
      ]
     },
     "dose_response": {
      "passed": false,
-     "score": 0.75,
+     "score": 0.8,
      "checks": [
+      {
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 26]",
+       "v": 26.06060606060606,
+       "ok": true
+      },
       {
        "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
        "d": "rate[strong] > 5.0 Hz  [3/3 seeds, sd 25]",
        "v": 43.63636363636363,
-       "ok": true,
-       "m": 0.94
+       "ok": true
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6  [3/3 seeds, sd 4.4e-05]",
        "v": 4.772851415439324e-05,
-       "ok": true,
-       "m": 2.78
+       "ok": true
       },
       {
        "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 25]",
        "v": 43.63636363636363,
-       "ok": true,
-       "m": 0.84
+       "ok": true
       }
      ]
     },
@@ -154,14 +142,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz  [3/3 seeds, sd 39.2]",
        "v": 68.57142857142857,
-       "ok": true,
-       "m": 1.14
+       "ok": true
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [2/3 seeds, sd 3.44]",
        "v": 2.5411481695934364,
-       "ok": false,
-       "m": -0.56
+       "ok": false
       }
      ]
     },
@@ -172,26 +158,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.269]",
        "v": 233.11546840958604,
-       "ok": true,
-       "m": 1.37
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 269]",
        "v": 233116.46840958603,
-       "ok": true,
-       "m": 4.67
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0]",
        "v": 0.8811188811188811,
-       "ok": false,
-       "m": -0.47
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 0.000312]",
        "v": 0.05972017761181526,
-       "ok": false,
-       "m": -0.08
+       "ok": false
       }
      ]
     },
@@ -202,26 +184,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 25]",
        "v": 43.63636363636363,
-       "ok": true,
-       "m": 0.94
+       "ok": true
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 5.95]",
        "v": 336.06060606060606,
-       "ok": true,
-       "m": 1.83
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz  [3/3 seeds, sd 0.429]",
        "v": 0.6060606060606061,
-       "ok": true,
-       "m": 0.52
+       "ok": true
       }
      ]
     },
@@ -232,20 +210,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 3.67]",
        "v": 390.4761904761904,
-       "ok": true,
-       "m": 1.89
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 2.76]",
        "v": 131.84523809523807,
-       "ok": true,
-       "m": 1.42
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15  [3/3 seeds, sd 0.00289]",
        "v": 0.1289910600255428,
-       "ok": true,
-       "m": 0.07
+       "ok": true
       }
      ]
     },
@@ -256,20 +231,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 0.000291]",
        "v": 0.1052673153567197,
-       "ok": true,
-       "m": 0.45
+       "ok": true
       }
      ]
     },
@@ -280,26 +252,22 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 30.5]",
        "v": 53.333333333333336,
-       "ok": true,
-       "m": 1.03
+       "ok": true
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -310,32 +278,27 @@
       {
        "d": "spikes per neuron[loom, 200-500ms] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.03]",
        "v": 116.33333333333333,
-       "ok": true,
-       "m": 2.07
+       "ok": true
       },
       {
-       "d": "spikes per neuron[loom, 200-500ms] <= 4.0 spikes/neuron  [0/3 seeds, sd 1.03]",
+       "d": "spikes per neuron[loom, 200-500ms] <= 1.0 spikes/neuron  [0/3 seeds, sd 1.03]",
        "v": 116.33333333333333,
-       "ok": false,
-       "m": -1.46
+       "ok": false
       },
       {
        "d": "spikes per neuron[loom, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.0
+       "ok": true
       },
       {
        "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 27.5]",
        "v": 48.0,
-       "ok": true,
-       "m": 0.98
+       "ok": true
       },
       {
        "d": "rate[sugar, mn9] < 150.0 Hz  [3/3 seeds, sd 27.5]",
        "v": 48.0,
-       "ok": true,
-       "m": 0.49
+       "ok": true
       }
      ]
     },
@@ -346,32 +309,114 @@
       {
        "d": "network rate[baseline_other_fly] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "rate[sugar_other_fly, mn9] > 5.0 Hz  [3/3 seeds, sd 6.61]",
        "v": 76.73611111111111,
-       "ok": true,
-       "m": 1.19
+       "ok": true
       },
       {
        "d": "active fraction[sugar_other_fly] < 0.1  [3/3 seeds, sd 0.00356]",
        "v": 0.01191339628738645,
-       "ok": true,
-       "m": 0.92
+       "ok": true
       },
       {
        "d": "rate[loom_other_fly, gf, 220-500ms] > 5.0 Hz  [3/3 seeds, sd 20.4]",
        "v": 376.7857142857142,
-       "ok": true,
-       "m": 1.88
+       "ok": true
       },
       {
        "d": "active fraction[loom_other_fly, 220-500ms] < 0.1  [3/3 seeds, sd 0.0016]",
        "v": 0.008820748506935717,
-       "ok": true,
-       "m": 1.05
+       "ok": true
+      }
+     ]
+    },
+    "gf_azimuth_invariance": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "spikes per neuron[left] >= 1.0 spikes/neuron  [3/3 seeds, sd 2.48]",
+       "v": 67.5,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[right] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.25]",
+       "v": 74.16666666666667,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[frontal] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.22]",
+       "v": 116.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[left] <= 1.0 spikes/neuron  [0/3 seeds, sd 2.48]",
+       "v": 67.5,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[right] <= 1.0 spikes/neuron  [0/3 seeds, sd 1.25]",
+       "v": 74.16666666666667,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[frontal] <= 1.0 spikes/neuron  [0/3 seeds, sd 1.22]",
+       "v": 116.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[frontal, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[left, gf] / rate[right] < 3.0  [3/3 seeds, sd 0.0207]",
+       "v": 0.9098509696595927,
+       "ok": true
+      },
+      {
+       "d": "rate[right, gf] / rate[left] < 3.0  [3/3 seeds, sd 0.0251]",
+       "v": 1.0996521673068613,
+       "ok": true
+      }
+     ]
+    },
+    "pn_transfer_function": {
+     "passed": false,
+     "score": 0.8333333333333334,
+     "checks": [
+      {
+       "d": "rate[orn100, da1_pn] <= 170.0 Hz  [0/3 seeds, sd 0.269]",
+       "v": 233.11546840958604,
+       "ok": false
+      },
+      {
+       "d": "rate[orn10, da1_pn] >= 5.0 Hz  [3/3 seeds, sd 5.07]",
+       "v": 147.62527233115466,
+       "ok": true
+      },
+      {
+       "d": "rate[orn30, da1_pn] / rate[orn10] > 1.0  [3/3 seeds, sd 0.0411]",
+       "v": 1.1297692707367364,
+       "ok": true
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] > 1.0  [3/3 seeds, sd 0.00914]",
+       "v": 1.3994905595235583,
+       "ok": true
+      },
+      {
+       "d": "rate[orn30, da1_pn] / rate[orn10] < 3.0  [3/3 seeds, sd 0.0411]",
+       "v": 1.1297692707367364,
+       "ok": true
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] < 2.0  [3/3 seeds, sd 0.00914]",
+       "v": 1.3994905595235583,
+       "ok": true
       }
      ]
     }
@@ -388,7 +433,6 @@
    "seeds": 1,
    "verified": true,
    "max_active": 0.09271480377724318,
-   "graded": 0.747,
    "tasks": {
     "stability": {
      "passed": true,
@@ -397,14 +441,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -415,20 +457,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0",
        "v": 1.0,
-       "ok": false,
-       "m": -0.7
+       "ok": false
       },
       {
        "d": "active fraction[sugar] < 0.1",
        "v": 0.0014146709274352805,
-       "ok": true,
-       "m": 1.85
+       "ok": true
       }
      ]
     },
@@ -439,14 +478,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5",
        "v": 1.0,
-       "ok": false,
-       "m": -0.3
+       "ok": false
       }
      ]
     },
@@ -457,20 +494,17 @@
       {
        "d": "rate[loom] > 5.0 Hz",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0",
        "v": 433929.57142857136,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1",
        "v": 0.004251193853003482,
-       "ok": true,
-       "m": 1.37
+       "ok": true
       }
      ]
     },
@@ -481,14 +515,12 @@
       {
        "d": "rate[bitter] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "active fraction[bitter] < 0.1",
        "v": 0.0005816667265089225,
-       "ok": true,
-       "m": 2.0
+       "ok": true
       }
      ]
     },
@@ -499,26 +531,22 @@
       {
        "d": "rate[weak] > 1.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
        "d": "rate[strong] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6",
        "v": 1.0,
-       "ok": false,
-       "m": -0.22
+       "ok": false
       },
       {
        "d": "rate[strong] < 300.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 5.48
+       "ok": true
       }
      ]
     },
@@ -529,14 +557,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7",
        "v": 1.0,
-       "ok": false,
-       "m": -0.15
+       "ok": false
       }
      ]
     },
@@ -547,26 +573,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz",
        "v": 420.0,
-       "ok": true,
-       "m": 1.62
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0",
        "v": 420000.99999999994,
-       "ok": true,
-       "m": 4.92
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3",
        "v": 0.8111888111888111,
-       "ok": false,
-       "m": -0.43
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05",
        "v": 0.04059459265376467,
-       "ok": true,
-       "m": 0.09
+       "ok": true
       }
      ]
     },
@@ -577,26 +599,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz",
        "v": 435.45454545454544,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       }
      ]
     },
@@ -607,20 +625,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz",
        "v": 172.32142857142856,
-       "ok": true,
-       "m": 1.54
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15",
        "v": 0.02681992337164751,
-       "ok": true,
-       "m": 0.75
+       "ok": true
       }
      ]
     },
@@ -631,20 +646,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3",
        "v": 0.09271480377724318,
-       "ok": true,
-       "m": 0.51
+       "ok": true
       }
      ]
     },
@@ -655,26 +667,22 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     }
@@ -691,7 +699,6 @@
    "seeds": 1,
    "verified": true,
    "max_active": 0.10049190334278842,
-   "graded": 0.714,
    "tasks": {
     "stability": {
      "passed": true,
@@ -700,14 +707,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -718,20 +723,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0",
        "v": 1.0,
-       "ok": false,
-       "m": -0.7
+       "ok": false
       },
       {
        "d": "active fraction[sugar] < 0.1",
        "v": 0.001579835553481024,
-       "ok": true,
-       "m": 1.8
+       "ok": true
       }
      ]
     },
@@ -742,14 +744,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5",
        "v": 1.0,
-       "ok": false,
-       "m": -0.3
+       "ok": false
       }
      ]
     },
@@ -760,20 +760,17 @@
       {
        "d": "rate[loom] > 5.0 Hz",
        "v": 432.1428571428571,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0",
        "v": 432143.8571428571,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1",
        "v": 0.0143908656780726,
-       "ok": true,
-       "m": 0.84
+       "ok": true
       }
      ]
     },
@@ -784,14 +781,12 @@
       {
        "d": "rate[bitter] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "active fraction[bitter] < 0.1",
        "v": 0.0006175720799971276,
-       "ok": true,
-       "m": 2.0
+       "ok": true
       }
      ]
     },
@@ -802,26 +797,22 @@
       {
        "d": "rate[weak] > 1.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
        "d": "rate[strong] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6",
        "v": 1.0,
-       "ok": false,
-       "m": -0.22
+       "ok": false
       },
       {
        "d": "rate[strong] < 300.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 5.48
+       "ok": true
       }
      ]
     },
@@ -832,14 +823,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7",
        "v": 1.0,
-       "ok": false,
-       "m": -0.15
+       "ok": false
       }
      ]
     },
@@ -850,26 +839,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz",
        "v": 427.32026143790847,
-       "ok": true,
-       "m": 1.63
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0",
        "v": 427321.26143790846,
-       "ok": true,
-       "m": 4.93
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3",
        "v": 0.8216783216783217,
-       "ok": false,
-       "m": -0.44
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05",
        "v": 0.054410972676025994,
-       "ok": false,
-       "m": -0.04
+       "ok": false
       }
      ]
     },
@@ -880,26 +865,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz",
        "v": 434.5454545454545,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       }
      ]
     },
@@ -910,20 +891,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz",
        "v": 432.1428571428571,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz",
        "v": 173.2142857142857,
-       "ok": true,
-       "m": 1.54
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15",
        "v": 0.15019157088122606,
-       "ok": false,
-       "m": -0.0
+       "ok": false
       }
      ]
     },
@@ -934,20 +912,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3",
        "v": 0.10049190334278842,
-       "ok": true,
-       "m": 0.47
+       "ok": true
       }
      ]
     },
@@ -958,26 +933,22 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     }
@@ -994,7 +965,6 @@
    "seeds": 1,
    "verified": true,
    "max_active": 0.10576280923485691,
-   "graded": 0.869,
    "tasks": {
     "stability": {
      "passed": true,
@@ -1003,14 +973,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -1021,20 +989,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 389.09090909090907,
-       "ok": true,
-       "m": 1.89
+       "ok": true
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0",
        "v": 389091.90909090906,
-       "ok": true,
-       "m": 4.89
+       "ok": true
       },
       {
        "d": "active fraction[sugar] < 0.1",
        "v": 0.079515995834979,
-       "ok": true,
-       "m": 0.1
+       "ok": true
       }
      ]
     },
@@ -1045,14 +1010,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 389.09090909090907,
-       "ok": true,
-       "m": 1.89
+       "ok": true
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5",
        "v": 2.5700868525805195e-06,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       }
      ]
     },
@@ -1063,20 +1026,17 @@
       {
        "d": "rate[loom] > 5.0 Hz",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0",
        "v": 433929.57142857136,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1",
        "v": 0.02701518796452551,
-       "ok": true,
-       "m": 0.57
+       "ok": true
       }
      ]
     },
@@ -1087,14 +1047,12 @@
       {
        "d": "rate[bitter] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "active fraction[bitter] < 0.1",
        "v": 0.0006462963627876917,
-       "ok": true,
-       "m": 2.0
+       "ok": true
       }
      ]
     },
@@ -1105,26 +1063,22 @@
       {
        "d": "rate[weak] > 1.0 Hz",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
        "d": "rate[strong] > 5.0 Hz",
        "v": 389.09090909090907,
-       "ok": true,
-       "m": 1.89
+       "ok": true
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6",
        "v": 2.5700868525805195e-06,
-       "ok": true,
-       "m": 2.78
+       "ok": true
       },
       {
        "d": "rate[strong] < 300.0 Hz",
        "v": 389.09090909090907,
-       "ok": false,
-       "m": -0.11
+       "ok": false
       }
      ]
     },
@@ -1135,14 +1089,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz",
        "v": 362.8571428571429,
-       "ok": true,
-       "m": 1.86
+       "ok": true
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7",
        "v": 1.2007868482252213,
-       "ok": false,
-       "m": -0.23
+       "ok": false
       }
      ]
     },
@@ -1153,26 +1105,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz",
        "v": 432.81045751633985,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0",
        "v": 432811.45751633984,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3",
        "v": 0.8321678321678322,
-       "ok": false,
-       "m": -0.44
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05",
        "v": 0.07305303220710208,
-       "ok": false,
-       "m": -0.16
+       "ok": false
       }
      ]
     },
@@ -1183,26 +1131,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz",
        "v": 389.09090909090907,
-       "ok": true,
-       "m": 1.89
+       "ok": true
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz",
        "v": 434.5454545454545,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       }
      ]
     },
@@ -1213,20 +1157,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz",
        "v": 180.35714285714283,
-       "ok": true,
-       "m": 1.56
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15",
        "v": 0.20842911877394635,
-       "ok": false,
-       "m": -0.14
+       "ok": false
       }
      ]
     },
@@ -1237,20 +1178,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3",
        "v": 0.10576280923485691,
-       "ok": true,
-       "m": 0.45
+       "ok": true
       }
      ]
     },
@@ -1261,59 +1199,52 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 378.88888888888886,
-       "ok": true,
-       "m": 1.88
+       "ok": true
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz",
        "v": 433.33333333333337,
-       "ok": false,
-       "m": -1.94
+       "ok": false
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz",
        "v": 9.600062235946048,
-       "ok": false,
-       "m": -1.28
+       "ok": false
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01",
        "v": 0.07181788804710783,
-       "ok": false,
-       "m": -0.86
+       "ok": false
       }
      ]
     }
    }
   },
   {
-   "label": "LIF gain 0.45",
+   "label": "LIF gain 0.45 (3 seeds)",
    "connectome": "flywire783",
    "simulator": "LIFSimulator",
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.6309523809523808,
-   "seeds": 1,
-   "verified": true,
-   "max_active": 0.1112563283185523,
-   "graded": 0.847,
+   "hard": 0.656060606060606,
+   "seeds": 3,
+   "verified": false,
+   "max_active": 0.11126829676971504,
    "tasks": {
     "stability": {
      "passed": true,
      "score": 1.0,
      "checks": [
       {
-       "d": "network rate[baseline] < 0.5 Hz",
+       "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
-       "d": "active fraction[baseline] < 0.01",
+       "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -1322,22 +1253,19 @@
      "score": 1.0,
      "checks": [
       {
-       "d": "rate[sugar] > 5.0 Hz",
-       "v": 427.27272727272725,
-       "ok": true,
-       "m": 1.93
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 16.4]",
+       "v": 404.5454545454545,
+       "ok": true
       },
       {
-       "d": "rate[sugar] / rate[baseline] > 5.0",
-       "v": 427273.72727272724,
-       "ok": true,
-       "m": 4.93
+       "d": "rate[sugar] / rate[baseline] > 5.0  [3/3 seeds, sd 1.64e+04]",
+       "v": 404546.45454545453,
+       "ok": true
       },
       {
-       "d": "active fraction[sugar] < 0.1",
-       "v": 0.08877957703493591,
-       "ok": true,
-       "m": 0.05
+       "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 0.00064]",
+       "v": 0.08787715581726568,
+       "ok": true
       }
      ]
     },
@@ -1346,16 +1274,14 @@
      "score": 1.0,
      "checks": [
       {
-       "d": "rate[sugar] > 5.0 Hz",
-       "v": 427.27272727272725,
-       "ok": true,
-       "m": 1.93
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 16.4]",
+       "v": 404.5454545454545,
+       "ok": true
       },
       {
-       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5",
-       "v": 0.017023577178861923,
-       "ok": true,
-       "m": 1.47
+       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [3/3 seeds, sd 0.00719]",
+       "v": 0.007201770646862011,
+       "ok": true
       }
      ]
     },
@@ -1364,22 +1290,19 @@
      "score": 1.0,
      "checks": [
       {
-       "d": "rate[loom] > 5.0 Hz",
-       "v": 435.71428571428567,
-       "ok": true,
-       "m": 1.94
+       "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 5.68e-14]",
+       "v": 435.7142857142856,
+       "ok": true
       },
       {
-       "d": "rate[loom] / rate[baseline] > 5.0",
+       "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 0]",
        "v": 435715.2857142856,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
-       "d": "active fraction[loom] < 0.1",
-       "v": 0.07320383469175254,
-       "ok": true,
-       "m": 0.14
+       "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 0.00149]",
+       "v": 0.07120270965734325,
+       "ok": true
       }
      ]
     },
@@ -1388,46 +1311,45 @@
      "score": 1.0,
      "checks": [
       {
-       "d": "rate[bitter] < 2.0 Hz",
+       "d": "rate[bitter] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
-       "d": "active fraction[bitter] < 0.1",
-       "v": 0.0006534774334853327,
-       "ok": true,
-       "m": 2.0
+       "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 3.39e-06]",
+       "v": 0.0006510837432527856,
+       "ok": true
       }
      ]
     },
     "dose_response": {
      "passed": false,
-     "score": 0.5,
+     "score": 0.4,
      "checks": [
       {
-       "d": "rate[weak] > 1.0 Hz",
+       "d": "rate[measured] > 5.0 Hz  [1/3 seeds, sd 100]",
+       "v": 73.63636363636364,
+       "ok": false
+      },
+      {
+       "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
-       "d": "rate[strong] > 5.0 Hz",
-       "v": 427.27272727272725,
-       "ok": true,
-       "m": 1.93
+       "d": "rate[strong] > 5.0 Hz  [3/3 seeds, sd 16.4]",
+       "v": 404.5454545454545,
+       "ok": true
       },
       {
-       "d": "rate[weak] / rate[strong] < 0.6",
-       "v": 2.340420054336043e-06,
-       "ok": true,
-       "m": 2.78
+       "d": "rate[weak] / rate[strong] < 0.6  [3/3 seeds, sd 9.82e-08]",
+       "v": 2.4758876807404953e-06,
+       "ok": true
       },
       {
-       "d": "rate[strong] < 300.0 Hz",
-       "v": 427.27272727272725,
-       "ok": false,
-       "m": -0.15
+       "d": "rate[strong] < 300.0 Hz  [0/3 seeds, sd 16.4]",
+       "v": 404.5454545454545,
+       "ok": false
       }
      ]
     },
@@ -1436,16 +1358,14 @@
      "score": 0.5,
      "checks": [
       {
-       "d": "rate[two_pulses] > 5.0 Hz",
-       "v": 425.7142857142857,
-       "ok": true,
-       "m": 1.93
+       "d": "rate[two_pulses] > 5.0 Hz  [3/3 seeds, sd 24.9]",
+       "v": 391.4285714285714,
+       "ok": true
       },
       {
-       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7",
-       "v": 1.0100670904464317,
-       "ok": false,
-       "m": -0.16
+       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0.0703]",
+       "v": 1.1042167037882773,
+       "ok": false
       }
      ]
     },
@@ -1454,28 +1374,24 @@
      "score": 0.5,
      "checks": [
       {
-       "d": "rate[cva, da1_pn] > 10.0 Hz",
-       "v": 434.24836601307186,
-       "ok": true,
-       "m": 1.64
+       "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.185]",
+       "v": 434.37908496732024,
+       "ok": true
       },
       {
-       "d": "rate[cva, da1_pn] / rate[baseline] > 5.0",
-       "v": 434249.36601307185,
-       "ok": true,
-       "m": 4.94
+       "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 185]",
+       "v": 434380.08496732014,
+       "ok": true
       },
       {
-       "d": "readout active fraction[cva, all_pn] < 0.3",
-       "v": 0.8391608391608392,
-       "ok": false,
-       "m": -0.45
+       "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0.00165]",
+       "v": 0.8379953379953381,
+       "ok": false
       },
       {
-       "d": "active fraction[cva] < 0.05",
-       "v": 0.08113173674194822,
-       "ok": false,
-       "m": -0.21
+       "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 8e-05]",
+       "v": 0.08102641437171616,
+       "ok": false
       }
      ]
     },
@@ -1484,28 +1400,24 @@
      "score": 1.0,
      "checks": [
       {
-       "d": "rate[sugar, mn9] > 5.0 Hz",
-       "v": 427.27272727272725,
-       "ok": true,
-       "m": 1.93
+       "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 16.4]",
+       "v": 404.5454545454545,
+       "ok": true
       },
       {
-       "d": "rate[sugar, gf] < 2.0 Hz",
+       "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
-       "d": "rate[loom, gf] > 5.0 Hz",
-       "v": 214.54545454545453,
-       "ok": true,
-       "m": 1.63
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 6.34]",
+       "v": 221.81818181818178,
+       "ok": true
       },
       {
-       "d": "rate[loom, mn9] < 2.0 Hz",
+       "d": "rate[loom, mn9] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       }
      ]
     },
@@ -1514,22 +1426,19 @@
      "score": 0.6666666666666666,
      "checks": [
       {
-       "d": "rate[loom, gf] > 5.0 Hz",
-       "v": 435.71428571428567,
-       "ok": true,
-       "m": 1.94
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 5.68e-14]",
+       "v": 435.7142857142856,
+       "ok": true
       },
       {
-       "d": "rate[loom, dnp] > 5.0 Hz",
-       "v": 195.53571428571428,
-       "ok": true,
-       "m": 1.59
+       "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 5.97]",
+       "v": 197.32142857142856,
+       "ok": true
       },
       {
-       "d": "readout active fraction[loom, all_dn] < 0.15",
-       "v": 0.3088122605363985,
-       "ok": false,
-       "m": -0.31
+       "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00253]",
+       "v": 0.3052362707535121,
+       "ok": false
       }
      ]
     },
@@ -1538,22 +1447,19 @@
      "score": 1.0,
      "checks": [
       {
-       "d": "rate[flash, gf] < 5.0 Hz",
+       "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
-       "d": "rate[flash, lplc2] < 20.0 Hz",
+       "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
-       "d": "active fraction[flash] < 0.3",
-       "v": 0.1112563283185523,
-       "ok": true,
-       "m": 0.43
+       "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 0.000185]",
+       "v": 0.11126829676971504,
+       "ok": true
       }
      ]
     },
@@ -1562,28 +1468,173 @@
      "score": 0.25,
      "checks": [
       {
-       "d": "rate[sugar] > 5.0 Hz",
-       "v": 427.77777777777777,
-       "ok": true,
-       "m": 1.93
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 20.4]",
+       "v": 399.6296296296296,
+       "ok": true
       },
       {
-       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz",
-       "v": 353.33333333333337,
-       "ok": false,
-       "m": -1.85
+       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [0/3 seeds, sd 1.57]",
+       "v": 354.4444444444445,
+       "ok": false
       },
       {
-       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz",
-       "v": 10.85270427154022,
-       "ok": false,
-       "m": -1.34
+       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [0/3 seeds, sd 0.000938]",
+       "v": 10.851403699847204,
+       "ok": false
       },
       {
-       "d": "active fraction[sugar, 1700-2000ms] < 0.01",
-       "v": 0.07701698323219992,
-       "ok": false,
-       "m": -0.89
+       "d": "active fraction[sugar, 1700-2000ms] < 0.01  [0/3 seeds, sd 4.48e-05]",
+       "v": 0.07707682548801359,
+       "ok": false
+      }
+     ]
+    },
+    "physiological_rates": {
+     "passed": false,
+     "score": 0.6,
+     "checks": [
+      {
+       "d": "spikes per neuron[loom, 200-500ms] >= 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 129.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[loom, 200-500ms] <= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 129.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 19.3]",
+       "v": 360.3333333333333,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar, mn9] < 150.0 Hz  [0/3 seeds, sd 19.3]",
+       "v": 360.3333333333333,
+       "ok": false
+      }
+     ]
+    },
+    "wiring_robustness": {
+     "passed": false,
+     "score": 0.8,
+     "checks": [
+      {
+       "d": "network rate[baseline_other_fly] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar_other_fly, mn9] > 5.0 Hz  [2/3 seeds, sd 152]",
+       "v": 213.19444444444446,
+       "ok": false
+      },
+      {
+       "d": "active fraction[sugar_other_fly] < 0.1  [3/3 seeds, sd 0.0419]",
+       "v": 0.06132395006762175,
+       "ok": true
+      },
+      {
+       "d": "rate[loom_other_fly, gf, 220-500ms] > 5.0 Hz  [3/3 seeds, sd 0.842]",
+       "v": 435.11904761904754,
+       "ok": true
+      },
+      {
+       "d": "active fraction[loom_other_fly, 220-500ms] < 0.1  [3/3 seeds, sd 0.0242]",
+       "v": 0.05132550596627291,
+       "ok": true
+      }
+     ]
+    },
+    "gf_azimuth_invariance": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "spikes per neuron[left] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.471]",
+       "v": 126.66666666666667,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[right] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.47]",
+       "v": 120.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[frontal] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
+       "v": 128.83333333333334,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[left] <= 1.0 spikes/neuron  [0/3 seeds, sd 0.471]",
+       "v": 126.66666666666667,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[right] <= 1.0 spikes/neuron  [0/3 seeds, sd 1.47]",
+       "v": 120.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[frontal] <= 1.0 spikes/neuron  [0/3 seeds, sd 0.236]",
+       "v": 128.83333333333334,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[frontal, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[left, gf] / rate[right] < 3.0  [3/3 seeds, sd 0.00928]",
+       "v": 1.0556685300550388,
+       "ok": true
+      },
+      {
+       "d": "rate[right, gf] / rate[left] < 3.0  [3/3 seeds, sd 0.00831]",
+       "v": 0.9473400406342325,
+       "ok": true
+      }
+     ]
+    },
+    "pn_transfer_function": {
+     "passed": false,
+     "score": 0.8333333333333334,
+     "checks": [
+      {
+       "d": "rate[orn100, da1_pn] <= 170.0 Hz  [0/3 seeds, sd 0.185]",
+       "v": 434.37908496732024,
+       "ok": false
+      },
+      {
+       "d": "rate[orn10, da1_pn] >= 5.0 Hz  [3/3 seeds, sd 19.8]",
+       "v": 379.21568627450984,
+       "ok": true
+      },
+      {
+       "d": "rate[orn30, da1_pn] / rate[orn10] > 1.0  [3/3 seeds, sd 0.0581]",
+       "v": 1.1108066589239185,
+       "ok": true
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] > 1.0  [3/3 seeds, sd 0.000791]",
+       "v": 1.034021639727704,
+       "ok": true
+      },
+      {
+       "d": "rate[orn30, da1_pn] / rate[orn10] < 3.0  [3/3 seeds, sd 0.0581]",
+       "v": 1.1108066589239185,
+       "ok": true
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] < 2.0  [3/3 seeds, sd 0.000791]",
+       "v": 1.034021639727704,
+       "ok": true
       }
      ]
     }
@@ -1600,7 +1651,6 @@
    "seeds": 3,
    "verified": true,
    "max_active": 0.10576041554462438,
-   "graded": 0.916,
    "tasks": {
     "stability": {
      "passed": true,
@@ -1609,14 +1659,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -1627,20 +1675,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [2/3 seeds, sd 182]",
        "v": 132.4242424242424,
-       "ok": false,
-       "m": 1.42
+       "ok": false
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0  [3/3 seeds, sd 1.82e+05]",
        "v": 132425.2424242424,
-       "ok": true,
-       "m": 4.42
+       "ok": true
       },
       {
        "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 0.0366]",
        "v": 0.027728507653824522,
-       "ok": true,
-       "m": 0.56
+       "ok": true
       }
      ]
     },
@@ -1651,14 +1696,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [2/3 seeds, sd 182]",
        "v": 132.4242424242424,
-       "ok": false,
-       "m": 1.42
+       "ok": false
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [3/3 seeds, sd 0.00023]",
        "v": 0.00023646197342709583,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       }
      ]
     },
@@ -1669,20 +1712,17 @@
       {
        "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 0]",
        "v": 433929.57142857136,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 4.32e-05]",
        "v": 0.026955345708711834,
-       "ok": true,
-       "m": 0.57
+       "ok": true
       }
      ]
     },
@@ -1693,14 +1733,12 @@
       {
        "d": "rate[bitter] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 5.86e-06]",
        "v": 0.0006391152920900506,
-       "ok": true,
-       "m": 2.0
+       "ok": true
       }
      ]
     },
@@ -1711,26 +1749,22 @@
       {
        "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
        "d": "rate[strong] > 5.0 Hz  [2/3 seeds, sd 182]",
        "v": 132.4242424242424,
-       "ok": false,
-       "m": 1.42
+       "ok": false
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6  [3/3 seeds, sd 0.00023]",
        "v": 0.00023646197342709583,
-       "ok": true,
-       "m": 2.78
+       "ok": true
       },
       {
        "d": "rate[strong] < 300.0 Hz  [2/3 seeds, sd 182]",
        "v": 132.4242424242424,
-       "ok": false,
-       "m": 0.36
+       "ok": false
       }
      ]
     },
@@ -1741,14 +1775,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz  [2/3 seeds, sd 168]",
        "v": 124.76190476190476,
-       "ok": false,
-       "m": 1.4
+       "ok": false
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [2/3 seeds, sd 0.492]",
        "v": 0.5670261466845982,
-       "ok": false,
-       "m": 0.09
+       "ok": false
       }
      ]
     },
@@ -1759,26 +1791,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 5.68e-14]",
        "v": 432.8104575163399,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 0]",
        "v": 432811.45751633984,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0]",
        "v": 0.8321678321678322,
-       "ok": false,
-       "m": -0.44
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 0.00104]",
        "v": 0.07413976757267841,
-       "ok": false,
-       "m": -0.17
+       "ok": false
       }
      ]
     },
@@ -1789,26 +1817,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz  [2/3 seeds, sd 182]",
        "v": 132.4242424242424,
-       "ok": false,
-       "m": 1.42
+       "ok": false
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 10.3]",
        "v": 427.27272727272725,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz  [3/3 seeds, sd 0.429]",
        "v": 0.30303030303030304,
-       "ok": true,
-       "m": 0.82
+       "ok": true
       }
      ]
     },
@@ -1819,20 +1843,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 5.69]",
        "v": 183.92857142857142,
-       "ok": true,
-       "m": 1.57
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00226]",
        "v": 0.2053639846743295,
-       "ok": false,
-       "m": -0.14
+       "ok": false
       }
      ]
     },
@@ -1843,20 +1864,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 7.92e-05]",
        "v": 0.10576041554462438,
-       "ok": true,
-       "m": 0.45
+       "ok": true
       }
      ]
     },
@@ -1867,26 +1885,22 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [2/3 seeds, sd 176]",
        "v": 129.62962962962962,
-       "ok": false,
-       "m": 1.41
+       "ok": false
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [2/3 seeds, sd 204]",
        "v": 144.44444444444446,
-       "ok": false,
-       "m": -1.46
+       "ok": false
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [2/3 seeds, sd 4.53]",
        "v": 3.2000207453153493,
-       "ok": false,
-       "m": -0.81
+       "ok": false
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01  [2/3 seeds, sd 0.0339]",
        "v": 0.023939296015702608,
-       "ok": false,
-       "m": -0.38
+       "ok": false
       }
      ]
     }
@@ -1903,7 +1917,6 @@
    "seeds": 1,
    "verified": true,
    "max_active": 0.11753258410829055,
-   "graded": 0.816,
    "tasks": {
     "stability": {
      "passed": true,
@@ -1912,14 +1925,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -1930,20 +1941,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 367.27272727272725,
-       "ok": true,
-       "m": 1.87
+       "ok": true
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0",
        "v": 367273.72727272724,
-       "ok": true,
-       "m": 4.87
+       "ok": true
       },
       {
        "d": "active fraction[sugar] < 0.1",
        "v": 0.10028365229255683,
-       "ok": false,
-       "m": -0.0
+       "ok": false
       }
      ]
     },
@@ -1954,14 +1962,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 367.27272727272725,
-       "ok": true,
-       "m": 1.87
+       "ok": true
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5",
        "v": 0.8341588673892224,
-       "ok": false,
-       "m": -0.22
+       "ok": false
       }
      ]
     },
@@ -1972,20 +1978,17 @@
       {
        "d": "rate[loom] > 5.0 Hz",
        "v": 432.1428571428571,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0",
        "v": 432143.8571428571,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1",
        "v": 0.09193206707120032,
-       "ok": true,
-       "m": 0.04
+       "ok": true
       }
      ]
     },
@@ -1996,14 +1999,12 @@
       {
        "d": "rate[bitter] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "active fraction[bitter] < 0.1",
        "v": 0.0007037449283688198,
-       "ok": true,
-       "m": 2.0
+       "ok": true
       }
      ]
     },
@@ -2014,26 +2015,22 @@
       {
        "d": "rate[weak] > 1.0 Hz",
        "v": 7.2727272727272725,
-       "ok": true,
-       "m": 0.86
+       "ok": true
       },
       {
        "d": "rate[strong] > 5.0 Hz",
        "v": 367.27272727272725,
-       "ok": true,
-       "m": 1.87
+       "ok": true
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6",
        "v": 0.019804649046747648,
-       "ok": true,
-       "m": 1.48
+       "ok": true
       },
       {
        "d": "rate[strong] < 300.0 Hz",
        "v": 367.27272727272725,
-       "ok": false,
-       "m": -0.09
+       "ok": false
       }
      ]
     },
@@ -2044,14 +2041,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz",
        "v": 395.7142857142857,
-       "ok": true,
-       "m": 1.9
+       "ok": true
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7",
        "v": 0.8519859336095541,
-       "ok": false,
-       "m": -0.09
+       "ok": false
       }
      ]
     },
@@ -2062,26 +2057,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz",
        "v": 434.7712418300654,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0",
        "v": 434772.2418300653,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3",
        "v": 0.8426573426573427,
-       "ok": false,
-       "m": -0.45
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05",
        "v": 0.09452443359304873,
-       "ok": false,
-       "m": -0.28
+       "ok": false
       }
      ]
     },
@@ -2092,26 +2083,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz",
        "v": 367.27272727272725,
-       "ok": true,
-       "m": 1.87
+       "ok": true
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz",
        "v": 198.18181818181816,
-       "ok": true,
-       "m": 1.6
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       }
      ]
     },
@@ -2122,20 +2109,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz",
        "v": 432.1428571428571,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz",
        "v": 218.74999999999997,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15",
        "v": 0.3586206896551724,
-       "ok": false,
-       "m": -0.38
+       "ok": false
       }
      ]
     },
@@ -2146,20 +2130,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3",
        "v": 0.11753258410829055,
-       "ok": true,
-       "m": 0.41
+       "ok": true
       }
      ]
     },
@@ -2170,26 +2151,22 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 373.3333333333333,
-       "ok": true,
-       "m": 1.87
+       "ok": true
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz",
        "v": 220.0,
-       "ok": false,
-       "m": -1.64
+       "ok": false
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz",
        "v": 12.720452886191998,
-       "ok": false,
-       "m": -1.41
+       "ok": false
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01",
        "v": 0.0890237334386557,
-       "ok": false,
-       "m": -0.95
+       "ok": false
       }
      ]
     }
@@ -2206,7 +2183,6 @@
    "seeds": 1,
    "verified": true,
    "max_active": 0.27066173566478763,
-   "graded": 0.837,
    "tasks": {
     "stability": {
      "passed": true,
@@ -2215,14 +2191,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -2233,20 +2207,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 427.27272727272725,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0",
        "v": 427273.72727272724,
-       "ok": true,
-       "m": 4.93
+       "ok": true
       },
       {
        "d": "active fraction[sugar] < 0.1",
        "v": 0.13567196869053175,
-       "ok": false,
-       "m": -0.13
+       "ok": false
       }
      ]
     },
@@ -2257,14 +2228,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 427.27272727272725,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5",
        "v": 0.3957460950623307,
-       "ok": true,
-       "m": 0.1
+       "ok": true
       }
      ]
     },
@@ -2275,20 +2244,17 @@
       {
        "d": "rate[loom] > 5.0 Hz",
        "v": 212.49999999999997,
-       "ok": true,
-       "m": 1.63
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0",
        "v": 212500.99999999997,
-       "ok": true,
-       "m": 4.63
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1",
        "v": 0.13491795626727945,
-       "ok": false,
-       "m": -0.13
+       "ok": false
       }
      ]
     },
@@ -2299,14 +2265,12 @@
       {
        "d": "rate[bitter] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "active fraction[bitter] < 0.1",
        "v": 0.0012566873720871782,
-       "ok": true,
-       "m": 1.9
+       "ok": true
       }
      ]
     },
@@ -2317,26 +2281,22 @@
       {
        "d": "rate[weak] > 1.0 Hz",
        "v": 93.63636363636363,
-       "ok": true,
-       "m": 1.97
+       "ok": true
       },
       {
        "d": "rate[strong] > 5.0 Hz",
        "v": 427.27272727272725,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6",
        "v": 0.21915076368970202,
-       "ok": true,
-       "m": 0.44
+       "ok": true
       },
       {
        "d": "rate[strong] < 300.0 Hz",
        "v": 427.27272727272725,
-       "ok": false,
-       "m": -0.15
+       "ok": false
       }
      ]
     },
@@ -2347,14 +2307,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz",
        "v": 422.8571428571429,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7",
        "v": 2.3648592722922616e-06,
-       "ok": true,
-       "m": 2.85
+       "ok": true
       }
      ]
     },
@@ -2365,26 +2323,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz",
        "v": 435.032679738562,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0",
        "v": 435033.679738562,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3",
        "v": 0.8636363636363636,
-       "ok": false,
-       "m": -0.46
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05",
        "v": 0.1294818857491652,
-       "ok": false,
-       "m": -0.41
+       "ok": false
       }
      ]
     },
@@ -2395,26 +2349,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz",
        "v": 427.27272727272725,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz",
        "v": 87.27272727272727,
-       "ok": true,
-       "m": 1.24
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       }
      ]
     },
@@ -2425,20 +2375,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz",
        "v": 212.49999999999997,
-       "ok": true,
-       "m": 1.63
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz",
        "v": 274.10714285714283,
-       "ok": true,
-       "m": 1.74
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15",
        "v": 0.4222222222222222,
-       "ok": false,
-       "m": -0.45
+       "ok": false
       }
      ]
     },
@@ -2449,20 +2396,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3",
        "v": 0.27066173566478763,
-       "ok": true,
-       "m": 0.04
+       "ok": true
       }
      ]
     },
@@ -2473,43 +2417,38 @@
       {
        "d": "rate[sugar] > 5.0 Hz",
        "v": 424.44444444444446,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz",
        "v": 48.333333333333336,
-       "ok": false,
-       "m": -0.99
+       "ok": false
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz",
        "v": 18.850214833698374,
-       "ok": false,
-       "m": -1.58
+       "ok": false
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01",
        "v": 0.11877490933898244,
-       "ok": false,
-       "m": -1.07
+       "ok": false
       }
      ]
     }
    }
   },
   {
-   "label": "LIF gain 0.45 (3 seeds)",
+   "label": "LIF gain 0.45 (reference)",
    "connectome": "flywire783",
    "simulator": "LIFSimulator",
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.6462962962962963,
+   "hard": 0.6351851851851851,
    "seeds": 3,
-   "verified": false,
+   "verified": true,
    "max_active": 0.11126829676971504,
-   "graded": 0.83,
    "tasks": {
     "stability": {
      "passed": true,
@@ -2518,14 +2457,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -2536,20 +2473,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 16.4]",
        "v": 404.5454545454545,
-       "ok": true,
-       "m": 1.91
+       "ok": true
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0  [3/3 seeds, sd 1.64e+04]",
        "v": 404546.45454545453,
-       "ok": true,
-       "m": 4.91
+       "ok": true
       },
       {
        "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 0.00064]",
        "v": 0.08787715581726568,
-       "ok": true,
-       "m": 0.06
+       "ok": true
       }
      ]
     },
@@ -2560,14 +2494,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 16.4]",
        "v": 404.5454545454545,
-       "ok": true,
-       "m": 1.91
+       "ok": true
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [3/3 seeds, sd 0.00719]",
        "v": 0.007201770646862011,
-       "ok": true,
-       "m": 1.84
+       "ok": true
       }
      ]
     },
@@ -2578,20 +2510,17 @@
       {
        "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 5.68e-14]",
        "v": 435.7142857142856,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 0]",
        "v": 435715.2857142856,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 0.00149]",
        "v": 0.07120270965734325,
-       "ok": true,
-       "m": 0.15
+       "ok": true
       }
      ]
     },
@@ -2602,44 +2531,43 @@
       {
        "d": "rate[bitter] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 3.39e-06]",
        "v": 0.0006510837432527856,
-       "ok": true,
-       "m": 2.0
+       "ok": true
       }
      ]
     },
     "dose_response": {
      "passed": false,
-     "score": 0.5,
+     "score": 0.4,
      "checks": [
+      {
+       "d": "rate[measured] > 5.0 Hz  [1/3 seeds, sd 100]",
+       "v": 73.63636363636364,
+       "ok": false
+      },
       {
        "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
        "d": "rate[strong] > 5.0 Hz  [3/3 seeds, sd 16.4]",
        "v": 404.5454545454545,
-       "ok": true,
-       "m": 1.91
+       "ok": true
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6  [3/3 seeds, sd 9.82e-08]",
        "v": 2.4758876807404953e-06,
-       "ok": true,
-       "m": 2.78
+       "ok": true
       },
       {
        "d": "rate[strong] < 300.0 Hz  [0/3 seeds, sd 16.4]",
        "v": 404.5454545454545,
-       "ok": false,
-       "m": -0.13
+       "ok": false
       }
      ]
     },
@@ -2650,14 +2578,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz  [3/3 seeds, sd 24.9]",
        "v": 391.4285714285714,
-       "ok": true,
-       "m": 1.89
+       "ok": true
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0.0703]",
        "v": 1.1042167037882773,
-       "ok": false,
-       "m": -0.2
+       "ok": false
       }
      ]
     },
@@ -2668,26 +2594,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.185]",
        "v": 434.37908496732024,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 185]",
        "v": 434380.08496732014,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0.00165]",
        "v": 0.8379953379953381,
-       "ok": false,
-       "m": -0.45
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 8e-05]",
        "v": 0.08102641437171616,
-       "ok": false,
-       "m": -0.21
+       "ok": false
       }
      ]
     },
@@ -2698,26 +2620,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 16.4]",
        "v": 404.5454545454545,
-       "ok": true,
-       "m": 1.91
+       "ok": true
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 6.34]",
        "v": 221.81818181818178,
-       "ok": true,
-       "m": 1.65
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       }
      ]
     },
@@ -2728,20 +2646,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 5.68e-14]",
        "v": 435.7142857142856,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 5.97]",
        "v": 197.32142857142856,
-       "ok": true,
-       "m": 1.6
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00253]",
        "v": 0.3052362707535121,
-       "ok": false,
-       "m": -0.31
+       "ok": false
       }
      ]
     },
@@ -2752,20 +2667,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 0.000185]",
        "v": 0.11126829676971504,
-       "ok": true,
-       "m": 0.43
+       "ok": true
       }
      ]
     },
@@ -2776,26 +2688,22 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 20.4]",
        "v": 399.6296296296296,
-       "ok": true,
-       "m": 1.9
+       "ok": true
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [0/3 seeds, sd 1.57]",
        "v": 354.4444444444445,
-       "ok": false,
-       "m": -1.85
+       "ok": false
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [0/3 seeds, sd 0.000938]",
        "v": 10.851403699847204,
-       "ok": false,
-       "m": -1.34
+       "ok": false
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01  [0/3 seeds, sd 4.48e-05]",
        "v": 0.07707682548801359,
-       "ok": false,
-       "m": -0.89
+       "ok": false
       }
      ]
     },
@@ -2806,32 +2714,27 @@
       {
        "d": "spikes per neuron[loom, 200-500ms] >= 1.0 spikes/neuron  [3/3 seeds, sd 0]",
        "v": 129.0,
-       "ok": true,
-       "m": 2.11
+       "ok": true
       },
       {
-       "d": "spikes per neuron[loom, 200-500ms] <= 4.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "d": "spikes per neuron[loom, 200-500ms] <= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
        "v": 129.0,
-       "ok": false,
-       "m": -1.51
+       "ok": false
       },
       {
        "d": "spikes per neuron[loom, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.0
+       "ok": true
       },
       {
        "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 19.3]",
        "v": 360.3333333333333,
-       "ok": true,
-       "m": 1.86
+       "ok": true
       },
       {
        "d": "rate[sugar, mn9] < 150.0 Hz  [0/3 seeds, sd 19.3]",
        "v": 360.3333333333333,
-       "ok": false,
-       "m": -0.38
+       "ok": false
       }
      ]
     },
@@ -2842,32 +2745,27 @@
       {
        "d": "network rate[baseline_other_fly] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "rate[sugar_other_fly, mn9] > 5.0 Hz  [2/3 seeds, sd 152]",
        "v": 213.19444444444446,
-       "ok": false,
-       "m": 1.63
+       "ok": false
       },
       {
        "d": "active fraction[sugar_other_fly] < 0.1  [3/3 seeds, sd 0.0419]",
        "v": 0.06132395006762175,
-       "ok": true,
-       "m": 0.21
+       "ok": true
       },
       {
        "d": "rate[loom_other_fly, gf, 220-500ms] > 5.0 Hz  [3/3 seeds, sd 0.842]",
        "v": 435.11904761904754,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "active fraction[loom_other_fly, 220-500ms] < 0.1  [3/3 seeds, sd 0.0242]",
        "v": 0.05132550596627291,
-       "ok": true,
-       "m": 0.29
+       "ok": true
       }
      ]
     }
@@ -2884,7 +2782,6 @@
    "seeds": 3,
    "verified": false,
    "max_active": 0.08566769828403864,
-   "graded": 0.646,
    "tasks": {
     "stability": {
      "passed": true,
@@ -2893,14 +2790,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -2911,20 +2806,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0  [0/3 seeds, sd 0]",
        "v": 1.0,
-       "ok": false,
-       "m": -0.7
+       "ok": false
       },
       {
        "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 8.15e-05]",
        "v": 0.0008200035520891197,
-       "ok": true,
-       "m": 2.0
+       "ok": true
       }
      ]
     },
@@ -2935,14 +2827,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [0/3 seeds, sd 1.29e+03]",
        "v": 15455.545454545454,
-       "ok": false,
-       "m": -4.49
+       "ok": false
       }
      ]
     },
@@ -2953,20 +2843,17 @@
       {
        "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 0]",
        "v": 433929.57142857136,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 0.00675]",
        "v": 0.06052911012609916,
-       "ok": true,
-       "m": 0.22
+       "ok": true
       }
      ]
     },
@@ -2977,14 +2864,12 @@
       {
        "d": "rate[bitter] < 2.0 Hz  [2/3 seeds, sd 1.71]",
        "v": 1.2121212121212122,
-       "ok": false,
-       "m": 0.22
+       "ok": false
       },
       {
        "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 0.000561]",
        "v": 0.08132583615799995,
-       "ok": true,
-       "m": 0.09
+       "ok": true
       }
      ]
     },
@@ -2995,26 +2880,22 @@
       {
        "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
        "d": "rate[strong] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6  [0/3 seeds, sd 0]",
        "v": 1.0,
-       "ok": false,
-       "m": -0.22
+       "ok": false
       },
       {
        "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 5.48
+       "ok": true
       }
      ]
     },
@@ -3025,14 +2906,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0]",
        "v": 1.0,
-       "ok": false,
-       "m": -0.15
+       "ok": false
       }
      ]
     },
@@ -3043,26 +2922,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.121]",
        "v": 435.11111111111114,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 121]",
        "v": 435112.11111111107,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0]",
        "v": 0.8779661016949153,
-       "ok": false,
-       "m": -0.47
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 0.000158]",
        "v": 0.08181141429829235,
-       "ok": false,
-       "m": -0.21
+       "ok": false
       }
      ]
     },
@@ -3073,26 +2948,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 0.429]",
        "v": 435.1515151515152,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       }
      ]
     },
@@ -3103,20 +2974,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 0.421]",
        "v": 430.9523809523809,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.0047]",
        "v": 0.22391084093211752,
-       "ok": false,
-       "m": -0.17
+       "ok": false
       }
      ]
     },
@@ -3127,20 +2995,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 2.45e-05]",
        "v": 0.03913344140753421,
-       "ok": true,
-       "m": 0.88
+       "ok": true
       }
      ]
     },
@@ -3151,26 +3016,22 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     }
@@ -3187,7 +3048,6 @@
    "seeds": 3,
    "verified": false,
    "max_active": 0.09415303457996545,
-   "graded": 0.596,
    "tasks": {
     "stability": {
      "passed": true,
@@ -3196,14 +3056,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -3214,20 +3072,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [1/3 seeds, sd 6.43]",
        "v": 4.545454545454545,
-       "ok": false,
-       "m": -0.04
+       "ok": false
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0  [1/3 seeds, sd 6.43e+03]",
        "v": 4546.454545454545,
-       "ok": false,
-       "m": 2.96
+       "ok": false
       },
       {
        "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 0.00518]",
        "v": 0.004428774944923725,
-       "ok": true,
-       "m": 1.35
+       "ok": true
       }
      ]
     },
@@ -3238,14 +3093,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [1/3 seeds, sd 6.43]",
        "v": 4.545454545454545,
-       "ok": false,
-       "m": -0.04
+       "ok": false
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [0/3 seeds, sd 4.42e+04]",
        "v": 61821.381656860314,
-       "ok": false,
-       "m": -5.09
+       "ok": false
       }
      ]
     },
@@ -3256,20 +3109,17 @@
       {
        "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 1.46]",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 1.46e+03]",
        "v": 433929.57142857136,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 0.000588]",
        "v": 0.0939414207600715,
-       "ok": true,
-       "m": 0.03
+       "ok": true
       }
      ]
     },
@@ -3280,14 +3130,12 @@
       {
        "d": "rate[bitter] < 2.0 Hz  [0/3 seeds, sd 7.73]",
        "v": 72.42424242424242,
-       "ok": false,
-       "m": -1.56
+       "ok": false
       },
       {
        "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 0.000558]",
        "v": 0.08869642108127103,
-       "ok": true,
-       "m": 0.05
+       "ok": true
       }
      ]
     },
@@ -3298,26 +3146,22 @@
       {
        "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
        "d": "rate[strong] > 5.0 Hz  [1/3 seeds, sd 6.43]",
        "v": 4.545454545454545,
-       "ok": false,
-       "m": -0.04
+       "ok": false
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6  [1/3 seeds, sd 0.471]",
        "v": 0.6666911093186499,
-       "ok": false,
-       "m": -0.05
+       "ok": false
       },
       {
        "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 6.43]",
        "v": 4.545454545454545,
-       "ok": true,
-       "m": 1.82
+       "ok": true
       }
      ]
     },
@@ -3328,14 +3172,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0]",
        "v": 1.0,
-       "ok": false,
-       "m": -0.15
+       "ok": false
       }
      ]
     },
@@ -3346,26 +3188,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.121]",
        "v": 435.11111111111114,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 121]",
        "v": 435112.11111111107,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 1.11e-16]",
        "v": 0.8881355932203391,
-       "ok": false,
-       "m": -0.47
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 0.000171]",
        "v": 0.09049891736858214,
-       "ok": false,
-       "m": -0.26
+       "ok": false
       }
      ]
     },
@@ -3376,26 +3214,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz  [1/3 seeds, sd 6.43]",
        "v": 4.545454545454545,
-       "ok": false,
-       "m": -0.04
+       "ok": false
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 1.55]",
        "v": 433.030303030303,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz  [2/3 seeds, sd 4.29]",
        "v": 3.03030303030303,
-       "ok": false,
-       "m": -0.18
+       "ok": false
       }
      ]
     },
@@ -3406,20 +3240,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 1.46]",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 2.34]",
        "v": 428.27380952380946,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00251]",
        "v": 0.30952380952380953,
-       "ok": false,
-       "m": -0.31
+       "ok": false
       }
      ]
     },
@@ -3430,20 +3261,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 3.24e-05]",
        "v": 0.03999501195995964,
-       "ok": true,
-       "m": 0.88
+       "ok": true
       }
      ]
     },
@@ -3454,26 +3282,22 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0.524]",
        "v": 0.3703703703703704,
-       "ok": false,
-       "m": -1.13
+       "ok": false
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [2/3 seeds, sd 7.86]",
        "v": 5.555555555555556,
-       "ok": false,
-       "m": -0.05
+       "ok": false
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [2/3 seeds, sd 4.71]",
        "v": 3.3328798751478463,
-       "ok": false,
-       "m": -0.82
+       "ok": false
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01  [2/3 seeds, sd 0.0347]",
        "v": 0.024533977243956725,
-       "ok": false,
-       "m": -0.39
+       "ok": false
       }
      ]
     }
@@ -3490,7 +3314,6 @@
    "seeds": 3,
    "verified": false,
    "max_active": 0.12616718247535266,
-   "graded": 0.534,
    "tasks": {
     "stability": {
      "passed": true,
@@ -3499,14 +3322,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -3517,20 +3338,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0  [0/3 seeds, sd 0]",
        "v": 1.0,
-       "ok": false,
-       "m": -0.7
+       "ok": false
       },
       {
        "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 3.85e-05]",
        "v": 0.0008067776883457469,
-       "ok": true,
-       "m": 2.0
+       "ok": true
       }
      ]
     },
@@ -3541,14 +3359,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [0/3 seeds, sd 3.81e+03]",
        "v": 173334.33333333328,
-       "ok": false,
-       "m": -5.54
+       "ok": false
       }
      ]
     },
@@ -3559,20 +3375,17 @@
       {
        "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 1.46]",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 1.46e+03]",
        "v": 433929.57142857136,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1  [0/3 seeds, sd 0.000371]",
        "v": 0.10255712628432584,
-       "ok": false,
-       "m": -0.01
+       "ok": false
       }
      ]
     },
@@ -3583,14 +3396,12 @@
       {
        "d": "rate[bitter] < 2.0 Hz  [0/3 seeds, sd 10.4]",
        "v": 129.39393939393938,
-       "ok": false,
-       "m": -1.81
+       "ok": false
       },
       {
        "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 0.000372]",
        "v": 0.09751240397078219,
-       "ok": true,
-       "m": 0.01
+       "ok": true
       }
      ]
     },
@@ -3601,26 +3412,22 @@
       {
        "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
        "d": "rate[strong] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6  [0/3 seeds, sd 0]",
        "v": 1.0,
-       "ok": false,
-       "m": -0.22
+       "ok": false
       },
       {
        "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 5.48
+       "ok": true
       }
      ]
     },
@@ -3631,14 +3438,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0]",
        "v": 1.0,
-       "ok": false,
-       "m": -0.15
+       "ok": false
       }
      ]
     },
@@ -3649,26 +3454,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.121]",
        "v": 434.9629629629629,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 121]",
        "v": 434963.9629629629,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 1.11e-16]",
        "v": 0.8983050847457626,
-       "ok": false,
-       "m": -0.48
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 4.24e-05]",
        "v": 0.10041831517611183,
-       "ok": false,
-       "m": -0.3
+       "ok": false
       }
      ]
     },
@@ -3679,26 +3480,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 0.429]",
        "v": 433.030303030303,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz  [0/3 seeds, sd 1.55]",
        "v": 48.48484848484848,
-       "ok": false,
-       "m": -1.38
+       "ok": false
       }
      ]
     },
@@ -3709,20 +3506,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 1.46]",
        "v": 433.9285714285714,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 2.23]",
        "v": 426.19047619047615,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00124]",
        "v": 0.33966565349544076,
-       "ok": false,
-       "m": -0.35
+       "ok": false
       }
      ]
     },
@@ -3733,20 +3527,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 0.0176]",
        "v": 0.12616718247535266,
-       "ok": true,
-       "m": 0.38
+       "ok": true
       }
      ]
     },
@@ -3757,26 +3548,22 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.7
+       "ok": false
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     }
@@ -3789,11 +3576,10 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.5685185185185184,
+   "hard": 0.6666666666666666,
    "seeds": 3,
    "verified": false,
    "max_active": 0.1596626271099976,
-   "graded": 0.71,
    "tasks": {
     "stability": {
      "passed": true,
@@ -3802,14 +3588,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -3818,22 +3602,19 @@
      "score": 0.6666666666666666,
      "checks": [
       {
-       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 72.1]",
-       "v": 175.4545454545454,
-       "ok": true,
-       "m": 1.55
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 58.5]",
+       "v": 218.78787878787875,
+       "ok": true
       },
       {
-       "d": "rate[sugar] / rate[baseline] > 5.0  [3/3 seeds, sd 7.21e+04]",
-       "v": 175455.5454545454,
-       "ok": true,
-       "m": 4.55
+       "d": "rate[sugar] / rate[baseline] > 5.0  [3/3 seeds, sd 5.85e+04]",
+       "v": 218788.87878787876,
+       "ok": true
       },
       {
-       "d": "active fraction[sugar] < 0.1  [0/3 seeds, sd 0.00161]",
-       "v": 0.1159473686199378,
-       "ok": false,
-       "m": -0.06
+       "d": "active fraction[sugar] < 0.1  [0/3 seeds, sd 0.000576]",
+       "v": 0.11570363484523849,
+       "ok": false
       }
      ]
     },
@@ -3842,16 +3623,14 @@
      "score": 0.5,
      "checks": [
       {
-       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 72.1]",
-       "v": 175.4545454545454,
-       "ok": true,
-       "m": 1.55
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 58.5]",
+       "v": 218.78787878787875,
+       "ok": true
       },
       {
-       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [0/3 seeds, sd 0.23]",
-       "v": 0.8041940010093586,
-       "ok": false,
-       "m": -0.21
+       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [2/3 seeds, sd 0.142]",
+       "v": 0.3882198365909355,
+       "ok": false
       }
      ]
     },
@@ -3862,20 +3641,17 @@
       {
        "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 5.12]",
        "v": 427.3809523809523,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 5.12e+03]",
        "v": 427381.95238095225,
-       "ok": true,
-       "m": 4.93
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1  [0/3 seeds, sd 0.000277]",
        "v": 0.11858876255039998,
-       "ok": false,
-       "m": -0.07
+       "ok": false
       }
      ]
     },
@@ -3886,62 +3662,59 @@
       {
        "d": "rate[bitter] < 2.0 Hz  [0/3 seeds, sd 30.2]",
        "v": 55.15151515151515,
-       "ok": false,
-       "m": -1.44
+       "ok": false
       },
       {
        "d": "active fraction[bitter] < 0.1  [0/3 seeds, sd 0.00128]",
        "v": 0.1142903568338038,
-       "ok": false,
-       "m": -0.06
+       "ok": false
       }
      ]
     },
     "dose_response": {
      "passed": false,
-     "score": 0.75,
+     "score": 0.8,
      "checks": [
+      {
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 71.4]",
+       "v": 162.4242424242424,
+       "ok": true
+      },
       {
        "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": false,
-       "m": -3.0
+       "ok": false
       },
       {
-       "d": "rate[strong] > 5.0 Hz  [3/3 seeds, sd 72.1]",
-       "v": 175.4545454545454,
-       "ok": true,
-       "m": 1.55
+       "d": "rate[strong] > 5.0 Hz  [3/3 seeds, sd 58.5]",
+       "v": 218.78787878787875,
+       "ok": true
       },
       {
-       "d": "rate[weak] / rate[strong] < 0.6  [3/3 seeds, sd 3.09e-06]",
-       "v": 6.915852704046275e-06,
-       "ok": true,
-       "m": 2.78
+       "d": "rate[weak] / rate[strong] < 0.6  [3/3 seeds, sd 1.64e-06]",
+       "v": 5.0096482158051145e-06,
+       "ok": true
       },
       {
-       "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 72.1]",
-       "v": 175.4545454545454,
-       "ok": true,
-       "m": 0.23
+       "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 58.5]",
+       "v": 218.78787878787875,
+       "ok": true
       }
      ]
     },
     "adaptation": {
      "passed": false,
-     "score": 0.0,
+     "score": 0.5,
      "checks": [
       {
-       "d": "rate[two_pulses] > 5.0 Hz  [2/3 seeds, sd 111]",
-       "v": 120.47619047619048,
-       "ok": false,
-       "m": 1.38
+       "d": "rate[two_pulses] > 5.0 Hz  [3/3 seeds, sd 30.7]",
+       "v": 237.14285714285714,
+       "ok": true
       },
       {
-       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 1.01]",
-       "v": 1.7189466354074368,
-       "ok": false,
-       "m": -0.39
+       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [1/3 seeds, sd 0.461]",
+       "v": 0.7025760372785715,
+       "ok": false
       }
      ]
     },
@@ -3952,26 +3725,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.0698]",
        "v": 435.1604938271605,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 69.8]",
        "v": 435161.49382716045,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0.0016]",
        "v": 0.9062146892655368,
-       "ok": false,
-       "m": -0.48
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 0.000786]",
        "v": 0.1136536259650157,
-       "ok": false,
-       "m": -0.36
+       "ok": false
       }
      ]
     },
@@ -3980,28 +3749,24 @@
      "score": 0.75,
      "checks": [
       {
-       "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 72.1]",
-       "v": 175.4545454545454,
-       "ok": true,
-       "m": 1.55
+       "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 58.5]",
+       "v": 218.78787878787875,
+       "ok": true
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 2.97]",
        "v": 430.9090909090908,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz  [0/3 seeds, sd 31.4]",
        "v": 58.18181818181818,
-       "ok": false,
-       "m": -1.46
+       "ok": false
       }
      ]
     },
@@ -4012,20 +3777,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 5.12]",
        "v": 427.3809523809523,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 2.63]",
        "v": 421.4285714285714,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00379]",
        "v": 0.38703140830800403,
-       "ok": false,
-       "m": -0.41
+       "ok": false
       }
      ]
     },
@@ -4036,20 +3798,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.7
+       "ok": true
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 4.3
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 0.00154]",
        "v": 0.1596626271099976,
-       "ok": true,
-       "m": 0.27
+       "ok": true
       }
      ]
     },
@@ -4058,28 +3817,24 @@
      "score": 0.25,
      "checks": [
       {
-       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 92.4]",
-       "v": 150.74074074074073,
-       "ok": true,
-       "m": 1.48
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 48.7]",
+       "v": 226.2962962962963,
+       "ok": true
       },
       {
-       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [0/3 seeds, sd 19.7]",
-       "v": 292.77777777777777,
-       "ok": false,
-       "m": -1.77
+       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [1/3 seeds, sd 122]",
+       "v": 172.7777777777778,
+       "ok": false
       },
       {
-       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [0/3 seeds, sd 0.0257]",
-       "v": 14.659314346031424,
-       "ok": false,
-       "m": -1.47
+       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [0/3 seeds, sd 0.192]",
+       "v": 14.792568072261082,
+       "ok": false
       },
       {
-       "d": "active fraction[sugar, 1700-2000ms] < 0.01  [0/3 seeds, sd 0.000929]",
-       "v": 0.09448557058265598,
-       "ok": false,
-       "m": -0.98
+       "d": "active fraction[sugar, 1700-2000ms] < 0.01  [0/3 seeds, sd 0.00307]",
+       "v": 0.09372980694017753,
+       "ok": false
       }
      ]
     },
@@ -4090,32 +3845,27 @@
       {
        "d": "spikes per neuron[loom, 200-500ms] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.43]",
        "v": 127.66666666666667,
-       "ok": true,
-       "m": 2.11
+       "ok": true
       },
       {
-       "d": "spikes per neuron[loom, 200-500ms] <= 4.0 spikes/neuron  [0/3 seeds, sd 1.43]",
+       "d": "spikes per neuron[loom, 200-500ms] <= 1.0 spikes/neuron  [0/3 seeds, sd 1.43]",
        "v": 127.66666666666667,
-       "ok": false,
-       "m": -1.5
+       "ok": false
       },
       {
        "d": "spikes per neuron[loom, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.0
+       "ok": true
       },
       {
-       "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 84.9]",
-       "v": 137.0,
-       "ok": true,
-       "m": 1.44
+       "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 44]",
+       "v": 204.0,
+       "ok": true
       },
       {
-       "d": "rate[sugar, mn9] < 150.0 Hz  [2/3 seeds, sd 84.9]",
-       "v": 137.0,
-       "ok": false,
-       "m": 0.04
+       "d": "rate[sugar, mn9] < 150.0 Hz  [1/3 seeds, sd 44]",
+       "v": 204.0,
+       "ok": false
       }
      ]
     },
@@ -4126,32 +3876,150 @@
       {
        "d": "network rate[baseline_other_fly] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
-       "d": "rate[sugar_other_fly, mn9] > 5.0 Hz  [3/3 seeds, sd 21.9]",
-       "v": 244.79166666666666,
-       "ok": true,
-       "m": 1.69
+       "d": "rate[sugar_other_fly, mn9] > 5.0 Hz  [3/3 seeds, sd 53.1]",
+       "v": 139.58333333333334,
+       "ok": true
       },
       {
-       "d": "active fraction[sugar_other_fly] < 0.1  [0/3 seeds, sd 0.00359]",
-       "v": 0.11802193981854114,
-       "ok": false,
-       "m": -0.07
+       "d": "active fraction[sugar_other_fly] < 0.1  [0/3 seeds, sd 0.00341]",
+       "v": 0.12027222606402073,
+       "ok": false
       },
       {
        "d": "rate[loom_other_fly, gf, 220-500ms] > 5.0 Hz  [3/3 seeds, sd 0.842]",
        "v": 433.33333333333326,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "active fraction[loom_other_fly, 220-500ms] < 0.1  [0/3 seeds, sd 0.00214]",
        "v": 0.12165716293886251,
-       "ok": false,
-       "m": -0.09
+       "ok": false
+      }
+     ]
+    },
+    "looming_to_jump_muscle": {
+     "passed": false,
+     "score": 0.8333333333333334,
+     "checks": [
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.43]",
+       "v": 127.66666666666667,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [3/3 seeds, sd 4.29]",
+       "v": 57.666666666666664,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 124.5,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[loom] <= 4.0 spikes/neuron  [0/3 seeds, sd 4.29]",
+       "v": 57.666666666666664,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[baseline] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[sugar, 200-700ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "gf_azimuth_invariance": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "spikes per neuron[left] >= 1.0 spikes/neuron  [3/3 seeds, sd 2.09]",
+       "v": 68.66666666666667,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[right] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.85]",
+       "v": 77.16666666666667,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[frontal] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
+       "v": 129.16666666666666,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[left] <= 1.0 spikes/neuron  [0/3 seeds, sd 2.09]",
+       "v": 68.66666666666667,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[right] <= 1.0 spikes/neuron  [0/3 seeds, sd 0.85]",
+       "v": 77.16666666666667,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[frontal] <= 1.0 spikes/neuron  [0/3 seeds, sd 0.236]",
+       "v": 129.16666666666666,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[frontal, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[left, gf] / rate[right] < 3.0  [3/3 seeds, sd 0.0362]",
+       "v": 0.8902167126177524,
+       "ok": true
+      },
+      {
+       "d": "rate[right, gf] / rate[left] < 3.0  [3/3 seeds, sd 0.0446]",
+       "v": 1.1251359204071363,
+       "ok": true
+      }
+     ]
+    },
+    "pn_transfer_function": {
+     "passed": false,
+     "score": 0.8333333333333334,
+     "checks": [
+      {
+       "d": "rate[orn100, da1_pn] <= 170.0 Hz  [0/3 seeds, sd 0.0698]",
+       "v": 435.1604938271605,
+       "ok": false
+      },
+      {
+       "d": "rate[orn10, da1_pn] >= 5.0 Hz  [3/3 seeds, sd 0.32]",
+       "v": 243.7037037037037,
+       "ok": true
+      },
+      {
+       "d": "rate[orn30, da1_pn] / rate[orn10] > 1.0  [3/3 seeds, sd 0.0194]",
+       "v": 1.6054588402691714,
+       "ok": true
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] > 1.0  [3/3 seeds, sd 0.0141]",
+       "v": 1.1123826045004457,
+       "ok": true
+      },
+      {
+       "d": "rate[orn30, da1_pn] / rate[orn10] < 3.0  [3/3 seeds, sd 0.0194]",
+       "v": 1.6054588402691714,
+       "ok": true
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] < 2.0  [3/3 seeds, sd 0.0141]",
+       "v": 1.1123826045004457,
+       "ok": true
       }
      ]
     }
@@ -4164,11 +4032,10 @@
    "gain": 1.0,
    "w_syn": 0.275,
    "core": 0.7666666666666666,
-   "hard": 0.6333333333333333,
+   "hard": 0.6287878787878788,
    "seeds": 3,
    "verified": false,
    "max_active": 0.3414670927435281,
-   "graded": 0.742,
    "tasks": {
     "stability": {
      "passed": true,
@@ -4177,14 +4044,12 @@
       {
        "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 1.0
+       "ok": true
       }
      ]
     },
@@ -4195,20 +4060,17 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 25.7]",
        "v": 416.3636363636363,
-       "ok": true,
-       "m": 1.92
+       "ok": true
       },
       {
        "d": "rate[sugar] / rate[baseline] > 5.0  [3/3 seeds, sd 2.57e+04]",
        "v": 416364.63636363624,
-       "ok": true,
-       "m": 4.92
+       "ok": true
       },
       {
        "d": "active fraction[sugar] < 0.1  [0/3 seeds, sd 0.00159]",
        "v": 0.1948511723097914,
-       "ok": false,
-       "m": -0.29
+       "ok": false
       }
      ]
     },
@@ -4219,14 +4081,12 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 25.7]",
        "v": 416.3636363636363,
-       "ok": true,
-       "m": 1.92
+       "ok": true
       },
       {
        "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [2/3 seeds, sd 0.129]",
        "v": 0.43735328044127053,
-       "ok": false,
-       "m": 0.06
+       "ok": false
       }
      ]
     },
@@ -4237,20 +4097,17 @@
       {
        "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 5.26]",
        "v": 194.6428571428571,
-       "ok": true,
-       "m": 1.59
+       "ok": true
       },
       {
        "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 5.26e+03]",
        "v": 194643.85714285713,
-       "ok": true,
-       "m": 4.59
+       "ok": true
       },
       {
        "d": "active fraction[loom] < 0.1  [0/3 seeds, sd 0.000871]",
        "v": 0.20208251050231588,
-       "ok": false,
-       "m": -0.31
+       "ok": false
       }
      ]
     },
@@ -4261,44 +4118,43 @@
       {
        "d": "rate[bitter] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 7.17e-05]",
        "v": 0.0032410565748686466,
-       "ok": true,
-       "m": 1.49
+       "ok": true
       }
      ]
     },
     "dose_response": {
      "passed": false,
-     "score": 0.75,
+     "score": 0.8,
      "checks": [
+      {
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 85.7]",
+       "v": 156.06060606060603,
+       "ok": true
+      },
       {
        "d": "rate[weak] > 1.0 Hz  [3/3 seeds, sd 32.5]",
        "v": 46.060606060606055,
-       "ok": true,
-       "m": 1.66
+       "ok": true
       },
       {
        "d": "rate[strong] > 5.0 Hz  [3/3 seeds, sd 25.7]",
        "v": 416.3636363636363,
-       "ok": true,
-       "m": 1.92
+       "ok": true
       },
       {
        "d": "rate[weak] / rate[strong] < 0.6  [3/3 seeds, sd 0.0841]",
        "v": 0.11470786943702371,
-       "ok": true,
-       "m": 0.72
+       "ok": true
       },
       {
        "d": "rate[strong] < 300.0 Hz  [0/3 seeds, sd 25.7]",
        "v": 416.3636363636363,
-       "ok": false,
-       "m": -0.14
+       "ok": false
       }
      ]
     },
@@ -4309,14 +4165,12 @@
       {
        "d": "rate[two_pulses] > 5.0 Hz  [3/3 seeds, sd 5.68e-14]",
        "v": 434.2857142857144,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [3/3 seeds, sd 0.0135]",
        "v": 0.2938612751001341,
-       "ok": true,
-       "m": 0.38
+       "ok": true
       }
      ]
     },
@@ -4327,26 +4181,22 @@
       {
        "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.163]",
        "v": 434.98910675381256,
-       "ok": true,
-       "m": 1.64
+       "ok": true
       },
       {
        "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 163]",
        "v": 434990.1067538126,
-       "ok": true,
-       "m": 4.94
+       "ok": true
       },
       {
        "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0]",
        "v": 0.8671328671328671,
-       "ok": false,
-       "m": -0.46
+       "ok": false
       },
       {
        "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 0.00272]",
        "v": 0.18927866144842198,
-       "ok": false,
-       "m": -0.58
+       "ok": false
       }
      ]
     },
@@ -4357,26 +4207,22 @@
       {
        "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 25.7]",
        "v": 416.3636363636363,
-       "ok": true,
-       "m": 1.92
+       "ok": true
       },
       {
        "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.3
+       "ok": true
       },
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 2.39]",
        "v": 75.15151515151514,
-       "ok": true,
-       "m": 1.18
+       "ok": true
       },
       {
        "d": "rate[loom, mn9] < 2.0 Hz  [3/3 seeds, sd 0.429]",
        "v": 0.30303030303030304,
-       "ok": true,
-       "m": 0.82
+       "ok": true
       }
      ]
     },
@@ -4387,20 +4233,17 @@
       {
        "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 5.26]",
        "v": 194.6428571428571,
-       "ok": true,
-       "m": 1.59
+       "ok": true
       },
       {
        "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 1.52]",
        "v": 266.6666666666667,
-       "ok": true,
-       "m": 1.73
+       "ok": true
       },
       {
        "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00561]",
        "v": 0.4906768837803321,
-       "ok": false,
-       "m": -0.51
+       "ok": false
       }
      ]
     },
@@ -4411,20 +4254,17 @@
       {
        "d": "rate[flash, gf] < 5.0 Hz  [0/3 seeds, sd 1.78]",
        "v": 19.047619047619047,
-       "ok": false,
-       "m": -0.58
+       "ok": false
       },
       {
        "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0.028]",
        "v": 0.03174603174603175,
-       "ok": true,
-       "m": 2.8
+       "ok": true
       },
       {
        "d": "active fraction[flash] < 0.3  [0/3 seeds, sd 0.000461]",
        "v": 0.3414670927435281,
-       "ok": false,
-       "m": -0.06
+       "ok": false
       }
      ]
     },
@@ -4435,26 +4275,22 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 1.05]",
        "v": 434.8148148148148,
-       "ok": true,
-       "m": 1.94
+       "ok": true
       },
       {
        "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [0/3 seeds, sd 10.3]",
        "v": 166.66666666666666,
-       "ok": false,
-       "m": -1.52
+       "ok": false
       },
       {
        "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [0/3 seeds, sd 0.0211]",
        "v": 30.25101033675232,
-       "ok": false,
-       "m": -1.78
+       "ok": false
       },
       {
        "d": "active fraction[sugar, 1700-2000ms] < 0.01  [0/3 seeds, sd 0.00114]",
        "v": 0.16599284286620467,
-       "ok": false,
-       "m": -1.22
+       "ok": false
       }
      ]
     },
@@ -4465,32 +4301,27 @@
       {
        "d": "spikes per neuron[loom, 200-500ms] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.31]",
        "v": 61.833333333333336,
-       "ok": true,
-       "m": 1.79
+       "ok": true
       },
       {
-       "d": "spikes per neuron[loom, 200-500ms] <= 4.0 spikes/neuron  [0/3 seeds, sd 1.31]",
+       "d": "spikes per neuron[loom, 200-500ms] <= 1.0 spikes/neuron  [0/3 seeds, sd 1.31]",
        "v": 61.833333333333336,
-       "ok": false,
-       "m": -1.19
+       "ok": false
       },
       {
        "d": "spikes per neuron[loom, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 3.0
+       "ok": true
       },
       {
        "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 2.05]",
        "v": 417.6666666666667,
-       "ok": true,
-       "m": 1.92
+       "ok": true
       },
       {
        "d": "rate[sugar, mn9] < 150.0 Hz  [0/3 seeds, sd 2.05]",
        "v": 417.6666666666667,
-       "ok": false,
-       "m": -0.44
+       "ok": false
       }
      ]
     },
@@ -4501,32 +4332,114 @@
       {
        "d": "network rate[baseline_other_fly] < 0.5 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
-       "ok": true,
-       "m": 2.7
+       "ok": true
       },
       {
        "d": "rate[sugar_other_fly, mn9] > 5.0 Hz  [3/3 seeds, sd 15.2]",
        "v": 421.5277777777778,
-       "ok": true,
-       "m": 1.93
+       "ok": true
       },
       {
        "d": "active fraction[sugar_other_fly] < 0.1  [0/3 seeds, sd 0.0028]",
        "v": 0.20713798427345517,
-       "ok": false,
-       "m": -0.32
+       "ok": false
       },
       {
        "d": "rate[loom_other_fly, gf, 220-500ms] > 5.0 Hz  [3/3 seeds, sd 70.2]",
        "v": 192.85714285714286,
-       "ok": true,
-       "m": 1.59
+       "ok": true
       },
       {
        "d": "active fraction[loom_other_fly, 220-500ms] < 0.1  [0/3 seeds, sd 0.00642]",
        "v": 0.19832202314698455,
-       "ok": false,
-       "m": -0.3
+       "ok": false
+      }
+     ]
+    },
+    "gf_azimuth_invariance": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "spikes per neuron[left] >= 1.0 spikes/neuron  [3/3 seeds, sd 2.45]",
+       "v": 23.5,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[right] >= 1.0 spikes/neuron  [3/3 seeds, sd 2.01]",
+       "v": 26.166666666666668,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[frontal] >= 1.0 spikes/neuron  [3/3 seeds, sd 6.28]",
+       "v": 42.333333333333336,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[left] <= 1.0 spikes/neuron  [0/3 seeds, sd 2.45]",
+       "v": 23.5,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[right] <= 1.0 spikes/neuron  [0/3 seeds, sd 2.01]",
+       "v": 26.166666666666668,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[frontal] <= 1.0 spikes/neuron  [0/3 seeds, sd 6.28]",
+       "v": 42.333333333333336,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[frontal, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[left, gf] / rate[right] < 3.0  [3/3 seeds, sd 0.126]",
+       "v": 0.9039935343266694,
+       "ok": true
+      },
+      {
+       "d": "rate[right, gf] / rate[left] < 3.0  [3/3 seeds, sd 0.143]",
+       "v": 1.126025901507144,
+       "ok": true
+      }
+     ]
+    },
+    "pn_transfer_function": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[orn100, da1_pn] <= 170.0 Hz  [0/3 seeds, sd 0.163]",
+       "v": 434.98910675381256,
+       "ok": false
+      },
+      {
+       "d": "rate[orn10, da1_pn] >= 5.0 Hz  [3/3 seeds, sd 0.185]",
+       "v": 434.90196078431364,
+       "ok": true
+      },
+      {
+       "d": "rate[orn30, da1_pn] / rate[orn10] > 1.0  [1/3 seeds, sd 0.000618]",
+       "v": 1.0001004311353963,
+       "ok": false
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] > 1.0  [2/3 seeds, sd 0.000511]",
+       "v": 1.0001002804829344,
+       "ok": false
+      },
+      {
+       "d": "rate[orn30, da1_pn] / rate[orn10] < 3.0  [3/3 seeds, sd 0.000618]",
+       "v": 1.0001004311353963,
+       "ok": true
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] < 2.0  [3/3 seeds, sd 0.000511]",
+       "v": 1.0001002804829344,
+       "ok": true
       }
      ]
     }
@@ -4538,14 +4451,14 @@
    "name": "stability",
    "title": "Silence in, silence out",
    "tier": "core",
-   "description": "With no sensory drive the network must not spontaneously light up. A model whose gain is too high \"passes\" every reflex because everything fires; this task is the guard against that. (Real flies do have spontaneous activity \u2014 the LIF model has none by construction, so quiet is the correct answer here.)",
-   "citation": "Shiu et al. 2024, Nature \u2014 model is silent without input by design"
+   "description": "With no sensory drive the network must not spontaneously light up. A model whose gain is too high \"passes\" every reflex because everything fires; this task is the guard against that. (Real flies do have spontaneous activity \u00e2\u20ac\u201d the LIF model has none by construction, so quiet is the correct answer here.)",
+   "citation": "Shiu et al. 2024, Nature \u00e2\u20ac\u201d model is silent without input by design"
   },
   {
    "name": "sugar_to_proboscis",
-   "title": "Sugar \u2192 proboscis extension",
+   "title": "Sugar \u00e2\u2020\u2019 proboscis extension",
    "tier": "core",
-   "description": "The canonical reflex. Activating sugar-sensing gustatory receptor neurons should drive MN9, the motor neuron that extends the proboscis. This is the headline result of Shiu et al. 2024 and a behaviour every fly lab can reproduce with a drop of sucrose. Selector provenance \u2014 FlyWire v783: sub_class \"sugar/water\" (Engert et al. 2022 annotations). MaleCNS v1.0: the gustatory companion paper (Cell 2026; bioRxiv 10.1101/2025.08.25.671814) classifies labellar bristle GRNs by receptor driver line: LB3b sweet (Gr64f), LB3c sweet + low salt (Ir56b), LB3a water (ppk28), LB3d high salt / aversive (Ir7c, ppk23), LB1a\u2013d bitter, LB1e amino-acid aversion (glutamatergic). The sugar set is therefore LB3b\u2013c only. Our earlier wiring inference (docs/MALECNS.md) had put LB3a and LB3d in the sugar set because they also synapse onto the Shiu 2022 second-order sugar neurons; those cells respond to water as well as sugar (Shiu et al. 2024), so the wiring was consistent with the labels, not evidence against them. Provenance tag: MEASURED (receptor lines), not inferred.",
+   "description": "The canonical reflex. Activating sugar-sensing gustatory receptor neurons should drive MN9, the motor neuron that extends the proboscis. This is the headline result of Shiu et al. 2024 and a behaviour every fly lab can reproduce with a drop of sucrose. Selector provenance \u00e2\u20ac\u201d FlyWire v783: sub_class \"sugar/water\" (Engert et al. 2022 annotations). MaleCNS v1.0: the gustatory companion paper (Cell 2026; bioRxiv 10.1101/2025.08.25.671814) classifies labellar bristle GRNs by receptor driver line: LB3b sweet (Gr64f), LB3c sweet + low salt (Ir56b), LB3a water (ppk28), LB3d high salt / aversive (Ir7c, ppk23), LB1a\u00e2\u20ac\u201cd bitter, LB1e amino-acid aversion (glutamatergic). The sugar set is therefore LB3b\u00e2\u20ac\u201cc only. Our earlier wiring inference (docs/MALECNS.md) had put LB3a and LB3d in the sugar set because they also synapse onto the Shiu 2022 second-order sugar neurons; those cells respond to water as well as sugar (Shiu et al. 2024), so the wiring was consistent with the labels, not evidence against them. Provenance tag: MEASURED (receptor lines), not inferred.",
    "citation": "Dethier 1976; Shiu et al. 2024 (Nature) Fig. 2"
   },
   {
@@ -4557,7 +4470,7 @@
   },
   {
    "name": "looming_to_giant_fiber",
-   "title": "Looming \u2192 giant fiber escape",
+   "title": "Looming \u00e2\u2020\u2019 giant fiber escape",
    "tier": "core",
    "description": "LPLC2 and LC4 are the visual projection neurons that detect an expanding (looming) object. They converge on the Giant Fiber, the descending neuron that triggers the takeoff escape. Drive the detectors; the GF should fire.",
    "citation": "von Reyn et al. 2014; Ache et al. 2019; Shiu et al. 2024"
@@ -4573,14 +4486,14 @@
    "name": "dose_response",
    "title": "Proboscis response scales with sugar intensity",
    "tier": "hard",
-   "description": "Real flies extend the proboscis more reliably and more strongly as sucrose concentration rises; GRN firing rate encodes concentration. A model whose MN9 output is all-or-nothing (saturating at the refractory limit the moment any input arrives) has lost that gradation. Weak drive (20 Hz on the sugar GRNs) should give a clearly smaller MN9 response than strong drive (100 Hz), and both should be above baseline. The 100 Hz \"strong\" drive is the Shiu et al. 2024 convention; the one recorded number for a labellar sugar GRN is ~40 spikes per 500 ms (\u224880 Hz) at 100 mM sucrose (Zhang, Guo & Montell 2016, Neuron 91:863), so a third condition drives the GRNs at that measured rate and asks only that the pathway still conducts.",
+   "description": "Real flies extend the proboscis more reliably and more strongly as sucrose concentration rises; GRN firing rate encodes concentration. A model whose MN9 output is all-or-nothing (saturating at the refractory limit the moment any input arrives) has lost that gradation. Weak drive (20 Hz on the sugar GRNs) should give a clearly smaller MN9 response than strong drive (100 Hz), and both should be above baseline. The 100 Hz \"strong\" drive is the Shiu et al. 2024 convention; the one recorded number for a labellar sugar GRN is ~40 spikes per 500 ms (\u00e2\u2030\u02c680 Hz) at 100 mM sucrose (Zhang, Guo & Montell 2016, Neuron 91:863), so a third condition drives the GRNs at that measured rate and asks only that the pathway still conducts.",
    "citation": "Dethier 1976; Dahanukar et al. 2007 (Neuron); Zhang, Guo & Montell 2016 (Neuron 91:863); Shiu et al. 2024"
   },
   {
    "name": "adaptation",
    "title": "Repeated sugar gives a smaller second response",
    "tier": "hard",
-   "description": "Sensory responses adapt: a second identical sugar pulse shortly after the first evokes a weaker proboscis response (short-term adaptation in GRNs and downstream circuits; over longer timescales, PER habituation). A memoryless point-neuron model cannot do this by construction \u2014 every pulse looks like the first \u2014 so the reference LIF is expected to fail here. That is the point: this task measures something the wiring diagram alone does not give you.",
+   "description": "Sensory responses adapt: a second identical sugar pulse shortly after the first evokes a weaker proboscis response (short-term adaptation in GRNs and downstream circuits; over longer timescales, PER habituation). A memoryless point-neuron model cannot do this by construction \u00e2\u20ac\u201d every pulse looks like the first \u00e2\u20ac\u201d so the reference LIF is expected to fail here. That is the point: this task measures something the wiring diagram alone does not give you.",
    "citation": "Duerr & Quinn 1982 (PNAS, PER habituation); Paranjpe et al. 2012 (J. Neurosci.)"
   },
   {
@@ -4601,35 +4514,35 @@
    "name": "looming_dn_ensemble",
    "title": "Looming recruits the takeoff ensemble, not the whole descending tract",
    "tier": "hard",
-   "description": "The Giant Fiber is not alone: looming also drives DNp02, DNp11 and other descending neurons that prepare the takeoff (leg extension, wing raise), and the response is selective \u2014 a few dozen of the ~1300 descending neurons, not a general alarm. Checks that the named looming DNs fire and that the descending population as a whole stays mostly silent.",
+   "description": "The Giant Fiber is not alone: looming also drives DNp02, DNp11 and other descending neurons that prepare the takeoff (leg extension, wing raise), and the response is selective \u00e2\u20ac\u201d a few dozen of the ~1300 descending neurons, not a general alarm. Checks that the named looming DNs fire and that the descending population as a whole stays mostly silent.",
    "citation": "Ache et al. 2019 (Curr. Biol.); Namiki et al. 2018 (eLife); Dombrovski et al. 2023 (Nature)"
   },
   {
    "name": "flash_is_not_loom",
    "title": "A uniform flash is not a looming object",
    "tier": "hard",
-   "description": "LPLC2/LC4 respond to expanding edges, not to the whole eye lighting up. Driving every photoreceptor at once (a full-field flash) should therefore not fire the Giant Fiber the way looming does. In a pure connectome model motion selectivity has to emerge from the lamina/medulla circuitry and the synaptic delays alone \u2014 no dendritic nonlinearities, no adaptation \u2014 so this is expected to be hard. Failure here means the model's visual front end is a brightness detector, which is worth knowing before wiring it to a game.",
+   "description": "LPLC2/LC4 respond to expanding edges, not to the whole eye lighting up. Driving every photoreceptor at once (a full-field flash) should therefore not fire the Giant Fiber the way looming does. In a pure connectome model motion selectivity has to emerge from the lamina/medulla circuitry and the synaptic delays alone \u00e2\u20ac\u201d no dendritic nonlinearities, no adaptation \u00e2\u20ac\u201d so this is expected to be hard. Failure here means the model's visual front end is a brightness detector, which is worth knowing before wiring it to a game.",
    "citation": "von Reyn et al. 2014 (Nat. Neurosci.); Card & Dickinson 2008 (Curr. Biol.); Klapoetke et al. 2017 (Nature)"
   },
   {
    "name": "return_to_rest",
    "title": "The brain goes quiet again after the stimulus ends",
    "tier": "hard",
-   "description": "A real fly tastes sugar, extends its proboscis, and a second later is at rest again. In this model a half-second taste of sugar leaves ~8% of the brain firing at a constant rate indefinitely: recurrent excitation sustains itself and nothing in a static wiring diagram with five constants can switch it off (no spike-frequency adaptation, no short-term synaptic depression, no neuromodulation). This task stimulates for 500 ms, then measures 1\u20131.3 s after the stimulus stopped. It is the clearest single number for \"what a wiring diagram is missing\".",
+   "description": "A real fly tastes sugar, extends its proboscis, and a second later is at rest again. In this model a half-second taste of sugar leaves ~8% of the brain firing at a constant rate indefinitely: recurrent excitation sustains itself and nothing in a static wiring diagram with five constants can switch it off (no spike-frequency adaptation, no short-term synaptic depression, no neuromodulation). This task stimulates for 500 ms, then measures 1\u00e2\u20ac\u201c1.3 s after the stimulus stopped. It is the clearest single number for \"what a wiring diagram is missing\".",
    "citation": "Dethier 1976 (PER duration); Shiu et al. 2024 (activity tracks stimulus); Benda & Herz 2003 (adaptation)"
   },
   {
    "name": "physiological_rates",
    "title": "Neurons fire at fly rates, not at their refractory ceiling",
    "tier": "hard",
-   "description": "Passing the reflex tasks only requires that a pathway conducts. This task asks whether the readouts fire the way the real neurons do. The Giant Fiber produces a single spike per escape (von Reyn et al. 2014; Ache et al. 2019: \"the timing of a single spike in the GF determines whether a fly uses a short or long takeoff\"): it should spike once when the loom arrives and be silent before. For MN9 no electrophysiological recording exists in the literature (Gordon & Scott 2009, Schwarz et al. 2017, McKellar & Simpson 2020 and Shiu et al. 2022 are behaviour, optogenetics or calcium imaging), so the MN9 ceiling here is a convention, not a measurement, and is labelled as such. The reference LIF model pins both readouts at ~430 Hz \u2014 their 2.2 ms refractory ceiling \u2014 which is a saturating network, not a reflex.",
-   "citation": "von Reyn et al. 2014 (Nat Neurosci 17:962); Ache et al. 2019 (Curr Biol 29:1073) \u2014 single GF spike per loom. MN9 ceiling: convention (no MN9 electrophysiology published)"
+   "description": "Passing the reflex tasks only requires that a pathway conducts. This task asks whether the readouts fire the way the real neurons do. The Giant Fiber produces a single spike per escape (von Reyn et al. 2014; Ache et al. 2019: \"the timing of a single spike in the GF determines whether a fly uses a short or long takeoff\"): it should spike once when the loom arrives and be silent before. For MN9 no electrophysiological recording exists in the literature (Gordon & Scott 2009, Schwarz et al. 2017, McKellar & Simpson 2020 and Shiu et al. 2022 are behaviour, optogenetics or calcium imaging), so the MN9 ceiling here is a convention, not a measurement, and is labelled as such. The reference LIF model pins both readouts at ~430 Hz \u00e2\u20ac\u201d their 2.2 ms refractory ceiling \u00e2\u20ac\u201d which is a saturating network, not a reflex.",
+   "citation": "von Reyn et al. 2014 (Nat Neurosci 17:962); Ache et al. 2019 (Curr Biol 29:1073) \u00e2\u20ac\u201d single GF spike per loom. MN9 ceiling: convention (no MN9 electrophysiology published)"
   },
   {
    "name": "wiring_robustness",
    "title": "The reflexes survive a different individual's synapse counts",
    "tier": "hard",
-   "description": "A connectome is one animal. Synapse counts between the same two cell types differ between individuals and between hemispheres of the same fly by tens of percent, while the behaviour is the same in every fly. So a model that only reproduces a reflex at one exact set of synapse counts has fit the specimen, not the species. Here every synapse count is multiplied by independent lognormal noise (sigma 0.25, i.e. roughly \u00b125%) \u2014 a stand-in for a second individual with the same wiring diagram \u2014 and the two core reflexes must still work and the brain must still be quiet at rest. Real flies have homeostatic mechanisms that make this robustness automatic; a five-constant model has none.",
+   "description": "A connectome is one animal. Synapse counts between the same two cell types differ between individuals and between hemispheres of the same fly by tens of percent, while the behaviour is the same in every fly. So a model that only reproduces a reflex at one exact set of synapse counts has fit the specimen, not the species. Here every synapse count is multiplied by independent lognormal noise (sigma 0.25, i.e. roughly \u00c2\u00b125%) \u00e2\u20ac\u201d a stand-in for a second individual with the same wiring diagram \u00e2\u20ac\u201d and the two core reflexes must still work and the brain must still be quiet at rest. Real flies have homeostatic mechanisms that make this robustness automatic; a five-constant model has none.",
    "citation": "Schlegel et al. 2024 (FlyWire vs hemibrain: cell-type connectivity conserved, synapse counts vary); Takemura et al. 2015; Marder & Goaillard 2006 (robustness to parameter variation)"
   },
   {
@@ -4643,28 +4556,28 @@
    "name": "gf_azimuth_invariance",
    "title": "The giant fiber fires once, wherever the loom comes from",
    "tier": "hard",
-   "description": "A looming object at \u221245\u00b0, 0\u00b0 or +45\u00b0 azimuth evokes the same giant-fiber response: a single spike (Ache et al. 2019; von Reyn et al. 2014), with no directional selectivity across azimuth (J Exp Biol 2023, DSI never above 0.5, n = 10 flies). This is the first recording-match task: the GF spike count is compared to the measured one, not to a convention. Stimulus geometry (provenance INFERRED, see docs/rfcs/16_gf_azimuth_invariance.md): the model has no eyes, so a loom at \u221245\u00b0 drives the left-side LPLC2/LC4 detectors, +45\u00b0 the right-side ones, 0\u00b0 both, each neuron at the same 150 Hz used by task 4. The mapping uses the `side` annotation, not receptive fields; a dataset without side labels skips this task. Pre-registered prediction (before the first run): the reference LIF passes \"seen\" and \"invariant\" and fails \"one spike\" at every azimuth (~120 spikes per loom in task 13).",
+   "description": "A looming object at \u00e2\u02c6\u201945\u00c2\u00b0, 0\u00c2\u00b0 or +45\u00c2\u00b0 azimuth evokes the same giant-fiber response: a single spike (Ache et al. 2019; von Reyn et al. 2014), with no directional selectivity across azimuth (J Exp Biol 2023, DSI never above 0.5, n = 10 flies). This is the first recording-match task: the GF spike count is compared to the measured one, not to a convention. Stimulus geometry (provenance INFERRED, see docs/rfcs/16_gf_azimuth_invariance.md): the model has no eyes, so a loom at \u00e2\u02c6\u201945\u00c2\u00b0 drives the left-side LPLC2/LC4 detectors, +45\u00c2\u00b0 the right-side ones, 0\u00c2\u00b0 both, each neuron at the same 150 Hz used by task 4. The mapping uses the `side` annotation, not receptive fields; a dataset without side labels skips this task. Pre-registered prediction (before the first run): the reference LIF passes \"seen\" and \"invariant\" and fails \"one spike\" at every azimuth (~120 spikes per loom in task 13).",
    "citation": "Ache et al. 2019 (Curr Biol 29:1073); von Reyn et al. 2014 (Nat Neurosci 17:962); azimuthal invariance: J Exp Biol 2023 226:jeb244790"
   },
   {
    "name": "pn_transfer_function",
    "title": "The antennal-lobe output saturates the way the recording says",
    "tier": "hard",
-   "description": "Olsen, Bhandawat & Wilson 2010 (Neuron 66:287) recorded ORN \u2192 PN transfer in four glomeruli: PN = Rmax\u00b7ORN^1.5 / (ORN^1.5 + \u03c3^1.5), Rmax 163\u2013170 spikes/s, \u03c3 11.8\u201316.3 spikes/s. So a projection neuron never exceeds ~170 Hz and its input\u2013output curve is compressive: from the fit, ORN input at 10 / 30 / 100 Hz gives PN \u2248 62 / 126 / 158 Hz. This task drives the DA1 ORNs at those three rates and checks the ceiling, the ordering, the compression and the dynamic range, not the absolute rates (which depend on the global gain). Recording-match task; pre-registered in docs/rfcs/17. The dynamic-range check was added after the first run (dated in the RFC): a model whose PNs are already saturated at 10 Hz input passes the ratio checks vacuously, so the task also requires the 10 Hz response to be clearly smaller than the 100 Hz one. Provenance: rates and fit MEASURED; using DA1 for glomeruli the paper did not fit is a CONVENTION (Schlief & Wilson 2007 show the same shape for DA1).",
+   "description": "Olsen, Bhandawat & Wilson 2010 (Neuron 66:287) recorded ORN \u00e2\u2020\u2019 PN transfer in four glomeruli: PN = Rmax\u00c2\u00b7ORN^1.5 / (ORN^1.5 + \u00cf\u0192^1.5), Rmax 163\u00e2\u20ac\u201c170 spikes/s, \u00cf\u0192 11.8\u00e2\u20ac\u201c16.3 spikes/s. So a projection neuron never exceeds ~170 Hz and its input\u00e2\u20ac\u201coutput curve is compressive: from the fit, ORN input at 10 / 30 / 100 Hz gives PN \u00e2\u2030\u02c6 62 / 126 / 158 Hz. This task drives the DA1 ORNs at those three rates and checks the ceiling, the ordering, the compression and the dynamic range, not the absolute rates (which depend on the global gain). Recording-match task; pre-registered in docs/rfcs/17. The dynamic-range check was added after the first run (dated in the RFC): a model whose PNs are already saturated at 10 Hz input passes the ratio checks vacuously, so the task also requires the 10 Hz response to be clearly smaller than the 100 Hz one. Provenance: rates and fit MEASURED; using DA1 for glomeruli the paper did not fit is a CONVENTION (Schlief & Wilson 2007 show the same shape for DA1).",
    "citation": "Olsen, Bhandawat & Wilson 2010 (Neuron 66:287); Schlief & Wilson 2007 (Nat Neurosci 10:623)"
   },
   {
    "name": "da1_sparseness",
    "title": "One odour channel responds to one odour",
    "tier": "hard",
-   "description": "Schlief & Wilson 2007 (Nat Neurosci 10:623) measured the lifetime sparseness of DA1 projection neurons across an odour panel: S = 0.90 (Willmore & Tolhurst 2001 measure; 1 = one stimulus only, 0 = all equally). Task 8 asks whether one odour recruits most PNs; this task asks the other question \u2014 whether one PN responds to most odours. Recording-match task, pre-registered in docs/rfcs/18. Odour panel (CONVENTION, see the RFC): eight single-glomerulus \"odours\", each the ORNs of one glomerulus at 100 Hz \u2014 DA1 (cVA, the cognate channel), DM1, DM2, DM4, DL1, DL5, VA1v, DC1. A dataset missing any of them skips the task rather than shrinking the panel.",
+   "description": "Schlief & Wilson 2007 (Nat Neurosci 10:623) measured the lifetime sparseness of DA1 projection neurons across an odour panel: S = 0.90 (Willmore & Tolhurst 2001 measure; 1 = one stimulus only, 0 = all equally). Task 8 asks whether one odour recruits most PNs; this task asks the other question \u00e2\u20ac\u201d whether one PN responds to most odours. Recording-match task, pre-registered in docs/rfcs/18. Odour panel (CONVENTION, see the RFC): eight single-glomerulus \"odours\", each the ORNs of one glomerulus at 100 Hz \u00e2\u20ac\u201d DA1 (cVA, the cognate channel), DM1, DM2, DM4, DL1, DL5, VA1v, DC1. A dataset missing any of them skips the task rather than shrinking the panel.",
    "citation": "Schlief & Wilson 2007 (Nat Neurosci 10:623); Willmore & Tolhurst 2001 (sparseness measure)"
   },
   {
    "name": "gf_to_muscle_latency",
    "title": "The giant fiber reaches the jump muscle in under a millisecond",
    "tier": "hard",
-   "description": "Augustin et al. 2019 (eNeuro) measured brain-stimulus-to-muscle latencies of 0.93 ms (TTM) and 1.44 ms (DLM), including a 0.35 ms neuromuscular delay, so GF \u2192 TTMn \u2248 0.6 ms: the synapse is electrical. Engel & Wu 1996: a DLM response \u2265 3.0 ms is the non-GF pathway. This task measures first-spike latency from the GF's first spike to TTMn and DLMn on a loom. MaleCNS only (needs the nerve cord). Pre-registered in docs/rfcs/19: the reference model, with one 1.8 ms chemical delay for every synapse, is expected to fail the TTMn latency by construction \u2014 the task names a missing mechanism (gap junctions), not a wrong parameter.",
+   "description": "Augustin et al. 2019 (eNeuro) measured brain-stimulus-to-muscle latencies of 0.93 ms (TTM) and 1.44 ms (DLM), including a 0.35 ms neuromuscular delay, so GF \u00e2\u2020\u2019 TTMn \u00e2\u2030\u02c6 0.6 ms: the synapse is electrical. Engel & Wu 1996: a DLM response \u00e2\u2030\u00a5 3.0 ms is the non-GF pathway. This task measures first-spike latency from the GF's first spike to TTMn and DLMn on a loom. MaleCNS only (needs the nerve cord). Pre-registered in docs/rfcs/19: the reference model, with one 1.8 ms chemical delay for every synapse, is expected to fail the TTMn latency by construction \u00e2\u20ac\u201d the task names a missing mechanism (gap junctions), not a wrong parameter. First run (RFC outcome): 11.8 ms, because one GF spike through a summed chemical synapse cannot bring TTMn to threshold; the electrical synapse in the fly makes a single spike sufficient. DLMn also fired before TTMn.",
    "citation": "Augustin et al. 2019 (eNeuro 6:ENEURO.0423-18.2019; ModelDB 245415); Engel & Wu 1996 (J Neurosci 16:3486); Tanouye & Wyman 1980"
   }
  ]

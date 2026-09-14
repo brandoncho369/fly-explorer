@@ -375,7 +375,7 @@ function Guide({ frame, pressed, stimEndT, ready, dataset }: { frame: Frame | nu
     escape: <>The <b>Giant Fiber</b> fired. That is the escape command: a real fly would be airborne in about 10 ms.</>,
     feed: <><b>MN9</b> is firing at {mn9.toFixed(0)} Hz. That is the proboscis motor neuron: a real fly would be extending its mouth toward the sugar right now.</>,
     descending: <>Descending neurons are active: commands are leaving the brain for the body.</>,
-    stimulating: <>Sensory neurons are firing. Watch whether the signal reaches a readout.</>,
+    stimulating: <>Sensory neurons are firing. Watch whether the signal reaches a readout.{dataset === "toy" ? "" : " On the real brain at gain 0.45 sugar only reaches MN9 at about 100 Hz input, and at 0.65 the whole brain lights up instead — both are documented flybench findings, not bugs."}</>,
     quiet: <>Quiet. Press a sense, or hold one with ⏺ to keep it on.</>,
   };
   return (
