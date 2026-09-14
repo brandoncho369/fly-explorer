@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { track } from "@/lib/track";
+import EditableValue from "@/components/EditableValue";
 
 /**
  * Zero-install submission. The form writes a flybench submission config; the button opens
@@ -79,15 +80,15 @@ export default function Submit() {
                 {SIMULATORS.map((s, i) => <option key={s.id} value={i}>{s.label}</option>)}
               </select>
             </Field>
-            <Field label={`gain · ${gain.toFixed(2)}×`} hint="volume knob on every synapse. 1.0 is the 2024 paper; 0.45 is the robust window on today's data">
+            <Field label="gain" value={<EditableValue label="gain" value={gain} min={0.1} max={2} step={0.01} onChange={setGain} fmt={(v) => v.toFixed(2) + "×"} className="w-20" />} hint="volume knob on every synapse. 1.0 is the 2024 paper; 0.45 is the robust window on today's data">
               <input type="range" min={0.1} max={2} step={0.01} value={gain} onChange={(e) => setGain(+e.target.value)} className="w-full" aria-label="gain" />
             </Field>
             {sim.extra.map((e) => (
-              <Field key={e.key} label={`${e.label} · ${extra[e.key] ?? e.def}`} hint={e.help}>
+              <Field key={e.key} label={e.label} value={<EditableValue label={e.label} value={extra[e.key] ?? e.def} min={e.min} max={e.max} step={e.step} onChange={(v) => setExtra({ ...extra, [e.key]: v })} fmt={String} className="w-20" />} hint={e.help}>
                 <input type="range" min={e.min} max={e.max} step={e.step} value={extra[e.key] ?? e.def} onChange={(ev) => setExtra({ ...extra, [e.key]: +ev.target.value })} className="w-full" aria-label={e.label} />
               </Field>
             ))}
-            <Field label={`seeds · ${seeds}`} hint="random repeats; a check only passes if it holds on every seed. 3 is the standard">
+            <Field label="seeds" value={<EditableValue label="seeds" value={seeds} min={1} max={5} step={1} onChange={(v) => setSeeds(Math.round(v))} fmt={String} className="w-12" />} hint="random repeats; a check only passes if it holds on every seed. 3 is the standard">
               <input type="range" min={1} max={5} step={1} value={seeds} onChange={(e) => setSeeds(+e.target.value)} className="w-full" aria-label="seeds" />
             </Field>
           </div>
@@ -121,12 +122,15 @@ export default function Submit() {
   );
 }
 
-function Field({ label, hint, children }: { label: string; hint: string; children: React.ReactNode }) {
+function Field({ label, value, hint, children }: { label: string; value?: React.ReactNode; hint: string; children: React.ReactNode }) {
+  // a <label> names its select/input for screen readers; a field with an editable number is a <div>
+  // instead, because a label would forward clicks on the number to the slider (the slider carries aria-label)
+  const Tag = value === undefined ? "label" : "div";
   return (
-    <label className="block space-y-1">
-      <span className="text-xs uppercase tracking-wide text-zinc-400">{label}</span>
+    <Tag className="block space-y-1">
+      <span className="flex items-baseline justify-between text-xs uppercase tracking-wide text-zinc-400"><span>{label}</span>{value}</span>
       {children}
       <span className="block text-xs text-zinc-500">{hint}</span>
-    </label>
+    </Tag>
   );
 }

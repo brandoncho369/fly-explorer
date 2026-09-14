@@ -8,6 +8,7 @@ import { Explain, HELP, HelpPanel, HelpProvider } from "@/components/Hint";
 import { CellTypes } from "@/components/CellTypes";
 import { FlyMode } from "@/components/FlyMode";
 import { track } from "@/lib/track";
+import EditableValue from "@/components/EditableValue";
 
 const Brain = dynamic(() => import("@/components/Brain"), { ssr: false });
 
@@ -232,7 +233,7 @@ function PageInner() {
             <div className="flex items-center gap-2 text-xs text-zinc-400 pt-1">
               <span className="w-16 whitespace-nowrap">input rate</span>
               <input type="range" min={10} max={300} step={10} value={rateHz} onChange={(e) => setRateHz(+e.target.value)} className="flex-1" aria-label="input rate (Hz)" />
-              <span className="w-12 text-right">{rateHz} Hz</span>
+              <EditableValue label="input rate" value={rateHz} min={1} max={500} step={1} onChange={setRateHz} fmt={(v) => `${v} Hz`} className="w-16" />
             </div>
           </Explain>
         </section>
@@ -262,7 +263,7 @@ function PageInner() {
         <section className="space-y-2">
           <label className="text-xs uppercase tracking-wide text-zinc-500">model</label>
           <Explain title="gain" text={HELP.gain}><Slider label="gain" value={gain} min={0.1} max={3} step={0.05} onChange={setGain} fmt={(v) => v.toFixed(2) + "×"} /></Explain>
-          <Explain title="speed" text={HELP.speed}><Slider label="speed" value={speedIdx} min={0} max={SPEEDS.length - 1} step={1} onChange={setSpeedIdx} fmt={(i) => `${SPEEDS[i]}× real time (target)`} /></Explain>
+          <Explain title="speed" text={HELP.speed}><Slider label="speed" value={speedIdx} min={0} max={SPEEDS.length - 1} step={1} onChange={setSpeedIdx} fmt={(i) => `${SPEEDS[i]}× real time (target)`} editable={false} /></Explain>
           <div className="flex flex-wrap gap-2 pt-1">
             <Explain title="pause / run" text={HELP.pause}><button onClick={() => setRunning((r) => !r)} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">{running ? "pause" : "run"}</button></Explain>
             <Explain title="reset" text={HELP.reset}><button onClick={resetBrain} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
@@ -312,12 +313,12 @@ function PageInner() {
   );
 }
 
-function Slider({ label, value, min, max, step, onChange, fmt }: { label: string; value: number; min: number; max: number; step: number; onChange: (v: number) => void; fmt: (v: number) => string }) {
+function Slider({ label, value, min, max, step, onChange, fmt, editable = true }: { label: string; value: number; min: number; max: number; step: number; onChange: (v: number) => void; fmt: (v: number) => string; editable?: boolean }) {
   return (
     <div className="flex items-center gap-2 text-xs text-zinc-400">
       <span className="w-14">{label}</span>
       <input type="range" min={min} max={max} step={step} value={value} onChange={(e) => onChange(+e.target.value)} className="flex-1" aria-label={label} />
-      <span className="w-24 text-right font-mono">{fmt(value)}</span>
+      {editable ? <EditableValue label={label} value={value} min={min} max={max} step={step} onChange={onChange} fmt={fmt} /> : <span className="w-24 text-right font-mono">{fmt(value)}</span>}
     </div>
   );
 }

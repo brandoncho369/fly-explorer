@@ -46,6 +46,31 @@ await p.getByLabel("input rate (Hz)").fill("100");
 const t0 = await simT(); await p.waitForTimeout(1000); const t1 = await simT();
 check(t1 > t0, `sim keeps advancing under full load (${(t1 - t0).toFixed(2)} sim-s per wall-s)`);
 
+// 2b. typed values: click the number, type an exact value, Enter / blur / Escape / junk
+await p.getByRole("button", { name: "edit gain" }).click();
+await p.getByLabel("gain value").fill("0.437");
+await p.keyboard.press("Enter");
+check((await aside()).includes("0.44×"), "typing 0.437 into the gain number sets gain 0.437 (shown 0.44×)");
+await p.getByRole("button", { name: "edit gain" }).click();
+await p.getByLabel("gain value").fill("99");
+await p.keyboard.press("Enter");
+check((await aside()).includes("3.00×"), "typed gain is clamped to the slider max");
+await p.getByRole("button", { name: "edit gain" }).click();
+await p.getByLabel("gain value").fill("0.5");
+await p.keyboard.press("Escape");
+check((await aside()).includes("3.00×"), "Escape cancels the edit");
+await p.getByRole("button", { name: "edit input rate" }).click();
+await p.getByLabel("input rate value").fill("137");
+await p.getByLabel("input rate value").blur();
+check((await aside()).includes("137 Hz"), "blur commits a typed input rate (137 Hz, off the slider's 10 Hz grid)");
+await p.getByRole("button", { name: "edit gain" }).click();
+await p.getByLabel("gain value").fill("1");
+await p.keyboard.press("Enter");
+await p.getByRole("button", { name: "edit input rate" }).click();
+await p.getByLabel("input rate value").fill("100");
+await p.keyboard.press("Enter");
+check(errs.length === 0, "typed values: no errors");
+
 // 3. speed changes, pause/run, reset while held
 for (const label of ["0.05×", "4×", "1×", "0.25×"]) { const btn = p.getByRole("button", { name: label, exact: true }); if (await btn.count()) await btn.click(); }
 await p.getByRole("button", { name: "pause", exact: true }).click();
