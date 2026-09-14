@@ -30,6 +30,8 @@ const POP_HELP: Record<string, string> = {
   "sugar GRNs": "Gustatory receptor neurons on the fly's mouthparts and legs that respond to sugar. Firing them is 'tasting sugar'. Real flies respond by extending the proboscis.",
   "bitter GRNs": "Taste neurons that detect bitter compounds. Real flies reject food when these fire; in the model they should shut down the sugar response.",
   "water GRNs": "Taste neurons that respond to water. Thirsty flies extend the proboscis to them.",
+  "high-salt GRNs": "Taste neurons (Ir7c / ppk23) that fire to concentrated salt. Real flies reject it; added to sugar it should cut the proboscis response (flybench task 20).",
+  "amino-acid GRNs (LB1e)": "Labellar taste neurons the Cell 2026 typing groups as LB1e, responding to amino acids. Only in MaleCNS.",
   "looming (LPLC2/LC4)": "Visual neurons that detect an object rapidly expanding in the eye, i.e. something rushing at the fly. They drive the Giant Fiber escape.",
   "olfactory RNs": "All ~2,300 smell receptor neurons in the antennae at once, an 'every smell simultaneously' input. Real odours activate only a few channels.",
   "JO (antennal mechanosensory)": "Johnston's organ, the ~1,100 neurons in the antenna that sense sound, wind and gravity.",
@@ -42,7 +44,7 @@ const POP_HELP: Record<string, string> = {
   "leg motor neurons": "About 275 motor neurons in the nerve cord that move the six legs: flexors, extensors, rotators. Walking would be patterns across these. Only in MaleCNS.",
   "wing motor neurons": "The motor neurons for the wing and flight muscles, including DLMn, DVMn and the steering muscles. Only in MaleCNS.",
 };
-const STIMULI = ["sugar GRNs", "bitter GRNs", "water GRNs", "looming (LPLC2/LC4)", "olfactory RNs"];
+const STIMULI = ["sugar GRNs", "bitter GRNs", "water GRNs", "high-salt GRNs", "looming (LPLC2/LC4)", "olfactory RNs"];
 
 function PageInner() {
   const workerRef = useRef<Worker | null>(null);

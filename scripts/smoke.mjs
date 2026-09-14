@@ -15,7 +15,7 @@ const mn9 = async () => +((await aside()).match(/MN9 \(proboscis\)[^\d]*?(\d+)\s
 const check = (ok, msg) => { console.log((ok ? "✓ " : "✗ ") + msg); if (!ok) process.exitCode = 1; };
 
 await p.goto(URL, { waitUntil: "networkidle" });
-await p.waitForFunction(() => document.body.innerText.includes("2,408"), null, { timeout: 30000 });
+await p.waitForFunction(() => document.body.innerText.includes("2,428"), null, { timeout: 30000 });
 check(true, "toy loads");
 const guide = async () => (await p.getByTestId("guide").innerText());
 check(/Try it: press sugar GRNs/.test(await guide()), "guide: first-run prompt");
@@ -153,7 +153,7 @@ for (const w of [1300, 400]) {
   check((await q.locator("h1").innerText()).includes("simulated fly"), `/bench @${w}px: headline`);
   check((await q.locator("svg[role=img]").count()) === 2, `/bench @${w}px: two gain charts`);
   check((await q.locator("#leaderboard tbody tr").count()) >= 5, `/bench @${w}px: leaderboard rows`);
-  check((await q.locator("#tasks article").count()) === 19, `/bench @${w}px: 19 task cards`);
+  check((await q.locator("#tasks article").count()) === 20, `/bench @${w}px: 20 task cards`);
   const cta = q.getByRole("link", { name: /Submit a result/ }).first();
   check((await cta.boundingBox())?.y < 900, `/bench @${w}px: contribute CTA above the fold`);
   check((await q.getByRole("link", { name: /Add a task or a model/ }).getAttribute("href")).includes("/blob/HEAD/"), `/bench @${w}px: links use HEAD not main`);

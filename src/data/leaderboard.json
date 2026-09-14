@@ -1221,13 +1221,13 @@
    }
   },
   {
-   "label": "LIF gain 0.45 (3 seeds)",
+   "label": "gain0.45",
    "connectome": "flywire783",
    "simulator": "LIFSimulator",
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.656060606060606,
+   "hard": 0.534589947089947,
    "seeds": 3,
    "verified": false,
    "max_active": 0.11126829676971504,
@@ -1363,7 +1363,7 @@
        "ok": true
       },
       {
-       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0.0703]",
+       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0.0703]  [saturated: all compared conditions at ceiling]",
        "v": 1.1042167037882773,
        "ok": false
       }
@@ -1553,7 +1553,7 @@
     },
     "gf_azimuth_invariance": {
      "passed": false,
-     "score": 0.6666666666666666,
+     "score": 0.4444444444444444,
      "checks": [
       {
        "d": "spikes per neuron[left] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.471]",
@@ -1591,20 +1591,20 @@
        "ok": true
       },
       {
-       "d": "rate[left, gf] / rate[right] < 3.0  [3/3 seeds, sd 0.00928]",
+       "d": "rate[left, gf] / rate[right] < 3.0  [0/3 seeds, sd 0.00928]  [saturated: all compared conditions at ceiling]",
        "v": 1.0556685300550388,
-       "ok": true
+       "ok": false
       },
       {
-       "d": "rate[right, gf] / rate[left] < 3.0  [3/3 seeds, sd 0.00831]",
+       "d": "rate[right, gf] / rate[left] < 3.0  [0/3 seeds, sd 0.00831]  [saturated: all compared conditions at ceiling]",
        "v": 0.9473400406342325,
-       "ok": true
+       "ok": false
       }
      ]
     },
     "pn_transfer_function": {
      "passed": false,
-     "score": 0.8333333333333334,
+     "score": 0.14285714285714285,
      "checks": [
       {
        "d": "rate[orn100, da1_pn] <= 170.0 Hz  [0/3 seeds, sd 0.185]",
@@ -1617,24 +1617,80 @@
        "ok": true
       },
       {
-       "d": "rate[orn30, da1_pn] / rate[orn10] > 1.0  [3/3 seeds, sd 0.0581]",
+       "d": "rate[orn30, da1_pn] / rate[orn10] > 1.0  [1/3 seeds, sd 0.0581]",
        "v": 1.1108066589239185,
-       "ok": true
+       "ok": false
       },
       {
-       "d": "rate[orn100, da1_pn] / rate[orn30] > 1.0  [3/3 seeds, sd 0.000791]",
+       "d": "rate[orn100, da1_pn] / rate[orn30] > 1.0  [0/3 seeds, sd 0.000791]  [saturated: all compared conditions at ceiling]",
        "v": 1.034021639727704,
-       "ok": true
+       "ok": false
       },
       {
-       "d": "rate[orn30, da1_pn] / rate[orn10] < 3.0  [3/3 seeds, sd 0.0581]",
+       "d": "rate[orn30, da1_pn] / rate[orn10] < 3.0  [1/3 seeds, sd 0.0581]",
        "v": 1.1108066589239185,
+       "ok": false
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] < 2.0  [0/3 seeds, sd 0.000791]  [saturated: all compared conditions at ceiling]",
+       "v": 1.034021639727704,
+       "ok": false
+      },
+      {
+       "d": "rate[orn10, da1_pn] / rate[orn100] < 0.6  [0/3 seeds, sd 0.0452]",
+       "v": 0.8729904740856963,
+       "ok": false
+      }
+     ]
+    },
+    "da1_sparseness": {
+     "passed": false,
+     "score": 0.1111111111111111,
+     "checks": [
+      {
+       "d": "lifetime sparseness[da1_pn, 8 stimuli] >= 0.9  [0/3 seeds, sd 4.42e-06]  [saturated: all compared conditions at ceiling]",
+       "v": 0.0009073801746590993,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] >= 10.0 Hz  [3/3 seeds, sd 0.185]",
+       "v": 434.37908496732024,
        "ok": true
       },
       {
-       "d": "rate[orn100, da1_pn] / rate[orn30] < 2.0  [3/3 seeds, sd 0.000791]",
-       "v": 1.034021639727704,
-       "ok": true
+       "d": "rate[cva, da1_pn] / rate[dm1] > 1.0  [0/3 seeds, sd 0.000594]  [saturated: all compared conditions at ceiling]",
+       "v": 1.0860660752576357,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dm2] > 1.0  [0/3 seeds, sd 0.000357]  [saturated: all compared conditions at ceiling]",
+       "v": 1.0865394984657522,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dm4] > 1.0  [0/3 seeds, sd 0.000405]  [saturated: all compared conditions at ceiling]",
+       "v": 1.0853563365024863,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dl1] > 1.0  [0/3 seeds, sd 0.000462]  [saturated: all compared conditions at ceiling]",
+       "v": 1.0859474975495567,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dl5] > 1.0  [0/3 seeds, sd 0.000576]  [saturated: all compared conditions at ceiling]",
+       "v": 1.0857111044874346,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[va1v] > 1.0  [0/3 seeds, sd 0.000406]  [saturated: all compared conditions at ceiling]",
+       "v": 1.0871317241297416,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dc1] > 1.0  [0/3 seeds, sd 0.000356]  [saturated: all compared conditions at ceiling]",
+       "v": 1.0861843434830911,
+       "ok": false
       }
      ]
     }
@@ -3570,13 +3626,13 @@
    }
   },
   {
-   "label": "MaleCNS gain 0.65 (Minecraft demo)",
+   "label": "gain0.65",
    "connectome": "malecns",
    "simulator": "LIFSimulator",
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.6666666666666666,
+   "hard": 0.6177248677248677,
    "seeds": 3,
    "verified": false,
    "max_active": 0.1596626271099976,
@@ -3989,7 +4045,7 @@
     },
     "pn_transfer_function": {
      "passed": false,
-     "score": 0.8333333333333334,
+     "score": 0.5714285714285714,
      "checks": [
       {
        "d": "rate[orn100, da1_pn] <= 170.0 Hz  [0/3 seeds, sd 0.0698]",
@@ -4007,9 +4063,9 @@
        "ok": true
       },
       {
-       "d": "rate[orn100, da1_pn] / rate[orn30] > 1.0  [3/3 seeds, sd 0.0141]",
+       "d": "rate[orn100, da1_pn] / rate[orn30] > 1.0  [0/3 seeds, sd 0.0141]  [saturated: all compared conditions at ceiling]",
        "v": 1.1123826045004457,
-       "ok": true
+       "ok": false
       },
       {
        "d": "rate[orn30, da1_pn] / rate[orn10] < 3.0  [3/3 seeds, sd 0.0194]",
@@ -4017,8 +4073,116 @@
        "ok": true
       },
       {
-       "d": "rate[orn100, da1_pn] / rate[orn30] < 2.0  [3/3 seeds, sd 0.0141]",
+       "d": "rate[orn100, da1_pn] / rate[orn30] < 2.0  [0/3 seeds, sd 0.0141]  [saturated: all compared conditions at ceiling]",
        "v": 1.1123826045004457,
+       "ok": false
+      },
+      {
+       "d": "rate[orn10, da1_pn] / rate[orn100] < 0.6  [3/3 seeds, sd 0.000647]",
+       "v": 0.5600326844319049,
+       "ok": true
+      }
+     ]
+    },
+    "da1_sparseness": {
+     "passed": false,
+     "score": 0.7777777777777778,
+     "checks": [
+      {
+       "d": "lifetime sparseness[da1_pn, 8 stimuli] >= 0.9  [0/3 seeds, sd 0.000102]",
+       "v": 0.0998987875775455,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] >= 10.0 Hz  [3/3 seeds, sd 0.0698]",
+       "v": 435.1604938271605,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dm1] > 1.0  [3/3 seeds, sd 0.00284]",
+       "v": 1.9127412712362482,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dm2] > 1.0  [3/3 seeds, sd 0.00105]",
+       "v": 1.910664449453478,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dm4] > 1.0  [3/3 seeds, sd 0.000786]",
+       "v": 1.9119076980354304,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dl1] > 1.0  [3/3 seeds, sd 0.000787]",
+       "v": 1.9131529648828962,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dl5] > 1.0  [3/3 seeds, sd 0.00229]",
+       "v": 1.9156512043450078,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[va1v] > 1.0  [0/3 seeds, sd 0.00116]  [saturated: all compared conditions at ceiling]",
+       "v": 1.0487991455888857,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dc1] > 1.0  [3/3 seeds, sd 0.00205]",
+       "v": 1.9131549889340025,
+       "ok": true
+      }
+     ]
+    },
+    "gf_to_muscle_latency": {
+     "passed": false,
+     "score": 0.25,
+     "checks": [
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [3/3 seeds, sd 4.29]",
+       "v": 57.666666666666664,
+       "ok": true
+      },
+      {
+       "d": "latency[loom, gf \u2192 ttmn] <= 1.5 ms  [0/3 seeds, sd 7.19e-06]",
+       "v": 11.750005086263021,
+       "ok": false
+      },
+      {
+       "d": "latency[loom, gf \u2192 dlmn] <= 3.0 ms  [0/3 seeds, sd 1.44e-05]",
+       "v": 10.550008138020834,
+       "ok": false
+      },
+      {
+       "d": "latency[loom, ttmn \u2192 dlmn] > 0.0 ms  [0/3 seeds, sd 1.25e-05]",
+       "v": -1.1999969482421875,
+       "ok": false
+      }
+     ]
+    },
+    "taste_modalities": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[water] > 5.0 Hz  [3/3 seeds, sd 6.05]",
+       "v": 95.75757575757575,
+       "ok": true
+      },
+      {
+       "d": "rate[high_salt] < 5.0 Hz  [1/3 seeds, sd 129]",
+       "v": 183.030303030303,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar_plus_high_salt] / rate[sugar] < 0.5  [0/3 seeds, sd 0.225]",
+       "v": 1.0429838145973847,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 58.5]",
+       "v": 218.78787878787875,
        "ok": true
       }
      ]
@@ -4451,14 +4615,14 @@
    "name": "stability",
    "title": "Silence in, silence out",
    "tier": "core",
-   "description": "With no sensory drive the network must not spontaneously light up. A model whose gain is too high \"passes\" every reflex because everything fires; this task is the guard against that. (Real flies do have spontaneous activity \u00e2\u20ac\u201d the LIF model has none by construction, so quiet is the correct answer here.)",
-   "citation": "Shiu et al. 2024, Nature \u00e2\u20ac\u201d model is silent without input by design"
+   "description": "With no sensory drive the network must not spontaneously light up. A model whose gain is too high \"passes\" every reflex because everything fires; this task is the guard against that. (Real flies do have spontaneous activity \u2014 the LIF model has none by construction, so quiet is the correct answer here.)",
+   "citation": "Shiu et al. 2024, Nature \u2014 model is silent without input by design"
   },
   {
    "name": "sugar_to_proboscis",
-   "title": "Sugar \u00e2\u2020\u2019 proboscis extension",
+   "title": "Sugar \u2192 proboscis extension",
    "tier": "core",
-   "description": "The canonical reflex. Activating sugar-sensing gustatory receptor neurons should drive MN9, the motor neuron that extends the proboscis. This is the headline result of Shiu et al. 2024 and a behaviour every fly lab can reproduce with a drop of sucrose. Selector provenance \u00e2\u20ac\u201d FlyWire v783: sub_class \"sugar/water\" (Engert et al. 2022 annotations). MaleCNS v1.0: the gustatory companion paper (Cell 2026; bioRxiv 10.1101/2025.08.25.671814) classifies labellar bristle GRNs by receptor driver line: LB3b sweet (Gr64f), LB3c sweet + low salt (Ir56b), LB3a water (ppk28), LB3d high salt / aversive (Ir7c, ppk23), LB1a\u00e2\u20ac\u201cd bitter, LB1e amino-acid aversion (glutamatergic). The sugar set is therefore LB3b\u00e2\u20ac\u201cc only. Our earlier wiring inference (docs/MALECNS.md) had put LB3a and LB3d in the sugar set because they also synapse onto the Shiu 2022 second-order sugar neurons; those cells respond to water as well as sugar (Shiu et al. 2024), so the wiring was consistent with the labels, not evidence against them. Provenance tag: MEASURED (receptor lines), not inferred.",
+   "description": "The canonical reflex. Activating sugar-sensing gustatory receptor neurons should drive MN9, the motor neuron that extends the proboscis. This is the headline result of Shiu et al. 2024 and a behaviour every fly lab can reproduce with a drop of sucrose. Selector provenance \u2014 FlyWire v783: sub_class \"sugar/water\" (Engert et al. 2022 annotations). MaleCNS v1.0: the gustatory companion paper (Cell 2026; bioRxiv 10.1101/2025.08.25.671814) classifies labellar bristle GRNs by receptor driver line: LB3b sweet (Gr64f), LB3c sweet + low salt (Ir56b), LB3a water (ppk28), LB3d high salt / aversive (Ir7c, ppk23), LB1a\u2013d bitter, LB1e amino-acid aversion (glutamatergic). The sugar set is therefore LB3b\u2013c only. Our earlier wiring inference (docs/MALECNS.md) had put LB3a and LB3d in the sugar set because they also synapse onto the Shiu 2022 second-order sugar neurons; those cells respond to water as well as sugar (Shiu et al. 2024), so the wiring was consistent with the labels, not evidence against them. Provenance tag: MEASURED (receptor lines), not inferred.",
    "citation": "Dethier 1976; Shiu et al. 2024 (Nature) Fig. 2"
   },
   {
@@ -4470,7 +4634,7 @@
   },
   {
    "name": "looming_to_giant_fiber",
-   "title": "Looming \u00e2\u2020\u2019 giant fiber escape",
+   "title": "Looming \u2192 giant fiber escape",
    "tier": "core",
    "description": "LPLC2 and LC4 are the visual projection neurons that detect an expanding (looming) object. They converge on the Giant Fiber, the descending neuron that triggers the takeoff escape. Drive the detectors; the GF should fire.",
    "citation": "von Reyn et al. 2014; Ache et al. 2019; Shiu et al. 2024"
@@ -4486,14 +4650,14 @@
    "name": "dose_response",
    "title": "Proboscis response scales with sugar intensity",
    "tier": "hard",
-   "description": "Real flies extend the proboscis more reliably and more strongly as sucrose concentration rises; GRN firing rate encodes concentration. A model whose MN9 output is all-or-nothing (saturating at the refractory limit the moment any input arrives) has lost that gradation. Weak drive (20 Hz on the sugar GRNs) should give a clearly smaller MN9 response than strong drive (100 Hz), and both should be above baseline. The 100 Hz \"strong\" drive is the Shiu et al. 2024 convention; the one recorded number for a labellar sugar GRN is ~40 spikes per 500 ms (\u00e2\u2030\u02c680 Hz) at 100 mM sucrose (Zhang, Guo & Montell 2016, Neuron 91:863), so a third condition drives the GRNs at that measured rate and asks only that the pathway still conducts.",
+   "description": "Real flies extend the proboscis more reliably and more strongly as sucrose concentration rises; GRN firing rate encodes concentration. A model whose MN9 output is all-or-nothing (saturating at the refractory limit the moment any input arrives) has lost that gradation. Weak drive (20 Hz on the sugar GRNs) should give a clearly smaller MN9 response than strong drive (100 Hz), and both should be above baseline. The 100 Hz \"strong\" drive is the Shiu et al. 2024 convention; the one recorded number for a labellar sugar GRN is ~40 spikes per 500 ms (\u224880 Hz) at 100 mM sucrose (Zhang, Guo & Montell 2016, Neuron 91:863), so a third condition drives the GRNs at that measured rate and asks only that the pathway still conducts.",
    "citation": "Dethier 1976; Dahanukar et al. 2007 (Neuron); Zhang, Guo & Montell 2016 (Neuron 91:863); Shiu et al. 2024"
   },
   {
    "name": "adaptation",
    "title": "Repeated sugar gives a smaller second response",
    "tier": "hard",
-   "description": "Sensory responses adapt: a second identical sugar pulse shortly after the first evokes a weaker proboscis response (short-term adaptation in GRNs and downstream circuits; over longer timescales, PER habituation). A memoryless point-neuron model cannot do this by construction \u00e2\u20ac\u201d every pulse looks like the first \u00e2\u20ac\u201d so the reference LIF is expected to fail here. That is the point: this task measures something the wiring diagram alone does not give you.",
+   "description": "Sensory responses adapt: a second identical sugar pulse shortly after the first evokes a weaker proboscis response (short-term adaptation in GRNs and downstream circuits; over longer timescales, PER habituation). A memoryless point-neuron model cannot do this by construction \u2014 every pulse looks like the first \u2014 so the reference LIF is expected to fail here. That is the point: this task measures something the wiring diagram alone does not give you.",
    "citation": "Duerr & Quinn 1982 (PNAS, PER habituation); Paranjpe et al. 2012 (J. Neurosci.)"
   },
   {
@@ -4514,35 +4678,35 @@
    "name": "looming_dn_ensemble",
    "title": "Looming recruits the takeoff ensemble, not the whole descending tract",
    "tier": "hard",
-   "description": "The Giant Fiber is not alone: looming also drives DNp02, DNp11 and other descending neurons that prepare the takeoff (leg extension, wing raise), and the response is selective \u00e2\u20ac\u201d a few dozen of the ~1300 descending neurons, not a general alarm. Checks that the named looming DNs fire and that the descending population as a whole stays mostly silent.",
+   "description": "The Giant Fiber is not alone: looming also drives DNp02, DNp11 and other descending neurons that prepare the takeoff (leg extension, wing raise), and the response is selective \u2014 a few dozen of the ~1300 descending neurons, not a general alarm. Checks that the named looming DNs fire and that the descending population as a whole stays mostly silent.",
    "citation": "Ache et al. 2019 (Curr. Biol.); Namiki et al. 2018 (eLife); Dombrovski et al. 2023 (Nature)"
   },
   {
    "name": "flash_is_not_loom",
    "title": "A uniform flash is not a looming object",
    "tier": "hard",
-   "description": "LPLC2/LC4 respond to expanding edges, not to the whole eye lighting up. Driving every photoreceptor at once (a full-field flash) should therefore not fire the Giant Fiber the way looming does. In a pure connectome model motion selectivity has to emerge from the lamina/medulla circuitry and the synaptic delays alone \u00e2\u20ac\u201d no dendritic nonlinearities, no adaptation \u00e2\u20ac\u201d so this is expected to be hard. Failure here means the model's visual front end is a brightness detector, which is worth knowing before wiring it to a game.",
+   "description": "LPLC2/LC4 respond to expanding edges, not to the whole eye lighting up. Driving every photoreceptor at once (a full-field flash) should therefore not fire the Giant Fiber the way looming does. In a pure connectome model motion selectivity has to emerge from the lamina/medulla circuitry and the synaptic delays alone \u2014 no dendritic nonlinearities, no adaptation \u2014 so this is expected to be hard. Failure here means the model's visual front end is a brightness detector, which is worth knowing before wiring it to a game.",
    "citation": "von Reyn et al. 2014 (Nat. Neurosci.); Card & Dickinson 2008 (Curr. Biol.); Klapoetke et al. 2017 (Nature)"
   },
   {
    "name": "return_to_rest",
    "title": "The brain goes quiet again after the stimulus ends",
    "tier": "hard",
-   "description": "A real fly tastes sugar, extends its proboscis, and a second later is at rest again. In this model a half-second taste of sugar leaves ~8% of the brain firing at a constant rate indefinitely: recurrent excitation sustains itself and nothing in a static wiring diagram with five constants can switch it off (no spike-frequency adaptation, no short-term synaptic depression, no neuromodulation). This task stimulates for 500 ms, then measures 1\u00e2\u20ac\u201c1.3 s after the stimulus stopped. It is the clearest single number for \"what a wiring diagram is missing\".",
+   "description": "A real fly tastes sugar, extends its proboscis, and a second later is at rest again. In this model a half-second taste of sugar leaves ~8% of the brain firing at a constant rate indefinitely: recurrent excitation sustains itself and nothing in a static wiring diagram with five constants can switch it off (no spike-frequency adaptation, no short-term synaptic depression, no neuromodulation). This task stimulates for 500 ms, then measures 1\u20131.3 s after the stimulus stopped. It is the clearest single number for \"what a wiring diagram is missing\".",
    "citation": "Dethier 1976 (PER duration); Shiu et al. 2024 (activity tracks stimulus); Benda & Herz 2003 (adaptation)"
   },
   {
    "name": "physiological_rates",
    "title": "Neurons fire at fly rates, not at their refractory ceiling",
    "tier": "hard",
-   "description": "Passing the reflex tasks only requires that a pathway conducts. This task asks whether the readouts fire the way the real neurons do. The Giant Fiber produces a single spike per escape (von Reyn et al. 2014; Ache et al. 2019: \"the timing of a single spike in the GF determines whether a fly uses a short or long takeoff\"): it should spike once when the loom arrives and be silent before. For MN9 no electrophysiological recording exists in the literature (Gordon & Scott 2009, Schwarz et al. 2017, McKellar & Simpson 2020 and Shiu et al. 2022 are behaviour, optogenetics or calcium imaging), so the MN9 ceiling here is a convention, not a measurement, and is labelled as such. The reference LIF model pins both readouts at ~430 Hz \u00e2\u20ac\u201d their 2.2 ms refractory ceiling \u00e2\u20ac\u201d which is a saturating network, not a reflex.",
-   "citation": "von Reyn et al. 2014 (Nat Neurosci 17:962); Ache et al. 2019 (Curr Biol 29:1073) \u00e2\u20ac\u201d single GF spike per loom. MN9 ceiling: convention (no MN9 electrophysiology published)"
+   "description": "Passing the reflex tasks only requires that a pathway conducts. This task asks whether the readouts fire the way the real neurons do. The Giant Fiber produces a single spike per escape (von Reyn et al. 2014; Ache et al. 2019: \"the timing of a single spike in the GF determines whether a fly uses a short or long takeoff\"): it should spike once when the loom arrives and be silent before. For MN9 no electrophysiological recording exists in the literature (Gordon & Scott 2009, Schwarz et al. 2017, McKellar & Simpson 2020 and Shiu et al. 2022 are behaviour, optogenetics or calcium imaging), so the MN9 ceiling here is a convention, not a measurement, and is labelled as such. The reference LIF model pins both readouts at ~430 Hz \u2014 their 2.2 ms refractory ceiling \u2014 which is a saturating network, not a reflex.",
+   "citation": "von Reyn et al. 2014 (Nat Neurosci 17:962); Ache et al. 2019 (Curr Biol 29:1073) \u2014 single GF spike per loom. MN9 ceiling: convention (no MN9 electrophysiology published)"
   },
   {
    "name": "wiring_robustness",
    "title": "The reflexes survive a different individual's synapse counts",
    "tier": "hard",
-   "description": "A connectome is one animal. Synapse counts between the same two cell types differ between individuals and between hemispheres of the same fly by tens of percent, while the behaviour is the same in every fly. So a model that only reproduces a reflex at one exact set of synapse counts has fit the specimen, not the species. Here every synapse count is multiplied by independent lognormal noise (sigma 0.25, i.e. roughly \u00c2\u00b125%) \u00e2\u20ac\u201d a stand-in for a second individual with the same wiring diagram \u00e2\u20ac\u201d and the two core reflexes must still work and the brain must still be quiet at rest. Real flies have homeostatic mechanisms that make this robustness automatic; a five-constant model has none.",
+   "description": "A connectome is one animal. Synapse counts between the same two cell types differ between individuals and between hemispheres of the same fly by tens of percent, while the behaviour is the same in every fly. So a model that only reproduces a reflex at one exact set of synapse counts has fit the specimen, not the species. Here every synapse count is multiplied by independent lognormal noise (sigma 0.25, i.e. roughly \u00b125%) \u2014 a stand-in for a second individual with the same wiring diagram \u2014 and the two core reflexes must still work and the brain must still be quiet at rest. Real flies have homeostatic mechanisms that make this robustness automatic; a five-constant model has none.",
    "citation": "Schlegel et al. 2024 (FlyWire vs hemibrain: cell-type connectivity conserved, synapse counts vary); Takemura et al. 2015; Marder & Goaillard 2006 (robustness to parameter variation)"
   },
   {
@@ -4556,29 +4720,36 @@
    "name": "gf_azimuth_invariance",
    "title": "The giant fiber fires once, wherever the loom comes from",
    "tier": "hard",
-   "description": "A looming object at \u00e2\u02c6\u201945\u00c2\u00b0, 0\u00c2\u00b0 or +45\u00c2\u00b0 azimuth evokes the same giant-fiber response: a single spike (Ache et al. 2019; von Reyn et al. 2014), with no directional selectivity across azimuth (J Exp Biol 2023, DSI never above 0.5, n = 10 flies). This is the first recording-match task: the GF spike count is compared to the measured one, not to a convention. Stimulus geometry (provenance INFERRED, see docs/rfcs/16_gf_azimuth_invariance.md): the model has no eyes, so a loom at \u00e2\u02c6\u201945\u00c2\u00b0 drives the left-side LPLC2/LC4 detectors, +45\u00c2\u00b0 the right-side ones, 0\u00c2\u00b0 both, each neuron at the same 150 Hz used by task 4. The mapping uses the `side` annotation, not receptive fields; a dataset without side labels skips this task. Pre-registered prediction (before the first run): the reference LIF passes \"seen\" and \"invariant\" and fails \"one spike\" at every azimuth (~120 spikes per loom in task 13).",
+   "description": "A looming object at \u221245\u00b0, 0\u00b0 or +45\u00b0 azimuth evokes the same giant-fiber response: a single spike (Ache et al. 2019; von Reyn et al. 2014), with no directional selectivity across azimuth (J Exp Biol 2023, DSI never above 0.5, n = 10 flies). This is the first recording-match task: the GF spike count is compared to the measured one, not to a convention. Stimulus geometry (provenance INFERRED, see docs/rfcs/16_gf_azimuth_invariance.md): the model has no eyes, so a loom at \u221245\u00b0 drives the left-side LPLC2/LC4 detectors, +45\u00b0 the right-side ones, 0\u00b0 both, each neuron at the same 150 Hz used by task 4. The mapping uses the `side` annotation, not receptive fields; a dataset without side labels skips this task. Pre-registered prediction (before the first run): the reference LIF passes \"seen\" and \"invariant\" and fails \"one spike\" at every azimuth (~120 spikes per loom in task 13).",
    "citation": "Ache et al. 2019 (Curr Biol 29:1073); von Reyn et al. 2014 (Nat Neurosci 17:962); azimuthal invariance: J Exp Biol 2023 226:jeb244790"
   },
   {
    "name": "pn_transfer_function",
    "title": "The antennal-lobe output saturates the way the recording says",
    "tier": "hard",
-   "description": "Olsen, Bhandawat & Wilson 2010 (Neuron 66:287) recorded ORN \u00e2\u2020\u2019 PN transfer in four glomeruli: PN = Rmax\u00c2\u00b7ORN^1.5 / (ORN^1.5 + \u00cf\u0192^1.5), Rmax 163\u00e2\u20ac\u201c170 spikes/s, \u00cf\u0192 11.8\u00e2\u20ac\u201c16.3 spikes/s. So a projection neuron never exceeds ~170 Hz and its input\u00e2\u20ac\u201coutput curve is compressive: from the fit, ORN input at 10 / 30 / 100 Hz gives PN \u00e2\u2030\u02c6 62 / 126 / 158 Hz. This task drives the DA1 ORNs at those three rates and checks the ceiling, the ordering, the compression and the dynamic range, not the absolute rates (which depend on the global gain). Recording-match task; pre-registered in docs/rfcs/17. The dynamic-range check was added after the first run (dated in the RFC): a model whose PNs are already saturated at 10 Hz input passes the ratio checks vacuously, so the task also requires the 10 Hz response to be clearly smaller than the 100 Hz one. Provenance: rates and fit MEASURED; using DA1 for glomeruli the paper did not fit is a CONVENTION (Schlief & Wilson 2007 show the same shape for DA1).",
+   "description": "Olsen, Bhandawat & Wilson 2010 (Neuron 66:287) recorded ORN \u2192 PN transfer in four glomeruli: PN = Rmax\u00b7ORN^1.5 / (ORN^1.5 + \u03c3^1.5), Rmax 163\u2013170 spikes/s, \u03c3 11.8\u201316.3 spikes/s. So a projection neuron never exceeds ~170 Hz and its input\u2013output curve is compressive: from the fit, ORN input at 10 / 30 / 100 Hz gives PN \u2248 62 / 126 / 158 Hz. This task drives the DA1 ORNs at those three rates and checks the ceiling, the ordering, the compression and the dynamic range, not the absolute rates (which depend on the global gain). Recording-match task; pre-registered in docs/rfcs/17. The dynamic-range check was added after the first run (dated in the RFC): a model whose PNs are already saturated at 10 Hz input passes the ratio checks vacuously, so the task also requires the 10 Hz response to be clearly smaller than the 100 Hz one. Provenance: rates and fit MEASURED; using DA1 for glomeruli the paper did not fit is a CONVENTION (Schlief & Wilson 2007 show the same shape for DA1).",
    "citation": "Olsen, Bhandawat & Wilson 2010 (Neuron 66:287); Schlief & Wilson 2007 (Nat Neurosci 10:623)"
   },
   {
    "name": "da1_sparseness",
    "title": "One odour channel responds to one odour",
    "tier": "hard",
-   "description": "Schlief & Wilson 2007 (Nat Neurosci 10:623) measured the lifetime sparseness of DA1 projection neurons across an odour panel: S = 0.90 (Willmore & Tolhurst 2001 measure; 1 = one stimulus only, 0 = all equally). Task 8 asks whether one odour recruits most PNs; this task asks the other question \u00e2\u20ac\u201d whether one PN responds to most odours. Recording-match task, pre-registered in docs/rfcs/18. Odour panel (CONVENTION, see the RFC): eight single-glomerulus \"odours\", each the ORNs of one glomerulus at 100 Hz \u00e2\u20ac\u201d DA1 (cVA, the cognate channel), DM1, DM2, DM4, DL1, DL5, VA1v, DC1. A dataset missing any of them skips the task rather than shrinking the panel.",
+   "description": "Schlief & Wilson 2007 (Nat Neurosci 10:623) measured the lifetime sparseness of DA1 projection neurons across an odour panel: S = 0.90 (Willmore & Tolhurst 2001 measure; 1 = one stimulus only, 0 = all equally). Task 8 asks whether one odour recruits most PNs; this task asks the other question \u2014 whether one PN responds to most odours. Recording-match task, pre-registered in docs/rfcs/18. Odour panel (CONVENTION, see the RFC): eight single-glomerulus \"odours\", each the ORNs of one glomerulus at 100 Hz \u2014 DA1 (cVA, the cognate channel), DM1, DM2, DM4, DL1, DL5, VA1v, DC1. A dataset missing any of them skips the task rather than shrinking the panel.",
    "citation": "Schlief & Wilson 2007 (Nat Neurosci 10:623); Willmore & Tolhurst 2001 (sparseness measure)"
   },
   {
    "name": "gf_to_muscle_latency",
    "title": "The giant fiber reaches the jump muscle in under a millisecond",
    "tier": "hard",
-   "description": "Augustin et al. 2019 (eNeuro) measured brain-stimulus-to-muscle latencies of 0.93 ms (TTM) and 1.44 ms (DLM), including a 0.35 ms neuromuscular delay, so GF \u00e2\u2020\u2019 TTMn \u00e2\u2030\u02c6 0.6 ms: the synapse is electrical. Engel & Wu 1996: a DLM response \u00e2\u2030\u00a5 3.0 ms is the non-GF pathway. This task measures first-spike latency from the GF's first spike to TTMn and DLMn on a loom. MaleCNS only (needs the nerve cord). Pre-registered in docs/rfcs/19: the reference model, with one 1.8 ms chemical delay for every synapse, is expected to fail the TTMn latency by construction \u00e2\u20ac\u201d the task names a missing mechanism (gap junctions), not a wrong parameter. First run (RFC outcome): 11.8 ms, because one GF spike through a summed chemical synapse cannot bring TTMn to threshold; the electrical synapse in the fly makes a single spike sufficient. DLMn also fired before TTMn.",
+   "description": "Augustin et al. 2019 (eNeuro) measured brain-stimulus-to-muscle latencies of 0.93 ms (TTM) and 1.44 ms (DLM), including a 0.35 ms neuromuscular delay, so GF \u2192 TTMn \u2248 0.6 ms: the synapse is electrical. Engel & Wu 1996: a DLM response \u2265 3.0 ms is the non-GF pathway. This task measures first-spike latency from the GF's first spike to TTMn and DLMn on a loom. MaleCNS only (needs the nerve cord). Pre-registered in docs/rfcs/19: the reference model, with one 1.8 ms chemical delay for every synapse, is expected to fail the TTMn latency by construction \u2014 the task names a missing mechanism (gap junctions), not a wrong parameter. First run (RFC outcome): 11.8 ms, because one GF spike through a summed chemical synapse cannot bring TTMn to threshold; the electrical synapse in the fly makes a single spike sufficient. DLMn also fired before TTMn.",
    "citation": "Augustin et al. 2019 (eNeuro 6:ENEURO.0423-18.2019; ModelDB 245415); Engel & Wu 1996 (J Neurosci 16:3486); Tanouye & Wyman 1980"
+  },
+  {
+   "name": "taste_modalities",
+   "title": "Water extends, high salt does not, high salt suppresses sugar",
+   "tier": "hard",
+   "description": "The labellum carries four gustatory channels and one proboscis motor neuron has to read them with the right sign. Water GRNs (ppk28, LB3a) drive proboscis extension in thirsty flies (Cameron et al. 2010; Chen & Dahanukar 2017); high-salt GRNs (Ir7c / ppk23, LB3d) do not, and high salt added to sucrose suppresses the extension (Zhang et al. 2013; Jaeger et al. 2018). Task 03 tests the bitter channel; this task tests the other three the export has carried since Phase 0. Scope note: Jaeger et al. put part of high-salt aversion in bitter GRNs, which this task does not drive, so a weak suppression means \"LB3d-driven central suppression alone is not enough\", not \"the fly has none\". Check 2 is a null check (a dead network passes it). Pre-registered predictions and the outcome: docs/rfcs/20_taste_modalities.md.",
+   "citation": "Cameron et al. 2010 (Nature 465:91); Chen & Dahanukar 2017 (Cell Rep 18:1140); Zhang et al. 2013 (Science 340:1334); Jaeger et al. 2018 (eLife 7:e37167)"
   }
  ]
 }

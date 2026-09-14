@@ -14,11 +14,11 @@ const netRate = async () => +((await aside()).match(/whole network\s*\n\s*([\d.]
 const simT = async () => +((await aside()).match(/t = ([\d.]+) s/)?.[1] ?? NaN);
 
 await p.goto(URL, { waitUntil: "networkidle" });
-await p.waitForFunction(() => document.body.innerText.includes("2,408"), null, { timeout: 30000 });
+await p.waitForFunction(() => document.body.innerText.includes("2,428"), null, { timeout: 30000 });
 await p.getByRole("button", { name: "turn off" }).click().catch(() => {});
 
 // 1. click every sense button as fast as possible, ten times over
-const senses = await p.getByRole("button", { name: /^(sugar|bitter|water|looming|olfactory|JO|photoreceptors|descending)/ }).all();
+const senses = await p.getByRole("button", { name: /^(sugar|bitter|water|high-salt|looming|olfactory|JO|photoreceptors|descending)/ }).all();
 console.log(`${senses.length} sense buttons`);
 for (let r = 0; r < 10; r++) for (const s of senses) await s.click({ delay: 0 });
 await p.waitForTimeout(500);
@@ -86,7 +86,7 @@ for (const h of holds.slice(0, 3)) await h.click();
 await p.waitForTimeout(200);
 const hasReal = (await fetch(`${URL}/data/flywire783/meta.json`)).ok;
 await p.locator("select").first().selectOption({ index: hasReal ? 1 : 0 });
-await p.waitForFunction((real) => document.body.innerText.includes(real ? "139," : "2,408"), hasReal, { timeout: 120000 });
+await p.waitForFunction((real) => document.body.innerText.includes(real ? "139," : "2,428"), hasReal, { timeout: 120000 });
 await p.waitForTimeout(800);
 const stillPressed = await p.getByRole("button", { name: /^hold /, pressed: true }).count();
 check(stillPressed === 0, `switching dataset while holding clears the held buttons (${stillPressed} still shown pressed)`);
