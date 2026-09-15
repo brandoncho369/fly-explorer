@@ -1233,7 +1233,7 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5463522588522588,
+   "hard": 0.5668509070294784,
    "seeds": 3,
    "verified": false,
    "max_active": 0.11126829676971504,
@@ -1782,6 +1782,42 @@
       {
        "d": "spikes per neuron[lc10a, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
        "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "optic_flow_rotation": {
+     "passed": false,
+     "score": 0.8333333333333334,
+     "checks": [
+      {
+       "d": "rate[yaw_right, dnp15_left] > 5.0 Hz  [3/3 seeds, sd 7.48]",
+       "v": 198.0,
+       "ok": true
+      },
+      {
+       "d": "rate[yaw_left, dnp15_right] > 5.0 Hz  [3/3 seeds, sd 5.73]",
+       "v": 76.66666666666667,
+       "ok": true
+      },
+      {
+       "d": "rate[yaw_right, dnp15_right] < 2.0 Hz  [0/3 seeds, sd 4.71]",
+       "v": 50.666666666666664,
+       "ok": false
+      },
+      {
+       "d": "rate[yaw_right, dnp15_left] / rate[forward] > 1.0  [3/3 seeds, sd 0.428]",
+       "v": 6.365433873630795,
+       "ok": true
+      },
+      {
+       "d": "rate[forward, dnp15_left] / rate[ftb_left] < 0.8  [3/3 seeds, sd 0.0906]",
+       "v": 0.5223743337328701,
+       "ok": true
+      },
+      {
+       "d": "rate[forward, bips] / rate[yaw_right] > 1.0  [3/3 seeds, sd 1.61]",
+       "v": 8.921133290906619,
        "ok": true
       }
      ]
@@ -3740,7 +3776,7 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.6119929453262787,
+   "hard": 0.6060985797827904,
    "seeds": 3,
    "verified": false,
    "max_active": 0.1596626271099976,
@@ -4447,6 +4483,42 @@
        "ok": false
       }
      ]
+    },
+    "optic_flow_rotation": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[yaw_right, dnp15_left] > 5.0 Hz  [3/3 seeds, sd 4.9]",
+       "v": 14.0,
+       "ok": true
+      },
+      {
+       "d": "rate[yaw_left, dnp15_right] > 5.0 Hz  [3/3 seeds, sd 8.49]",
+       "v": 322.0,
+       "ok": true
+      },
+      {
+       "d": "rate[yaw_right, dnp15_right] < 2.0 Hz  [0/3 seeds, sd 16.3]",
+       "v": 292.0,
+       "ok": false
+      },
+      {
+       "d": "rate[yaw_right, dnp15_left] / rate[forward] > 1.0  [0/3 seeds, sd 0.124]",
+       "v": 0.3723365845909384,
+       "ok": false
+      },
+      {
+       "d": "rate[forward, dnp15_left] / rate[ftb_left] < 0.8  [2/3 seeds, sd 0.777]",
+       "v": 1.013211398739184,
+       "ok": false
+      },
+      {
+       "d": "rate[forward, bips] / rate[yaw_right] > 1.0  [3/3 seeds, sd 10.2]",
+       "v": 17.965769025109548,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {}
@@ -5036,6 +5108,13 @@
    "tier": "hard",
    "description": "Henneman's size principle in the fly leg: the tibia flexor motor neurons are recruited in order of size, slow (smallest) first, fast (largest) last, as drive and force rise (Azevedo et al. 2020). The wiring says the opposite would happen on drive alone: every premotor neuron distributes its synapses onto a muscle's MNs in proportion to MN size, so \"if MN recruitment were dictated entirely by the magnitude of premotor input ... a common input [would] first recruit the largest, fastest MNs\", and \"the intrinsic electrical properties of the largest MNs must compensate\" (Lesser, Azevedo et al. 2024). This task ramps the front-left leg's excitatory central premotor pool from 0 to 100 Hz over one second and scores the Spearman correlation between each MN's size (its total input synapse count, r = 0.94 with surface area in Lesser 2024) and its first-spike time: the size principle is a positive correlation. A model of uniform point neurons is predicted to fail it, largest first; that failure is the finding the task exists to record, and a model that passes has to have put something real in the MNs. MaleCNS only (the leg MNs live in the nerve cord); on FlyWire it is not applicable. The wing steering MNs are not scored: MaleCNS reproduces Lesser 2024's leg/wing contrast per premotor neuron (median rho(weight, size) 0.41 leg vs 0.10 wing) but pooled excitatory drive scales with size in both (0.99 / 0.95), so no model could pass a wing null under a common ramp. Pre-registered predictions and outcome: docs/rfcs/23_leg_mn_size_principle.md.",
    "citation": "Azevedo et al. 2020 (eLife 9:e56754); Lesser, Azevedo et al. 2024 (Nature 631:369); Henneman 1957 (Science 126:1345); Henneman, Somjen & Carpenter 1965 (J Neurophysiol 28:560)"
+  },
+  {
+   "name": "optic_flow_rotation",
+   "title": "DNp15 prefers yaw rotation to forward translation, and bIPS prefers the reverse",
+   "tier": "hard",
+   "description": "The lobula plate's horizontal-system cells (HSN/HSE/HSS) respond to front-to-back motion on their own eye and H2 to back-to-front motion on its eye, projecting across the midline. Both converge on the descending neuron DNp15 (DNHS1), which responds to yaw rotation (Suver et al. 2016), and on the bilateral GABAergic bIPS, which inhibits the contralateral DNp15 (Nat Neurosci 2025: \"a competitive disinhibitory network for robust optic flow processing\"). That paper's result: DNp15 is more selective for rotational than translational optic flow than HS is, and bIPS responds most to binocular symmetric (translational) flow and subtracts it at DNp15. The model has no eyes, so optic flow is the set of tangential cells it would drive (INFERRED from the cells' known preferred directions): a right yaw turn = left HS + right H2, forward translation = both HS, each at the task-02 100 Hz. Checks: DNp15 responds to yaw on the correct side and not the other (a null), prefers rotation to translation, is suppressed by the contralateral symmetric component, and bIPS prefers symmetric flow. The rotation/translation comparisons are subject to the RFC S1 ceiling gate. bIPS is CB0268 on FlyWire v783 (the Chiappe lab's own label) and PS321 on MaleCNS (INFERRED homologue: same HS/H2 inputs, same crossed inhibition of DNp15). Pre-registered predictions and outcome: docs/rfcs/24_optic_flow_rotation.md.",
+   "citation": "Nat Neurosci 2025 (doi 10.1038/s41593-025-01948-9, A competitive disinhibitory network for robust optic flow processing in Drosophila); Suver et al. 2016 (J Neurosci 36:11768); Schnell et al. 2010 (J Neurophysiol 103:1646, HS tuning); Krapp et al. 2001 (J Neurophysiol 85:724, H2)"
   }
  ]
 }
