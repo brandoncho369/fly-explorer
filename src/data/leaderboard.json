@@ -1227,7 +1227,7 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.534589947089947,
+   "hard": 0.5463522588522588,
    "seeds": 3,
    "verified": false,
    "max_active": 0.11126829676971504,
@@ -1691,6 +1691,92 @@
        "d": "rate[cva, da1_pn] / rate[dc1] > 1.0  [0/3 seeds, sd 0.000356]  [saturated: all compared conditions at ceiling]",
        "v": 1.0861843434830911,
        "ok": false
+      }
+     ]
+    },
+    "lc_dn_matrix": {
+     "passed": false,
+     "score": 0.6875,
+     "checks": [
+      {
+       "d": "spikes per neuron[lc4, gf] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
+       "v": 127.83333333333333,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc4, dnp02] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.85]",
+       "v": 93.33333333333333,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc4, dnp11] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.03]",
+       "v": 45.166666666666664,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc4, mdn] < 1.0 spikes/neuron  [0/3 seeds, sd 0.354]",
+       "v": 18.75,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[lplc2, gf] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.25]",
+       "v": 123.66666666666667,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lplc2, mdn] < 1.0 spikes/neuron  [0/3 seeds, sd 0.118]",
+       "v": 13.833333333333334,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[lc6, mdn] < 1.0 spikes/neuron  [0/3 seeds, sd 0.589]",
+       "v": 15.166666666666666,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[lplc1, mdn] < 1.0 spikes/neuron  [1/3 seeds, sd 0.118]",
+       "v": 0.9166666666666666,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[lc16, gf] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc16, dnp02] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc16, dnp11] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc16, mdn] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[lc10a, gf] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc10a, dnp02] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc10a, dnp11] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc10a, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
       }
      ]
     }
@@ -3632,7 +3718,7 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.6177248677248677,
+   "hard": 0.6338045634920635,
    "seeds": 3,
    "verified": false,
    "max_active": 0.1596626271099976,
@@ -4183,6 +4269,92 @@
       {
        "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 58.5]",
        "v": 218.78787878787875,
+       "ok": true
+      }
+     ]
+    },
+    "lc_dn_matrix": {
+     "passed": false,
+     "score": 0.875,
+     "checks": [
+      {
+       "d": "spikes per neuron[lc4, gf] >= 1.0 spikes/neuron  [3/3 seeds, sd 2.27]",
+       "v": 50.5,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc4, dnp02] >= 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 129.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc4, dnp11] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.25]",
+       "v": 82.83333333333333,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc4, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lplc2, gf] >= 1.0 spikes/neuron  [3/3 seeds, sd 2.32]",
+       "v": 54.666666666666664,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lplc2, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc6, mdn] < 1.0 spikes/neuron  [0/3 seeds, sd 0.408]",
+       "v": 1.5,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[lplc1, mdn] < 1.0 spikes/neuron  [0/3 seeds, sd 2.87]",
+       "v": 39.916666666666664,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[lc16, gf] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc16, dnp02] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc16, dnp11] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc16, mdn] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
+       "v": 1.3333333333333333,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc10a, gf] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc10a, dnp02] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.5,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc10a, dnp11] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc10a, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
        "ok": true
       }
      ]
@@ -4750,6 +4922,13 @@
    "tier": "hard",
    "description": "The labellum carries four gustatory channels and one proboscis motor neuron has to read them with the right sign. Water GRNs (ppk28, LB3a) drive proboscis extension in thirsty flies (Cameron et al. 2010; Chen & Dahanukar 2017); high-salt GRNs (Ir7c / ppk23, LB3d) do not, and high salt added to sucrose suppresses the extension (Zhang et al. 2013; Jaeger et al. 2018). Task 03 tests the bitter channel; this task tests the other three the export has carried since Phase 0. Scope note: Jaeger et al. put part of high-salt aversion in bitter GRNs, which this task does not drive, so a weak suppression means \"LB3d-driven central suppression alone is not enough\", not \"the fly has none\". Check 2 is a null check (a dead network passes it). Pre-registered predictions and the outcome: docs/rfcs/20_taste_modalities.md.",
    "citation": "Cameron et al. 2010 (Nature 465:91); Chen & Dahanukar 2017 (Cell Rep 18:1140); Zhang et al. 2013 (Science 340:1334); Jaeger et al. 2018 (eLife 7:e37167)"
+  },
+  {
+   "name": "lc_dn_matrix",
+   "title": "Each lobula columnar type drives its own descending neuron, and not the others",
+   "tier": "hard",
+   "description": "Optogenetic activation of single LC types evokes type-specific behaviours (Wu et al. 2016, 22 types screened): LC4, LC6, LPLC1, LPLC2 \u2192 takeoff; LC16 \u2192 backward walking; LC10 \u2192 neither. The descending neurons behind two of those are known: LC4 and LPLC2 synapse onto the giant fiber (von Reyn 2017; Klapoetke 2017; Ache 2019) and LC4 onto DNp02 / DNp11 (Dombrovski 2023); LC16 drives the four moonwalker DNs (Sen 2017). This task drives each LC type at the task-04 loom rate and reads four DNs; the `matrix` check scores every cell with a citation: \"+\" the DN must spike, \"-\" it must not (a null check). The off-diagonal is the point \u2014 task 04 already tests the diagonal. Cells without a citation are \"?\" and not scored (LC6 and LPLC1 evoke takeoff but their DN targets are not established). Pre-registered predictions and outcome: docs/rfcs/21_lc_dn_matrix.md.",
+   "citation": "Wu et al. 2016 (eLife 5:e21022); Sen et al. 2017 (Curr Biol 27:766); Dombrovski et al. 2023 (Nature 613:534); von Reyn et al. 2017 (Neuron 94:1190); Klapoetke et al. 2017 (Nature 551:237); Ribeiro et al. 2018 (Curr Biol 28:2211); Morimoto et al. 2020 (eLife 9:e57685)"
   }
  ]
 }
