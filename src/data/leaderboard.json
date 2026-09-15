@@ -1233,7 +1233,7 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5290608465608465,
+   "hard": 0.5350570436507937,
    "seeds": 3,
    "verified": false,
    "max_active": 0.11126829676971504,
@@ -1845,6 +1845,52 @@
        "d": "rate[jo_ce, mdn] < 2.0 Hz  [0/3 seeds, sd 2.72]",
        "v": 11.333333333333334,
        "ok": false
+      }
+     ]
+    },
+    "mb_sparseness_apl": {
+     "passed": false,
+     "score": 0.625,
+     "checks": [
+      {
+       "d": "readout active fraction[cva, kc] < 0.2  [0/3 seeds, sd 9.11e-05]",
+       "v": 0.6019573755714377,
+       "ok": false
+      },
+      {
+       "d": "readout active fraction[dm4, kc] < 0.2  [0/3 seeds, sd 9.11e-05]",
+       "v": 0.6006052411306421,
+       "ok": false
+      },
+      {
+       "d": "readout active fraction[va1v, kc] < 0.2  [0/3 seeds, sd 0.000158]",
+       "v": 0.606722039791385,
+       "ok": false
+      },
+      {
+       "d": "readout active fraction[cva_apl_off, kc] / readout active fraction[cva] > 1.0  [3/3 seeds, sd 0.000131]",
+       "v": 1.4740226706978243,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[dm4_apl_off, kc] / readout active fraction[dm4] > 1.0  [3/3 seeds, sd 0.000344]",
+       "v": 1.4760513253413177,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[va1v_apl_off, kc] / readout active fraction[va1v] > 1.0  [3/3 seeds, sd 0.000557]",
+       "v": 1.4637375507090615,
+       "ok": true
+      },
+      {
+       "d": "population sparseness[cva, kc] / population sparseness[cva_apl_off] > 1.0  [3/3 seeds, sd 0.000338]",
+       "v": 1.8926357168984331,
+       "ok": true
+      },
+      {
+       "d": "population sparseness[dm4, kc] / population sparseness[dm4_apl_off] > 1.0  [3/3 seeds, sd 0.000304]",
+       "v": 1.8940033641084186,
+       "ok": true
       }
      ]
     }
@@ -3802,7 +3848,7 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.5882936507936508,
+   "hard": 0.5900415721844293,
    "seeds": 3,
    "verified": false,
    "max_active": 0.1596626271099976,
@@ -4571,6 +4617,52 @@
        "ok": false
       }
      ]
+    },
+    "mb_sparseness_apl": {
+     "passed": false,
+     "score": 0.625,
+     "checks": [
+      {
+       "d": "readout active fraction[cva, kc] < 0.2  [0/3 seeds, sd 0.000464]",
+       "v": 0.8542486876640419,
+       "ok": false
+      },
+      {
+       "d": "readout active fraction[dm4, kc] < 0.2  [0/3 seeds, sd 0.000116]",
+       "v": 0.8473589238845145,
+       "ok": false
+      },
+      {
+       "d": "readout active fraction[va1v, kc] < 0.2  [0/3 seeds, sd 0.000201]",
+       "v": 0.8558070866141732,
+       "ok": false
+      },
+      {
+       "d": "readout active fraction[cva_apl_off, kc] / readout active fraction[cva] > 1.0  [3/3 seeds, sd 0.000633]",
+       "v": 1.1669676344964461,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[dm4_apl_off, kc] / readout active fraction[dm4] > 1.0  [3/3 seeds, sd 0.000161]",
+       "v": 1.1758644939967986,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[va1v_apl_off, kc] / readout active fraction[va1v] > 1.0  [3/3 seeds, sd 0.000273]",
+       "v": 1.1648448227884618,
+       "ok": true
+      },
+      {
+       "d": "population sparseness[cva, kc] / population sparseness[cva_apl_off] > 1.0  [3/3 seeds, sd 0.00266]",
+       "v": 3.2543118846503893,
+       "ok": true
+      },
+      {
+       "d": "population sparseness[dm4, kc] / population sparseness[dm4_apl_off] > 1.0  [3/3 seeds, sd 3.37e-05]",
+       "v": 3.259223104620748,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {}
@@ -5174,6 +5266,13 @@
    "tier": "hard",
    "description": "Johnston's organ neurons (JONs) in the antenna drive antennal grooming through a command circuit \u2014 the brain interneuron aBN1 and the descending pair aDN1/aDN2 (Hampel et al. 2015). Hampel et al. 2020 split the JONs by subpopulation: optogenetic activation of JO-C/E or of JO-F elicits antennal grooming, but only JO-F also elicits backward locomotion (5\u20138\u00d7 control), which the authors attribute to the moonwalker descending neurons (MDN; Bidaye et al. 2014); JO-C/E activation gives grooming and wing flapping, no backward walking. This task drives each JON population at the task-02 100 Hz and reads aDN1/aDN2 (DNg62, DNge078 \u2014 Hampel 2015's names are the MaleCNS synonyms; the same types on FlyWire v783) and MDN. Two positive checks, one positive check whose readout is inferred from behaviour (JO-F \u2192 MDN), and one null: JO-C/E must not fire MDN. Neither JON population makes a direct synapse on MDN in either connectome; JO-F's route is two-hop (via DNge132/DNae007 on FlyWire, GNG583/pIP1 on MaleCNS) and JO-C/E's is four times weaker on FlyWire and three times stronger on MaleCNS (via pIP1), so the null is the check with the prediction at risk. The roadmap's bristle version (BM-Ant vs BM-InOm, Eichler et al. 2025) waits for those types to be annotated in the datasets. Pre-registered predictions and outcome: docs/rfcs/25_antennal_grooming_vs_backward.md.",
    "citation": "Hampel et al. 2020 (eLife 9:e59976); Hampel et al. 2015 (eLife 4:e08758); Bidaye et al. 2014 (Science 344:97, MDN); Sen et al. 2017 (Curr Biol 27:766)"
+  },
+  {
+   "name": "mb_sparseness_apl",
+   "title": "Kenyon cell odour responses are sparse, and less sparse without APL",
+   "tier": "hard",
+   "description": "An odour activates only ~5 % of the ~2,000 Kenyon cells per hemisphere (Honegger et al. 2011; Turner et al. 2008), and that sparseness is enforced by the single GABAergic APL neuron, which reads the whole KC population and inhibits all of it (Lin et al. 2014: blocking APL output with shibire increases KC odour responses, lowers population sparseness, raises the overlap between odours, and impairs learned discrimination of similar odours). This task drives the task-18 odour panel (eight glomeruli, each a whole ORN type at 100 Hz) with the mushroom body intact and with APL silenced \u2014 its outgoing synapses zeroed for the condition (`silence`, the in silico shibire; the neuron stays, so its own inputs are untouched). It is the first task to use silencing and lists `requires_capabilities: [can_silence]`, so a simulator that cannot do it skips the task rather than failing it. Checks: three odours each activate under 20 % of KCs with APL intact; silencing APL raises that fraction for the same three; and it lowers the population sparseness of the KC response for two. Pre-registered predictions and outcome: docs/rfcs/26_mb_sparseness_apl.md.",
+   "citation": "Lin et al. 2014 (Nat Neurosci 17:559); Honegger, Campbell & Turner 2011 (J Neurosci 31:11772); Turner, Bazhenov & Laurent 2008 (J Neurophysiol 99:734); Willmore & Tolhurst 2001 (Network 12:255)"
   }
  ]
 }
