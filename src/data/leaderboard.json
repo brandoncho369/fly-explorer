@@ -1791,7 +1791,8 @@
     "looming_to_jump_muscle": "readout 'ttmn' matches no neurons on flywire783",
     "gf_to_muscle_latency": "readout 'ttmn' matches no neurons on flywire783",
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
-    "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)"
+    "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
+    "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -3739,7 +3740,7 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.6479925303454716,
+   "hard": 0.6119929453262787,
    "seeds": 3,
    "verified": false,
    "max_active": 0.1596626271099976,
@@ -4425,6 +4426,27 @@
        "ok": true
       }
      ]
+    },
+    "leg_mn_size_principle": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rank order[ramp, leg_t1l] rho(input synapses, recruitment time) > 0.5  [0/3 seeds, sd 0.0721]",
+       "v": -0.759132947399274,
+       "ok": false
+      },
+      {
+       "d": "readout active fraction[ramp, leg_t1l] >= 0.8  [0/3 seeds, sd 0.0248]",
+       "v": 0.47368421052631576,
+       "ok": false
+      },
+      {
+       "d": "recruitment spread[ramp, leg_t1l] > 50.0 ms  [2/3 seeds, sd 56.7]",
+       "v": 113.76666005452473,
+       "ok": false
+      }
+     ]
     }
    },
    "skipped": {}
@@ -5007,6 +5029,13 @@
    "tier": "hard",
    "description": "The male song command chain (von Philipsborn et al. 2011): the male-specific P1 cluster (the pMP-e / pMP4 lineage) \u2192 the descending neuron pIP10 \u2192 thoracic song premotor neurons (dPR1, vPR6, TN1; Lillvis et al. 2024) \u2192 the wing motor neurons that make song (hg1\u20134, ps1, b1, i1, i2, iii1, iii3; O'Sullivan et al. 2018). P1 or pIP10 activation elicits song; one pIP10 is enough and a unilateral pIP10 sings with either wing, no side bias (von Philipsborn 2011). pIP10 activation gives wing extension, not walking (Cande et al. 2018), so the leg motor pool is the null readout. MaleCNS only \u2014 P1 and pIP10 are male-specific and the chain needs the nerve cord; on a female or brain-only dataset this task is not applicable (`dataset_only`), which is a different statement from \"matches no neurons\". Nothing here scores song rhythm. Pre-registered predictions and outcome: docs/rfcs/22_courtship_song_chain.md.",
    "citation": "von Philipsborn et al. 2011 (Neuron 69:509); Lillvis et al. 2024 (Curr Biol); O'Sullivan et al. 2018 (Curr Biol 28:2705); Cande et al. 2018 (eLife 7:e34275); Cachero et al. 2010 (Curr Biol 20:1589); Yu et al. 2010 (Curr Biol 20:1602)"
+  },
+  {
+   "name": "leg_mn_size_principle",
+   "title": "A ramping common drive recruits the front-leg motor neurons smallest first",
+   "tier": "hard",
+   "description": "Henneman's size principle in the fly leg: the tibia flexor motor neurons are recruited in order of size, slow (smallest) first, fast (largest) last, as drive and force rise (Azevedo et al. 2020). The wiring says the opposite would happen on drive alone: every premotor neuron distributes its synapses onto a muscle's MNs in proportion to MN size, so \"if MN recruitment were dictated entirely by the magnitude of premotor input ... a common input [would] first recruit the largest, fastest MNs\", and \"the intrinsic electrical properties of the largest MNs must compensate\" (Lesser, Azevedo et al. 2024). This task ramps the front-left leg's excitatory central premotor pool from 0 to 100 Hz over one second and scores the Spearman correlation between each MN's size (its total input synapse count, r = 0.94 with surface area in Lesser 2024) and its first-spike time: the size principle is a positive correlation. A model of uniform point neurons is predicted to fail it, largest first; that failure is the finding the task exists to record, and a model that passes has to have put something real in the MNs. MaleCNS only (the leg MNs live in the nerve cord); on FlyWire it is not applicable. The wing steering MNs are not scored: MaleCNS reproduces Lesser 2024's leg/wing contrast per premotor neuron (median rho(weight, size) 0.41 leg vs 0.10 wing) but pooled excitatory drive scales with size in both (0.99 / 0.95), so no model could pass a wing null under a common ramp. Pre-registered predictions and outcome: docs/rfcs/23_leg_mn_size_principle.md.",
+   "citation": "Azevedo et al. 2020 (eLife 9:e56754); Lesser, Azevedo et al. 2024 (Nature 631:369); Henneman 1957 (Science 126:1345); Henneman, Somjen & Carpenter 1965 (J Neurophysiol 28:560)"
   }
  ]
 }
