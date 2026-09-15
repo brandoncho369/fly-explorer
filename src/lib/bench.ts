@@ -10,6 +10,9 @@ export interface Run {
   // public − hold-out gap, and closed/open division; absent on results that predate them
   graded?: number; graded_ci?: [number, number]; specificity?: number; holdout_gap?: number; division?: string;
   tasks: Record<string, TaskResult>;
+  // tasks this run could not score, by reason: "not applicable: ..." (a dataset_only task, e.g. a male-only
+  // circuit on the female brain) or "readout 'x' matches no neurons" (the dataset lacks the cell type)
+  skipped?: Record<string, string>;
 }
 export interface Task { name: string; title: string; tier: "core" | "hard" | string; description: string; citation: string }
 export interface Snapshot { generated: string; source: string; runs: Run[]; tasks: Task[] }

@@ -12,14 +12,22 @@ describe("committed snapshot", () => {
   it("is internally consistent", () => {
     expect(validateSnapshot(snap)).toEqual([]);
   });
-  it("has 5 core + 16 hard tasks; every run's tasks are known tasks and every run covers the core tier", () => {
+  it("has 5 core + 17 hard tasks; every run's tasks are known tasks and every run covers the core tier", () => {
     expect(snap.tasks.filter((t) => t.tier === "core")).toHaveLength(5);
-    expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(16);
+    expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(17);
     const known = new Set(snap.tasks.map((t) => t.name));
     for (const r of snap.runs) {
       for (const name of Object.keys(r.tasks)) expect(known.has(name), `${r.label} has unknown task ${name}`).toBe(true);
       for (const t of snap.tasks.filter((t) => t.tier === "core")) expect(r.tasks[t.name], `${r.label} missing core task ${t.name}`).toBeDefined();
     }
+  });
+  it("records why a run could not score a task: a dataset_only task is 'not applicable' on the other brain, never 'not run yet'", () => {
+    const fw = snap.runs.find((r) => r.label === "LIF gain 0.45 (3 seeds)")!;
+    const mc = snap.runs.find((r) => r.connectome === "malecns" && r.gain === 0.65)!;
+    expect(fw.skipped?.courtship_song_chain).toMatch(/^not applicable/);
+    expect(fw.tasks.courtship_song_chain).toBeUndefined();
+    expect(mc.tasks.courtship_song_chain).toBeDefined();
+    expect(mc.skipped?.courtship_song_chain).toBeUndefined();
   });
   it("reproduces the headline finding: robust window is 0.45 (0.40 fails with 3 seeds), Shiu 1.0 fails core", () => {
     const fw = byConnectome(snap.runs, PRIMARY_CONNECTOME);

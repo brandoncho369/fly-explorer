@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-14",
+ "generated": "2026-09-15",
  "source": "https://github.com/brandoncho369/flybench",
  "runs": [
   {
@@ -420,6 +420,9 @@
       }
      ]
     }
+   },
+   "skipped": {
+    "looming_to_jump_muscle": "readout 'ttmn' matches no neurons on flywire783"
    }
   },
   {
@@ -686,7 +689,8 @@
       }
      ]
     }
-   }
+   },
+   "skipped": {}
   },
   {
    "label": "LIF gain 0.35",
@@ -952,7 +956,8 @@
       }
      ]
     }
-   }
+   },
+   "skipped": {}
   },
   {
    "label": "LIF gain 0.4",
@@ -1218,10 +1223,11 @@
       }
      ]
     }
-   }
+   },
+   "skipped": {}
   },
   {
-   "label": "gain0.45",
+   "label": "LIF gain 0.45 (3 seeds)",
    "connectome": "flywire783",
    "simulator": "LIFSimulator",
    "gain": 0.45,
@@ -1780,6 +1786,12 @@
       }
      ]
     }
+   },
+   "skipped": {
+    "looming_to_jump_muscle": "readout 'ttmn' matches no neurons on flywire783",
+    "gf_to_muscle_latency": "readout 'ttmn' matches no neurons on flywire783",
+    "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
+    "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -2046,7 +2058,8 @@
       }
      ]
     }
-   }
+   },
+   "skipped": {}
   },
   {
    "label": "LIF gain 0.5",
@@ -2312,7 +2325,8 @@
       }
      ]
     }
-   }
+   },
+   "skipped": {}
   },
   {
    "label": "LIF gain 0.7",
@@ -2578,7 +2592,8 @@
       }
      ]
     }
-   }
+   },
+   "skipped": {}
   },
   {
    "label": "LIF gain 0.45 (reference)",
@@ -2911,6 +2926,9 @@
       }
      ]
     }
+   },
+   "skipped": {
+    "looming_to_jump_muscle": "readout 'ttmn' matches no neurons on flywire783"
    }
   },
   {
@@ -3177,7 +3195,8 @@
       }
      ]
     }
-   }
+   },
+   "skipped": {}
   },
   {
    "label": "MaleCNS gain 0.50",
@@ -3443,7 +3462,8 @@
       }
      ]
     }
-   }
+   },
+   "skipped": {}
   },
   {
    "label": "MaleCNS gain 0.55",
@@ -3709,16 +3729,17 @@
       }
      ]
     }
-   }
+   },
+   "skipped": {}
   },
   {
-   "label": "gain0.65",
+   "label": "MaleCNS gain 0.65 (Minecraft demo)",
    "connectome": "malecns",
    "simulator": "LIFSimulator",
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.6338045634920635,
+   "hard": 0.6479925303454716,
    "seeds": 3,
    "verified": false,
    "max_active": 0.1596626271099976,
@@ -4358,8 +4379,55 @@
        "ok": true
       }
      ]
+    },
+    "courtship_song_chain": {
+     "passed": false,
+     "score": 0.875,
+     "checks": [
+      {
+       "d": "rate[p1, pip10] > 5.0 Hz  [3/3 seeds, sd 1.7]",
+       "v": 72.33333333333333,
+       "ok": true
+      },
+      {
+       "d": "rate[p1, song_mn] > 5.0 Hz  [3/3 seeds, sd 1.52]",
+       "v": 67.46666666666667,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[p1, song_mn] > 0.5  [3/3 seeds, sd 0.0236]",
+       "v": 0.8833333333333333,
+       "ok": true
+      },
+      {
+       "d": "rate[pip10_left, leg_mn] < 2.0 Hz  [0/3 seeds, sd 0.528]",
+       "v": 16.19636363636364,
+       "ok": false
+      },
+      {
+       "d": "rate[pip10_left, song_mn] > 5.0 Hz  [3/3 seeds, sd 0.759]",
+       "v": 70.86666666666667,
+       "ok": true
+      },
+      {
+       "d": "rate[pip10_right, song_mn] > 5.0 Hz  [3/3 seeds, sd 1.11]",
+       "v": 76.66666666666667,
+       "ok": true
+      },
+      {
+       "d": "rate[pip10_left, song_mn_left] / rate[pip10_right] < 3.0  [3/3 seeds, sd 0.0163]",
+       "v": 0.9234243599443367,
+       "ok": true
+      },
+      {
+       "d": "rate[pip10_right, song_mn_left] / rate[pip10_left] < 3.0  [3/3 seeds, sd 0.019]",
+       "v": 1.0832608137520745,
+       "ok": true
+      }
+     ]
     }
-   }
+   },
+   "skipped": {}
   },
   {
    "label": "Shiu 2024 (gain 1.0)",
@@ -4779,6 +4847,9 @@
       }
      ]
     }
+   },
+   "skipped": {
+    "looming_to_jump_muscle": "readout 'ttmn' matches no neurons on flywire783"
    }
   }
  ],
@@ -4929,6 +5000,13 @@
    "tier": "hard",
    "description": "Optogenetic activation of single LC types evokes type-specific behaviours (Wu et al. 2016, 22 types screened): LC4, LC6, LPLC1, LPLC2 \u2192 takeoff; LC16 \u2192 backward walking; LC10 \u2192 neither. The descending neurons behind two of those are known: LC4 and LPLC2 synapse onto the giant fiber (von Reyn 2017; Klapoetke 2017; Ache 2019) and LC4 onto DNp02 / DNp11 (Dombrovski 2023); LC16 drives the four moonwalker DNs (Sen 2017). This task drives each LC type at the task-04 loom rate and reads four DNs; the `matrix` check scores every cell with a citation: \"+\" the DN must spike, \"-\" it must not (a null check). The off-diagonal is the point \u2014 task 04 already tests the diagonal. Cells without a citation are \"?\" and not scored (LC6 and LPLC1 evoke takeoff but their DN targets are not established). Pre-registered predictions and outcome: docs/rfcs/21_lc_dn_matrix.md.",
    "citation": "Wu et al. 2016 (eLife 5:e21022); Sen et al. 2017 (Curr Biol 27:766); Dombrovski et al. 2023 (Nature 613:534); von Reyn et al. 2017 (Neuron 94:1190); Klapoetke et al. 2017 (Nature 551:237); Ribeiro et al. 2018 (Curr Biol 28:2211); Morimoto et al. 2020 (eLife 9:e57685)"
+  },
+  {
+   "name": "courtship_song_chain",
+   "title": "P1 drives pIP10 drives the song wing motor neurons, on either wing, not the legs",
+   "tier": "hard",
+   "description": "The male song command chain (von Philipsborn et al. 2011): the male-specific P1 cluster (the pMP-e / pMP4 lineage) \u2192 the descending neuron pIP10 \u2192 thoracic song premotor neurons (dPR1, vPR6, TN1; Lillvis et al. 2024) \u2192 the wing motor neurons that make song (hg1\u20134, ps1, b1, i1, i2, iii1, iii3; O'Sullivan et al. 2018). P1 or pIP10 activation elicits song; one pIP10 is enough and a unilateral pIP10 sings with either wing, no side bias (von Philipsborn 2011). pIP10 activation gives wing extension, not walking (Cande et al. 2018), so the leg motor pool is the null readout. MaleCNS only \u2014 P1 and pIP10 are male-specific and the chain needs the nerve cord; on a female or brain-only dataset this task is not applicable (`dataset_only`), which is a different statement from \"matches no neurons\". Nothing here scores song rhythm. Pre-registered predictions and outcome: docs/rfcs/22_courtship_song_chain.md.",
+   "citation": "von Philipsborn et al. 2011 (Neuron 69:509); Lillvis et al. 2024 (Curr Biol); O'Sullivan et al. 2018 (Curr Biol 28:2705); Cande et al. 2018 (eLife 7:e34275); Cachero et al. 2010 (Curr Biol 20:1589); Yu et al. 2010 (Curr Biol 20:1602)"
   }
  ]
 }

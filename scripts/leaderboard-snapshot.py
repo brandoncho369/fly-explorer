@@ -22,6 +22,8 @@ for f in sorted(glob.glob(os.path.join(root, "results", "*.json"))):
         "tasks": {t["task"]: {"passed": t["passed"], "score": t["score"],
                               "checks": [{"d": c["description"], "v": c["value"], "ok": c["passed"]} for c in t["checks"]]}
                   for t in r["tasks"]},
+        # tasks this run could not score here, with the reason ("not applicable: ..." for a dataset_only task)
+        "skipped": dict(r.get("skipped") or {}),
     })
 tasks = []
 for f in sorted(glob.glob(os.path.join(root, "tasks", "*.yaml"))):

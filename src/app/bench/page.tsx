@@ -218,6 +218,11 @@ function Dots({ run, tasks, color }: { run: Snapshot["runs"][number]; tasks: Sna
     <span className="flex gap-1.5">
       {tasks.map((t) => {
         const x = run.tasks[t.name];
+        const why = run.skipped?.[t.name];
+        if (why) {
+          const na = why.startsWith("not applicable");
+          return <span key={t.name} title={`${t.title} · ${na ? "not applicable on this dataset" : "skipped"}: ${why}`} className={`inline-block h-3 w-3 rounded-full border border-dotted ${na ? "border-zinc-500" : "border-zinc-700"}`} aria-label={`${t.name}: ${na ? "not applicable" : "skipped"}`} />;
+        }
         if (!x) return <span key={t.name} title={`${t.title} · not run on this result yet (task added later)`} className="inline-block h-3 w-3 rounded-full border border-dashed border-zinc-700" aria-label={`${t.name}: not run`} />;
         const ok = !!x.passed;
         return <span key={t.name} title={`${t.title}${ok ? "" : ` · ${pct(x.score)} of checks`}`} className={`inline-block h-3 w-3 rounded-full border ${ok ? fill : ring}`} aria-label={`${t.name}: ${ok ? "pass" : "fail"}`} />;
