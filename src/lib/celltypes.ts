@@ -104,3 +104,15 @@ export function externalLinks(dataset: string, typeName: string): { label: strin
   }
   return [];
 }
+
+/** Per-neuron spike counts since the last reset as CSV (ROADMAP item 54): neuron_index, cell_type, spikes, hz.
+ *  Neurons that never fired are left out so a 140k-neuron brain gives a file the size of its activity. */
+export function countsToCsv(counts: Uint32Array | number[], ids: Uint16Array, t: TypeTable, sinceMs: number): string {
+  const secs = Math.max(sinceMs, 1) / 1000;
+  const rows = ["neuron_index,cell_type,spikes,hz"];
+  for (let i = 0; i < ids.length; i++) {
+    const c = counts[i];
+    if (c > 0) rows.push(`${i},"${(t.names[ids[i]] ?? "").replace(/"/g, '""')}",${c},${(c / secs).toFixed(3)}`);
+  }
+  return rows.join("\n") + "\n";
+}

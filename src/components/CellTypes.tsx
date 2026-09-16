@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { activityByType, externalLinks, neuronsOfType, searchTypes, type TypeActivity, type TypeTable } from "@/lib/celltypes";
+import { activityByType, countsToCsv, externalLinks, neuronsOfType, searchTypes, type TypeActivity, type TypeTable } from "@/lib/celltypes";
 import { Explain } from "@/components/Hint";
 import snapshot from "@/data/leaderboard.json";
 import synonyms from "@/data/synonyms.json";
@@ -119,7 +119,11 @@ export function CellTypes({ base, ready, gain, activeStims, onFire, held, reques
       <Explain title="what fired" text={HELP_FIRED}>
         <div className="flex items-baseline justify-between pt-1">
           <label className="text-xs uppercase tracking-wide text-zinc-500">what fired <span className="normal-case tracking-normal text-zinc-600">· by cell type{report ? `, last ${(report.sinceMs / 1000).toFixed(1)} s` : ""}</span></label>
-          <button onClick={onClear} disabled={!ready} className="text-xs text-zinc-500 hover:text-zinc-200 disabled:opacity-40">clear</button>
+          <span className="flex gap-3">
+            <button onClick={() => { if (!report || !ids || !table) return; const blob = new Blob([countsToCsv(report.counts, ids, table, report.sinceMs)], { type: "text/csv" }); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `fly-explorer-${base.split("/").pop()}-spikes.csv`; a.click(); URL.revokeObjectURL(a.href); }}
+              disabled={!ready || !report} className="text-xs text-zinc-500 hover:text-zinc-200 disabled:opacity-40" aria-label="download spike counts as CSV">download csv</button>
+            <button onClick={onClear} disabled={!ready} className="text-xs text-zinc-500 hover:text-zinc-200 disabled:opacity-40">clear</button>
+          </span>
         </div>
       </Explain>
       {rows.length === 0 ? (

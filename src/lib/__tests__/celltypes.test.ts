@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { activityByType, externalLinks, neuronsOfType, searchTypes, type TypeTable } from "../celltypes";
+import { activityByType, countsToCsv, externalLinks, neuronsOfType, searchTypes, type TypeTable } from "../celltypes";
 
 const t: TypeTable = {
   names: ["", "MN9", "GF", "LPLC2", "LC4", "KCg-m", "DNp01"],
@@ -66,5 +66,15 @@ describe("externalLinks", () => {
     expect(mc[0].href).toContain("male-cns");
     expect(externalLinks("toy", "MN9")).toEqual([]);
     expect(externalLinks("flywire783", "KCa'b'-m")[1].href).toContain(encodeURIComponent("KCa'b'-m"));
+  });
+});
+
+
+describe("countsToCsv", () => {
+  it("writes one row per neuron that fired, with its type, count and rate", () => {
+    const t: TypeTable = { names: ["", "MN9", "GF"], counts: [0, 2, 2], super_class: ["", "motor", "descending"] };
+    const ids = new Uint16Array([1, 1, 2, 2, 0]);
+    const csv = countsToCsv([10, 0, 3, 0, 7], ids, t, 500);
+    expect(csv.split("\n").filter(Boolean)).toEqual(["neuron_index,cell_type,spikes,hz", '0,"MN9",10,20.000', '2,"GF",3,6.000', '4,"",7,14.000']);
   });
 });
