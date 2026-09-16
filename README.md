@@ -6,7 +6,7 @@ Each dot is one of the ~140,000 neurons in the [FlyWire](https://flywire.ai) adu
 
 Nothing is scripted. There is no per-neuron tuning. When MN9 lights up, the wiring did that.
 
-> Ships with a 3.6k-neuron synthetic "toy" connectome (hand-wired to pass every flybench task) so it runs instantly. To load the real brain, see [Loading FlyWire](#loading-flywire) — it's one command with the sibling repo **flybench**.
+> Ships with a 3.6k-neuron synthetic "toy" connectome (hand-wired so every circuit-level flybench task can pass) so it runs instantly. To load the real brain, see [Loading FlyWire](#loading-flywire) — it's one command with the sibling repo **flybench**.
 
 ## How it works
 

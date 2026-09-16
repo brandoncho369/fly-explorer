@@ -210,4 +210,15 @@ check(errs.length === 0, "no page/console errors" + (errs.length ? ": " + errs.j
   await p2.close();
 }
 
+// /limits: the "what this model cannot do" page (ROADMAP item 59) lists every limit with a task link
+{
+  const p3 = await b.newPage({ viewport: { width: 400, height: 800 } });
+  p3.on("pageerror", (e) => errs.push("pageerror: " + e.message));
+  await p3.goto(`${URL}/limits`, { waitUntil: "networkidle" });
+  check((await p3.locator("h1").innerText()).includes("cannot do"), "/limits: headline");
+  check((await p3.locator("ol > li").count()) === 8, "/limits: eight limits");
+  check((await p3.evaluate(() => document.documentElement.scrollWidth)) <= 400, "/limits @400px: no horizontal overflow");
+  await p3.close();
+}
+
 await b.close();

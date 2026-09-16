@@ -33,6 +33,7 @@ export default function Bench() {
           <Link href="/" className="text-zinc-400 hover:text-white">← fly-explorer</Link>
           <div className="flex gap-5 text-zinc-400">
             <Link href="/submit" className="hover:text-white">submit</Link>
+            <Link href="/limits" className="hover:text-white">limits</Link>
             <a href="#leaderboard" className="hover:text-white">leaderboard</a>
             <a href="#tasks" className="hover:text-white">tasks</a>
             <a href={REPO} className="hover:text-white">github</a>
