@@ -9,6 +9,7 @@ import { CellTypes } from "@/components/CellTypes";
 import { FlyMode } from "@/components/FlyMode";
 import { track } from "@/lib/track";
 import EditableValue from "@/components/EditableValue";
+import { decodeState, encodeState, missingNames, type ExplorerState } from "@/lib/permalink";
 
 const Brain = dynamic(() => import("@/components/Brain"), { ssr: false });
 
@@ -69,7 +70,11 @@ function PageInner() {
   const [history, setHistory] = useState<Record<string, number[]>>({});
   const [pressed, setPressed] = useState(false);           // has the visitor fired any sense yet
   const [stimEndT, setStimEndT] = useState<number | null>(null);   // sim time when the last stimulus ended
-  const urlGain = useRef<number | null>(null);             // ?gain=0.45 from /submit's preview link
+  const urlGain = useRef<number | null>(null);             // ?gain=0.45 from /submit's preview link, or a permalink
+  const link = useRef<ExplorerState | null>(null);         // the permalink this page was opened with (applied once the brain loads)
+  const [linkTypes, setLinkTypes] = useState<string[]>([]);     // its held cell types, applied by CellTypes when the type table is in
+  const [missing, setMissing] = useState<string[]>([]);         // names the link asked for that this dataset lacks
+  const [copied, setCopied] = useState(false);
   const [report, setReport] = useState<{ counts: Uint32Array; sinceMs: number } | null>(null);
   const loading = !meta && !error;
 
@@ -91,6 +96,11 @@ function PageInner() {
         const g = urlGain.current ?? DATASETS.find((d) => d.id === e.meta.name)?.gain ?? SHIU_2024.gain;
         urlGain.current = null;
         setGain(g);
+        const st = link.current;   // the rest of a permalink: input rate now, held senses and types once the state is in (effects below)
+        if (st) {
+          if (st.rate !== 100) setRateHz(st.rate);
+          if (st.dataset !== e.meta.name && st.dataset !== "toy") setMissing([`dataset ${st.dataset}`]);
+        }
         w.postMessage({ type: "params", params: { gain: g } } satisfies WorkerCommand);
         w.postMessage({ type: "speed", target: SPEEDS[2] } satisfies WorkerCommand);
         w.postMessage({ type: "run", running: true } satisfies WorkerCommand);
@@ -110,17 +120,25 @@ function PageInner() {
         }
       }
     };
-    // /submit links here with ?dataset=flywire783&gain=0.42 so a submitter can watch a setting before opening a PR
-    const q = new URLSearchParams(window.location.search);
-    const g = parseFloat(q.get("gain") ?? "");
-    if (g > 0 && g <= 5) urlGain.current = g;
-    const ds = q.get("dataset");
-    const base = ds && DATASETS.some((d) => d.id === ds) ? `/data/${ds}` : "/data/toy";
+    // a permalink (or /submit's ?dataset=flywire783&gain=0.42 preview link): dataset, gain, input rate, held senses and cell types
+    const st = decodeState(window.location.search, { dataset: "toy", gain: NaN });
+    if (st.gain > 0) urlGain.current = st.gain;
+    link.current = st;
+    const base = DATASETS.some((d) => d.id === st.dataset) ? `/data/${st.dataset}` : "/data/toy";
     w.postMessage({ type: "load", base } satisfies WorkerCommand);
     return () => w.terminate();
   }, []);
 
   useEffect(() => { send({ type: "params", params: { gain } }); }, [gain, send]);
+  const copyLink = () => {
+    const pops = new Set(Object.keys(meta?.populations ?? {}));
+    const state: ExplorerState = { dataset, gain, rate: rateHz, hold: [...held].filter((h) => pops.has(h)), types: [...held].filter((h) => !pops.has(h)) };
+    const url = `${window.location.origin}${window.location.pathname}?${encodeState(state)}`;
+    window.history.replaceState(null, "", url);
+    navigator.clipboard?.writeText(url).catch(() => {});
+    track({ name: "copy_link", dataset, held: state.hold.length + state.types.length });
+    setCopied(true); setTimeout(() => setCopied(false), 1500);
+  };
   useEffect(() => { send({ type: "speed", target: SPEEDS[speedIdx] }); }, [speedIdx, send]);
   useEffect(() => { send({ type: "run", running }); }, [running, send]);
 
@@ -128,7 +146,7 @@ function PageInner() {
     setDataset(id); setMeta(null); setPositions(null); setClasses(null); setFrame(null); setError(null); setStatus("loading…"); setHighlight(new Set());
     activityRef.current = null;
     // a new brain starts with nothing held: the worker drops every stimulus on load, so the UI must too
-    setHeld(new Set()); setStimEndT(null); setReport(null); setPressed(false);
+    setHeld(new Set()); setStimEndT(null); setReport(null); setPressed(false); setMissing([]); setLinkTypes([]);
     setRunning(true);
     send({ type: "load", base: `/data/${id}` });
   };
@@ -160,6 +178,16 @@ function PageInner() {
   useEffect(() => {
     for (const [name, idx] of heldNeurons.current) send({ type: "stim", name, neurons: idx, rateHz, durationMs: Number.POSITIVE_INFINITY });
   }, [rateHz, send]);
+  // apply a permalink's held senses once the brain is in; names this dataset lacks go on the banner, nothing is silently dropped
+  useEffect(() => {
+    if (!meta || !link.current) return;
+    const st = link.current; link.current = null;
+    const lacking = missingNames(st.hold, Object.keys(meta.populations));
+    if (lacking.length) setMissing((m) => [...m, ...lacking]);
+    for (const name of st.hold) if (meta.populations[name]) toggleHold(name);
+    if (st.types.length) setLinkTypes(st.types);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [meta]);
   const requestReport = useCallback(() => send({ type: "report" }), [send]);
   // fly mode drives named populations at its own rates (the cursor sets the looming rate)
   const stimAt = useCallback((name: string, hz: number, ms: number) => {
@@ -203,6 +231,7 @@ function PageInner() {
             </select>
           </Explain>
           <p className="text-xs text-zinc-500">{error ? <span className="text-red-400">couldn&apos;t load: {error}. {dataset !== "toy" && <button className="underline" onClick={() => loadDataset("toy")}>back to toy</button>}</span> : status}</p>
+          {missing.length > 0 && <p className="text-xs text-amber-300/90 rounded border border-amber-300/40 bg-amber-300/10 px-2 py-1" data-testid="missing">not in this dataset: {missing.join(", ")} — the link asked for it; nothing was substituted.</p>}
         </section>
 
         <section className="space-y-2">
@@ -242,7 +271,8 @@ function PageInner() {
 
         <CellTypes base={`/data/${dataset}`} ready={!!meta} gain={gain} activeStims={frame?.activeStims ?? []} held={held}
           onFire={(name, neurons, hold) => { track({ name: "cell_type_fire", cellType: name, hold }); return hold ? toggleHold(name, neurons) : stimulate(name, 500, neurons); }}
-          requestReport={requestReport} report={report} onClear={() => { send({ type: "clearCounts" }); setReport(null); }} />
+          requestReport={requestReport} report={report} onClear={() => { send({ type: "clearCounts" }); setReport(null); }}
+          initialTypes={linkTypes} onMissing={(names) => setMissing((m) => [...m, ...names])} />
 
         <section className="space-y-2">
           <Explain title="readouts" text={HELP.readouts}><label className="text-xs uppercase tracking-wide text-zinc-500 block">readouts <span className="normal-case tracking-normal text-zinc-600">· Hz per neuron, last 100 ms</span></label></Explain>
@@ -271,6 +301,7 @@ function PageInner() {
             <Explain title="reset" text={HELP.reset}><button onClick={resetBrain} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40">reset</button></Explain>
             <Explain title="gain preset: Shiu 2024" text={HELP.presetShiu}><button onClick={() => setGain(SHIU_2024.gain)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: Shiu 2024</button></Explain>
             <Explain title="gain preset: flybench" text={HELP.presetFlybench}><button onClick={() => setGain(0.45)} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400">gain: flybench</button></Explain>
+            <Explain title="copy link" text={HELP.copyLink}><button onClick={copyLink} disabled={!meta} className="px-3 py-1.5 rounded border border-zinc-700 bg-zinc-900 hover:border-zinc-400 disabled:opacity-40" aria-label="copy link to this experiment">{copied ? "copied ✓" : "copy link"}</button></Explain>
           </div>
           <p className="text-xs text-zinc-500 font-mono">
             t = {((frame?.t ?? 0) / 1000).toFixed(2)} s · asked {SPEEDS[speedIdx]}× · getting {frame?.achieved ? `${frame.achieved.toFixed(2)}×` : "–"}{frame && frame.achieved < SPEEDS[speedIdx] * 0.5 ? <span className="text-amber-300/80"> (brain busy: {frame.firedThisFrame.toLocaleString()} spikes/frame)</span> : null} · {frame?.stepMs.toFixed(2) ?? "–"} ms/step

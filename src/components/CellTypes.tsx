@@ -4,6 +4,7 @@ import Link from "next/link";
 import { activityByType, neuronsOfType, searchTypes, type TypeActivity, type TypeTable } from "@/lib/celltypes";
 import { Explain } from "@/components/Hint";
 import snapshot from "@/data/leaderboard.json";
+import synonyms from "@/data/synonyms.json";
 
 /**
  * The lab tool: activate any annotated cell type by name, and see which cell types fired since the
@@ -20,12 +21,14 @@ export interface CellTypesProps {
   requestReport: () => void;                        // ask the worker for spike counts
   report: { counts: Uint32Array; sinceMs: number } | null;
   onClear: () => void;
+  initialTypes?: string[];                          // cell types a permalink asked to hold on; applied once the type table is loaded
+  onMissing?: (names: string[]) => void;            // permalink names this dataset does not have
 }
 
-const HELP_SEARCH = "Every cell type in the dataset's annotation (8,773 on FlyWire v783), searchable by name: MN9, DNp01, LPLC2, KCg-m, aMe12… Pick one and fire it to see what the wiring does with it. This is the in-silico version of activating a genetic driver line.";
+const HELP_SEARCH = "Every cell type in the dataset's annotation (8,773 on FlyWire v783), searchable by name: MN9, DNp01, LPLC2, KCg-m, aMe12… Literature names work too — 'giant fiber' finds DNp01 here and GF on MaleCNS, 'bIPS', 'P9', 'oviEN' resolve to the dataset's own name. Pick one and fire it to see what the wiring does with it. This is the in-silico version of activating a genetic driver line.";
 const HELP_FIRED = "Which cell types have fired since the last reset, ranked by spikes per neuron across the whole type. 'active' is how many of the type's neurons fired at all. Types you are stimulating directly are marked as input. Read it as a prediction of what an activation experiment would show, with the trust line below telling you how far to believe it.";
 
-export function CellTypes({ base, ready, gain, activeStims, onFire, held, requestReport, report, onClear }: CellTypesProps) {
+export function CellTypes({ base, ready, gain, activeStims, onFire, held, requestReport, report, onClear, initialTypes, onMissing }: CellTypesProps) {
   const [loaded, setLoaded] = useState<{ base: string; table: TypeTable; ids: Uint16Array } | null>(null);
   const table = loaded?.base === base ? loaded.table : null;
   const ids = loaded?.base === base ? loaded.ids : null;
@@ -49,7 +52,19 @@ export function CellTypes({ base, ready, gain, activeStims, onFire, held, reques
     return () => clearInterval(id);
   }, [ready, requestReport]);
 
-  const hits = useMemo(() => (table ? searchTypes(table, q) : []), [table, q]);
+  const hits = useMemo(() => (table ? searchTypes(table, q, 8, synonyms) : []), [table, q]);
+  // a permalink's held cell types: fired (held) once the table for this dataset is in; names it lacks are reported, not dropped
+  const applied = useRef<string | null>(null);
+  useEffect(() => {
+    if (!ready || !table || !ids || !initialTypes?.length || applied.current === base) return;
+    applied.current = base;
+    const missing: string[] = [];
+    for (const name of initialTypes) {
+      const id = table.names.findIndex((n) => n.toLowerCase() === name.toLowerCase());
+      if (id > 0) onFire(table.names[id], neuronsOfType(ids, id), true); else missing.push(name);
+    }
+    if (missing.length) onMissing?.(missing);
+  }, [ready, table, ids, initialTypes, base, onFire, onMissing]);
   const rows: TypeActivity[] = useMemo(() => (report && ids && table ? activityByType(report.counts, ids, table, report.sinceMs).slice(0, 12) : []), [report, ids, table]);
   const pickedName = picked != null && table && picked < table.names.length ? table.names[picked] : null;
   const pickedCount = picked != null && table ? table.counts[picked] : 0;
@@ -78,7 +93,7 @@ export function CellTypes({ base, ready, gain, activeStims, onFire, held, reques
               <li key={h.id} role="option" aria-selected={picked === h.id}>
                 <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => { setPicked(h.id); setQ(h.name); setOpen(false); }}
                   className="w-full flex items-baseline justify-between gap-2 px-2.5 py-1.5 text-left text-sm hover:bg-zinc-800">
-                  <span className="truncate">{h.name}</span>
+                  <span className="truncate">{h.name}{h.via && <span className="text-zinc-500"> · a.k.a. {h.via}</span>}</span>
                   <span className="text-xs text-zinc-500 shrink-0">{h.count.toLocaleString()} · {h.superClass}</span>
                 </button>
               </li>

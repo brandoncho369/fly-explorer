@@ -2,19 +2,49 @@
 
 export interface TypeTable { names: string[]; counts: number[]; super_class: string[] }
 
-export interface TypeHit { id: number; name: string; count: number; superClass: string }
+export interface TypeHit { id: number; name: string; count: number; superClass: string; via?: string }
 
-/** Substring search over type names, exact/prefix matches first, then by population size. Id 0 (untyped) is never returned. */
-export function searchTypes(t: TypeTable, query: string, limit = 8): TypeHit[] {
+/** native type name -> other names for the same cells (literature, community, the other dataset's name).
+ *  The table is src/data/synonyms.json (ROADMAP item 55): keys are native type names as they appear in at least
+ *  one dataset's annotation; search resolves an alias to whichever of them the loaded dataset has. */
+export type Synonyms = Record<string, string[]>;
+
+/**
+ * Substring search over type names, exact/prefix matches first, then by population size. Id 0 (untyped)
+ * is never returned. With a synonym table, a query that matches an alias ("giant fiber", "P9", "bIPS")
+ * also returns the native types it names in this dataset, marked `via: <the alias>` — so GF finds DNp01
+ * on FlyWire and DNp01 finds GF on MaleCNS, and only names this dataset actually has come back.
+ */
+export function searchTypes(t: TypeTable, query: string, limit = 8, synonyms?: Synonyms): TypeHit[] {
   const q = query.trim().toLowerCase();
   if (!q) return [];
   const hits: (TypeHit & { rank: number })[] = [];
+  const seen = new Set<number>();
   for (let id = 1; id < t.names.length; id++) {
     const name = t.names[id], lc = name.toLowerCase();
     const at = lc.indexOf(q);
     if (at < 0) continue;
     const rank = lc === q ? 0 : at === 0 ? 1 : 2;
     hits.push({ id, name, count: t.counts[id], superClass: t.super_class[id], rank });
+    seen.add(id);
+  }
+  if (synonyms) {
+    const byName = new Map<string, number>();
+    for (let id = 1; id < t.names.length; id++) byName.set(t.names[id].toLowerCase(), id);
+    for (const [native, aliases] of Object.entries(synonyms)) {
+      if (!Array.isArray(aliases)) continue;
+      // the alias that matched: one of the listed names, or the native name itself when it is absent here
+      const matched = aliases.find((a) => a.toLowerCase().includes(q)) ?? (native.toLowerCase().includes(q) ? native : undefined);
+      if (!matched) continue;
+      // targets: the native name, plus any alias that is itself a native type here (GF <-> DNp01)
+      for (const cand of [native, ...aliases]) {
+        const id = byName.get(cand.toLowerCase());
+        if (id == null || seen.has(id)) continue;
+        const exact = matched.toLowerCase() === q;
+        hits.push({ id, name: t.names[id], count: t.counts[id], superClass: t.super_class[id], via: matched, rank: exact ? 1 : 3 });
+        seen.add(id);
+      }
+    }
   }
   hits.sort((a, b) => a.rank - b.rank || b.count - a.count || a.name.localeCompare(b.name));
   return hits.slice(0, limit).map(({ rank: _r, ...h }) => h);   // eslint-disable-line @typescript-eslint/no-unused-vars

@@ -1,0 +1,272 @@
+{
+  "GF": [
+    "DNp01",
+    "giant fiber",
+    "giant fibre",
+    "GFN"
+  ],
+  "DNp01": [
+    "GF",
+    "giant fiber",
+    "giant fibre"
+  ],
+  "MN9": [
+    "CB0701",
+    "proboscis motor neuron",
+    "rostrum protractor"
+  ],
+  "CB0701": [
+    "MN9",
+    "proboscis motor neuron"
+  ],
+  "TTMn": [
+    "TTM",
+    "jump muscle motor neuron",
+    "tergotrochanteral motor neuron"
+  ],
+  "DLMn a, b": [
+    "DLM",
+    "DLMn",
+    "flight power motor neuron"
+  ],
+  "DLMn c-f": [
+    "DLM",
+    "DLMn",
+    "flight power motor neuron"
+  ],
+  "EPG": [
+    "E-PG",
+    "compass neuron",
+    "wedge neuron"
+  ],
+  "PEN_a/PEN1": [
+    "P-EN",
+    "PEN",
+    "PEN1",
+    "PEN_a(PEN1)"
+  ],
+  "PEN_b/PEN2": [
+    "P-EN",
+    "PEN",
+    "PEN2",
+    "PEN_b(PEN2)"
+  ],
+  "PEN_a(PEN1)": [
+    "P-EN",
+    "PEN",
+    "PEN1",
+    "PEN_a/PEN1"
+  ],
+  "PEN_b(PEN2)": [
+    "P-EN",
+    "PEN",
+    "PEN2",
+    "PEN_b/PEN2"
+  ],
+  "PEG": [
+    "P-EG"
+  ],
+  "Delta7": [
+    "Δ7",
+    "delta 7",
+    "PB18.s-9i1i2i3s-GxΔ7Gy"
+  ],
+  "APL": [
+    "anterior paired lateral",
+    "MB APL"
+  ],
+  "MDN": [
+    "moonwalker descending neuron",
+    "moonwalker"
+  ],
+  "DNp09": [
+    "P9",
+    "forward walking DN"
+  ],
+  "DNa02": [
+    "steering DN",
+    "high-gain steering"
+  ],
+  "DNa01": [
+    "steering DN",
+    "low-gain steering"
+  ],
+  "DNg60": [
+    "Bluebell",
+    "BB",
+    "halt neuron"
+  ],
+  "CB0890": [
+    "Foxglove",
+    "FG",
+    "halt neuron"
+  ],
+  "DNg97": [
+    "oDN1",
+    "walking DN"
+  ],
+  "DNg100": [
+    "BDN2",
+    "walking DN"
+  ],
+  "DNg62": [
+    "aDN1",
+    "antennal grooming DN"
+  ],
+  "DNge078": [
+    "aDN2",
+    "antennal grooming DN"
+  ],
+  "SMP550": [
+    "oviEN",
+    "oviposition excitatory neuron"
+  ],
+  "oviIN": [
+    "oviposition inhibitory neuron"
+  ],
+  "oviDNa_a": [
+    "oviDN",
+    "oviposition descending neuron"
+  ],
+  "oviDNa_b": [
+    "oviDN",
+    "oviposition descending neuron"
+  ],
+  "oviDNb": [
+    "oviDN",
+    "oviposition descending neuron"
+  ],
+  "V_ilPN": [
+    "PNvbi",
+    "CO2 projection neuron",
+    "PNv"
+  ],
+  "V_l2PN": [
+    "PNvuni",
+    "CO2 projection neuron"
+  ],
+  "l2LN23": [
+    "LN23",
+    "CO2 local neuron"
+  ],
+  "M_smPNm1": [
+    "PNm1"
+  ],
+  "M_l2PNm17": [
+    "PNm17"
+  ],
+  "LHPD5c1": [
+    "PD5c1"
+  ],
+  "CB0268": [
+    "bIPS",
+    "bilateral inferior posterior slope"
+  ],
+  "PS321": [
+    "bIPS",
+    "bilateral inferior posterior slope"
+  ],
+  "DNp15": [
+    "DNHS1",
+    "yaw DN"
+  ],
+  "HSN": [
+    "horizontal system",
+    "HS"
+  ],
+  "HSE": [
+    "horizontal system",
+    "HS"
+  ],
+  "HSS": [
+    "horizontal system",
+    "HS"
+  ],
+  "H2": [
+    "heterolateral H2"
+  ],
+  "pIP10": [
+    "song descending neuron",
+    "P1 target"
+  ],
+  "pC1_toy": [
+    "P1"
+  ],
+  "ORN_V": [
+    "Gr21a",
+    "Gr63a",
+    "CO2 receptor neuron"
+  ],
+  "ORN_DA1": [
+    "Or67d",
+    "cVA receptor neuron"
+  ],
+  "LPLC2": [
+    "looming detector",
+    "loom"
+  ],
+  "LC4": [
+    "looming detector",
+    "loom"
+  ],
+  "LC16": [
+    "backward walking LC",
+    "retreat"
+  ],
+  "LC10a": [
+    "courtship tracking LC"
+  ],
+  "KCg-m": [
+    "Kenyon cell",
+    "KC",
+    "gamma KC"
+  ],
+  "KCab": [
+    "Kenyon cell",
+    "KC",
+    "alpha/beta KC"
+  ],
+  "KCab-s": [
+    "Kenyon cell",
+    "KC"
+  ],
+  "KCab-m": [
+    "Kenyon cell",
+    "KC"
+  ],
+  "KCab-c": [
+    "Kenyon cell",
+    "KC"
+  ],
+  "KCapbp-m": [
+    "Kenyon cell",
+    "KC",
+    "alpha'/beta' KC"
+  ],
+  "KCa'b'-m": [
+    "Kenyon cell",
+    "KC",
+    "alpha'/beta' KC"
+  ],
+  "JO-C": [
+    "Johnston's organ",
+    "JON",
+    "antennal grooming JON"
+  ],
+  "JO-E": [
+    "Johnston's organ",
+    "JON",
+    "antennal grooming JON"
+  ],
+  "JO-F": [
+    "Johnston's organ",
+    "JON",
+    "backward walking JON"
+  ],
+  "ExR6": [
+    "extrinsic ring neuron 6"
+  ],
+  "ER4m": [
+    "ring neuron"
+  ]
+}

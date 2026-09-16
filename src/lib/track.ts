@@ -12,6 +12,7 @@ export type Event =
   | { name: "fly_mode"; on: boolean }
   | { name: "fly_escape" }
   | { name: "guide_never_stops_shown" }
+  | { name: "copy_link"; dataset: string; held: number }
   | { name: "submit_preview_click"; gain: number }
   | { name: "submit_pr_click"; gain: number; simulator: string; seeds: number };
 

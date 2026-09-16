@@ -153,7 +153,7 @@ for (const w of [1300, 400]) {
   check((await q.locator("h1").innerText()).includes("simulated fly"), `/bench @${w}px: headline`);
   check((await q.locator("svg[role=img]").count()) === 2, `/bench @${w}px: two gain charts`);
   check((await q.locator("#leaderboard tbody tr").count()) >= 5, `/bench @${w}px: leaderboard rows`);
-  check((await q.locator("#tasks article").count()) === 22, `/bench @${w}px: 22 task cards`);
+  check((await q.locator("#tasks article").count()) === 31, `/bench @${w}px: 31 task cards`);
   const cta = q.getByRole("link", { name: /Submit a result/ }).first();
   check((await cta.boundingBox())?.y < 900, `/bench @${w}px: contribute CTA above the fold`);
   check((await q.getByRole("link", { name: /Add a task or a model/ }).getAttribute("href")).includes("/blob/HEAD/"), `/bench @${w}px: links use HEAD not main`);
@@ -186,4 +186,28 @@ for (const w of [1300, 400]) {
 }
 
 check(errs.length === 0, "no page/console errors" + (errs.length ? ": " + errs.join(" | ") : ""));
+// permalinks (ROADMAP item 53): the address bar holds the experiment; names the dataset lacks are banner-ed, never substituted
+{
+  const p2 = await b.newPage({ viewport: { width: 1400, height: 860 } });
+  p2.on("pageerror", (e) => errs.push("pageerror: " + e.message));
+  await p2.goto(`${URL}/?dataset=toy&gain=0.8&rate=150&hold=sugar%20GRNs,nothing%20here&type=MN9`, { waitUntil: "networkidle" });
+  await p2.waitForFunction(() => document.body.innerText.includes("3,578"), null, { timeout: 30000 });
+  await p2.waitForTimeout(1500);
+  const text = await p2.locator("aside").innerText();
+  check(/0\.80×/.test(text), "permalink: gain applied");
+  check(/150 Hz/.test(text), "permalink: input rate applied");
+  check((await p2.getByRole("button", { name: "hold sugar GRNs" }).getAttribute("aria-pressed")) === "true", "permalink: held sense is on");
+  check(/not in this dataset: nothing here/.test(text), "permalink: an unknown name is banner-ed, not dropped");
+  await p2.getByRole("button", { name: "copy link to this experiment" }).click();
+  await p2.waitForTimeout(200);
+  const href = await p2.evaluate(() => window.location.search);
+  check(/hold=sugar\+GRNs|hold=sugar%20GRNs/.test(href) && /gain=0\.8/.test(href) && /rate=150/.test(href), `copy link writes the state to the URL (${href})`);
+  // synonym search: a literature name resolves to the dataset's own type, marked with the alias
+  await p2.getByLabel("cell type search").fill("giant fiber");
+  await p2.waitForTimeout(300);
+  const opt = await p2.getByRole("listbox").getByRole("option").first().innerText().catch(() => "");
+  check(/GF/.test(opt) && /a\.k\.a\. giant fiber/i.test(opt), `synonym search resolves 'giant fiber' → ${opt.split("\n")[0]}`);
+  await p2.close();
+}
+
 await b.close();

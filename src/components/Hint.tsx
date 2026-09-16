@@ -66,6 +66,7 @@ export const HELP = {
   pause: "Freeze or resume the simulation. State is kept, so resuming continues where it stopped.",
   reset: "Wipe all activity back to a resting brain and cancel any running stimulus. You will need this: a stimulated circuit in this model keeps firing indefinitely, because nothing in a wiring diagram plus five constants can switch it off. The connectome and settings are kept.",
   presetShiu: "Set gain to 1.0, the value from the 2024 Nature paper. On the current data this makes about a fifth of the brain fire at a taste of sugar.",
+  copyLink: "Puts this experiment in the address bar and on your clipboard: the dataset, the gain, the input rate, and every sense or cell type you are holding on. Anyone who opens the link gets the same brain in the same state. Cite it like a figure.",
   presetFlybench: "Set gain to 0.45, the middle of the window where flybench's reflex tests pass on this dataset.",
   spin: "Slowly rotate the brain. Dragging it yourself also stops the rotation.",
   flyMode:
