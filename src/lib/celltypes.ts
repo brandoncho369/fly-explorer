@@ -80,3 +80,27 @@ export function activityByType(counts: Uint32Array | number[], ids: Uint16Array,
   }
   return out.sort((a, b) => b.hz - a.hz || b.active - a.active);
 }
+
+/**
+ * Where to look this cell type up outside the explorer (ROADMAP item 56): Codex for FlyWire types,
+ * neuPrint for MaleCNS types, Virtual Fly Brain for both. Deep links only where the site documents the
+ * URL (Codex `filter_string`, neuPrint "find neurons"); Neuroglancer needs per-dataset segment ids and
+ * is left out rather than linked wrong. The toy has no external home.
+ */
+export function externalLinks(dataset: string, typeName: string): { label: string; href: string }[] {
+  const t = encodeURIComponent(typeName);
+  if (dataset === "flywire783") {
+    return [
+      { label: "Codex", href: `https://codex.flywire.ai/app/search?dataset=fafb&filter_string=${encodeURIComponent(`cell_type == ${typeName}`)}` },
+      { label: "Virtual Fly Brain", href: `https://v2.virtualflybrain.org/org.geppetto.frontend/geppetto?q=${t},search` },
+    ];
+  }
+  if (dataset === "malecns") {
+    const ds = encodeURIComponent("male-cns:v1.0");
+    return [
+      { label: "neuPrint", href: `https://neuprint.janelia.org/?dataset=${ds}&qt=findneurons&q=1&qr%5B0%5D%5Bcode%5D=fn&qr%5B0%5D%5Bds%5D=${ds}&qr%5B0%5D%5Bpm%5D%5Bdataset%5D=${ds}&qr%5B0%5D%5Bpm%5D%5Bneuron_name%5D=${t}&qr%5B0%5D%5Bpm%5D%5Benable_contains%5D=true` },
+      { label: "Virtual Fly Brain", href: `https://v2.virtualflybrain.org/org.geppetto.frontend/geppetto?q=${t},search` },
+    ];
+  }
+  return [];
+}

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { activityByType, neuronsOfType, searchTypes, type TypeActivity, type TypeTable } from "@/lib/celltypes";
+import { activityByType, externalLinks, neuronsOfType, searchTypes, type TypeActivity, type TypeTable } from "@/lib/celltypes";
 import { Explain } from "@/components/Hint";
 import snapshot from "@/data/leaderboard.json";
 import synonyms from "@/data/synonyms.json";
@@ -109,6 +109,11 @@ export function CellTypes({ base, ready, gain, activeStims, onFire, held, reques
           <button onClick={() => fire(true)} disabled={!ready} aria-label={`hold ${pickedName}`} aria-pressed={held.has(pickedName)}
             className={`w-9 shrink-0 rounded border bg-zinc-900 hover:border-zinc-400 py-1.5 ${held.has(pickedName) ? "border-amber-300 text-amber-300 bg-amber-300/20" : "border-zinc-700 text-zinc-400"}`}>{held.has(pickedName) ? "■" : "⏺"}</button>
         </div>
+      )}
+      {pickedName && externalLinks(base.split("/").pop() ?? "", pickedName).length > 0 && (
+        <p className="text-xs text-zinc-500" data-testid="external-links">look it up: {externalLinks(base.split("/").pop() ?? "", pickedName).map((l, i) => (
+          <span key={l.label}>{i > 0 && " · "}<a href={l.href} target="_blank" rel="noreferrer" className="underline hover:text-zinc-300">{l.label}</a></span>
+        ))}</p>
       )}
 
       <Explain title="what fired" text={HELP_FIRED}>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { activityByType, neuronsOfType, searchTypes, type TypeTable } from "../celltypes";
+import { activityByType, externalLinks, neuronsOfType, searchTypes, type TypeTable } from "../celltypes";
 
 const t: TypeTable = {
   names: ["", "MN9", "GF", "LPLC2", "LC4", "KCg-m", "DNp01"],
@@ -51,5 +51,20 @@ describe("activityByType", () => {
     expect(activityByType(counts, ids, t, 500)[0].hz).toBe(10);   // 10 spikes / 2 neurons / 0.5 s
     expect(activityByType(counts, ids, t, 0)[0].hz).toBeGreaterThan(0);
     expect(activityByType(new Uint32Array(ids.length), ids, t, 1000)).toEqual([]);
+  });
+});
+
+
+describe("externalLinks", () => {
+  it("links FlyWire types to Codex and VFB, MaleCNS types to neuPrint and VFB, the toy nowhere", () => {
+    const fw = externalLinks("flywire783", "DNp01");
+    expect(fw.map((l) => l.label)).toEqual(["Codex", "Virtual Fly Brain"]);
+    expect(fw[0].href).toContain("codex.flywire.ai");
+    expect(decodeURIComponent(fw[0].href)).toContain("cell_type == DNp01");
+    const mc = externalLinks("malecns", "GF");
+    expect(mc[0].label).toBe("neuPrint");
+    expect(mc[0].href).toContain("male-cns");
+    expect(externalLinks("toy", "MN9")).toEqual([]);
+    expect(externalLinks("flywire783", "KCa'b'-m")[1].href).toContain(encodeURIComponent("KCa'b'-m"));
   });
 });
