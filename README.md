@@ -2,6 +2,8 @@
 
 **A fruit fly connectome running as a spiking neural network, live, in your browser.** Live at [www.fly-bench.com](https://www.fly-bench.com); the benchmark that keeps it honest is at [/bench](https://www.fly-bench.com/bench).
 
+![the FlyWire connectome running as a spiking network: sugar receptors fire, the taste pathway lights up, MN9 fires at 140 Hz](docs/explorer.gif)
+
 Each dot is one of the ~140,000 neurons in the [FlyWire](https://flywire.ai) adult *Drosophila* connectome. Each edge is a real synapse count. Every neuron is the same five-constant leaky integrate-and-fire unit from [Shiu et al. 2024 (Nature)](https://www.nature.com/articles/s41586-024-07763-9). Press **sugar GRNs** and watch the activity propagate from the taste receptors through the subesophageal zone to **MN9**, the motor neuron that extends the proboscis. Press **looming** and watch the **Giant Fiber** fire. Add **bitter** on top of sugar and watch MN9 go quiet.
 
 Nothing is scripted. There is no per-neuron tuning. When MN9 lights up, the wiring did that.
@@ -42,6 +44,7 @@ npm test                 # vitest: the LIF core (propagation, inhibition, refrac
 npm run lint && npm run build
 npm start -- -p 3123 &   # then, with playwright available:
 node scripts/smoke.mjs   # headless click-through: hints, stimulate, reset, pause, real-dataset reflexes, /bench, permalinks, synonym search
+node scripts/record-gif.mjs frames && python scripts/make-gif.py frames docs/explorer.gif   # re-record the README animation
 ```
 
 ## Sharing an experiment
