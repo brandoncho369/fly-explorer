@@ -6,7 +6,7 @@ Each dot is one of the ~140,000 neurons in the [FlyWire](https://flywire.ai) adu
 
 Nothing is scripted. There is no per-neuron tuning. When MN9 lights up, the wiring did that.
 
-> Ships with a 2k-neuron synthetic "toy" connectome so it runs instantly. To load the real brain, see [Loading FlyWire](#loading-flywire) — it's one command with the sibling repo **flybench**.
+> Ships with a 3.6k-neuron synthetic "toy" connectome (hand-wired to pass every flybench task) so it runs instantly. To load the real brain, see [Loading FlyWire](#loading-flywire) — it's one command with the sibling repo **flybench**.
 
 ## How it works
 
@@ -41,8 +41,12 @@ npm run dev        # http://localhost:3000, loads the toy connectome
 npm test                 # vitest: the LIF core (propagation, inhibition, refractory, delay, gain, determinism)
 npm run lint && npm run build
 npm start -- -p 3123 &   # then, with playwright available:
-node scripts/smoke.mjs   # headless click-through: hints, stimulate, reset, pause, real-dataset reflexes
+node scripts/smoke.mjs   # headless click-through: hints, stimulate, reset, pause, real-dataset reflexes, /bench, permalinks, synonym search
 ```
+
+## Sharing an experiment
+
+The address bar holds the experiment: `?dataset=flywire783&gain=0.45&rate=150&hold=sugar%20GRNs&type=DNp01` reproduces the dataset, the gain, the input rate and everything held on (senses by population name, cell types by their annotation name). **copy link** writes the current state to the URL and clipboard. A link that names something the chosen dataset lacks shows a banner saying so; nothing is substituted. The cell-type search also takes literature names — *giant fiber*, *bIPS*, *P9*, *oviEN*, *E-PG* — and resolves them to the loaded dataset's own type (`src/data/synonyms.json`).
 
 ## Loading FlyWire
 
