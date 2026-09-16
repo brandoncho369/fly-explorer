@@ -1233,7 +1233,7 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5371965452847806,
+   "hard": 0.5152888007054673,
    "seeds": 3,
    "verified": false,
    "max_active": 0.11126829676971504,
@@ -1931,6 +1931,47 @@
       {
        "d": "rate[cva, pnv_bi] < 2.0 Hz  [0/3 seeds, sd 0.943]",
        "v": 417.3333333333333,
+       "ok": false
+      }
+     ]
+    },
+    "epg_ring_attractor": {
+     "passed": false,
+     "score": 0.14285714285714285,
+     "checks": [
+      {
+       "d": "bump resultant[cue, 8 wedges] > 0.5  [0/3 seeds, sd 0.000305]",
+       "v": 0.016890279220919496,
+       "ok": false
+      },
+      {
+       "d": "bump error[cue, vs 135\u00b0] < 45.0 deg  [0/3 seeds, sd 1.88]",
+       "v": 87.3700292728666,
+       "ok": false
+      },
+      {
+       "d": "rate[cue, epg, 900-1400ms] > 5.0 Hz  [3/3 seeds, sd 0.112]",
+       "v": 370.4113475177305,
+       "ok": true
+      },
+      {
+       "d": "bump resultant[cue, 8 wedges] > 0.5  [0/3 seeds, sd 0.000183]",
+       "v": 0.021718553213843365,
+       "ok": false
+      },
+      {
+       "d": "bump error[cue, vs 135\u00b0] < 45.0 deg  [0/3 seeds, sd 0.257]",
+       "v": 122.36940755908581,
+       "ok": false
+      },
+      {
+       "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd 0.00102]",
+       "v": 0.021069262625555595,
+       "ok": false
+      },
+      {
+       "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd 0.000423]",
+       "v": 0.02145105914052219,
        "ok": false
       }
      ]
@@ -3890,7 +3931,7 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.5853174603174603,
+   "hard": 0.5589451058201058,
    "seeds": 3,
    "verified": false,
    "max_active": 0.1596626271099976,
@@ -4749,7 +4790,7 @@
     },
     "steering_dna02_vs_dna01": {
      "passed": false,
-     "score": 0.5,
+     "score": 0.16666666666666666,
      "checks": [
       {
        "d": "rate[dna02, leg_mn_right] > 5.0 Hz  [0/3 seeds, sd 0.012]",
@@ -4762,17 +4803,17 @@
        "ok": false
       },
       {
-       "d": "latency[dna02, leg_mn_right] / latency[dna01] < 1.0  [3/3 seeds, sd 0.186]",
+       "d": "latency[dna02, leg_mn_right] / latency[dna01] < 1.0  [0/3 seeds, sd 0.186]  [floored: every compared condition silent]",
        "v": 0.33750600347805176,
-       "ok": true
+       "ok": false
       },
       {
-       "d": "rate[dna02, leg_mn_right] / rate[dna01] > 1.0  [3/3 seeds, sd 0.886]",
+       "d": "rate[dna02, leg_mn_right] / rate[dna01] > 1.0  [0/3 seeds, sd 0.886]  [floored: every compared condition silent]",
        "v": 2.8648295130747603,
-       "ok": true
+       "ok": false
       },
       {
-       "d": "rate[dna02, leg_mn_right] / rate[dna02, leg_mn_left] > 1.0  [0/3 seeds, sd 0.0806]",
+       "d": "rate[dna02, leg_mn_right] / rate[dna02, leg_mn_left] > 1.0  [0/3 seeds, sd 0.0806]  [floored: every compared condition silent]",
        "v": 0.37346945006454035,
        "ok": false
       },
@@ -4780,6 +4821,47 @@
        "d": "rate[dna02, dna02_left] < 2.0 Hz  [3/3 seeds, sd 0]",
        "v": 0.0,
        "ok": true
+      }
+     ]
+    },
+    "epg_ring_attractor": {
+     "passed": false,
+     "score": 0.2857142857142857,
+     "checks": [
+      {
+       "d": "bump resultant[cue, 8 wedges] > 0.5  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "bump error[cue, vs 135\u00b0] < 45.0 deg  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[cue, epg, 900-1400ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "bump resultant[cue, 8 wedges] > 0.5  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "bump error[cue, vs 135\u00b0] < 45.0 deg  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd 0.0248]",
+       "v": 0.030707678352203376,
+       "ok": false
+      },
+      {
+       "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
       }
      ]
     }
@@ -5406,6 +5488,13 @@
    "tier": "hard",
    "description": "Two descending neurons per side steer the walking fly. Rayshubskiy et al. 2025: DNa02 predicts high-gain steering (rotational velocity is a steep function of DNa02 activity, shallow of DNa01), its activity leads DNa01's, and \"DNa02 makes more direct synaptic connections onto motor neurons, as compared to DNa01\"; the two receive \"see-saw\" input, excitation of one copy with inhibition of the contralateral copy, and unilateral DNa02 activation gives an ipsilateral steering bias. MaleCNS v1.0 agrees on the wiring: the right DNa02 makes 490 direct synapses on 11 right leg MNs, the right DNa01 104 on 6, neither touches a left-leg MN or its contralateral twin. This task drives each right DN alone at the task-02 100 Hz and reads the leg motor pools by side and the left DNa02. Checks: both DNs recruit the right leg MNs; the DNa02 recruitment is faster (first-spike latency ratio) and stronger (rate ratio); DNa02 drives its own side more than the other; and the left DNa02 stays silent (the see-saw null). MaleCNS only (leg MNs are in the nerve cord); FlyWire records it as not applicable. Pre-registered predictions and outcome: docs/rfcs/28_steering_dna02_vs_dna01.md.",
    "citation": "Rayshubskiy et al. 2025 (eLife 13:RP102230); Bidaye et al. 2020 (Neuron 108:469, DNa01/DNa02 steering); Chen et al. 2018 (Nat Neurosci 21:1290)"
+  },
+  {
+   "name": "epg_ring_attractor",
+   "title": "The compass keeps one bump, keeps it in the dark, and picks one of two cues",
+   "tier": "hard",
+   "description": "The head-direction system of the fly is a ring attractor: the EPG neurons of the ellipsoid body carry a single bump of activity (~90\u00b0 FWHM) that tracks heading, persists when the visual cue is removed, drifts slowly in darkness, and when two cues compete one wins (Seelig & Jayaraman 2015; Kim et al. 2017; Turner-Evans et al. 2017; Green et al. 2017). The circuit is EPG \u2192 PEN \u2192 EPG local excitation with the glutamatergic Delta7 neurons providing global inhibition (Hulse et al. 2021, the hemibrain central complex). This task cues one ellipsoid-body wedge \u2014 the EPGs of PB glomerulus 4, both sides, at the task-02 100 Hz for 500 ms \u2014 and reads the ring as eight wedges by PB glomerulus number (the community and neuPrint labels carry it; the wedge-to-angle map, 45\u00b0 per glomerulus with left and right merged, is INFERRED from Wolff, Iyer & Rubin 2015). The population vector's length (one bump \u2248 0.85, spread or two bumps \u2248 0) and angle are the readouts, during the cue and 200\u2013700 ms after it ends; a second condition cues two opposite wedges. Shipped in the expected-fail tier: a uniform LIF with no adaptation and a 20 ms membrane has nothing to hold a bump with, and the task exists to say how it fails. Pre-registered predictions and outcome: docs/rfcs/29_epg_ring_attractor.md.",
+   "citation": "Seelig & Jayaraman 2015 (Nature 521:186); Kim et al. 2017 (Science 356:849); Turner-Evans et al. 2017 (eLife 6:e23496); Green et al. 2017 (Nature 546:101); Hulse et al. 2021 (eLife 10:e66039); Wolff, Iyer & Rubin 2015 (J Comp Neurol 523:997)"
   }
  ]
 }

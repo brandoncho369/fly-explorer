@@ -1,6 +1,6 @@
 /** Pure helpers for the /bench page — unit-tested, no React. */
 
-export interface Check { d: string; v: number; ok: boolean }
+export interface Check { d: string; v: number | null; ok: boolean }   // v is null when the measurement is undefined (a silent ring has no bump angle)
 export interface TaskResult { passed: boolean; score: number; checks: Check[] }
 export interface Run {
   label: string; connectome: string; simulator: string; gain: number; w_syn: number;
