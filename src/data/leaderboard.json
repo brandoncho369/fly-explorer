@@ -1233,7 +1233,7 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5152888007054673,
+   "hard": 0.5262599206349206,
    "seeds": 3,
    "verified": false,
    "max_active": 0.11126829676971504,
@@ -1972,6 +1972,68 @@
       {
        "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd 0.000423]",
        "v": 0.02145105914052219,
+       "ok": false
+      }
+     ]
+    },
+    "egg_laying_ovidn": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "rate[ovien, ovidn] > 5.0 Hz  [3/3 seeds, sd 1.89]",
+       "v": 14.333333333333334,
+       "ok": true
+      },
+      {
+       "d": "rate[ovien_plus_oviin, ovidn] / rate[ovien] < 0.5  [0/3 seeds, sd 0.107]",
+       "v": 0.6772474339354502,
+       "ok": false
+      },
+      {
+       "d": "rate[pc1, oviin] > 5.0 Hz  [3/3 seeds, sd 25.3]",
+       "v": 52.0,
+       "ok": true
+      },
+      {
+       "d": "rate[pc1, ovidn] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "halt_walk_off": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[sugar, fg] > 5.0 Hz  [3/3 seeds, sd 2.87]",
+       "v": 66.33333333333333,
+       "ok": true
+      },
+      {
+       "d": "rate[walk, bdn2] > 5.0 Hz  [3/3 seeds, sd 14.9]",
+       "v": 105.33333333333333,
+       "ok": true
+      },
+      {
+       "d": "rate[walk, odn1] > 5.0 Hz  [3/3 seeds, sd 2.49]",
+       "v": 14.666666666666666,
+       "ok": true
+      },
+      {
+       "d": "rate[walk_plus_fg, bdn2] / rate[walk] < 0.5  [0/3 seeds, sd 0.222]",
+       "v": 0.6858067180801979,
+       "ok": false
+      },
+      {
+       "d": "rate[walk_plus_fg, odn1] / rate[walk] < 0.5  [0/3 seeds, sd 0.242]",
+       "v": 1.0581947704691423,
+       "ok": false
+      },
+      {
+       "d": "rate[walk_plus_bb, odn1] / rate[walk] < 0.5  [0/3 seeds, sd 0.194]",
+       "v": 0.9087352447310709,
        "ok": false
       }
      ]
@@ -4866,7 +4928,10 @@
      ]
     }
    },
-   "skipped": {}
+   "skipped": {
+    "egg_laying_ovidn": "not applicable: egg_laying_ovidn is defined on flywire783/toy only (this is malecns)",
+    "halt_walk_off": "readout 'fg' matches no neurons on malecns"
+   }
   },
   {
    "label": "Shiu 2024 (gain 1.0)",
@@ -5495,6 +5560,20 @@
    "tier": "hard",
    "description": "The head-direction system of the fly is a ring attractor: the EPG neurons of the ellipsoid body carry a single bump of activity (~90\u00b0 FWHM) that tracks heading, persists when the visual cue is removed, drifts slowly in darkness, and when two cues compete one wins (Seelig & Jayaraman 2015; Kim et al. 2017; Turner-Evans et al. 2017; Green et al. 2017). The circuit is EPG \u2192 PEN \u2192 EPG local excitation with the glutamatergic Delta7 neurons providing global inhibition (Hulse et al. 2021, the hemibrain central complex). This task cues one ellipsoid-body wedge \u2014 the EPGs of PB glomerulus 4, both sides, at the task-02 100 Hz for 500 ms \u2014 and reads the ring as eight wedges by PB glomerulus number (the community and neuPrint labels carry it; the wedge-to-angle map, 45\u00b0 per glomerulus with left and right merged, is INFERRED from Wolff, Iyer & Rubin 2015). The population vector's length (one bump \u2248 0.85, spread or two bumps \u2248 0) and angle are the readouts, during the cue and 200\u2013700 ms after it ends; a second condition cues two opposite wedges. Shipped in the expected-fail tier: a uniform LIF with no adaptation and a 20 ms membrane has nothing to hold a bump with, and the task exists to say how it fails. Pre-registered predictions and outcome: docs/rfcs/29_epg_ring_attractor.md.",
    "citation": "Seelig & Jayaraman 2015 (Nature 521:186); Kim et al. 2017 (Science 356:849); Turner-Evans et al. 2017 (eLife 6:e23496); Green et al. 2017 (Nature 546:101); Hulse et al. 2021 (eLife 10:e66039); Wolff, Iyer & Rubin 2015 (J Comp Neurol 523:997)"
+  },
+  {
+   "name": "egg_laying_ovidn",
+   "title": "The egg-laying command is driven by oviEN, held down by oviIN, and not started by pC1",
+   "tier": "hard",
+   "description": "Egg laying in the female is commanded by the oviposition descending neurons: \"activation of female-specific oviDNs is necessary and sufficient for egg laying\" (Wang et al. 2020). Their major excitatory input is the oviposition excitatory neurons (oviENs), and \"GABAergic oviposition inhibitory neurons (oviINs) mediate feed-forward inhibition from pC1 neurons to both oviDNs and their major excitatory input, the oviENs\" \u2014 in virgins the pC1 \u2192 oviIN drive holds egg laying down, and after mating sex peptide silences the abdominal inputs to pC1 and oviIN, disinhibiting oviDN. FlyWire v783 (a female) carries oviDNa/b, oviIN and the female pC1a\u2013e by name; the oviENs are not labelled, and SMP550 is taken as oviEN (INFERRED: the oviDNs' largest excitatory input, 185 synapses, and the oviINs' largest target, \u2212429 \u2014 exactly the paper's motif). Conditions: oviEN alone; oviEN with oviIN driven; pC1 alone. Checks: oviEN drives oviDN; adding oviIN halves it (the task-03 suppression convention); pC1 drives oviIN and does not drive oviDN (the virgin null). FlyWire only \u2014 MaleCNS has no oviDN and its pC1 are the male types; recorded as not applicable there. Pre-registered predictions and outcome: docs/rfcs/30_egg_laying_ovidn.md.",
+   "citation": "Wang et al. 2020 (Nature 579:101, Neural circuitry linking mating and egg laying in Drosophila females); Wang et al. 2021 (Nature 596:433, oviDN and the egg-laying sequence)"
+  },
+  {
+   "name": "halt_walk_off",
+   "title": "Foxglove and Bluebell switch the walking commands off; sugar switches Foxglove on",
+   "tier": "hard",
+   "description": "Sapkal et al. 2024 found two ways a fly stops. The \"walk-OFF\" mechanism is two GABAergic brain neurons found by optogenetic screen, Foxglove and Bluebell, that inhibit specific walking-promoting descending neurons: Foxglove strongly inhibits BDN2 (forward velocity) and oDN1, Bluebell inhibits oDN1 \u2014 \"oDN1 and BDN2 stood apart as important nodes\" \u2014 \"comparable to taking one's foot off the gas pedal\"; both are downstream of the sugar sensory pathway and Foxglove responds to sugar more strongly in starved flies (halting to feed). The \"brake\" mechanism, cholinergic ascending neurons in the nerve cord, is not scored here. FlyWire v783 carries all of them under the paper's labels (Foxglove = CB0890, Bluebell = DNg60, oDN1 = DNg97, BDN2 = DNg100). P9 (DNp09) is not scored: neither halt neuron contacts it in v783. The model has no walking fly, so the walking command is stood in for by the shared excitatory inputs of the two walking DNs, PVLP137 and CB0529 (four cells), driven at the task-02 100 Hz (CONVENTION, declared: they are selected because they are the DNs' largest common inputs, not for any behaviour of their own). Checks: sugar drives Foxglove; the walking input drives BDN2 and oDN1; adding Foxglove halves both; adding Bluebell halves oDN1 (the task-03 suppression convention, under the S1/S2 gates). MaleCNS has no Foxglove under any name and is skipped. Pre-registered predictions and outcome: docs/rfcs/31_halt_walk_off.md.",
+   "citation": "Sapkal et al. 2024 (Nature 634:191, Neural circuit mechanisms underlying context-specific halting in Drosophila); Bidaye et al. 2020 (Neuron 108:469)"
   }
  ]
 }
