@@ -1233,7 +1233,7 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5350570436507937,
+   "hard": 0.5371965452847806,
    "seeds": 3,
    "verified": false,
    "max_active": 0.11126829676971504,
@@ -1893,6 +1893,47 @@
        "ok": true
       }
      ]
+    },
+    "co2_pathway_specificity": {
+     "passed": false,
+     "score": 0.5714285714285714,
+     "checks": [
+      {
+       "d": "rate[co2, pnv_bi] > 5.0 Hz  [3/3 seeds, sd 0.943]",
+       "v": 430.6666666666667,
+       "ok": true
+      },
+      {
+       "d": "rate[co2, ln23] > 5.0 Hz  [3/3 seeds, sd 1.08]",
+       "v": 186.5,
+       "ok": true
+      },
+      {
+       "d": "rate[co2, pnm1] > 5.0 Hz  [3/3 seeds, sd 0.943]",
+       "v": 392.3333333333333,
+       "ok": true
+      },
+      {
+       "d": "rate[co2, lhpd5c1] > 5.0 Hz  [3/3 seeds, sd 0.943]",
+       "v": 427.3333333333333,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, pnm1] < 2.0 Hz  [0/3 seeds, sd 0.471]",
+       "v": 234.33333333333334,
+       "ok": false
+      },
+      {
+       "d": "rate[dm1, pnm1] < 2.0 Hz  [0/3 seeds, sd 0.471]",
+       "v": 235.66666666666666,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, pnv_bi] < 2.0 Hz  [0/3 seeds, sd 0.943]",
+       "v": 417.3333333333333,
+       "ok": false
+      }
+     ]
     }
    },
    "skipped": {
@@ -1900,7 +1941,8 @@
     "gf_to_muscle_latency": "readout 'ttmn' matches no neurons on flywire783",
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
     "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
-    "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)"
+    "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -3848,7 +3890,7 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.5900415721844293,
+   "hard": 0.5853174603174603,
    "seeds": 3,
    "verified": false,
    "max_active": 0.1596626271099976,
@@ -4663,6 +4705,83 @@
        "ok": true
       }
      ]
+    },
+    "co2_pathway_specificity": {
+     "passed": false,
+     "score": 0.5714285714285714,
+     "checks": [
+      {
+       "d": "rate[co2, pnv_bi] > 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 432.0,
+       "ok": true
+      },
+      {
+       "d": "rate[co2, ln23] > 5.0 Hz  [3/3 seeds, sd 1.65]",
+       "v": 326.1666666666667,
+       "ok": true
+      },
+      {
+       "d": "rate[co2, pnm1] > 5.0 Hz  [3/3 seeds, sd 2.62]",
+       "v": 374.3333333333333,
+       "ok": true
+      },
+      {
+       "d": "rate[co2, lhpd5c1] > 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 428.0,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, pnm1] < 2.0 Hz  [0/3 seeds, sd 0.471]",
+       "v": 408.6666666666667,
+       "ok": false
+      },
+      {
+       "d": "rate[dm1, pnm1] < 2.0 Hz  [0/3 seeds, sd 0.471]",
+       "v": 409.6666666666667,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, pnv_bi] < 2.0 Hz  [0/3 seeds, sd 0.471]",
+       "v": 422.3333333333333,
+       "ok": false
+      }
+     ]
+    },
+    "steering_dna02_vs_dna01": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[dna02, leg_mn_right] > 5.0 Hz  [0/3 seeds, sd 0.012]",
+       "v": 0.1176470588235294,
+       "ok": false
+      },
+      {
+       "d": "rate[dna01, leg_mn_right] > 5.0 Hz  [0/3 seeds, sd 0.012]",
+       "v": 0.04411764705882353,
+       "ok": false
+      },
+      {
+       "d": "latency[dna02, leg_mn_right] / latency[dna01] < 1.0  [3/3 seeds, sd 0.186]",
+       "v": 0.33750600347805176,
+       "ok": true
+      },
+      {
+       "d": "rate[dna02, leg_mn_right] / rate[dna01] > 1.0  [3/3 seeds, sd 0.886]",
+       "v": 2.8648295130747603,
+       "ok": true
+      },
+      {
+       "d": "rate[dna02, leg_mn_right] / rate[dna02, leg_mn_left] > 1.0  [0/3 seeds, sd 0.0806]",
+       "v": 0.37346945006454035,
+       "ok": false
+      },
+      {
+       "d": "rate[dna02, dna02_left] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {}
@@ -5273,6 +5392,20 @@
    "tier": "hard",
    "description": "An odour activates only ~5 % of the ~2,000 Kenyon cells per hemisphere (Honegger et al. 2011; Turner et al. 2008), and that sparseness is enforced by the single GABAergic APL neuron, which reads the whole KC population and inhibits all of it (Lin et al. 2014: blocking APL output with shibire increases KC odour responses, lowers population sparseness, raises the overlap between odours, and impairs learned discrimination of similar odours). This task drives the task-18 odour panel (eight glomeruli, each a whole ORN type at 100 Hz) with the mushroom body intact and with APL silenced \u2014 its outgoing synapses zeroed for the condition (`silence`, the in silico shibire; the neuron stays, so its own inputs are untouched). It is the first task to use silencing and lists `requires_capabilities: [can_silence]`, so a simulator that cannot do it skips the task rather than failing it. Checks: three odours each activate under 20 % of KCs with APL intact; silencing APL raises that fraction for the same three; and it lowers the population sparseness of the KC response for two. Pre-registered predictions and outcome: docs/rfcs/26_mb_sparseness_apl.md.",
    "citation": "Lin et al. 2014 (Nat Neurosci 17:559); Honegger, Campbell & Turner 2011 (J Neurosci 31:11772); Turner, Bazhenov & Laurent 2008 (J Neurophysiol 99:734); Willmore & Tolhurst 2001 (Network 12:255)"
+  },
+  {
+   "name": "co2_pathway_specificity",
+   "title": "CO2 reaches its own projection neurons, its extraglomerular channel and the lateral horn; other odours do not",
+   "tier": "hard",
+   "description": "CO2 is sensed by the Gr21a/Gr63a neurons of the V glomerulus (ORN_V; Suh et al. 2004) and is innately aversive. The V glomerulus has its own projection neurons \u2014 a bilateral cholinergic PN (PNvbi, FlyWire V_ilPN) that targets the lateral horn on both sides (Lin et al. 2013) \u2014 and, per bioRxiv 2026.01.05.697655 (\"Structural basis of CO2 valence coding\"), a second, extraglomerular channel: the non-GABAergic local neuron LN23, driven only by ORN_V, relays to the multiglomerular PNm1 (M_smPNm1), whose activation \"induced strong aversion\" and whose silencing (via LN23) \"fully abolished aversion\"; PNvbi's primary target is the lateral horn neuron LHPD5c1. This task drives ORN_V at the task-02 100 Hz and reads V_ilPN, LN23, PNm1 and LHPD5c1 (four positives), then drives two other glomeruli of the task-18 panel (DA1, DM1) and requires PNm1 and V_ilPN to stay silent (three nulls): in the wiring neither receives a synapse from any ORN but ORN_V, and PNm1's LN23 input carries only CO2. The nulls test the task-18 finding \u2014 that this model's antennal lobe broadcasts one glomerulus to most PNs \u2014 on the one channel the fly keeps private. LHPD5c1 is not a null: it also receives DM1/DM4/DP1m PNs directly (the paper: it \"integrates CO2 + food cues\"). Pre-registered predictions and outcome: docs/rfcs/27_co2_pathway_specificity.md.",
+   "citation": "bioRxiv 2026.01.05.697655 (Structural basis of CO2 valence coding in Drosophila); Suh et al. 2004 (Nature 431:854); Lin et al. 2013 (Nature 501:81); Jones et al. 2007 (Nature 445:86)"
+  },
+  {
+   "name": "steering_dna02_vs_dna01",
+   "title": "DNa02 reaches the leg motor neurons faster and harder than DNa01, on its own side, without waking its twin",
+   "tier": "hard",
+   "description": "Two descending neurons per side steer the walking fly. Rayshubskiy et al. 2025: DNa02 predicts high-gain steering (rotational velocity is a steep function of DNa02 activity, shallow of DNa01), its activity leads DNa01's, and \"DNa02 makes more direct synaptic connections onto motor neurons, as compared to DNa01\"; the two receive \"see-saw\" input, excitation of one copy with inhibition of the contralateral copy, and unilateral DNa02 activation gives an ipsilateral steering bias. MaleCNS v1.0 agrees on the wiring: the right DNa02 makes 490 direct synapses on 11 right leg MNs, the right DNa01 104 on 6, neither touches a left-leg MN or its contralateral twin. This task drives each right DN alone at the task-02 100 Hz and reads the leg motor pools by side and the left DNa02. Checks: both DNs recruit the right leg MNs; the DNa02 recruitment is faster (first-spike latency ratio) and stronger (rate ratio); DNa02 drives its own side more than the other; and the left DNa02 stays silent (the see-saw null). MaleCNS only (leg MNs are in the nerve cord); FlyWire records it as not applicable. Pre-registered predictions and outcome: docs/rfcs/28_steering_dna02_vs_dna01.md.",
+   "citation": "Rayshubskiy et al. 2025 (eLife 13:RP102230); Bidaye et al. 2020 (Neuron 108:469, DNa01/DNa02 steering); Chen et al. 2018 (Nat Neurosci 21:1290)"
   }
  ]
 }

@@ -15,7 +15,7 @@ const mn9 = async () => +((await aside()).match(/MN9 \(proboscis\)[^\d]*?(\d+)\s
 const check = (ok, msg) => { console.log((ok ? "✓ " : "✗ ") + msg); if (!ok) process.exitCode = 1; };
 
 await p.goto(URL, { waitUntil: "networkidle" });
-await p.waitForFunction(() => document.body.innerText.includes("3,366"), null, { timeout: 30000 });
+await p.waitForFunction(() => document.body.innerText.includes("3,460"), null, { timeout: 30000 });
 check(true, "toy loads");
 const guide = async () => (await p.getByTestId("guide").innerText());
 check(/Try it: press sugar GRNs/.test(await guide()), "guide: first-run prompt");
