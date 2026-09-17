@@ -15,7 +15,7 @@ const mn9 = async () => +((await aside()).match(/MN9 \(proboscis\)[^\d]*?(\d+)\s
 const check = (ok, msg) => { console.log((ok ? "✓ " : "✗ ") + msg); if (!ok) process.exitCode = 1; };
 
 await p.goto(URL, { waitUntil: "networkidle" });
-await p.waitForFunction(() => document.body.innerText.includes("3,578"), null, { timeout: 30000 });
+await p.waitForFunction(() => document.body.innerText.includes("3,790"), null, { timeout: 30000 });
 check(true, "toy loads");
 const guide = async () => (await p.getByTestId("guide").innerText());
 check(/Try it: press sugar GRNs/.test(await guide()), "guide: first-run prompt");
@@ -153,7 +153,7 @@ for (const w of [1300, 400]) {
   check((await q.locator("h1").innerText()).includes("simulated fly"), `/bench @${w}px: headline`);
   check((await q.locator("svg[role=img]").count()) === 2, `/bench @${w}px: two gain charts`);
   check((await q.locator("#leaderboard tbody tr").count()) >= 5, `/bench @${w}px: leaderboard rows`);
-  check((await q.locator("#tasks article").count()) === 31, `/bench @${w}px: 31 task cards`);
+  check((await q.locator("#tasks article").count()) === 32, `/bench @${w}px: 32 task cards`);
   const cta = q.getByRole("link", { name: /Submit a result/ }).first();
   check((await cta.boundingBox())?.y < 900, `/bench @${w}px: contribute CTA above the fold`);
   check((await q.getByRole("link", { name: /Add a task or a model/ }).getAttribute("href")).includes("/blob/HEAD/"), `/bench @${w}px: links use HEAD not main`);
@@ -191,7 +191,7 @@ check(errs.length === 0, "no page/console errors" + (errs.length ? ": " + errs.j
   const p2 = await b.newPage({ viewport: { width: 1400, height: 860 } });
   p2.on("pageerror", (e) => errs.push("pageerror: " + e.message));
   await p2.goto(`${URL}/?dataset=toy&gain=0.8&rate=150&hold=sugar%20GRNs,nothing%20here&type=MN9`, { waitUntil: "networkidle" });
-  await p2.waitForFunction(() => document.body.innerText.includes("3,578"), null, { timeout: 30000 });
+  await p2.waitForFunction(() => document.body.innerText.includes("3,790"), null, { timeout: 30000 });
   await p2.waitForTimeout(1500);
   const text = await p2.locator("aside").innerText();
   check(/0\.80×/.test(text), "permalink: gain applied");

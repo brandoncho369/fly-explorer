@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-16",
+ "generated": "2026-09-17",
  "source": "https://github.com/brandoncho369/flybench",
  "runs": [
   {
@@ -3297,10 +3297,10 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5262599206349206,
+   "hard": 0.5011999244142101,
    "seeds": 3,
    "verified": false,
-   "max_active": 0.11126829676971504,
+   "max_active": 0.21970485799432696,
    "tasks": {
     "stability": {
      "passed": true,
@@ -4098,6 +4098,27 @@
       {
        "d": "rate[walk_plus_bb, odn1] / rate[walk] < 0.5  [0/3 seeds, sd 0.194]",
        "v": 0.9087352447310709,
+       "ok": false
+      }
+     ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
        "ok": false
       }
      ]
@@ -10248,10 +10269,10 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.5589451058201058,
+   "hard": 0.5365873015873016,
    "seeds": 3,
    "verified": false,
-   "max_active": 0.1596626271099976,
+   "max_active": 0.2330982908405225,
    "tasks": {
     "stability": {
      "passed": true,
@@ -11178,6 +11199,27 @@
       {
        "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd nan]",
        "v": null,
+       "ok": false
+      }
+     ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
        "ok": false
       }
      ]
@@ -12228,6 +12270,13 @@
    "tier": "hard",
    "description": "Sapkal et al. 2024 found two ways a fly stops. The \"walk-OFF\" mechanism is two GABAergic brain neurons found by optogenetic screen, Foxglove and Bluebell, that inhibit specific walking-promoting descending neurons: Foxglove strongly inhibits BDN2 (forward velocity) and oDN1, Bluebell inhibits oDN1 \u2014 \"oDN1 and BDN2 stood apart as important nodes\" \u2014 \"comparable to taking one's foot off the gas pedal\"; both are downstream of the sugar sensory pathway and Foxglove responds to sugar more strongly in starved flies (halting to feed). The \"brake\" mechanism, cholinergic ascending neurons in the nerve cord, is not scored here. FlyWire v783 carries all of them under the paper's labels (Foxglove = CB0890, Bluebell = DNg60, oDN1 = DNg97, BDN2 = DNg100). P9 (DNp09) is not scored: neither halt neuron contacts it in v783. The model has no walking fly, so the walking command is stood in for by the shared excitatory inputs of the two walking DNs, PVLP137 and CB0529 (four cells), driven at the task-02 100 Hz (CONVENTION, declared: they are selected because they are the DNs' largest common inputs, not for any behaviour of their own). Checks: sugar drives Foxglove; the walking input drives BDN2 and oDN1; adding Foxglove halves both; adding Bluebell halves oDN1 (the task-03 suppression convention, under the S1/S2 gates). MaleCNS has no Foxglove under any name and is skipped. Pre-registered predictions and outcome: docs/rfcs/31_halt_walk_off.md.",
    "citation": "Sapkal et al. 2024 (Nature 634:191, Neural circuit mechanisms underlying context-specific halting in Drosophila); Bidaye et al. 2020 (Neuron 108:469)"
+  },
+  {
+   "name": "flyvis_loom_escape",
+   "title": "Through a real visual front end, a loom reaches the loom detectors and the giant fiber",
+   "tier": "hard",
+   "description": "The escape tasks so far drive the loom detectors themselves (LPLC2 and LC4 at 150 Hz): a convention that assumes the optic lobe has already done its job. This task replaces it with a published model of the optic lobe: flyvis (Lappalainen et al. 2024), a connectome-constrained network of 65 cell types on a 721-column retina, sees a rendered stimulus and its output types (T4/T5, T2/T3, Tm/TmY) drive the same types in the connectome, column by column (an inferred retinotopy, see flybench/frontends/flyvis_frontend.py); the LIF's own wiring from there to LPLC2, LC4 and the giant fiber does the rest. A dark disc expanding with r/v = 40 ms (von Reyn 2014, Ache 2019) must fire LPLC2 and LC4 (Klapoetke 2017; Ache 2019) and give the giant fiber at least one spike (von Reyn 2014). A full-field brightening (the task-11 null, now through the eye) is measured and reported but not scored: see the checks. Front-end outputs are cached and committed (data/frontends/flyvis), so runs need neither torch nor flyvis; a dataset without the optic-lobe types skips the task. Pre-registered predictions and outcome: docs/rfcs/32_flyvis_loom_escape.md.",
+   "citation": "Lappalainen et al. 2024 (Nature 634:1132, flyvis); von Reyn et al. 2014 (Nat Neurosci 17:962); Klapoetke et al. 2017 (Nature 551:237); Ache et al. 2019 (Curr Biol 29:1073)"
   }
  ]
 }
