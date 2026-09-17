@@ -161,13 +161,13 @@ flybench submit results/mine.json   # validates, commits, opens the PR`}</code><
                 {runs.map((r, i) => (
                   <tr key={r.label} className={`border-t border-zinc-800 ${i === 0 ? "bg-amber-300/[0.06]" : ""}`}>
                     <td className="p-3 text-zinc-500">{i + 1}</td>
-                    <td className="p-3">{r.label}</td>
+                    <td className="p-3">{r.label}{r.reference_baseline ? <span className="ml-2 rounded border border-zinc-700 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-zinc-400" title={`the maintainers' reference model, submitted and evaluated by CI like any other row; a floor to beat, not the benchmark's answer${r.conflict_of_interest ? ` — declared: ${r.conflict_of_interest}` : ""}`}>baseline</span> : null}</td>
                     <td className="p-3 text-zinc-400">{r.simulator}</td>
                     <td className="p-3 font-mono">{score2(r.core)}</td>
                     <td className="p-3 font-mono">{score2(r.hard)}</td>
                     <td className="p-3 font-mono text-zinc-300">{r.graded == null ? <span className="text-zinc-600">–</span> : <>{r.graded.toFixed(2)}{r.graded_ci ? <span className="text-zinc-500 text-xs"> [{r.graded_ci[0].toFixed(2)}, {r.graded_ci[1].toFixed(2)}]</span> : null}</>}</td>
                     <td className="p-3 font-mono text-zinc-300">{r.specificity == null ? <span className="text-zinc-600">–</span> : (r.specificity >= 0 ? "+" : "") + r.specificity.toFixed(2)}</td>
-                    <td className="p-3 text-xs">{r.division ? <span className="text-zinc-500" title="closed = reference LIF, gain only; open = other dynamics or fitted constants (declared)">{r.division} · </span> : null}{r.verified ? <span className="text-emerald-300" title="a maintainer re-ran this and got the same scores">✓ verified</span> : <span className="text-zinc-500" title="not yet re-run by a maintainer">self-reported</span>}{r.seeds && r.seeds > 1 ? <span className="text-zinc-500"> · {r.seeds} seeds</span> : ""}</td>
+                    <td className="p-3 text-xs">{r.division ? <span className="text-zinc-500" title="closed = reference LIF, gain only; open = other dynamics or fitted constants (declared)">{r.division} · </span> : null}{r.verified ? <span className="text-emerald-300" title={r.conflict_of_interest ? `evaluated by the benchmark's CI or re-run by a maintainer — declared conflict of interest: ${r.conflict_of_interest}` : "evaluated by the benchmark's CI or re-run by a maintainer"}>✓ verified</span> : <span className="text-zinc-500" title="not yet re-run by a maintainer">self-reported</span>}{r.seeds && r.seeds > 1 ? <span className="text-zinc-500"> · {r.seeds} seeds</span> : ""}</td>
                     <td className="p-3"><Dots run={r} tasks={core} color="amber" /></td>
                     <td className="p-3"><Dots run={r} tasks={hard} color="sky" /></td>
                   </tr>

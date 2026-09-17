@@ -27,6 +27,7 @@ const LABEL_RE = /^[A-Za-z0-9 ._,()+\/-]{1,60}$/;
 export default function Submit() {
   const [label, setLabel] = useState("");
   const [note, setNote] = useState("");
+  const [coi, setCoi] = useState("none");
   const [gain, setGain] = useState(0.45);
   const [seeds, setSeeds] = useState(3);
   const [simIdx, setSimIdx] = useState(0);
@@ -43,13 +44,16 @@ export default function Submit() {
     const lines = [`label: ${label || "…"}`, `note: ${note.replace(/\n/g, " ") || "…"}`, "connectome: flywire783", `seeds: ${seeds}`, "params:", `  gain: ${gain}`];
     if (sim.extra.length) { lines.push("  extra:"); for (const e of sim.extra) lines.push(`    ${e.key}: ${extra[e.key] ?? e.def}`); }
     lines.push(`simulator: ${sim.id}`);
+    // ROADMAP item 49: every row declares its conflict of interest; "none" is an answer
+    lines.push(`conflict_of_interest: ${JSON.stringify(coi.replace(/\n/g, " ").trim() || "none")}`);
     return lines.join("\n") + "\n";
-  }, [label, note, gain, seeds, sim, extra]);
+  }, [label, note, gain, seeds, sim, extra, coi]);
 
   const problems: string[] = [];
   if (!LABEL_RE.test(label)) problems.push("label: 1–60 characters; letters, digits, spaces and . _ , ( ) + / -");
   if (!note.trim()) problems.push("note: say what you changed, in one line");
   if (note.length > 300) problems.push("note: max 300 characters");
+  if (coi.length > 300) problems.push("conflict of interest: max 300 characters");
   const ok = problems.length === 0;
   const href = `https://github.com/${OWNER}/${REPO}/new/${branch}?filename=${encodeURIComponent(`configs/submissions/${slug(label)}.yaml`)}&value=${encodeURIComponent(yaml)}`;
   const field = "w-full rounded border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-100 focus:border-amber-300 outline-none";
@@ -74,6 +78,9 @@ export default function Submit() {
             </Field>
             <Field label="what you changed" hint="one line; this is what other people read">
               <input className={field} value={note} onChange={(e) => setNote(e.target.value)} placeholder="e.g. gain 0.42, otherwise Shiu 2024 defaults" maxLength={300} />
+            </Field>
+            <Field label="conflict of interest" hint="who wrote the model, whether you wrote tasks it targets, what you stand to gain; none is an answer">
+              <input className={field} value={coi} onChange={(e) => setCoi(e.target.value)} placeholder="none" maxLength={300} />
             </Field>
             <Field label="model" hint="built-in simulators only; custom code goes through a normal PR">
               <select className={field} value={simIdx} onChange={(e) => pickSim(+e.target.value)}>

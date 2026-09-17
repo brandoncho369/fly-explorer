@@ -14,10 +14,17 @@ for f in sorted(glob.glob(os.path.join(root, "results", "*.json"))):
     r = json.load(open(f))
     runs.append({
         "label": r["label"], "connectome": r["connectome"],
-        "simulator": r.get("simulator", "flybench.sim.LIFSimulator").replace("flybench.sim.", ""),
+        "simulator": r.get("simulator", "flybench.sim.LIFSimulator").replace("flybench.sim.", "").replace("flybench.models.reference_lif.", ""),
         "gain": r["params"]["gain"], "w_syn": r["params"]["w_syn_mv"],
         "core": r.get("core_score"), "hard": r.get("hard_score"),
         "seeds": int(r.get("seeds", 1)), "verified": bool(r.get("verified", False)),
+        # graded score + CI, shuffled-wiring specificity, hold-out gap, division (absent on older results);
+        # role and conflict of interest (ROADMAP items 45 and 49): the maintainers' model is a tagged baseline
+        "graded": r.get("graded"), "graded_ci": r.get("graded_ci95"), "specificity": r.get("specificity"),
+        "holdout_gap": (r.get("holdout") or {}).get("gap"), "division": r.get("division"),
+        "n_free_parameters": r.get("n_free_parameters"),
+        "reference_baseline": bool(r.get("reference_baseline", False)),
+        "conflict_of_interest": r.get("conflict_of_interest"),
         "max_active": max((m["active_fraction"] for t in r["tasks"] for m in t["measurements"].values()), default=0),
         "tasks": {t["task"]: {"passed": t["passed"], "score": t["score"],
                               # an undefined measurement (a silent ring's bump angle) is NaN in Python and null in JSON

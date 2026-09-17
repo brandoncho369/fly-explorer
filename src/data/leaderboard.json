@@ -12,6 +12,17 @@
    "hard": 0.681438492063492,
    "seeds": 3,
    "verified": false,
+   "graded": 0.7905270745667393,
+   "graded_ci": [
+    0.7701826397343569,
+    0.807562204774275
+   ],
+   "specificity": 0.33792063492063495,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.1052673153567197,
    "tasks": {
     "stability": {
@@ -834,6 +845,14 @@
    "hard": 0.5986011904761905,
    "seeds": 1,
    "verified": false,
+   "graded": 0.5999834421456767,
+   "graded_ci": null,
+   "specificity": null,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.09271480377724318,
    "tasks": {
     "stability": {
@@ -1656,6 +1675,14 @@
    "hard": 0.5517261904761904,
    "seeds": 1,
    "verified": false,
+   "graded": 0.5952582948459113,
+   "graded_ci": null,
+   "specificity": null,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.10049190334278842,
    "tasks": {
     "stability": {
@@ -2478,6 +2505,14 @@
    "hard": 0.5645039682539682,
    "seeds": 1,
    "verified": false,
+   "graded": 0.6667909591439674,
+   "graded_ci": null,
+   "specificity": null,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.10576280923485691,
    "tasks": {
     "stability": {
@@ -3293,13 +3328,24 @@
   {
    "label": "LIF gain 0.45 (3 seeds)",
    "connectome": "flywire783",
-   "simulator": "LIFSimulator",
+   "simulator": "ReferenceLIFSimulator",
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
    "hard": 0.5011999244142101,
    "seeds": 3,
-   "verified": false,
+   "verified": true,
+   "graded": 0.6533978015235294,
+   "graded_ci": [
+    0.6443782420733968,
+    0.66346014721908
+   ],
+   "specificity": 0.20555555555555557,
+   "holdout_gap": null,
+   "division": "closed",
+   "n_free_parameters": 1,
+   "reference_baseline": true,
+   "conflict_of_interest": "the benchmark's maintainers wrote this model; it is the baseline, not the answer",
    "max_active": 0.21970485799432696,
    "tasks": {
     "stability": {
@@ -4143,6 +4189,17 @@
    "hard": 0.47304563492063495,
    "seeds": 3,
    "verified": false,
+   "graded": 0.6461001653017977,
+   "graded_ci": [
+    0.6101952091585886,
+    0.6936925750313143
+   ],
+   "specificity": null,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.10576041554462438,
    "tasks": {
     "stability": {
@@ -4965,6 +5022,14 @@
    "hard": 0.5798710317460316,
    "seeds": 1,
    "verified": false,
+   "graded": 0.6921352623870456,
+   "graded_ci": null,
+   "specificity": null,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.11753258410829055,
    "tasks": {
     "stability": {
@@ -5787,6 +5852,14 @@
    "hard": 0.605704365079365,
    "seeds": 1,
    "verified": false,
+   "graded": 0.7160971696356481,
+   "graded_ci": null,
+   "specificity": null,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.27066173566478763,
    "tasks": {
     "stability": {
@@ -6600,828 +6673,6 @@
    }
   },
   {
-   "label": "LIF gain 0.45 (reference)",
-   "connectome": "flywire783",
-   "simulator": "LIFSimulator",
-   "gain": 0.45,
-   "w_syn": 0.275,
-   "core": 1.0,
-   "hard": 0.5262599206349206,
-   "seeds": 3,
-   "verified": false,
-   "max_active": 0.11126829676971504,
-   "tasks": {
-    "stability": {
-     "passed": true,
-     "score": 1.0,
-     "checks": [
-      {
-       "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      }
-     ]
-    },
-    "sugar_to_proboscis": {
-     "passed": true,
-     "score": 1.0,
-     "checks": [
-      {
-       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 16.4]",
-       "v": 404.5454545454545,
-       "ok": true
-      },
-      {
-       "d": "rate[sugar] / rate[baseline] > 5.0  [3/3 seeds, sd 1.64e+04]",
-       "v": 404546.45454545453,
-       "ok": true
-      },
-      {
-       "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 0.00064]",
-       "v": 0.08787715581726568,
-       "ok": true
-      }
-     ]
-    },
-    "bitter_suppression": {
-     "passed": true,
-     "score": 1.0,
-     "checks": [
-      {
-       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 16.4]",
-       "v": 404.5454545454545,
-       "ok": true
-      },
-      {
-       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [3/3 seeds, sd 0.00719]",
-       "v": 0.007201770646862011,
-       "ok": true
-      }
-     ]
-    },
-    "looming_to_giant_fiber": {
-     "passed": true,
-     "score": 1.0,
-     "checks": [
-      {
-       "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 5.68e-14]",
-       "v": 435.7142857142856,
-       "ok": true
-      },
-      {
-       "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 0]",
-       "v": 435715.2857142856,
-       "ok": true
-      },
-      {
-       "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 0.00149]",
-       "v": 0.07120270965734325,
-       "ok": true
-      }
-     ]
-    },
-    "taste_specificity": {
-     "passed": true,
-     "score": 1.0,
-     "checks": [
-      {
-       "d": "rate[bitter] < 2.0 Hz  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 3.39e-06]",
-       "v": 0.0006510837432527856,
-       "ok": true
-      }
-     ]
-    },
-    "dose_response": {
-     "passed": false,
-     "score": 0.4,
-     "checks": [
-      {
-       "d": "rate[measured] > 5.0 Hz  [1/3 seeds, sd 100]",
-       "v": 73.63636363636364,
-       "ok": false
-      },
-      {
-       "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": false
-      },
-      {
-       "d": "rate[strong] > 5.0 Hz  [3/3 seeds, sd 16.4]",
-       "v": 404.5454545454545,
-       "ok": true
-      },
-      {
-       "d": "rate[weak] / rate[strong] < 0.6  [3/3 seeds, sd 9.82e-08]",
-       "v": 2.4758876807404953e-06,
-       "ok": true
-      },
-      {
-       "d": "rate[strong] < 300.0 Hz  [0/3 seeds, sd 16.4]",
-       "v": 404.5454545454545,
-       "ok": false
-      }
-     ]
-    },
-    "adaptation": {
-     "passed": false,
-     "score": 0.5,
-     "checks": [
-      {
-       "d": "rate[two_pulses] > 5.0 Hz  [3/3 seeds, sd 24.9]",
-       "v": 391.4285714285714,
-       "ok": true
-      },
-      {
-       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0.0703]  [saturated: all compared conditions at ceiling]",
-       "v": 1.1042167037882773,
-       "ok": false
-      }
-     ]
-    },
-    "olfactory_sparse_coding": {
-     "passed": false,
-     "score": 0.5,
-     "checks": [
-      {
-       "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.185]",
-       "v": 434.37908496732024,
-       "ok": true
-      },
-      {
-       "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 185]",
-       "v": 434380.08496732014,
-       "ok": true
-      },
-      {
-       "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0.00165]",
-       "v": 0.8379953379953381,
-       "ok": false
-      },
-      {
-       "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 8e-05]",
-       "v": 0.08102641437171616,
-       "ok": false
-      }
-     ]
-    },
-    "crosstalk": {
-     "passed": true,
-     "score": 1.0,
-     "checks": [
-      {
-       "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 16.4]",
-       "v": 404.5454545454545,
-       "ok": true
-      },
-      {
-       "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 6.34]",
-       "v": 221.81818181818178,
-       "ok": true
-      },
-      {
-       "d": "rate[loom, mn9] < 2.0 Hz  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      }
-     ]
-    },
-    "looming_dn_ensemble": {
-     "passed": false,
-     "score": 0.6666666666666666,
-     "checks": [
-      {
-       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 5.68e-14]",
-       "v": 435.7142857142856,
-       "ok": true
-      },
-      {
-       "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 5.97]",
-       "v": 197.32142857142856,
-       "ok": true
-      },
-      {
-       "d": "readout active fraction[loom, all_dn] < 0.15  [0/3 seeds, sd 0.00253]",
-       "v": 0.3052362707535121,
-       "ok": false
-      }
-     ]
-    },
-    "flash_is_not_loom": {
-     "passed": true,
-     "score": 1.0,
-     "checks": [
-      {
-       "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 0.000185]",
-       "v": 0.11126829676971504,
-       "ok": true
-      }
-     ]
-    },
-    "return_to_rest": {
-     "passed": false,
-     "score": 0.25,
-     "checks": [
-      {
-       "d": "rate[sugar] > 5.0 Hz  [3/3 seeds, sd 20.4]",
-       "v": 399.6296296296296,
-       "ok": true
-      },
-      {
-       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [0/3 seeds, sd 1.57]",
-       "v": 354.4444444444445,
-       "ok": false
-      },
-      {
-       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [0/3 seeds, sd 0.000938]",
-       "v": 10.851403699847204,
-       "ok": false
-      },
-      {
-       "d": "active fraction[sugar, 1700-2000ms] < 0.01  [0/3 seeds, sd 4.48e-05]",
-       "v": 0.07707682548801359,
-       "ok": false
-      }
-     ]
-    },
-    "physiological_rates": {
-     "passed": false,
-     "score": 0.6,
-     "checks": [
-      {
-       "d": "spikes per neuron[loom, 200-500ms] >= 1.0 spikes/neuron  [3/3 seeds, sd 0]",
-       "v": 129.0,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[loom, 200-500ms] <= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
-       "v": 129.0,
-       "ok": false
-      },
-      {
-       "d": "spikes per neuron[loom, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "rate[sugar, mn9] > 5.0 Hz  [3/3 seeds, sd 19.3]",
-       "v": 360.3333333333333,
-       "ok": true
-      },
-      {
-       "d": "rate[sugar, mn9] < 150.0 Hz  [0/3 seeds, sd 19.3]",
-       "v": 360.3333333333333,
-       "ok": false
-      }
-     ]
-    },
-    "wiring_robustness": {
-     "passed": false,
-     "score": 0.8,
-     "checks": [
-      {
-       "d": "network rate[baseline_other_fly] < 0.5 Hz  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "rate[sugar_other_fly, mn9] > 5.0 Hz  [2/3 seeds, sd 152]",
-       "v": 213.19444444444446,
-       "ok": false
-      },
-      {
-       "d": "active fraction[sugar_other_fly] < 0.1  [3/3 seeds, sd 0.0419]",
-       "v": 0.06132395006762175,
-       "ok": true
-      },
-      {
-       "d": "rate[loom_other_fly, gf, 220-500ms] > 5.0 Hz  [3/3 seeds, sd 0.842]",
-       "v": 435.11904761904754,
-       "ok": true
-      },
-      {
-       "d": "active fraction[loom_other_fly, 220-500ms] < 0.1  [3/3 seeds, sd 0.0242]",
-       "v": 0.05132550596627291,
-       "ok": true
-      }
-     ]
-    },
-    "gf_azimuth_invariance": {
-     "passed": false,
-     "score": 0.4444444444444444,
-     "checks": [
-      {
-       "d": "spikes per neuron[left] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.471]",
-       "v": 126.66666666666667,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[right] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.47]",
-       "v": 120.0,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[frontal] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
-       "v": 128.83333333333334,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[left] <= 1.0 spikes/neuron  [0/3 seeds, sd 0.471]",
-       "v": 126.66666666666667,
-       "ok": false
-      },
-      {
-       "d": "spikes per neuron[right] <= 1.0 spikes/neuron  [0/3 seeds, sd 1.47]",
-       "v": 120.0,
-       "ok": false
-      },
-      {
-       "d": "spikes per neuron[frontal] <= 1.0 spikes/neuron  [0/3 seeds, sd 0.236]",
-       "v": 128.83333333333334,
-       "ok": false
-      },
-      {
-       "d": "spikes per neuron[frontal, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "rate[left, gf] / rate[right] < 3.0  [0/3 seeds, sd 0.00928]  [saturated: all compared conditions at ceiling]",
-       "v": 1.0556685300550388,
-       "ok": false
-      },
-      {
-       "d": "rate[right, gf] / rate[left] < 3.0  [0/3 seeds, sd 0.00831]  [saturated: all compared conditions at ceiling]",
-       "v": 0.9473400406342325,
-       "ok": false
-      }
-     ]
-    },
-    "pn_transfer_function": {
-     "passed": false,
-     "score": 0.14285714285714285,
-     "checks": [
-      {
-       "d": "rate[orn100, da1_pn] <= 170.0 Hz  [0/3 seeds, sd 0.185]",
-       "v": 434.37908496732024,
-       "ok": false
-      },
-      {
-       "d": "rate[orn10, da1_pn] >= 5.0 Hz  [3/3 seeds, sd 19.8]",
-       "v": 379.21568627450984,
-       "ok": true
-      },
-      {
-       "d": "rate[orn30, da1_pn] / rate[orn10] > 1.0  [1/3 seeds, sd 0.0581]",
-       "v": 1.1108066589239185,
-       "ok": false
-      },
-      {
-       "d": "rate[orn100, da1_pn] / rate[orn30] > 1.0  [0/3 seeds, sd 0.000791]  [saturated: all compared conditions at ceiling]",
-       "v": 1.034021639727704,
-       "ok": false
-      },
-      {
-       "d": "rate[orn30, da1_pn] / rate[orn10] < 3.0  [1/3 seeds, sd 0.0581]",
-       "v": 1.1108066589239185,
-       "ok": false
-      },
-      {
-       "d": "rate[orn100, da1_pn] / rate[orn30] < 2.0  [0/3 seeds, sd 0.000791]  [saturated: all compared conditions at ceiling]",
-       "v": 1.034021639727704,
-       "ok": false
-      },
-      {
-       "d": "rate[orn10, da1_pn] / rate[orn100] < 0.6  [0/3 seeds, sd 0.0452]",
-       "v": 0.8729904740856963,
-       "ok": false
-      }
-     ]
-    },
-    "da1_sparseness": {
-     "passed": false,
-     "score": 0.1111111111111111,
-     "checks": [
-      {
-       "d": "lifetime sparseness[da1_pn, 8 stimuli] >= 0.9  [0/3 seeds, sd 4.42e-06]  [saturated: all compared conditions at ceiling]",
-       "v": 0.0009073801746590993,
-       "ok": false
-      },
-      {
-       "d": "rate[cva, da1_pn] >= 10.0 Hz  [3/3 seeds, sd 0.185]",
-       "v": 434.37908496732024,
-       "ok": true
-      },
-      {
-       "d": "rate[cva, da1_pn] / rate[dm1] > 1.0  [0/3 seeds, sd 0.000594]  [saturated: all compared conditions at ceiling]",
-       "v": 1.0860660752576357,
-       "ok": false
-      },
-      {
-       "d": "rate[cva, da1_pn] / rate[dm2] > 1.0  [0/3 seeds, sd 0.000357]  [saturated: all compared conditions at ceiling]",
-       "v": 1.0865394984657522,
-       "ok": false
-      },
-      {
-       "d": "rate[cva, da1_pn] / rate[dm4] > 1.0  [0/3 seeds, sd 0.000405]  [saturated: all compared conditions at ceiling]",
-       "v": 1.0853563365024863,
-       "ok": false
-      },
-      {
-       "d": "rate[cva, da1_pn] / rate[dl1] > 1.0  [0/3 seeds, sd 0.000462]  [saturated: all compared conditions at ceiling]",
-       "v": 1.0859474975495567,
-       "ok": false
-      },
-      {
-       "d": "rate[cva, da1_pn] / rate[dl5] > 1.0  [0/3 seeds, sd 0.000576]  [saturated: all compared conditions at ceiling]",
-       "v": 1.0857111044874346,
-       "ok": false
-      },
-      {
-       "d": "rate[cva, da1_pn] / rate[va1v] > 1.0  [0/3 seeds, sd 0.000406]  [saturated: all compared conditions at ceiling]",
-       "v": 1.0871317241297416,
-       "ok": false
-      },
-      {
-       "d": "rate[cva, da1_pn] / rate[dc1] > 1.0  [0/3 seeds, sd 0.000356]  [saturated: all compared conditions at ceiling]",
-       "v": 1.0861843434830911,
-       "ok": false
-      }
-     ]
-    },
-    "lc_dn_matrix": {
-     "passed": false,
-     "score": 0.6875,
-     "checks": [
-      {
-       "d": "spikes per neuron[lc4, gf] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
-       "v": 127.83333333333333,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[lc4, dnp02] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.85]",
-       "v": 93.33333333333333,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[lc4, dnp11] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.03]",
-       "v": 45.166666666666664,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[lc4, mdn] < 1.0 spikes/neuron  [0/3 seeds, sd 0.354]",
-       "v": 18.75,
-       "ok": false
-      },
-      {
-       "d": "spikes per neuron[lplc2, gf] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.25]",
-       "v": 123.66666666666667,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[lplc2, mdn] < 1.0 spikes/neuron  [0/3 seeds, sd 0.118]",
-       "v": 13.833333333333334,
-       "ok": false
-      },
-      {
-       "d": "spikes per neuron[lc6, mdn] < 1.0 spikes/neuron  [0/3 seeds, sd 0.589]",
-       "v": 15.166666666666666,
-       "ok": false
-      },
-      {
-       "d": "spikes per neuron[lplc1, mdn] < 1.0 spikes/neuron  [1/3 seeds, sd 0.118]",
-       "v": 0.9166666666666666,
-       "ok": false
-      },
-      {
-       "d": "spikes per neuron[lc16, gf] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[lc16, dnp02] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[lc16, dnp11] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[lc16, mdn] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": false
-      },
-      {
-       "d": "spikes per neuron[lc10a, gf] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[lc10a, dnp02] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[lc10a, dnp11] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      },
-      {
-       "d": "spikes per neuron[lc10a, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      }
-     ]
-    },
-    "optic_flow_rotation": {
-     "passed": false,
-     "score": 0.8333333333333334,
-     "checks": [
-      {
-       "d": "rate[yaw_right, dnp15_left] > 5.0 Hz  [3/3 seeds, sd 7.48]",
-       "v": 198.0,
-       "ok": true
-      },
-      {
-       "d": "rate[yaw_left, dnp15_right] > 5.0 Hz  [3/3 seeds, sd 5.73]",
-       "v": 76.66666666666667,
-       "ok": true
-      },
-      {
-       "d": "rate[yaw_right, dnp15_right] < 2.0 Hz  [0/3 seeds, sd 4.71]",
-       "v": 50.666666666666664,
-       "ok": false
-      },
-      {
-       "d": "rate[yaw_right, dnp15_left] / rate[forward] > 1.0  [3/3 seeds, sd 0.428]",
-       "v": 6.365433873630795,
-       "ok": true
-      },
-      {
-       "d": "rate[forward, dnp15_left] / rate[ftb_left] < 0.8  [3/3 seeds, sd 0.0906]",
-       "v": 0.5223743337328701,
-       "ok": true
-      },
-      {
-       "d": "rate[forward, bips] / rate[yaw_right] > 1.0  [3/3 seeds, sd 1.61]",
-       "v": 8.921133290906619,
-       "ok": true
-      }
-     ]
-    },
-    "antennal_grooming_vs_backward": {
-     "passed": false,
-     "score": 0.0,
-     "checks": [
-      {
-       "d": "rate[jo_ce, adn] > 5.0 Hz  [0/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": false
-      },
-      {
-       "d": "rate[jo_f, adn] > 5.0 Hz  [2/3 seeds, sd 0.943]",
-       "v": 5.333333333333333,
-       "ok": false
-      },
-      {
-       "d": "rate[jo_f, mdn] > 5.0 Hz  [0/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": false
-      },
-      {
-       "d": "rate[jo_ce, mdn] < 2.0 Hz  [0/3 seeds, sd 2.72]",
-       "v": 11.333333333333334,
-       "ok": false
-      }
-     ]
-    },
-    "mb_sparseness_apl": {
-     "passed": false,
-     "score": 0.625,
-     "checks": [
-      {
-       "d": "readout active fraction[cva, kc] < 0.2  [0/3 seeds, sd 9.11e-05]",
-       "v": 0.6019573755714377,
-       "ok": false
-      },
-      {
-       "d": "readout active fraction[dm4, kc] < 0.2  [0/3 seeds, sd 9.11e-05]",
-       "v": 0.6006052411306421,
-       "ok": false
-      },
-      {
-       "d": "readout active fraction[va1v, kc] < 0.2  [0/3 seeds, sd 0.000158]",
-       "v": 0.606722039791385,
-       "ok": false
-      },
-      {
-       "d": "readout active fraction[cva_apl_off, kc] / readout active fraction[cva] > 1.0  [3/3 seeds, sd 0.000131]",
-       "v": 1.4740226706978243,
-       "ok": true
-      },
-      {
-       "d": "readout active fraction[dm4_apl_off, kc] / readout active fraction[dm4] > 1.0  [3/3 seeds, sd 0.000344]",
-       "v": 1.4760513253413177,
-       "ok": true
-      },
-      {
-       "d": "readout active fraction[va1v_apl_off, kc] / readout active fraction[va1v] > 1.0  [3/3 seeds, sd 0.000557]",
-       "v": 1.4637375507090615,
-       "ok": true
-      },
-      {
-       "d": "population sparseness[cva, kc] / population sparseness[cva_apl_off] > 1.0  [3/3 seeds, sd 0.000338]",
-       "v": 1.8926357168984331,
-       "ok": true
-      },
-      {
-       "d": "population sparseness[dm4, kc] / population sparseness[dm4_apl_off] > 1.0  [3/3 seeds, sd 0.000304]",
-       "v": 1.8940033641084186,
-       "ok": true
-      }
-     ]
-    },
-    "co2_pathway_specificity": {
-     "passed": false,
-     "score": 0.5714285714285714,
-     "checks": [
-      {
-       "d": "rate[co2, pnv_bi] > 5.0 Hz  [3/3 seeds, sd 0.943]",
-       "v": 430.6666666666667,
-       "ok": true
-      },
-      {
-       "d": "rate[co2, ln23] > 5.0 Hz  [3/3 seeds, sd 1.08]",
-       "v": 186.5,
-       "ok": true
-      },
-      {
-       "d": "rate[co2, pnm1] > 5.0 Hz  [3/3 seeds, sd 0.943]",
-       "v": 392.3333333333333,
-       "ok": true
-      },
-      {
-       "d": "rate[co2, lhpd5c1] > 5.0 Hz  [3/3 seeds, sd 0.943]",
-       "v": 427.3333333333333,
-       "ok": true
-      },
-      {
-       "d": "rate[cva, pnm1] < 2.0 Hz  [0/3 seeds, sd 0.471]",
-       "v": 234.33333333333334,
-       "ok": false
-      },
-      {
-       "d": "rate[dm1, pnm1] < 2.0 Hz  [0/3 seeds, sd 0.471]",
-       "v": 235.66666666666666,
-       "ok": false
-      },
-      {
-       "d": "rate[cva, pnv_bi] < 2.0 Hz  [0/3 seeds, sd 0.943]",
-       "v": 417.3333333333333,
-       "ok": false
-      }
-     ]
-    },
-    "epg_ring_attractor": {
-     "passed": false,
-     "score": 0.14285714285714285,
-     "checks": [
-      {
-       "d": "bump resultant[cue, 8 wedges] > 0.5  [0/3 seeds, sd 0.000305]",
-       "v": 0.016890279220919496,
-       "ok": false
-      },
-      {
-       "d": "bump error[cue, vs 135\u00b0] < 45.0 deg  [0/3 seeds, sd 1.88]",
-       "v": 87.3700292728666,
-       "ok": false
-      },
-      {
-       "d": "rate[cue, epg, 900-1400ms] > 5.0 Hz  [3/3 seeds, sd 0.112]",
-       "v": 370.4113475177305,
-       "ok": true
-      },
-      {
-       "d": "bump resultant[cue, 8 wedges] > 0.5  [0/3 seeds, sd 0.000183]",
-       "v": 0.021718553213843365,
-       "ok": false
-      },
-      {
-       "d": "bump error[cue, vs 135\u00b0] < 45.0 deg  [0/3 seeds, sd 0.257]",
-       "v": 122.36940755908581,
-       "ok": false
-      },
-      {
-       "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd 0.00102]",
-       "v": 0.021069262625555595,
-       "ok": false
-      },
-      {
-       "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd 0.000423]",
-       "v": 0.02145105914052219,
-       "ok": false
-      }
-     ]
-    },
-    "egg_laying_ovidn": {
-     "passed": false,
-     "score": 0.75,
-     "checks": [
-      {
-       "d": "rate[ovien, ovidn] > 5.0 Hz  [3/3 seeds, sd 1.89]",
-       "v": 14.333333333333334,
-       "ok": true
-      },
-      {
-       "d": "rate[ovien_plus_oviin, ovidn] / rate[ovien] < 0.5  [0/3 seeds, sd 0.107]",
-       "v": 0.6772474339354502,
-       "ok": false
-      },
-      {
-       "d": "rate[pc1, oviin] > 5.0 Hz  [3/3 seeds, sd 25.3]",
-       "v": 52.0,
-       "ok": true
-      },
-      {
-       "d": "rate[pc1, ovidn] < 2.0 Hz  [3/3 seeds, sd 0]",
-       "v": 0.0,
-       "ok": true
-      }
-     ]
-    },
-    "halt_walk_off": {
-     "passed": false,
-     "score": 0.5,
-     "checks": [
-      {
-       "d": "rate[sugar, fg] > 5.0 Hz  [3/3 seeds, sd 2.87]",
-       "v": 66.33333333333333,
-       "ok": true
-      },
-      {
-       "d": "rate[walk, bdn2] > 5.0 Hz  [3/3 seeds, sd 14.9]",
-       "v": 105.33333333333333,
-       "ok": true
-      },
-      {
-       "d": "rate[walk, odn1] > 5.0 Hz  [3/3 seeds, sd 2.49]",
-       "v": 14.666666666666666,
-       "ok": true
-      },
-      {
-       "d": "rate[walk_plus_fg, bdn2] / rate[walk] < 0.5  [0/3 seeds, sd 0.222]",
-       "v": 0.6858067180801979,
-       "ok": false
-      },
-      {
-       "d": "rate[walk_plus_fg, odn1] / rate[walk] < 0.5  [0/3 seeds, sd 0.242]",
-       "v": 1.0581947704691423,
-       "ok": false
-      },
-      {
-       "d": "rate[walk_plus_bb, odn1] / rate[walk] < 0.5  [0/3 seeds, sd 0.194]",
-       "v": 0.9087352447310709,
-       "ok": false
-      }
-     ]
-    }
-   },
-   "skipped": {
-    "looming_to_jump_muscle": "readout 'ttmn' matches no neurons on flywire783",
-    "gf_to_muscle_latency": "readout 'ttmn' matches no neurons on flywire783",
-    "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
-    "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
-    "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
-    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
-   }
-  },
-  {
    "label": "MaleCNS gain 0.45",
    "connectome": "malecns",
    "simulator": "LIFSimulator",
@@ -7431,6 +6682,17 @@
    "hard": 0.6187830687830688,
    "seeds": 3,
    "verified": false,
+   "graded": 0.6904921287376815,
+   "graded_ci": [
+    0.6751934135371208,
+    0.7027905007190168
+   ],
+   "specificity": null,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.0939376419418591,
    "tasks": {
     "stability": {
@@ -8378,6 +7640,17 @@
    "hard": 0.5985284391534391,
    "seeds": 3,
    "verified": false,
+   "graded": 0.6624673348720757,
+   "graded_ci": [
+    0.6517641625379216,
+    0.6701086935106099
+   ],
+   "specificity": null,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.10586737103838145,
    "tasks": {
     "stability": {
@@ -9325,6 +8598,17 @@
    "hard": 0.5927992724867724,
    "seeds": 3,
    "verified": false,
+   "graded": 0.6321243354555673,
+   "graded_ci": [
+    0.628922126089451,
+    0.6356245532564446
+   ],
+   "specificity": null,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.12616718247535266,
    "tasks": {
     "stability": {
@@ -10272,6 +9556,17 @@
    "hard": 0.5365873015873016,
    "seeds": 3,
    "verified": false,
+   "graded": 0.639020396778695,
+   "graded_ci": [
+    0.6240964008168272,
+    0.6494020739550029
+   ],
+   "specificity": 0.18418650793650795,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.2330982908405225,
    "tasks": {
     "stability": {
@@ -11240,6 +10535,17 @@
    "hard": 0.5348710317460317,
    "seeds": 3,
    "verified": false,
+   "graded": 0.6449444211944643,
+   "graded_ci": [
+    0.632979593559235,
+    0.6562924957662749
+   ],
+   "specificity": 0.21168253968253967,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
    "max_active": 0.3414670927435281,
    "tasks": {
     "stability": {

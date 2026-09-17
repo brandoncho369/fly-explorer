@@ -8,7 +8,10 @@ export interface Run {
   seeds?: number; verified?: boolean;
   // cliff-free graded score (IQM over tasks) with a seed-bootstrap 95% CI, shuffled-wiring specificity,
   // public − hold-out gap, and closed/open division; absent on results that predate them
-  graded?: number; graded_ci?: [number, number]; specificity?: number; holdout_gap?: number; division?: string;
+  graded?: number | null; graded_ci?: [number, number] | null; specificity?: number | null; holdout_gap?: number | null; division?: string | null;
+  n_free_parameters?: number | null;
+  // the maintainers' own model, submitted and evaluated like any other but tagged so it reads as the floor to beat
+  reference_baseline?: boolean; conflict_of_interest?: string | null;
   tasks: Record<string, TaskResult>;
   // tasks this run could not score, by reason: "not applicable: ..." (a dataset_only task, e.g. a male-only
   // circuit on the female brain) or "readout 'x' matches no neurons" (the dataset lacks the cell type)

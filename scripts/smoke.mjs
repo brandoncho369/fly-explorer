@@ -178,7 +178,8 @@ for (const w of [1300, 400]) {
   check(!!href && href.startsWith("https://github.com/brandoncho369/flybench/new/") && href.includes("configs%2Fsubmissions%2Fsmoke-test-run.yaml"), "/submit: builds a GitHub new-file URL");
   const yaml = decodeURIComponent(href.split("value=")[1]);
   check(yaml.includes("label: smoke test run") && yaml.includes("gain: 0.45") && yaml.includes("seeds: 3"), "/submit: YAML carries the form values");
-  await q.getByLabel("model").selectOption({ index: 1 });
+  check(yaml.includes('conflict_of_interest: "none"'), "/submit: YAML declares a conflict of interest (default none)");
+  await q.getByLabel(/^model/).selectOption({ index: 1 });
   check((await q.getByTestId("yaml").innerText()).includes("b_mv: 2"), "/submit: adaptive model adds its constants");
   const sw = await q.evaluate(() => document.documentElement.scrollWidth);
   check(sw <= 1300, "/submit: no horizontal overflow");

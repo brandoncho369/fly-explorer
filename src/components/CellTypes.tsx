@@ -154,8 +154,9 @@ export function CellTypes({ base, ready, gain, activeStims, onFire, held, reques
 function trustLine(gain: number, base: string): React.ReactNode {
   const ds = base.split("/").pop() ?? "";
   if (ds === "toy") return "Toy network: hand-wired, proves nothing about biology.";
-  const runs = (snapshot as { runs: { connectome: string; gain: number; simulator: string; core: number | null; hard: number | null; seeds?: number }[] }).runs
-    .filter((r) => r.connectome === ds && r.simulator === "LIFSimulator");
+  // the reference LIF rows: the plain engine, or the same engine under its model-card name (the tagged baseline)
+  const runs = (snapshot as { runs: { connectome: string; gain: number; simulator: string; core: number | null; hard: number | null; seeds?: number; reference_baseline?: boolean }[] }).runs
+    .filter((r) => r.connectome === ds && (r.simulator === "LIFSimulator" || r.reference_baseline));
   if (!runs.length) return "No benchmark result for this dataset yet.";
   const near = runs.reduce((a, b) => (Math.abs(b.gain - gain) < Math.abs(a.gain - gain) ? b : a));
   const core = near.core == null ? "–" : `${Math.round(near.core * 5)}/5 core`;
