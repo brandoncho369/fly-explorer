@@ -3332,15 +3332,15 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5011999244142101,
+   "hard": 0.5125090187590188,
    "seeds": 3,
    "verified": true,
-   "graded": 0.6533978015235294,
+   "graded": 0.6549974136676018,
    "graded_ci": [
-    0.6443782420733968,
-    0.66346014721908
+    0.6465312356002528,
+    0.6635942127413031
    ],
-   "specificity": 0.20555555555555557,
+   "specificity": 0.207201646090535,
    "holdout_gap": null,
    "division": "closed",
    "n_free_parameters": 1,
@@ -4165,6 +4165,32 @@
       {
        "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
        "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms  [3/3 seeds, sd 0.17]",
+       "v": 17.063328043619787,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5  [0/3 seeds, sd 0]",
+       "v": 1.0,
        "ok": false
       }
      ]
@@ -9553,15 +9579,15 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.5365873015873016,
+   "hard": 0.5447954822954822,
    "seeds": 3,
    "verified": false,
-   "graded": 0.639020396778695,
+   "graded": 0.64132101492,
    "graded_ci": [
-    0.6240964008168272,
-    0.6494020739550029
+    0.6281831789686063,
+    0.6508726801389434
    ],
-   "specificity": 0.18418650793650795,
+   "specificity": 0.18630952380952384,
    "holdout_gap": null,
    "division": null,
    "n_free_parameters": null,
@@ -10515,6 +10541,32 @@
       {
        "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
        "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms  [3/3 seeds, sd 0.125]",
+       "v": 23.066669718424475,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5  [0/3 seeds, sd 0]",
+       "v": 1.0,
        "ok": false
       }
      ]
@@ -11583,6 +11635,13 @@
    "tier": "hard",
    "description": "The escape tasks so far drive the loom detectors themselves (LPLC2 and LC4 at 150 Hz): a convention that assumes the optic lobe has already done its job. This task replaces it with a published model of the optic lobe: flyvis (Lappalainen et al. 2024), a connectome-constrained network of 65 cell types on a 721-column retina, sees a rendered stimulus and its output types (T4/T5, T2/T3, Tm/TmY) drive the same types in the connectome, column by column (an inferred retinotopy, see flybench/frontends/flyvis_frontend.py); the LIF's own wiring from there to LPLC2, LC4 and the giant fiber does the rest. A dark disc expanding with r/v = 40 ms (von Reyn 2014, Ache 2019) must fire LPLC2 and LC4 (Klapoetke 2017; Ache 2019) and give the giant fiber at least one spike (von Reyn 2014). A full-field brightening (the task-11 null, now through the eye) is measured and reported but not scored: see the checks. Front-end outputs are cached and committed (data/frontends/flyvis), so runs need neither torch nor flyvis; a dataset without the optic-lobe types skips the task. Pre-registered predictions and outcome: docs/rfcs/32_flyvis_loom_escape.md.",
    "citation": "Lappalainen et al. 2024 (Nature 634:1132, flyvis); von Reyn et al. 2014 (Nat Neurosci 17:962); Klapoetke et al. 2017 (Nature 551:237); Ache et al. 2019 (Curr Biol 29:1073)"
+  },
+  {
+   "name": "embodied_loom_escape",
+   "title": "A loom makes the body jump; a flash and rest do not (first embodied task)",
+   "tier": "hard",
+   "description": "The first task of the embodied track (docs/ROADMAP.md item 51): the brain's spikes drive a physics body and the body's behaviour is scored. The jump command is a spike of the tergotrochanteral motor neuron (TTMn) where the dataset has a nerve cord, or the giant fiber plus the measured 0.93 ms GF\u2192TTM delay (Augustin et al. 2019) where it has none; the body is NeuroMechFly in FlyGym (MuJoCo), which runs one fixed middle-leg extension program per command (flybench/embodied/flygym_body.py). Takeoff is a physics event: all six feet off the ground within 30 ms of a command. A loom (the task-4 LPLC2/LC4 convention) must produce a takeoff within the drive; a fly at rest must not jump; a full-field flash through the flyvis front end must not make it jump. The loom through the eye (task 32) is measured, not scored, because task 32 already scores that failure. Feed-forward: nothing from the body returns to the brain. Pre-registered predictions and outcome: docs/rfcs/33_embodied_loom_escape.md.",
+   "citation": "Card & Dickinson 2008 (Curr Biol 18:1300, doi:10.1016/j.cub.2008.07.094); von Reyn et al. 2014 (Nat Neurosci 17:962, doi:10.1038/nn.3741); Trimarchi & Schneiderman 1995 (J Exp Biol 198:1099); Allen et al. 2006 (J Neurosci 26:1264, doi:10.1523/JNEUROSCI.4258-05.2006); Augustin et al. 2019 (J Physiol 597:2233); Lobato-Rios et al. 2022 (Nat Methods 19:620, doi:10.1038/s41592-022-01466-7); Wang-Chen et al. 2024 (Nat Methods 21:2353, doi:10.1038/s41592-024-02497-y)"
   }
  ]
 }
