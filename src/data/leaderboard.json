@@ -9579,21 +9579,21 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.5447954822954822,
+   "hard": 0.5616549088771311,
    "seeds": 3,
    "verified": false,
-   "graded": 0.64132101492,
+   "graded": 0.651560025647754,
    "graded_ci": [
-    0.6281831789686063,
-    0.6508726801389434
+    0.6378644195273935,
+    0.6603006211509364
    ],
-   "specificity": 0.18630952380952384,
+   "specificity": 0.20652901785714287,
    "holdout_gap": null,
    "division": null,
    "n_free_parameters": null,
    "reference_baseline": false,
    "conflict_of_interest": null,
-   "max_active": 0.2330982908405225,
+   "max_active": 0.2332702270691864,
    "tasks": {
     "stability": {
      "passed": true,
@@ -10568,6 +10568,42 @@
        "d": "body takeoff[flash_eye] < 0.5  [0/3 seeds, sd 0]",
        "v": 1.0,
        "ok": false
+      }
+     ]
+    },
+    "ttmn_without_gf": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "spikes per neuron[loom_eye_gf_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.31]",
+       "v": 3.3333333333333335,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[loom_eye_gf_off] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom_eye_gf_off] < 1000.0 ms  [3/3 seeds, sd 63.1]",
+       "v": 498.66667073567714,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[loom_gf_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 4.02]",
+       "v": 27.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye_gf_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[rest_gf_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
       }
      ]
     }
@@ -11642,6 +11678,13 @@
    "tier": "hard",
    "description": "The first task of the embodied track (docs/ROADMAP.md item 51): the brain's spikes drive a physics body and the body's behaviour is scored. The jump command is a spike of the tergotrochanteral motor neuron (TTMn) where the dataset has a nerve cord, or the giant fiber plus the measured 0.93 ms GF\u2192TTM delay (Augustin et al. 2019) where it has none; the body is NeuroMechFly in FlyGym (MuJoCo), which runs one fixed middle-leg extension program per command (flybench/embodied/flygym_body.py). Takeoff is a physics event: all six feet off the ground within 30 ms of a command. A loom (the task-4 LPLC2/LC4 convention) must produce a takeoff within the drive; a fly at rest must not jump; a full-field flash through the flyvis front end must not make it jump. The loom through the eye (task 32) is measured, not scored, because task 32 already scores that failure. Feed-forward: nothing from the body returns to the brain. Pre-registered predictions and outcome: docs/rfcs/33_embodied_loom_escape.md.",
    "citation": "Card & Dickinson 2008 (Curr Biol 18:1300, doi:10.1016/j.cub.2008.07.094); von Reyn et al. 2014 (Nat Neurosci 17:962, doi:10.1038/nn.3741); Trimarchi & Schneiderman 1995 (J Exp Biol 198:1099); Allen et al. 2006 (J Neurosci 26:1264, doi:10.1523/JNEUROSCI.4258-05.2006); Augustin et al. 2019 (J Physiol 597:2233); Lobato-Rios et al. 2022 (Nat Methods 19:620, doi:10.1038/s41592-022-01466-7); Wang-Chen et al. 2024 (Nat Methods 21:2353, doi:10.1038/s41592-024-02497-y)"
+  },
+  {
+   "name": "ttmn_without_gf",
+   "title": "The jump without the giant fiber \u2014 a loom through the eye reaches TTMn with the GF silenced",
+   "tier": "hard",
+   "description": "Flies take off from a loom in two modes (Card & Dickinson 2008; von Reyn et al. 2014): the giant-fiber short mode, and a long mode that survives silencing the GF and ends in the same tergotrochanteral muscle. Task 33 found, unasked, that the flyvis loom made the body jump on MaleCNS with the GF at 0 Hz. Here the GF's outgoing synapses are zeroed for the condition (`silence`, as in task 26) and the question is asked directly, on the body: does the loom through the eye still reach TTMn and make NeuroMechFly leave the ground before the movie's collision; does the task-4 convention loom also have a GF-free route; does the flash's jump (task 33) survive the GF's silencing (predicted not to \u2014 see the RFC); does the fly stay put at rest. The GF-intact loom is measured, not scored (task 33 owns it). MaleCNS in practice (TTMn needs a nerve cord). Pre-registered predictions and outcome: docs/rfcs/34_ttmn_without_gf.md.",
+   "citation": "Card & Dickinson 2008 (Curr Biol 18:1300, doi:10.1016/j.cub.2008.07.094); von Reyn et al. 2014 (Nat Neurosci 17:962, doi:10.1038/nn.3741); Engel & Wu 1996 (J Comp Physiol A 178:105); Lobato-Rios et al. 2022 (Nat Methods 19:620, doi:10.1038/s41592-022-01466-7)"
   }
  ]
 }
