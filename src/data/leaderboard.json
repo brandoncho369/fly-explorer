@@ -9579,15 +9579,15 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.5616549088771311,
+   "hard": 0.5737386621315193,
    "seeds": 3,
    "verified": false,
-   "graded": 0.651560025647754,
+   "graded": 0.6595170927387886,
    "graded_ci": [
-    0.6378644195273935,
-    0.6603006211509364
+    0.6462122439719478,
+    0.6676023575593687
    ],
-   "specificity": 0.20652901785714287,
+   "specificity": 0.21845238095238098,
    "holdout_gap": null,
    "division": null,
    "n_free_parameters": null,
@@ -10603,6 +10603,62 @@
       {
        "d": "body takeoff[rest_gf_off] < 0.5  [3/3 seeds, sd 0]",
        "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "gf_free_route_to_ttmn": {
+     "passed": false,
+     "score": 0.9,
+     "checks": [
+      {
+       "d": "spikes per neuron[gf_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.31]",
+       "v": 3.3333333333333335,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_all_dn_off] < 0.5 spikes/neuron  [0/3 seeds, sd 1.31]",
+       "v": 3.1666666666666665,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_direct_dn_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.31]",
+       "v": 3.3333333333333335,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_route_off] < 0.5 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[gf_route_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_dnge048_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.18]",
+       "v": 2.3333333333333335,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_dna02_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.41]",
+       "v": 9.5,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_dnbe007_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.408]",
+       "v": 2.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_dnge006_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
+       "v": 1.6666666666666667,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_dng45_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.03]",
+       "v": 2.6666666666666665,
        "ok": true
       }
      ]
@@ -11685,6 +11741,13 @@
    "tier": "hard",
    "description": "Flies take off from a loom in two modes (Card & Dickinson 2008; von Reyn et al. 2014): the giant-fiber short mode, and a long mode that survives silencing the GF and ends in the same tergotrochanteral muscle. Task 33 found, unasked, that the flyvis loom made the body jump on MaleCNS with the GF at 0 Hz. Here the GF's outgoing synapses are zeroed for the condition (`silence`, as in task 26) and the question is asked directly, on the body: does the loom through the eye still reach TTMn and make NeuroMechFly leave the ground before the movie's collision; does the task-4 convention loom also have a GF-free route; does the flash's jump (task 33) survive the GF's silencing (predicted not to \u2014 see the RFC); does the fly stay put at rest. The GF-intact loom is measured, not scored (task 33 owns it). MaleCNS in practice (TTMn needs a nerve cord). Pre-registered predictions and outcome: docs/rfcs/34_ttmn_without_gf.md.",
    "citation": "Card & Dickinson 2008 (Curr Biol 18:1300, doi:10.1016/j.cub.2008.07.094); von Reyn et al. 2014 (Nat Neurosci 17:962, doi:10.1038/nn.3741); Engel & Wu 1996 (J Comp Physiol A 178:105); Lobato-Rios et al. 2022 (Nat Methods 19:620, doi:10.1038/s41592-022-01466-7)"
+  },
+  {
+   "name": "gf_free_route_to_ttmn",
+   "title": "Which descending neurons carry the giant-fiber-free loom route to the jump muscle",
+   "tier": "hard",
+   "description": "Task 34 showed a route from the flyvis eye to TTMn that survives silencing the giant fiber and that the flash does not use. This task asks which descending neurons carry it, on the body (NeuroMechFly, TTMn as the command). Every condition is the rendered loom with the GF silenced plus one more silenced set: nothing more (the route exists); every descending neuron (the route must descend \u2014 a check on the task itself); the three direct loom-DN inputs to TTMn (DNp02, DNp06, DNp10 \u2014 predicted, from anatomy, not to matter, because task 32 found LC4 and LPLC2 silent to this loom); the candidate set named by a fixed, disclosed procedure from one development spike dump (docs/rfcs/35, stage 2: nine DN types converging on the GF-coupled interneurons GFC2 and IN20A.22A, none of them a loom DN of the literature); and the top five candidates one at a time. MaleCNS in practice: the candidate types are this dataset's names and the toy has no GFC2, so it is skipped there; GFC2 (the GF-coupled interneuron the route runs through) is read out in every condition. Pre-registered in two disclosed stages: docs/rfcs/35_gf_free_route_to_ttmn.md.",
+   "citation": "von Reyn et al. 2014 (Nat Neurosci 17:962, doi:10.1038/nn.3741); Card & Dickinson 2008 (Curr Biol 18:1300, doi:10.1016/j.cub.2008.07.094); Allen et al. 2006 (J Neurosci 26:1264, doi:10.1523/JNEUROSCI.4258-05.2006); Dombrovski et al. 2023 (Nature 613:534, doi:10.1038/s41586-022-05586-0)"
   }
  ]
 }
