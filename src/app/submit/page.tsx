@@ -19,6 +19,8 @@ const SIMULATORS = [
       { key: "tau_a_ms", label: "adaptation decay (ms)", def: 200, min: 20, max: 2000, step: 10, help: "How long the tiredness lasts. Literature: 100–500 ms." },
     ],
   },
+  // axo-axonic inputs kept off the soma (RFC M1). Needs synapse-side data, which only MaleCNS has: on FlyWire this is the reference LIF bit for bit
+  { id: "flybench.models.terminal_lif:TerminalLIFSimulator", label: "Terminal-aware LIF (axon inputs modulate release; = reference on FlyWire)", extra: [] },
 ];
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60) || "submission";
