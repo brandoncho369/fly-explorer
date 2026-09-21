@@ -4214,15 +4214,15 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5125090187590188,
+   "hard": 0.5119651483781918,
    "seeds": 3,
    "verified": true,
-   "graded": 0.6549974136676018,
+   "graded": 0.6439260448347551,
    "graded_ci": [
-    0.6465312356002528,
-    0.6635942127413031
+    0.6364368962065742,
+    0.651922939237795
    ],
-   "specificity": 0.207201646090535,
+   "specificity": 0.1998015873015873,
    "holdout_gap": null,
    "division": "closed",
    "n_free_parameters": 1,
@@ -5076,6 +5076,32 @@
        "ok": false
       }
      ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -5084,7 +5110,9 @@
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
     "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
     "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
-    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)",
+    "ttmn_without_gf": "readout 'ttmn' matches no neurons on flywire783",
+    "gf_free_route_to_ttmn": "not applicable: gf_free_route_to_ttmn is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -10461,15 +10489,15 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.5666666666666667,
-   "hard": 0.5737386621315193,
+   "hard": 0.579816639299398,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6595170927387886,
+   "graded": 0.6569577776743288,
    "graded_ci": [
-    0.6462122439719478,
-    0.6676023575593687
+    0.6435796973891162,
+    0.6651835774250017
    ],
-   "specificity": 0.21845238095238098,
+   "specificity": 0.21938025210084036,
    "holdout_gap": null,
    "division": null,
    "n_free_parameters": null,
@@ -11541,6 +11569,32 @@
       {
        "d": "spikes per neuron[gf_dng45_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.03]",
        "v": 2.6666666666666665,
+       "ok": true
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [3/3 seeds, sd 46]",
+       "v": 1100.199999999913,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
        "ok": true
       }
      ]
@@ -13727,6 +13781,13 @@
    "tier": "hard",
    "description": "Task 34 showed a route from the flyvis eye to TTMn that survives silencing the giant fiber and that the flash does not use. This task asks which descending neurons carry it, on the body (NeuroMechFly, TTMn as the command). Every condition is the rendered loom with the GF silenced plus one more silenced set: nothing more (the route exists); every descending neuron (the route must descend \u2014 a check on the task itself); the three direct loom-DN inputs to TTMn (DNp02, DNp06, DNp10 \u2014 predicted, from anatomy, not to matter, because task 32 found LC4 and LPLC2 silent to this loom); the candidate set named by a fixed, disclosed procedure from one development spike dump (docs/rfcs/35, stage 2: nine DN types converging on the GF-coupled interneurons GFC2 and IN20A.22A, none of them a loom DN of the literature); and the top five candidates one at a time. MaleCNS in practice: the candidate types are this dataset's names and the toy has no GFC2, so it is skipped there; GFC2 (the GF-coupled interneuron the route runs through) is read out in every condition. Pre-registered in two disclosed stages: docs/rfcs/35_gf_free_route_to_ttmn.md.",
    "citation": "von Reyn et al. 2014 (Nat Neurosci 17:962, doi:10.1038/nn.3741); Card & Dickinson 2008 (Curr Biol 18:1300, doi:10.1016/j.cub.2008.07.094); Allen et al. 2006 (J Neurosci 26:1264, doi:10.1523/JNEUROSCI.4258-05.2006); Dombrovski et al. 2023 (Nature 613:534, doi:10.1038/s41586-022-05586-0)"
+  },
+  {
+   "name": "closed_loop_escape",
+   "title": "The closed loop \u2014 the body's own eyes, an approaching object, and the jump",
+   "tier": "hard",
+   "description": "Phase 7b. The brain's visual input is the body's: every 10 ms NeuroMechFly's two compound eyes are rendered in MuJoCo, mapped one-to-one onto flyvis's 721-hexal retina, run through the pretrained flyvis network frame by frame with its state carried, and the resulting rates drive the connectome's own optic-lobe cells; a spike of TTMn (or the GF plus the measured 0.93 ms where there is no nerve cord) starts the jump program, and the eyes see the world from wherever the body now is. A black 2 mm sphere approaches the eyes at 50 mm/s (r/v = 40 ms, the geometry of every escape task here) and must produce a takeoff before contact; the same sphere on a 10 mm near-miss path and a motionless sphere must not. Nobody is predicted to pass: at a real eye's resolution the loom is a small, late event. Needs flygym, flyvis and torch installed; skipped otherwise. Pre-registered predictions and outcome: docs/rfcs/36_closed_loop_escape.md.",
+   "citation": "Card & Dickinson 2008 (Curr Biol 18:1300, doi:10.1016/j.cub.2008.07.094); von Reyn et al. 2014 (Nat Neurosci 17:962, doi:10.1038/nn.3741); Lappalainen et al. 2024 (Nature 634:1132, doi:10.1038/s41586-024-07939-3); Lobato-Rios et al. 2022 (Nat Methods 19:620, doi:10.1038/s41592-022-01466-7); Wang-Chen et al. 2024 (Nat Methods 21:2353, doi:10.1038/s41592-024-02497-y)"
   }
  ]
 }

@@ -14,7 +14,7 @@ describe("committed snapshot", () => {
   });
   it("has 5 core + 26 hard tasks; every run's tasks are known tasks and every run covers the core tier", () => {
     expect(snap.tasks.filter((t) => t.tier === "core")).toHaveLength(5);
-    expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(30);
+    expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(31);
     const known = new Set(snap.tasks.map((t) => t.name));
     for (const r of snap.runs) {
       for (const name of Object.keys(r.tasks)) expect(known.has(name), `${r.label} has unknown task ${name}`).toBe(true);
