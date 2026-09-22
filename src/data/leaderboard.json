@@ -9,21 +9,21 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.681438492063492,
+   "hard": 0.6469030365769496,
    "seeds": 3,
-   "verified": false,
-   "graded": 0.7905270745667393,
+   "verified": true,
+   "graded": 0.7541420409563055,
    "graded_ci": [
-    0.7701826397343569,
-    0.807562204774275
+    0.7344649852742527,
+    0.7677499583022928
    ],
-   "specificity": 0.33792063492063495,
+   "specificity": 0.31064342403628126,
    "holdout_gap": null,
-   "division": null,
-   "n_free_parameters": null,
+   "division": "open",
+   "n_free_parameters": 0,
    "reference_baseline": false,
-   "conflict_of_interest": null,
-   "max_active": 0.1052673153567197,
+   "conflict_of_interest": "written by the flybench maintainer; the model is a hypothesis, and it is graded by the same CI as any other",
+   "max_active": 0.15139611982813303,
    "tasks": {
     "stability": {
      "passed": true,
@@ -824,6 +824,79 @@
        "ok": false
       }
      ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms  [3/3 seeds, sd 0.17]",
+       "v": 17.063328043619787,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -832,7 +905,9 @@
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
     "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
     "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
-    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)",
+    "ttmn_without_gf": "readout 'ttmn' matches no neurons on flywire783",
+    "gf_free_route_to_ttmn": "not applicable: gf_free_route_to_ttmn is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -842,15 +917,15 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5727362914862915,
+   "hard": 0.5695738440303657,
    "seeds": 3,
    "verified": false,
-   "graded": 0.7110877707286227,
+   "graded": 0.6960099478199889,
    "graded_ci": [
-    0.7012118721661177,
-    0.7189696903403967
+    0.6877330001968439,
+    0.7038505957324787
    ],
-   "specificity": 0.25627572016460903,
+   "specificity": 0.24712301587301586,
    "holdout_gap": null,
    "division": null,
    "n_free_parameters": null,
@@ -1704,6 +1779,32 @@
        "ok": false
       }
      ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -1724,10 +1825,10 @@
    "gain": 0.3,
    "w_syn": 0.275,
    "core": 0.6666666666666666,
-   "hard": 0.5986011904761905,
+   "hard": 0.5748706004140787,
    "seeds": 1,
    "verified": false,
-   "graded": 0.5999834421456767,
+   "graded": 0.5838830727131389,
    "graded_ci": null,
    "specificity": null,
    "holdout_gap": null,
@@ -1735,7 +1836,7 @@
    "n_free_parameters": null,
    "reference_baseline": false,
    "conflict_of_interest": null,
-   "max_active": 0.09271480377724318,
+   "max_active": 0.13020717388962694,
    "tasks": {
     "stability": {
      "passed": true,
@@ -2536,6 +2637,79 @@
        "ok": false
       }
      ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms",
+       "v": 18.029992675781244,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -2544,7 +2718,9 @@
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
     "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
     "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
-    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)",
+    "ttmn_without_gf": "readout 'ttmn' matches no neurons on flywire783",
+    "gf_free_route_to_ttmn": "not applicable: gf_free_route_to_ttmn is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -2554,10 +2730,10 @@
    "gain": 0.35,
    "w_syn": 0.275,
    "core": 0.6666666666666666,
-   "hard": 0.5517261904761904,
+   "hard": 0.5341097308488613,
    "seeds": 1,
    "verified": false,
-   "graded": 0.5952582948459113,
+   "graded": 0.5828844309923014,
    "graded_ci": null,
    "specificity": null,
    "holdout_gap": null,
@@ -2565,7 +2741,7 @@
    "n_free_parameters": null,
    "reference_baseline": false,
    "conflict_of_interest": null,
-   "max_active": 0.10049190334278842,
+   "max_active": 0.19650999964094645,
    "tasks": {
     "stability": {
      "passed": true,
@@ -3366,6 +3542,79 @@
        "ok": false
       }
      ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms",
+       "v": 17.729989624023432,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -3374,7 +3623,9 @@
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
     "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
     "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
-    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)",
+    "ttmn_without_gf": "readout 'ttmn' matches no neurons on flywire783",
+    "gf_free_route_to_ttmn": "not applicable: gf_free_route_to_ttmn is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -3384,10 +3635,10 @@
    "gain": 0.4,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5645039682539682,
+   "hard": 0.5452208419599723,
    "seeds": 1,
    "verified": false,
-   "graded": 0.6667909591439674,
+   "graded": 0.6408295440250967,
    "graded_ci": null,
    "specificity": null,
    "holdout_gap": null,
@@ -3395,7 +3646,7 @@
    "n_free_parameters": null,
    "reference_baseline": false,
    "conflict_of_interest": null,
-   "max_active": 0.10576280923485691,
+   "max_active": 0.20689382786973537,
    "tasks": {
     "stability": {
      "passed": true,
@@ -4196,6 +4447,79 @@
        "ok": false
       }
      ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms",
+       "v": 17.42998657226562,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -4204,7 +4528,9 @@
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
     "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
     "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
-    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)",
+    "ttmn_without_gf": "readout 'ttmn' matches no neurons on flywire783",
+    "gf_free_route_to_ttmn": "not applicable: gf_free_route_to_ttmn is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -5122,13 +5448,13 @@
    "gain": 0.4,
    "w_syn": 0.275,
    "core": 0.6666666666666666,
-   "hard": 0.47304563492063495,
+   "hard": 0.46569185645272604,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6461001653017977,
+   "graded": 0.6279365721005649,
    "graded_ci": [
-    0.6101952091585886,
-    0.6936925750313143
+    0.593468639354946,
+    0.6631025758906929
    ],
    "specificity": null,
    "holdout_gap": null,
@@ -5136,7 +5462,7 @@
    "n_free_parameters": null,
    "reference_baseline": false,
    "conflict_of_interest": null,
-   "max_active": 0.10576041554462438,
+   "max_active": 0.20682201716275894,
    "tasks": {
     "stability": {
      "passed": true,
@@ -5937,6 +6263,79 @@
        "ok": false
       }
      ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms  [3/3 seeds, sd 0.216]",
+       "v": 17.329990641276037,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -5945,7 +6344,9 @@
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
     "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
     "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
-    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)",
+    "ttmn_without_gf": "readout 'ttmn' matches no neurons on flywire783",
+    "gf_free_route_to_ttmn": "not applicable: gf_free_route_to_ttmn is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -5955,10 +6356,10 @@
    "gain": 0.5,
    "w_syn": 0.275,
    "core": 0.8333333333333333,
-   "hard": 0.5798710317460316,
+   "hard": 0.5585835058661145,
    "seeds": 1,
    "verified": false,
-   "graded": 0.6921352623870456,
+   "graded": 0.6670830376623366,
    "graded_ci": null,
    "specificity": null,
    "holdout_gap": null,
@@ -5966,7 +6367,7 @@
    "n_free_parameters": null,
    "reference_baseline": false,
    "conflict_of_interest": null,
-   "max_active": 0.11753258410829055,
+   "max_active": 0.23013177264730172,
    "tasks": {
     "stability": {
      "passed": true,
@@ -6767,6 +7168,79 @@
        "ok": false
       }
      ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms",
+       "v": 16.92998657226562,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -6775,7 +7249,9 @@
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
     "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
     "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
-    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)",
+    "ttmn_without_gf": "readout 'ttmn' matches no neurons on flywire783",
+    "gf_free_route_to_ttmn": "not applicable: gf_free_route_to_ttmn is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -6785,10 +7261,10 @@
    "gain": 0.7,
    "w_syn": 0.275,
    "core": 0.8666666666666666,
-   "hard": 0.605704365079365,
+   "hard": 0.5810472739820566,
    "seeds": 1,
    "verified": false,
-   "graded": 0.7160971696356481,
+   "graded": 0.6953865992099747,
    "graded_ci": null,
    "specificity": null,
    "holdout_gap": null,
@@ -7597,6 +8073,79 @@
        "ok": false
       }
      ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz",
+       "v": 0.09615384615384616,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms",
+       "v": 16.229989624023432,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms",
+       "v": 1181.8999999998387,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[static] < 0.5",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -7605,7 +8154,9 @@
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
     "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
     "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
-    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)",
+    "ttmn_without_gf": "readout 'ttmn' matches no neurons on flywire783",
+    "gf_free_route_to_ttmn": "not applicable: gf_free_route_to_ttmn is defined on malecns/toy only (this is flywire783)"
    }
   },
   {
@@ -7615,13 +8166,13 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 0.9,
-   "hard": 0.6187830687830688,
+   "hard": 0.5914066776135741,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6904921287376815,
+   "graded": 0.6540029781033552,
    "graded_ci": [
-    0.6751934135371208,
-    0.7027905007190168
+    0.6399950688819809,
+    0.665634796342852
    ],
    "specificity": null,
    "holdout_gap": null,
@@ -7629,7 +8180,7 @@
    "n_free_parameters": null,
    "reference_baseline": false,
    "conflict_of_interest": null,
-   "max_active": 0.0939376419418591,
+   "max_active": 0.1543949545219228,
    "tasks": {
     "stability": {
      "passed": true,
@@ -8559,6 +9110,171 @@
        "ok": false
       }
      ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0.00849]",
+       "v": 0.006006006006006007,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms  [3/3 seeds, sd 0.163]",
+       "v": 25.7000010172526,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "ttmn_without_gf": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "spikes per neuron[loom_eye_gf_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[loom_eye_gf_off] >= 1.0  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[loom_eye_gf_off] < 1000.0 ms  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom_gf_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.43]",
+       "v": 27.333333333333332,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye_gf_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[rest_gf_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "gf_free_route_to_ttmn": {
+     "passed": false,
+     "score": 0.3,
+     "checks": [
+      {
+       "d": "spikes per neuron[gf_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_all_dn_off] < 0.5 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_direct_dn_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_route_off] < 0.5 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[gf_route_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_dnge048_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dna02_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dnbe007_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dnge006_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dng45_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -8573,13 +9289,13 @@
    "gain": 0.5,
    "w_syn": 0.275,
    "core": 0.9,
-   "hard": 0.5985284391534391,
+   "hard": 0.566023535851122,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6624673348720757,
+   "graded": 0.6357678496166361,
    "graded_ci": [
-    0.6517641625379216,
-    0.6701086935106099
+    0.6214147477173816,
+    0.6468210191532903
    ],
    "specificity": null,
    "holdout_gap": null,
@@ -8587,7 +9303,7 @@
    "n_free_parameters": null,
    "reference_baseline": false,
    "conflict_of_interest": null,
-   "max_active": 0.10586737103838145,
+   "max_active": 0.20164340804056938,
    "tasks": {
     "stability": {
      "passed": true,
@@ -9517,6 +10233,171 @@
        "ok": false
       }
      ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0.00849]",
+       "v": 0.012012012012012014,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms  [3/3 seeds, sd 0.125]",
+       "v": 24.766666666666662,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5  [2/3 seeds, sd 0.471]",
+       "v": 0.3333333333333333,
+       "ok": false
+      }
+     ]
+    },
+    "ttmn_without_gf": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "spikes per neuron[loom_eye_gf_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[loom_eye_gf_off] >= 1.0  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[loom_eye_gf_off] < 1000.0 ms  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom_gf_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.84]",
+       "v": 17.833333333333332,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye_gf_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[rest_gf_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "gf_free_route_to_ttmn": {
+     "passed": false,
+     "score": 0.3,
+     "checks": [
+      {
+       "d": "spikes per neuron[gf_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_all_dn_off] < 0.5 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_direct_dn_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_route_off] < 0.5 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[gf_route_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_dnge048_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dna02_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dnbe007_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dnge006_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dng45_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [1/3 seeds, sd 0.471]",
+       "v": 0.3333333333333333,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [0/3 seeds, sd 0]",
+       "v": 1269.499999999759,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -9531,13 +10412,13 @@
    "gain": 0.55,
    "w_syn": 0.275,
    "core": 0.7333333333333333,
-   "hard": 0.5927992724867724,
+   "hard": 0.5612821565407772,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6321243354555673,
+   "graded": 0.6149445140516361,
    "graded_ci": [
-    0.628922126089451,
-    0.6356245532564446
+    0.6035641803939179,
+    0.6221659812552991
    ],
    "specificity": null,
    "holdout_gap": null,
@@ -9545,7 +10426,7 @@
    "n_free_parameters": null,
    "reference_baseline": false,
    "conflict_of_interest": null,
-   "max_active": 0.12616718247535266,
+   "max_active": 0.21625987688610263,
    "tasks": {
     "stability": {
      "passed": true,
@@ -10473,6 +11354,171 @@
        "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd nan]",
        "v": null,
        "ok": false
+      }
+     ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0.017]",
+       "v": 0.048048048048048055,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms  [3/3 seeds, sd 0.0817]",
+       "v": 24.099999999999994,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5  [1/3 seeds, sd 0.471]",
+       "v": 0.6666666666666666,
+       "ok": false
+      }
+     ]
+    },
+    "ttmn_without_gf": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "spikes per neuron[loom_eye_gf_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[loom_eye_gf_off] >= 1.0  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[loom_eye_gf_off] < 1000.0 ms  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom_gf_off] >= 1.0 spikes/neuron  [3/3 seeds, sd 2.36]",
+       "v": 16.666666666666668,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye_gf_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[rest_gf_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "gf_free_route_to_ttmn": {
+     "passed": false,
+     "score": 0.3,
+     "checks": [
+      {
+       "d": "spikes per neuron[gf_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_all_dn_off] < 0.5 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_direct_dn_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_route_off] < 0.5 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[gf_route_off] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[gf_dnge048_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dna02_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dnbe007_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dnge006_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[gf_dng45_off] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [2/3 seeds, sd 0.471]",
+       "v": 0.6666666666666666,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [0/3 seeds, sd 0.85]",
+       "v": 1249.3499999997773,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
       }
      ]
     }
@@ -11612,15 +12658,15 @@
    "gain": 0.65,
    "w_syn": 0.275,
    "core": 0.9,
-   "hard": 0.593735827664399,
+   "hard": 0.590503557744937,
    "seeds": 3,
    "verified": false,
-   "graded": 0.700324255318391,
+   "graded": 0.6968606157669693,
    "graded_ci": [
-    0.6896787095476248,
-    0.7078365588450889
+    0.687287234148275,
+    0.7045623611751064
    ],
-   "specificity": 0.2859247234247234,
+   "specificity": 0.277515172735761,
    "holdout_gap": null,
    "division": null,
    "n_free_parameters": null,
@@ -12695,6 +13741,32 @@
        "ok": false
       }
      ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [1/3 seeds, sd 76.2]",
+       "v": 1145.2333333332053,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -12709,15 +13781,15 @@
    "gain": 1.0,
    "w_syn": 0.275,
    "core": 0.7666666666666666,
-   "hard": 0.5348710317460317,
+   "hard": 0.5085835058661146,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6449444211944643,
+   "graded": 0.6289984477876359,
    "graded_ci": [
-    0.632979593559235,
-    0.6562924957662749
+    0.617696641747522,
+    0.6408644506940543
    ],
-   "specificity": 0.21168253968253967,
+   "specificity": 0.18007369614512472,
    "holdout_gap": null,
    "division": null,
    "n_free_parameters": null,
@@ -13524,6 +14596,79 @@
        "ok": false
       }
      ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0.00748]",
+       "v": 0.005291005291005292,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0.0604]",
+       "v": 0.04273504273504274,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [2/3 seeds, sd 3.06]",
+       "v": 4.333333333333333,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms  [3/3 seeds, sd 0.0816]",
+       "v": 15.829990641276035,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.25,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [2/3 seeds, sd 0.471]",
+       "v": 0.6666666666666666,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [2/3 seeds, sd 21]",
+       "v": 1103.9499999999096,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
     }
    },
    "skipped": {
@@ -13532,7 +14677,9 @@
     "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783",
     "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783)",
     "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783)",
-    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)"
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783)",
+    "ttmn_without_gf": "readout 'ttmn' matches no neurons on flywire783",
+    "gf_free_route_to_ttmn": "not applicable: gf_free_route_to_ttmn is defined on malecns/toy only (this is flywire783)"
    }
   }
  ],
