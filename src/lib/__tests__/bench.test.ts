@@ -49,7 +49,7 @@ describe("committed snapshot", () => {
     const fw = byConnectome([...snap.runs, fake], PRIMARY_CONNECTOME);
     expect(fw.some((r) => r.connectome === "malecns")).toBe(false);
     expect(gainWindow(fw)).toEqual({ lo: 0.45, hi: 0.45 });
-    expect(otherConnectomes([...snap.runs, fake])).toEqual(["flywire783_shiu", "malecns"]);
+    expect(otherConnectomes([...snap.runs, fake])).toEqual(["flywire783_ntfix", "flywire783_shiu", "malecns"]);
   });
 });
 
