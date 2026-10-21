@@ -12,9 +12,9 @@ describe("committed snapshot", () => {
   it("is internally consistent", () => {
     expect(validateSnapshot(snap)).toEqual([]);
   });
-  it("has 5 core + 26 hard tasks; every run's tasks are known tasks and every run covers the core tier", () => {
+  it("has 5 core + 32 hard tasks; every run's tasks are known tasks and every run covers the core tier", () => {
     expect(snap.tasks.filter((t) => t.tier === "core")).toHaveLength(5);
-    expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(31);
+    expect(snap.tasks.filter((t) => t.tier === "hard")).toHaveLength(32);
     const known = new Set(snap.tasks.map((t) => t.name));
     for (const r of snap.runs) {
       for (const name of Object.keys(r.tasks)) expect(known.has(name), `${r.label} has unknown task ${name}`).toBe(true);
@@ -49,7 +49,7 @@ describe("committed snapshot", () => {
     const fw = byConnectome([...snap.runs, fake], PRIMARY_CONNECTOME);
     expect(fw.some((r) => r.connectome === "malecns")).toBe(false);
     expect(gainWindow(fw)).toEqual({ lo: 0.45, hi: 0.45 });
-    expect(otherConnectomes([...snap.runs, fake])).toEqual(["malecns"]);
+    expect(otherConnectomes([...snap.runs, fake])).toEqual(["flywire783_shiu", "malecns"]);
   });
 });
 
