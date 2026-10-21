@@ -8160,6 +8160,945 @@
    }
   },
   {
+   "label": "LIF gain 0.45 (Shiu graph)",
+   "connectome": "flywire783_shiu",
+   "simulator": "LIFSimulator",
+   "gain": 0.45,
+   "w_syn": 0.275,
+   "core": 0.6666666666666666,
+   "hard": 0.5469824735449736,
+   "seeds": 3,
+   "verified": false,
+   "graded": 0.5847779111623634,
+   "graded_ci": [
+    0.579386342986395,
+    0.5926017920018667
+   ],
+   "specificity": 0.18207443897099068,
+   "holdout_gap": null,
+   "division": null,
+   "n_free_parameters": null,
+   "reference_baseline": false,
+   "conflict_of_interest": null,
+   "max_active": 0.1343506516821658,
+   "tasks": {
+    "stability": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "network rate[baseline] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[baseline] < 0.01  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "sugar_to_proboscis": {
+     "passed": false,
+     "score": 0.3333333333333333,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0.429]",
+       "v": 0.30303030303030304,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar] / rate[baseline] > 5.0  [0/3 seeds, sd 429]  [floored: every compared condition silent]",
+       "v": 304.030303030303,
+       "ok": false
+      },
+      {
+       "d": "active fraction[sugar] < 0.1  [3/3 seeds, sd 2.77e-05]",
+       "v": 0.0015391428195277248,
+       "ok": true
+      }
+     ]
+    },
+    "bitter_suppression": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0.429]",
+       "v": 0.30303030303030304,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar_plus_bitter] / rate[sugar] < 0.5  [0/3 seeds, sd 0.471]  [floored: every compared condition silent]",
+       "v": 0.6670329304431792,
+       "ok": false
+      }
+     ]
+    },
+    "looming_to_giant_fiber": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[loom] > 5.0 Hz  [3/3 seeds, sd 1.46]",
+       "v": 433.9285714285714,
+       "ok": true
+      },
+      {
+       "d": "rate[loom] / rate[baseline] > 5.0  [3/3 seeds, sd 1.46e+03]",
+       "v": 433929.57142857136,
+       "ok": true
+      },
+      {
+       "d": "active fraction[loom] < 0.1  [3/3 seeds, sd 8.96e-06]",
+       "v": 0.004318217179514799,
+       "ok": true
+      }
+     ]
+    },
+    "taste_specificity": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[bitter] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[bitter] < 0.1  [3/3 seeds, sd 3.39e-06]",
+       "v": 0.0005696982753461874,
+       "ok": true
+      }
+     ]
+    },
+    "dose_response": {
+     "passed": false,
+     "score": 0.2,
+     "checks": [
+      {
+       "d": "rate[measured] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[strong] > 5.0 Hz  [0/3 seeds, sd 0.429]",
+       "v": 0.30303030303030304,
+       "ok": false
+      },
+      {
+       "d": "rate[weak] / rate[strong] < 0.6  [0/3 seeds, sd 0.471]  [floored: every compared condition silent]",
+       "v": 0.6670329304431792,
+       "ok": false
+      },
+      {
+       "d": "rate[strong] < 300.0 Hz  [3/3 seeds, sd 0.429]",
+       "v": 0.30303030303030304,
+       "ok": true
+      }
+     ]
+    },
+    "adaptation": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[two_pulses] > 5.0 Hz  [0/3 seeds, sd 0.673]",
+       "v": 0.4761904761904762,
+       "ok": false
+      },
+      {
+       "d": "rate[two_pulses, 950-1300ms] / rate[two_pulses] < 0.7  [0/3 seeds, sd 0.471]  [floored: every compared condition silent]",
+       "v": 0.66689983678092,
+       "ok": false
+      }
+     ]
+    },
+    "olfactory_sparse_coding": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[cva, da1_pn] > 10.0 Hz  [3/3 seeds, sd 0.37]",
+       "v": 428.3660130718954,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[baseline] > 5.0  [3/3 seeds, sd 370]",
+       "v": 428367.0130718954,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[cva, all_pn] < 0.3  [0/3 seeds, sd 0.00165]",
+       "v": 0.9044289044289044,
+       "ok": false
+      },
+      {
+       "d": "active fraction[cva] < 0.05  [0/3 seeds, sd 1.48e-05]",
+       "v": 0.05318779696719448,
+       "ok": false
+      }
+     ]
+    },
+    "crosstalk": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "rate[sugar, mn9] > 5.0 Hz  [0/3 seeds, sd 0.429]",
+       "v": 0.30303030303030304,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar, gf] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 434.5454545454545,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, mn9] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "looming_dn_ensemble": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[loom, gf] > 5.0 Hz  [3/3 seeds, sd 1.46]",
+       "v": 433.9285714285714,
+       "ok": true
+      },
+      {
+       "d": "rate[loom, dnp] > 5.0 Hz  [3/3 seeds, sd 3.18]",
+       "v": 80.35714285714285,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[loom, all_dn] < 0.15  [3/3 seeds, sd 0.000361]",
+       "v": 0.028607918263090674,
+       "ok": true
+      }
+     ]
+    },
+    "flash_is_not_loom": {
+     "passed": true,
+     "score": 1.0,
+     "checks": [
+      {
+       "d": "rate[flash, gf] < 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[flash, lplc2] < 20.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[flash] < 0.3  [3/3 seeds, sd 1.55e-05]",
+       "v": 0.08049262144985816,
+       "ok": true
+      }
+     ]
+    },
+    "return_to_rest": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "rate[sugar] > 5.0 Hz  [0/3 seeds, sd 0.524]",
+       "v": 0.3703703703703704,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar, 1700-2000ms] < 5.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "network rate[sugar, 1700-2000ms] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "active fraction[sugar, 1700-2000ms] < 0.01  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "physiological_rates": {
+     "passed": false,
+     "score": 0.6,
+     "checks": [
+      {
+       "d": "spikes per neuron[loom, 200-500ms] >= 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 126.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[loom, 200-500ms] <= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 126.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar, mn9] > 5.0 Hz  [0/3 seeds, sd 0.471]",
+       "v": 0.3333333333333333,
+       "ok": false
+      },
+      {
+       "d": "rate[sugar, mn9] < 150.0 Hz  [3/3 seeds, sd 0.471]",
+       "v": 0.3333333333333333,
+       "ok": true
+      }
+     ]
+    },
+    "wiring_robustness": {
+     "passed": false,
+     "score": 0.8,
+     "checks": [
+      {
+       "d": "network rate[baseline_other_fly] < 0.5 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[sugar_other_fly, mn9] > 5.0 Hz  [0/3 seeds, sd 0.982]",
+       "v": 1.388888888888889,
+       "ok": false
+      },
+      {
+       "d": "active fraction[sugar_other_fly] < 0.1  [3/3 seeds, sd 2.77e-05]",
+       "v": 0.001584622933946118,
+       "ok": true
+      },
+      {
+       "d": "rate[loom_other_fly, gf, 220-500ms] > 5.0 Hz  [3/3 seeds, sd 3.37]",
+       "v": 430.9523809523809,
+       "ok": true
+      },
+      {
+       "d": "active fraction[loom_other_fly, 220-500ms] < 0.1  [3/3 seeds, sd 8.54e-05]",
+       "v": 0.004461838593467619,
+       "ok": true
+      }
+     ]
+    },
+    "gf_azimuth_invariance": {
+     "passed": false,
+     "score": 0.6666666666666666,
+     "checks": [
+      {
+       "d": "spikes per neuron[left] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
+       "v": 119.66666666666667,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[right] >= 1.0 spikes/neuron  [3/3 seeds, sd 1.18]",
+       "v": 103.83333333333333,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[frontal] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
+       "v": 126.16666666666667,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[left] <= 1.0 spikes/neuron  [0/3 seeds, sd 0.236]",
+       "v": 119.66666666666667,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[right] <= 1.0 spikes/neuron  [0/3 seeds, sd 1.18]",
+       "v": 103.83333333333333,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[frontal] <= 1.0 spikes/neuron  [0/3 seeds, sd 0.236]",
+       "v": 126.16666666666667,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[frontal, 0-200ms] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[left, gf] / rate[right] < 3.0  [3/3 seeds, sd 0.0107]",
+       "v": 1.1526092612718268,
+       "ok": true
+      },
+      {
+       "d": "rate[right, gf] / rate[left] < 3.0  [3/3 seeds, sd 0.00813]",
+       "v": 0.8676723447992053,
+       "ok": true
+      }
+     ]
+    },
+    "pn_transfer_function": {
+     "passed": false,
+     "score": 0.2857142857142857,
+     "checks": [
+      {
+       "d": "rate[orn100, da1_pn] <= 170.0 Hz  [0/3 seeds, sd 0.37]",
+       "v": 428.3660130718954,
+       "ok": false
+      },
+      {
+       "d": "rate[orn10, da1_pn] >= 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[orn30, da1_pn] / rate[orn10] > 1.0  [3/3 seeds, sd 1.03e+04]",
+       "v": 372245.0087145969,
+       "ok": true
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] > 1.0  [1/3 seeds, sd 0.0316]",
+       "v": 1.1516415505926056,
+       "ok": false
+      },
+      {
+       "d": "rate[orn30, da1_pn] / rate[orn10] < 3.0  [0/3 seeds, sd 1.03e+04]",
+       "v": 372245.0087145969,
+       "ok": false
+      },
+      {
+       "d": "rate[orn100, da1_pn] / rate[orn30] < 2.0  [1/3 seeds, sd 0.0316]",
+       "v": 1.1516415505926056,
+       "ok": false
+      },
+      {
+       "d": "rate[orn10, da1_pn] / rate[orn100] < 0.6  [3/3 seeds, sd 2.02e-09]",
+       "v": 2.334448533391852e-06,
+       "ok": true
+      }
+     ]
+    },
+    "da1_sparseness": {
+     "passed": false,
+     "score": 0.2222222222222222,
+     "checks": [
+      {
+       "d": "lifetime sparseness[da1_pn, 8 stimuli] >= 0.9  [0/3 seeds, sd 0.000102]",
+       "v": 0.003969179585015478,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] >= 10.0 Hz  [3/3 seeds, sd 0.37]",
+       "v": 428.3660130718954,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dm1] > 1.0  [0/3 seeds, sd 0.000732]  [saturated: all compared conditions at ceiling]",
+       "v": 1.1763786072896711,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dm2] > 1.0  [0/3 seeds, sd 0.00101]  [saturated: all compared conditions at ceiling]",
+       "v": 1.1768014594899723,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dm4] > 1.0  [0/3 seeds, sd 0.000723]  [saturated: all compared conditions at ceiling]",
+       "v": 1.1763788546019567,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dl1] > 1.0  [0/3 seeds, sd 0.000732]  [saturated: all compared conditions at ceiling]",
+       "v": 1.1768010549154113,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dl5] > 1.0  [0/3 seeds, sd 0.0016]  [saturated: all compared conditions at ceiling]",
+       "v": 1.175676059874598,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[va1v] > 1.0  [3/3 seeds, sd 0.00783]",
+       "v": 1.2071904614904179,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, da1_pn] / rate[dc1] > 1.0  [0/3 seeds, sd 0.0012]  [saturated: all compared conditions at ceiling]",
+       "v": 1.1760978357997711,
+       "ok": false
+      }
+     ]
+    },
+    "lc_dn_matrix": {
+     "passed": false,
+     "score": 0.9375,
+     "checks": [
+      {
+       "d": "spikes per neuron[lc4, gf] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
+       "v": 17.333333333333332,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc4, dnp02] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
+       "v": 40.333333333333336,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc4, dnp11] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.471]",
+       "v": 33.333333333333336,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc4, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lplc2, gf] >= 1.0 spikes/neuron  [3/3 seeds, sd 0.236]",
+       "v": 123.33333333333333,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lplc2, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc6, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lplc1, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc16, gf] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc16, dnp02] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc16, dnp11] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc16, mdn] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[lc10a, gf] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc10a, dnp02] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc10a, dnp11] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "spikes per neuron[lc10a, mdn] < 1.0 spikes/neuron  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "optic_flow_rotation": {
+     "passed": false,
+     "score": 0.8333333333333334,
+     "checks": [
+      {
+       "d": "rate[yaw_right, dnp15_left] > 5.0 Hz  [3/3 seeds, sd 2.49]",
+       "v": 13.333333333333334,
+       "ok": true
+      },
+      {
+       "d": "rate[yaw_left, dnp15_right] > 5.0 Hz  [3/3 seeds, sd 1.63]",
+       "v": 46.0,
+       "ok": true
+      },
+      {
+       "d": "rate[yaw_right, dnp15_right] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[yaw_right, dnp15_left] / rate[forward] > 1.0  [3/3 seeds, sd 2.49e+03]",
+       "v": 13334.333333333334,
+       "ok": true
+      },
+      {
+       "d": "rate[forward, dnp15_left] / rate[ftb_left] < 0.8  [0/3 seeds, sd 0]  [floored: every compared condition silent]",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "rate[forward, bips] / rate[yaw_right] > 1.0  [3/3 seeds, sd 0.206]",
+       "v": 1.4371114508368616,
+       "ok": true
+      }
+     ]
+    },
+    "antennal_grooming_vs_backward": {
+     "passed": false,
+     "score": 0.25,
+     "checks": [
+      {
+       "d": "rate[jo_ce, adn] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[jo_f, adn] > 5.0 Hz  [0/3 seeds, sd 0.408]",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "rate[jo_f, mdn] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[jo_ce, mdn] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "mb_sparseness_apl": {
+     "passed": false,
+     "score": 0.625,
+     "checks": [
+      {
+       "d": "readout active fraction[cva, kc] < 0.2  [0/3 seeds, sd 0.000241]",
+       "v": 0.650054729251175,
+       "ok": false
+      },
+      {
+       "d": "readout active fraction[dm4, kc] < 0.2  [0/3 seeds, sd 0.000182]",
+       "v": 0.6454188397398751,
+       "ok": false
+      },
+      {
+       "d": "readout active fraction[va1v, kc] < 0.2  [0/3 seeds, sd 0.000315]",
+       "v": 0.6486382074560556,
+       "ok": false
+      },
+      {
+       "d": "readout active fraction[cva_apl_off, kc] / readout active fraction[cva] > 1.0  [3/3 seeds, sd 0.000481]",
+       "v": 1.3586006494919427,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[dm4_apl_off, kc] / readout active fraction[dm4] > 1.0  [3/3 seeds, sd 0.000526]",
+       "v": 1.36694956048994,
+       "ok": true
+      },
+      {
+       "d": "readout active fraction[va1v_apl_off, kc] / readout active fraction[va1v] > 1.0  [3/3 seeds, sd 0.000661]",
+       "v": 1.3609685363314348,
+       "ok": true
+      },
+      {
+       "d": "population sparseness[cva, kc] / population sparseness[cva_apl_off] > 1.0  [3/3 seeds, sd 0.000157]",
+       "v": 1.7726917759302367,
+       "ok": true
+      },
+      {
+       "d": "population sparseness[dm4, kc] / population sparseness[dm4_apl_off] > 1.0  [3/3 seeds, sd 0.000208]",
+       "v": 1.775367589082174,
+       "ok": true
+      }
+     ]
+    },
+    "co2_pathway_specificity": {
+     "passed": false,
+     "score": 0.5714285714285714,
+     "checks": [
+      {
+       "d": "rate[co2, pnv_bi] > 5.0 Hz  [3/3 seeds, sd 0.816]",
+       "v": 417.0,
+       "ok": true
+      },
+      {
+       "d": "rate[co2, ln23] > 5.0 Hz  [3/3 seeds, sd 0.707]",
+       "v": 94.0,
+       "ok": true
+      },
+      {
+       "d": "rate[co2, pnm1] > 5.0 Hz  [3/3 seeds, sd 0.816]",
+       "v": 14.0,
+       "ok": true
+      },
+      {
+       "d": "rate[co2, lhpd5c1] > 5.0 Hz  [3/3 seeds, sd 0.816]",
+       "v": 416.0,
+       "ok": true
+      },
+      {
+       "d": "rate[cva, pnm1] < 2.0 Hz  [0/3 seeds, sd 0.471]",
+       "v": 73.33333333333333,
+       "ok": false
+      },
+      {
+       "d": "rate[dm1, pnm1] < 2.0 Hz  [0/3 seeds, sd 0]",
+       "v": 74.0,
+       "ok": false
+      },
+      {
+       "d": "rate[cva, pnv_bi] < 2.0 Hz  [0/3 seeds, sd 0.471]",
+       "v": 408.3333333333333,
+       "ok": false
+      }
+     ]
+    },
+    "epg_ring_attractor": {
+     "passed": false,
+     "score": 0.2857142857142857,
+     "checks": [
+      {
+       "d": "bump resultant[cue, 8 wedges] > 0.5  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "bump error[cue, vs 135\u00b0] < 45.0 deg  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "rate[cue, epg, 900-1400ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "bump resultant[cue, 8 wedges] > 0.5  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "bump error[cue, vs 135\u00b0] < 45.0 deg  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd 0.0248]",
+       "v": 0.030707678352203376,
+       "ok": false
+      },
+      {
+       "d": "bump resultant[two_cues, 8 wedges] > 0.5  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      }
+     ]
+    },
+    "egg_laying_ovidn": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[ovien, ovidn] > 5.0 Hz  [3/3 seeds, sd 1.44]",
+       "v": 7.666666666666667,
+       "ok": true
+      },
+      {
+       "d": "rate[ovien_plus_oviin, ovidn] / rate[ovien] < 0.5  [0/3 seeds, sd 0.0783]",
+       "v": 0.6538938335622133,
+       "ok": false
+      },
+      {
+       "d": "rate[pc1, oviin] > 5.0 Hz  [0/3 seeds, sd 0.943]",
+       "v": 1.6666666666666667,
+       "ok": false
+      },
+      {
+       "d": "rate[pc1, ovidn] < 2.0 Hz  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "halt_walk_off": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "rate[sugar, fg] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[walk, bdn2] > 5.0 Hz  [3/3 seeds, sd 18.1]",
+       "v": 204.66666666666666,
+       "ok": true
+      },
+      {
+       "d": "rate[walk, odn1] > 5.0 Hz  [3/3 seeds, sd 6.6]",
+       "v": 88.66666666666667,
+       "ok": true
+      },
+      {
+       "d": "rate[walk_plus_fg, bdn2] / rate[walk] < 0.5  [3/3 seeds, sd 0.02]",
+       "v": 0.14168798080961056,
+       "ok": true
+      },
+      {
+       "d": "rate[walk_plus_fg, odn1] / rate[walk] < 0.5  [0/3 seeds, sd 0.0488]",
+       "v": 0.9956018664804258,
+       "ok": false
+      },
+      {
+       "d": "rate[walk_plus_bb, odn1] / rate[walk] < 0.5  [0/3 seeds, sd 0.0225]",
+       "v": 0.6574112997883265,
+       "ok": false
+      }
+     ]
+    },
+    "flyvis_loom_escape": {
+     "passed": false,
+     "score": 0.0,
+     "checks": [
+      {
+       "d": "rate[loom, lplc2, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "rate[loom, lc4, 900-1200ms] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "spikes per neuron[loom] >= 1.0 spikes/neuron  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      }
+     ]
+    },
+    "embodied_loom_escape": {
+     "passed": false,
+     "score": 0.75,
+     "checks": [
+      {
+       "d": "body takeoff[loom] >= 1.0  [3/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff latency[loom] < 300.0 ms  [3/3 seeds, sd 0.17]",
+       "v": 18.963327026367182,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[baseline] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[flash_eye] < 0.5  [0/3 seeds, sd 0]",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    },
+    "closed_loop_escape": {
+     "passed": false,
+     "score": 0.5,
+     "checks": [
+      {
+       "d": "body takeoff[approach] >= 1.0  [0/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": false
+      },
+      {
+       "d": "body takeoff latency[approach] < 1160.0 ms  [0/3 seeds, sd nan]",
+       "v": null,
+       "ok": false
+      },
+      {
+       "d": "body takeoff[pass_by] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      },
+      {
+       "d": "body takeoff[static] < 0.5  [3/3 seeds, sd 0]",
+       "v": 0.0,
+       "ok": true
+      }
+     ]
+    },
+    "odor_valence_steering": {
+     "passed": false,
+     "score": 0.6,
+     "checks": [
+      {
+       "d": "rate[dm1, dna02_left] / rate[dm1, dna02_right] > 1.0  [3/3 seeds, sd 943]",
+       "v": 35334.333333333336,
+       "ok": true
+      },
+      {
+       "d": "rate[dm2, dna02_left] / rate[dm2, dna02_right] > 1.0  [3/3 seeds, sd 1.63e+03]",
+       "v": 30001.0,
+       "ok": true
+      },
+      {
+       "d": "rate[va2, dna02_left] / rate[va2, dna02_right] > 1.0  [3/3 seeds, sd 1.89e+03]",
+       "v": 29334.333333333332,
+       "ok": true
+      },
+      {
+       "d": "rate[v, dna02_left] / rate[v, dna02_right] < 1.0  [0/3 seeds, sd 0]  [floored: every compared condition silent]",
+       "v": 1.0,
+       "ok": false
+      },
+      {
+       "d": "rate[da2, dna02_left] / rate[da2, dna02_right] < 1.0  [0/3 seeds, sd 0]  [floored: every compared condition silent]",
+       "v": 1.0,
+       "ok": false
+      }
+     ]
+    }
+   },
+   "skipped": {
+    "looming_to_jump_muscle": "readout 'ttmn' matches no neurons on flywire783_shiu",
+    "gf_to_muscle_latency": "readout 'ttmn' matches no neurons on flywire783_shiu",
+    "taste_modalities": "stimulus 'water_grn' matches no neurons on flywire783_shiu",
+    "courtship_song_chain": "not applicable: courtship_song_chain is defined on malecns/toy only (this is flywire783_shiu)",
+    "leg_mn_size_principle": "not applicable: leg_mn_size_principle is defined on malecns/toy only (this is flywire783_shiu)",
+    "steering_dna02_vs_dna01": "not applicable: steering_dna02_vs_dna01 is defined on malecns/toy only (this is flywire783_shiu)",
+    "ttmn_without_gf": "readout 'ttmn' matches no neurons on flywire783_shiu",
+    "gf_free_route_to_ttmn": "not applicable: gf_free_route_to_ttmn is defined on malecns/toy only (this is flywire783_shiu)"
+   }
+  },
+  {
    "label": "LIF gain 0.7 (Shiu graph)",
    "connectome": "flywire783_shiu",
    "simulator": "LIFSimulator",
