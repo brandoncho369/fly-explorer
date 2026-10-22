@@ -34,7 +34,12 @@ export function bestPerGain(runs: Run[]): Run[] {
 
 /** The dataset the headline findings are computed on; other connectomes are shown as separate experiments, never mixed into the sweep. */
 export const PRIMARY_CONNECTOME = "flywire783";
-export const CONNECTOME_NAMES: Record<string, string> = { flywire783: "FlyWire v783 (female brain)", malecns: "MaleCNS v1.0 (male CNS, the Minecraft brain)" };
+export const CONNECTOME_NAMES: Record<string, string> = {
+  flywire783: "FlyWire v783 (female brain)",
+  flywire783_ntfix: "FlyWire v783, blank transmitters signed (RFC D1)",
+  flywire783_shiu: "FlyWire v783, Shiu et al. 2024's published graph (RFC D1)",
+  malecns: "MaleCNS v1.0 (male CNS, the Minecraft brain)",
+};
 export const byConnectome = (runs: Run[], name: string): Run[] => runs.filter((r) => r.connectome === name);
 export const otherConnectomes = (runs: Run[]): string[] => [...new Set(runs.map((r) => r.connectome))].filter((c) => c !== PRIMARY_CONNECTOME).sort();
 
