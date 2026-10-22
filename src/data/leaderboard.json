@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-21",
+ "generated": "2026-10-22",
  "source": "https://github.com/brandoncho369/flybench",
  "runs": [
   {
@@ -19437,7 +19437,7 @@
    "title": "Neurons fire at fly rates, not at their refractory ceiling",
    "tier": "hard",
    "description": "Passing the reflex tasks only requires that a pathway conducts. This task asks whether the readouts fire the way the real neurons do. The Giant Fiber produces a single spike per escape (von Reyn et al. 2014; Ache et al. 2019: \"the timing of a single spike in the GF determines whether a fly uses a short or long takeoff\"): it should spike once when the loom arrives and be silent before. For MN9 no electrophysiological recording exists in the literature (Gordon & Scott 2009, Schwarz et al. 2017, McKellar & Simpson 2020 and Shiu et al. 2022 are behaviour, optogenetics or calcium imaging), so the MN9 ceiling here is a convention, not a measurement, and is labelled as such. The reference LIF model pins both readouts at ~430 Hz \u2014 their 2.2 ms refractory ceiling \u2014 which is a saturating network, not a reflex.",
-   "citation": "von Reyn et al. 2014 (Nat Neurosci 17:962); Ache et al. 2019 (Curr Biol 29:1073) \u2014 single GF spike per loom. MN9 ceiling: convention (no MN9 electrophysiology published)"
+   "citation": "von Reyn et al. 2014 (Nat Neurosci 17:962; doi:10.1038/nn.3741); Ache et al. 2019 (Curr Biol 29:1073; doi:10.1016/j.cub.2019.01.079) \u2014 single GF spike per loom. MN9 ceiling: convention (no MN9 electrophysiology published); Schwarz et al. 2017 (eLife 6:e19892; doi:10.7554/elife.19892); McKellar & Simpson 2020 (eLife 9:e54978; doi:10.7554/elife.54978)"
   },
   {
    "name": "wiring_robustness",
@@ -19451,56 +19451,56 @@
    "title": "Looming reaches the jump muscle, not just the giant fiber",
    "tier": "hard",
    "description": "The first brain-to-muscle test. The giant fiber does not end in the brain: it descends the neck and synapses directly onto the tergotrochanteral motor neuron (TTMn, the jump muscle) and, through the peripherally synapsing interneuron (PSI), onto the dorsal longitudinal motor neurons (DLMn, the flight power muscles). That is the whole escape: legs push, wings start. This task needs the ventral nerve cord, so it runs on MaleCNS and is skipped on brain-only connectomes such as FlyWire FAFB. A looming stimulus should fire GF, then TTMn and DLMn; the jump muscle should fire a few times, not continuously; and sugar should not make the fly jump.",
-   "citation": "Tanouye & Wyman 1980 (GF -> TTM and DLM); Allen, Godenschwege, Tanouye & Phelan 2006 (the GF circuit); von Reyn et al. 2014 (single GF spike per escape)"
+   "citation": "Tanouye & Wyman 1980 (GF -> TTM and DLM; J Neurophysiol 44:405; doi:10.1152/jn.1980.44.2.405); Allen, Godenschwege, Tanouye & Phelan 2006 (the GF circuit; Semin Cell Dev Biol 17:31; doi:10.1016/j.semcdb.2005.11.011); von Reyn et al. 2014 (single GF spike per escape; Nat Neurosci 17:962; doi:10.1038/nn.3741)"
   },
   {
    "name": "gf_azimuth_invariance",
    "title": "The giant fiber fires once, wherever the loom comes from",
    "tier": "hard",
    "description": "A looming object at \u221245\u00b0, 0\u00b0 or +45\u00b0 azimuth evokes the same giant-fiber response: a single spike (Ache et al. 2019; von Reyn et al. 2014), with no directional selectivity across azimuth (J Exp Biol 2023, DSI never above 0.5, n = 10 flies). This is the first recording-match task: the GF spike count is compared to the measured one, not to a convention. Stimulus geometry (provenance INFERRED, see docs/rfcs/16_gf_azimuth_invariance.md): the model has no eyes, so a loom at \u221245\u00b0 drives the left-side LPLC2/LC4 detectors, +45\u00b0 the right-side ones, 0\u00b0 both, each neuron at the same 150 Hz used by task 4. The mapping uses the `side` annotation, not receptive fields; a dataset without side labels skips this task. Pre-registered prediction (before the first run): the reference LIF passes \"seen\" and \"invariant\" and fails \"one spike\" at every azimuth (~120 spikes per loom in task 13).",
-   "citation": "Ache et al. 2019 (Curr Biol 29:1073); von Reyn et al. 2014 (Nat Neurosci 17:962); azimuthal invariance: J Exp Biol 2023 226:jeb244790"
+   "citation": "Ache et al. 2019 (Curr Biol 29:1073; doi:10.1016/j.cub.2019.01.079); von Reyn et al. 2014 (Nat Neurosci 17:962; doi:10.1038/nn.3741); azimuthal invariance: J Exp Biol 2023 226:jeb244790 (Jang et al.; doi:10.1242/jeb.244790)"
   },
   {
    "name": "pn_transfer_function",
    "title": "The antennal-lobe output saturates the way the recording says",
    "tier": "hard",
    "description": "Olsen, Bhandawat & Wilson 2010 (Neuron 66:287) recorded ORN \u2192 PN transfer in four glomeruli: PN = Rmax\u00b7ORN^1.5 / (ORN^1.5 + \u03c3^1.5), Rmax 163\u2013170 spikes/s, \u03c3 11.8\u201316.3 spikes/s. So a projection neuron never exceeds ~170 Hz and its input\u2013output curve is compressive: from the fit, ORN input at 10 / 30 / 100 Hz gives PN \u2248 62 / 126 / 158 Hz. This task drives the DA1 ORNs at those three rates and checks the ceiling, the ordering, the compression and the dynamic range, not the absolute rates (which depend on the global gain). Recording-match task; pre-registered in docs/rfcs/17. The dynamic-range check was added after the first run (dated in the RFC): a model whose PNs are already saturated at 10 Hz input passes the ratio checks vacuously, so the task also requires the 10 Hz response to be clearly smaller than the 100 Hz one. Provenance: rates and fit MEASURED; using DA1 for glomeruli the paper did not fit is a CONVENTION (Schlief & Wilson 2007 show the same shape for DA1).",
-   "citation": "Olsen, Bhandawat & Wilson 2010 (Neuron 66:287); Schlief & Wilson 2007 (Nat Neurosci 10:623)"
+   "citation": "Olsen, Bhandawat & Wilson 2010 (Neuron 66:287; doi:10.1016/j.neuron.2010.04.009); Schlief & Wilson 2007 (Nat Neurosci 10:623; doi:10.1038/nn1881)"
   },
   {
    "name": "da1_sparseness",
    "title": "One odour channel responds to one odour",
    "tier": "hard",
    "description": "Schlief & Wilson 2007 (Nat Neurosci 10:623) measured the lifetime sparseness of DA1 projection neurons across an odour panel: S = 0.90 (Willmore & Tolhurst 2001 measure; 1 = one stimulus only, 0 = all equally). Task 8 asks whether one odour recruits most PNs; this task asks the other question \u2014 whether one PN responds to most odours. Recording-match task, pre-registered in docs/rfcs/18. Odour panel (CONVENTION, see the RFC): eight single-glomerulus \"odours\", each the ORNs of one glomerulus at 100 Hz \u2014 DA1 (cVA, the cognate channel), DM1, DM2, DM4, DL1, DL5, VA1v, DC1. A dataset missing any of them skips the task rather than shrinking the panel.",
-   "citation": "Schlief & Wilson 2007 (Nat Neurosci 10:623); Willmore & Tolhurst 2001 (sparseness measure)"
+   "citation": "Schlief & Wilson 2007 (Nat Neurosci 10:623; doi:10.1038/nn1881); Willmore & Tolhurst 2001 (sparseness measure; Network 12:255; doi:10.1080/net.12.3.255.270); Olsen & Wilson 2008 (Nature 452:956; doi:10.1038/nature06864)"
   },
   {
    "name": "gf_to_muscle_latency",
    "title": "The giant fiber reaches the jump muscle in under a millisecond",
    "tier": "hard",
    "description": "Augustin et al. 2019 (eNeuro) measured brain-stimulus-to-muscle latencies of 0.93 ms (TTM) and 1.44 ms (DLM), including a 0.35 ms neuromuscular delay, so GF \u2192 TTMn \u2248 0.6 ms: the synapse is electrical. Engel & Wu 1996: a DLM response \u2265 3.0 ms is the non-GF pathway. This task measures first-spike latency from the GF's first spike to TTMn and DLMn on a loom. MaleCNS only (needs the nerve cord). Pre-registered in docs/rfcs/19: the reference model, with one 1.8 ms chemical delay for every synapse, is expected to fail the TTMn latency by construction \u2014 the task names a missing mechanism (gap junctions), not a wrong parameter. First run (RFC outcome): 11.8 ms, because one GF spike through a summed chemical synapse cannot bring TTMn to threshold; the electrical synapse in the fly makes a single spike sufficient. DLMn also fired before TTMn.",
-   "citation": "Augustin et al. 2019 (eNeuro 6:ENEURO.0423-18.2019; ModelDB 245415); Engel & Wu 1996 (J Neurosci 16:3486); Tanouye & Wyman 1980"
+   "citation": "Augustin et al. 2019 (eNeuro 6:ENEURO.0423-18.2019; ModelDB 245415; doi:10.1523/eneuro.0423-18.2019); Engel & Wu 1996 (J Neurosci 16:3486; doi:10.1523/jneurosci.16-10-03486.1996); Tanouye & Wyman 1980 (J Neurophysiol 44:405; doi:10.1152/jn.1980.44.2.405); Allen et al. 2006 (Semin Cell Dev Biol 17:31; doi:10.1016/j.semcdb.2005.11.011)"
   },
   {
    "name": "taste_modalities",
    "title": "Water extends, high salt does not, high salt suppresses sugar",
    "tier": "hard",
-   "description": "The labellum carries four gustatory channels and one proboscis motor neuron has to read them with the right sign. Water GRNs (ppk28, LB3a) drive proboscis extension in thirsty flies (Cameron et al. 2010; Chen & Dahanukar 2017); high-salt GRNs (Ir7c / ppk23, LB3d) do not, and high salt added to sucrose suppresses the extension (Zhang et al. 2013; Jaeger et al. 2018). Task 03 tests the bitter channel; this task tests the other three the export has carried since Phase 0. Scope note: Jaeger et al. put part of high-salt aversion in bitter GRNs, which this task does not drive, so a weak suppression means \"LB3d-driven central suppression alone is not enough\", not \"the fly has none\". Check 2 is a null check (a dead network passes it). Pre-registered predictions and the outcome: docs/rfcs/20_taste_modalities.md.",
-   "citation": "Cameron et al. 2010 (Nature 465:91); Chen & Dahanukar 2017 (Cell Rep 18:1140); Zhang et al. 2013 (Science 340:1334); Jaeger et al. 2018 (eLife 7:e37167)"
+   "description": "The labellum carries four gustatory channels and one proboscis motor neuron has to read them with the right sign. Water GRNs (ppk28, LB3a) drive proboscis extension in thirsty flies (Cameron et al. 2010); high-salt GRNs (Ir7c / ppk23, LB3d) do not, and high salt added to sucrose suppresses the extension (Zhang et al. 2013; Jaeger et al. 2018). Task 03 tests the bitter channel; this task tests the other three the export has carried since Phase 0. Scope note: Jaeger et al. put part of high-salt aversion in bitter GRNs, which this task does not drive, so a weak suppression means \"LB3d-driven central suppression alone is not enough\", not \"the fly has none\". Check 2 is a null check (a dead network passes it). Pre-registered predictions and the outcome: docs/rfcs/20_taste_modalities.md.",
+   "citation": "Cameron et al. 2010 (Nature 465:91; doi:10.1038/nature09011); Zhang et al. 2013 (Science 340:1334; doi:10.1126/science.1234133); Jaeger et al. 2018 (eLife 7:e37167; doi:10.7554/elife.37167)"
   },
   {
    "name": "lc_dn_matrix",
    "title": "Each lobula columnar type drives its own descending neuron, and not the others",
    "tier": "hard",
    "description": "Optogenetic activation of single LC types evokes type-specific behaviours (Wu et al. 2016, 22 types screened): LC4, LC6, LPLC1, LPLC2 \u2192 takeoff; LC16 \u2192 backward walking; LC10 \u2192 neither. The descending neurons behind two of those are known: LC4 and LPLC2 synapse onto the giant fiber (von Reyn 2017; Klapoetke 2017; Ache 2019) and LC4 onto DNp02 / DNp11 (Dombrovski 2023); LC16 drives the four moonwalker DNs (Sen 2017). This task drives each LC type at the task-04 loom rate and reads four DNs; the `matrix` check scores every cell with a citation: \"+\" the DN must spike, \"-\" it must not (a null check). The off-diagonal is the point \u2014 task 04 already tests the diagonal. Cells without a citation are \"?\" and not scored (LC6 and LPLC1 evoke takeoff but their DN targets are not established). Pre-registered predictions and outcome: docs/rfcs/21_lc_dn_matrix.md.",
-   "citation": "Wu et al. 2016 (eLife 5:e21022); Sen et al. 2017 (Curr Biol 27:766); Dombrovski et al. 2023 (Nature 613:534); von Reyn et al. 2017 (Neuron 94:1190); Klapoetke et al. 2017 (Nature 551:237); Ribeiro et al. 2018 (Curr Biol 28:2211); Morimoto et al. 2020 (eLife 9:e57685)"
+   "citation": "Wu et al. 2016 (eLife 5:e21022; doi:10.7554/elife.21022); Sen et al. 2017 (Curr Biol 27:766; doi:10.1016/j.cub.2017.02.008); Dombrovski et al. 2023 (Nature 613:534; doi:10.1038/s41586-022-05562-8); von Reyn et al. 2017 (Neuron 94:1190; doi:10.1016/j.neuron.2017.05.036); Klapoetke et al. 2017 (Nature 551:237; doi:10.1038/nature24626); Ribeiro et al. 2018 (Cell 174:607; doi:10.1016/j.cell.2018.06.020); Morimoto et al. 2020 (eLife 9:e57685; doi:10.7554/elife.57685); Ache et al. 2019 (Curr Biol 29:1073; doi:10.1016/j.cub.2019.01.079)"
   },
   {
    "name": "courtship_song_chain",
    "title": "P1 drives pIP10 drives the song wing motor neurons, on either wing, not the legs",
    "tier": "hard",
    "description": "The male song command chain (von Philipsborn et al. 2011): the male-specific P1 cluster (the pMP-e / pMP4 lineage) \u2192 the descending neuron pIP10 \u2192 thoracic song premotor neurons (dPR1, vPR6, TN1; Lillvis et al. 2024) \u2192 the wing motor neurons that make song (hg1\u20134, ps1, b1, i1, i2, iii1, iii3; O'Sullivan et al. 2018). P1 or pIP10 activation elicits song; one pIP10 is enough and a unilateral pIP10 sings with either wing, no side bias (von Philipsborn 2011). pIP10 activation gives wing extension, not walking (Cande et al. 2018), so the leg motor pool is the null readout. MaleCNS only \u2014 P1 and pIP10 are male-specific and the chain needs the nerve cord; on a female or brain-only dataset this task is not applicable (`dataset_only`), which is a different statement from \"matches no neurons\". Nothing here scores song rhythm. Pre-registered predictions and outcome: docs/rfcs/22_courtship_song_chain.md.",
-   "citation": "von Philipsborn et al. 2011 (Neuron 69:509); Lillvis et al. 2024 (Curr Biol); O'Sullivan et al. 2018 (Curr Biol 28:2705); Cande et al. 2018 (eLife 7:e34275); Cachero et al. 2010 (Curr Biol 20:1589); Yu et al. 2010 (Curr Biol 20:1602)"
+   "citation": "von Philipsborn et al. 2011 (Neuron 69:509; doi:10.1016/j.neuron.2011.01.011); Lillvis et al. 2024 (Curr Biol 34:808; doi:10.1016/j.cub.2024.01.015); O'Sullivan et al. 2018 (Curr Biol 28:2705; doi:10.1016/j.cub.2018.06.038); Cande et al. 2018 (eLife 7:e34275; doi:10.7554/elife.34275); Cachero et al. 2010 (Curr Biol 20:1589; doi:10.1016/j.cub.2010.07.045); Yu et al. 2010 (Curr Biol 20:1602; doi:10.1016/j.cub.2010.08.025)"
   },
   {
    "name": "leg_mn_size_principle",
@@ -19542,14 +19542,14 @@
    "title": "DNa02 reaches the leg motor neurons faster and harder than DNa01, on its own side, without waking its twin",
    "tier": "hard",
    "description": "Two descending neurons per side steer the walking fly. Rayshubskiy et al. 2025: DNa02 predicts high-gain steering (rotational velocity is a steep function of DNa02 activity, shallow of DNa01), its activity leads DNa01's, and \"DNa02 makes more direct synaptic connections onto motor neurons, as compared to DNa01\"; the two receive \"see-saw\" input, excitation of one copy with inhibition of the contralateral copy, and unilateral DNa02 activation gives an ipsilateral steering bias. MaleCNS v1.0 agrees on the wiring: the right DNa02 makes 490 direct synapses on 11 right leg MNs, the right DNa01 104 on 6, neither touches a left-leg MN or its contralateral twin. This task drives each right DN alone at the task-02 100 Hz and reads the leg motor pools by side and the left DNa02. Checks: both DNs recruit the right leg MNs; the DNa02 recruitment is faster (first-spike latency ratio) and stronger (rate ratio); DNa02 drives its own side more than the other; and the left DNa02 stays silent (the see-saw null). MaleCNS only (leg MNs are in the nerve cord); FlyWire records it as not applicable. Pre-registered predictions and outcome: docs/rfcs/28_steering_dna02_vs_dna01.md.",
-   "citation": "Rayshubskiy et al. 2025 (eLife 13:RP102230); Bidaye et al. 2020 (Neuron 108:469, DNa01/DNa02 steering); Chen et al. 2018 (Nat Neurosci 21:1290)"
+   "citation": "Rayshubskiy et al. 2025 (eLife 13:RP102230; doi:10.7554/elife.102230); Bidaye et al. 2020 (Neuron 108:469, DNa01/DNa02 steering; doi:10.1016/j.neuron.2020.07.032)"
   },
   {
    "name": "epg_ring_attractor",
    "title": "The compass keeps one bump, keeps it in the dark, and picks one of two cues",
    "tier": "hard",
    "description": "The head-direction system of the fly is a ring attractor: the EPG neurons of the ellipsoid body carry a single bump of activity (~90\u00b0 FWHM) that tracks heading, persists when the visual cue is removed, drifts slowly in darkness, and when two cues compete one wins (Seelig & Jayaraman 2015; Kim et al. 2017; Turner-Evans et al. 2017; Green et al. 2017). The circuit is EPG \u2192 PEN \u2192 EPG local excitation with the glutamatergic Delta7 neurons providing global inhibition (Hulse et al. 2021, the hemibrain central complex). This task cues one ellipsoid-body wedge \u2014 the EPGs of PB glomerulus 4, both sides, at the task-02 100 Hz for 500 ms \u2014 and reads the ring as eight wedges by PB glomerulus number (the community and neuPrint labels carry it; the wedge-to-angle map, 45\u00b0 per glomerulus with left and right merged, is INFERRED from Wolff, Iyer & Rubin 2015). The population vector's length (one bump \u2248 0.85, spread or two bumps \u2248 0) and angle are the readouts, during the cue and 200\u2013700 ms after it ends; a second condition cues two opposite wedges. Shipped in the expected-fail tier: a uniform LIF with no adaptation and a 20 ms membrane has nothing to hold a bump with, and the task exists to say how it fails. Pre-registered predictions and outcome: docs/rfcs/29_epg_ring_attractor.md.",
-   "citation": "Seelig & Jayaraman 2015 (Nature 521:186); Kim et al. 2017 (Science 356:849); Turner-Evans et al. 2017 (eLife 6:e23496); Green et al. 2017 (Nature 546:101); Hulse et al. 2021 (eLife 10:e66039); Wolff, Iyer & Rubin 2015 (J Comp Neurol 523:997)"
+   "citation": "Seelig & Jayaraman 2015 (Nature 521:186; doi:10.1038/nature14446); Kim et al. 2017 (Science 356:849; doi:10.1126/science.aal4835); Turner-Evans et al. 2017 (eLife 6:e23496; doi:10.7554/elife.23496); Green et al. 2017 (Nature 546:101; doi:10.1038/nature22343); Hulse et al. 2021 (eLife 10:e66039; doi:10.7554/elife.66039); Wolff, Iyer & Rubin 2015 (J Comp Neurol 523:997; doi:10.1002/cne.23705)"
   },
   {
    "name": "egg_laying_ovidn",
@@ -19605,7 +19605,7 @@
    "title": "One antenna's attractive odour channel steers toward it, an aversive one steers away",
    "tier": "hard",
    "description": "Single ORN types carry a sign: optogenetic activation of DM1, DM2 or VA2 ORNs alone attracts walking flies (Bell & Wilson 2016; DM1 and VA2 are needed for vinegar attraction, Semmelhack & Wang 2009), while the CO2 channel V (Suh et al. 2004) and the geosmin channel DA2 (Stensmyr et al. 2012) are each sufficient for aversion. ORNs release more transmitter on their own side and flies turn toward the antenna with the stronger attractive input (Gaudry et al. 2013); DNa02 activity predicts ipsilateral turns (Rayshubskiy et al. 2025). This task drives the left-antenna ORNs of one glomerulus at the task-8 100 Hz and reads DNa02 on both sides: attractive channels must bias the left DNa02, aversive ones the right (turning away is INFERRED; the aversion papers measured approach and avoidance). A model whose turns follow drive strength rather than channel scores 3/5. RFC S2 applies: a silent DNa02 pair fails every check. Pre-registered predictions and outcome: docs/rfcs/37_odor_valence_steering.md. Prompted by Daniel Culotta (2026-10-19).",
-   "citation": "Bell & Wilson 2016 (Neuron 91:425); Semmelhack & Wang 2009 (Nature 459:218); Suh et al. 2004 (Nature 431:854); Stensmyr et al. 2012 (Cell 151:1345); Gaudry et al. 2013 (Nature 493:424); Rayshubskiy et al. 2025 (eLife 13:RP102230)"
+   "citation": "Bell & Wilson 2016 (Neuron 91:425; doi:10.1016/j.neuron.2016.06.011); Semmelhack & Wang 2009 (Nature 459:218; doi:10.1038/nature07983); Suh et al. 2004 (Nature 431:854; doi:10.1038/nature02980); Stensmyr et al. 2012 (Cell 151:1345; doi:10.1016/j.cell.2012.09.046); Gaudry et al. 2013 (Nature 493:424; doi:10.1038/nature11747); Rayshubskiy et al. 2025 (eLife 13:RP102230; doi:10.7554/elife.102230)"
   }
  ]
 }
