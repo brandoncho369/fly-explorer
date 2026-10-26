@@ -22322,7 +22322,7 @@
    }
   },
   {
-   "label": "Shiu constants, gain 1.0 (Codex \u22655 graph)",
+   "label": "Shiu constants, gain 1.0 (Codex graph, 5+ synapses)",
    "connectome": "flywire783",
    "simulator": "LIFSimulator",
    "gain": 1.0,
