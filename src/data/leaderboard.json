@@ -9,15 +9,15 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.6199487433862433,
+   "hard": 0.61161541005291,
    "seeds": 3,
    "verified": true,
-   "graded": 0.7400734898700873,
+   "graded": 0.7320535258385452,
    "graded_ci": [
-    0.7223146986921679,
-    0.7566315490524654
+    0.7149369419725968,
+    0.7483793648417426
    ],
-   "specificity": 0.2999315818281336,
+   "specificity": 0.2930350301039956,
    "holdout_gap": null,
    "division": "open",
    "n_free_parameters": 0,
@@ -117,12 +117,12 @@
     },
     "dose_response": {
      "passed": false,
-     "score": 0.8,
+     "score": 0.6,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 26]",
-       "v": 26.06060606060606,
-       "ok": true
+       "d": "rate[measured] > 5.0 Hz  [0/3 seeds, sd 1.55]",
+       "v": 2.121212121212121,
+       "ok": false
       },
       {
        "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
@@ -948,15 +948,15 @@
    "gain": 0.45,
    "w_syn": 0.275,
    "core": 1.0,
-   "hard": 0.5695738440303657,
+   "hard": 0.5608781918564527,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6960099478199889,
+   "graded": 0.6891956012019926,
    "graded_ci": [
-    0.6877330001968439,
-    0.7038505957324787
+    0.6785185420014817,
+    0.6995175207962194
    ],
-   "specificity": 0.24712301587301586,
+   "specificity": 0.23998015873015874,
    "holdout_gap": null,
    "division": null,
    "n_free_parameters": null,
@@ -1056,12 +1056,12 @@
     },
     "dose_response": {
      "passed": false,
-     "score": 0.6,
+     "score": 0.4,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 154]",
-       "v": 215.75757575757572,
-       "ok": true
+       "d": "rate[measured] > 5.0 Hz  [2/3 seeds, sd 92.2]",
+       "v": 67.87878787878788,
+       "ok": false
       },
       {
        "d": "rate[weak] > 1.0 Hz  [0/3 seeds, sd 0]",
@@ -3669,7 +3669,7 @@
    "hard": 0.5452208419599723,
    "seeds": 1,
    "verified": false,
-   "graded": 0.6408295440250967,
+   "graded": 0.6424979480417808,
    "graded_ci": null,
    "specificity": null,
    "holdout_gap": null,
@@ -3775,7 +3775,7 @@
      "checks": [
       {
        "d": "rate[measured] > 5.0 Hz",
-       "v": 0.0,
+       "v": 1.8181818181818181,
        "ok": false
       },
       {
@@ -4574,10 +4574,10 @@
    "hard": 0.5156332671957672,
    "seeds": 3,
    "verified": true,
-   "graded": 0.6403468687121577,
+   "graded": 0.6420781289396704,
    "graded_ci": [
-    0.6331811429585829,
-    0.648083992005211
+    0.6337735867826932,
+    0.649670699865052
    ],
    "specificity": 0.2136015325670498,
    "holdout_gap": null,
@@ -4682,8 +4682,8 @@
      "score": 0.4,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [1/3 seeds, sd 100]",
-       "v": 73.63636363636364,
+       "d": "rate[measured] > 5.0 Hz  [2/3 seeds, sd 94.6]",
+       "v": 72.72727272727272,
        "ok": false
       },
       {
@@ -5515,8 +5515,8 @@
    "verified": false,
    "graded": 0.6279365721005649,
    "graded_ci": [
-    0.593468639354946,
-    0.6631025758906929
+    0.5922887447980565,
+    0.6614080129769321
    ],
    "specificity": null,
    "holdout_gap": null,
@@ -5621,8 +5621,8 @@
      "score": 0.0,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [1/3 seeds, sd 3.24]",
-       "v": 2.727272727272727,
+       "d": "rate[measured] > 5.0 Hz  [0/3 seeds, sd 0.429]",
+       "v": 2.121212121212121,
        "ok": false
       },
       {
@@ -6527,7 +6527,7 @@
      "checks": [
       {
        "d": "rate[measured] > 5.0 Hz",
-       "v": 353.6363636363636,
+       "v": 170.9090909090909,
        "ok": true
       },
       {
@@ -7434,8 +7434,8 @@
      "score": 0.8,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 115]",
-       "v": 280.0,
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 52.5]",
+       "v": 163.93939393939394,
        "ok": true
       },
       {
@@ -8373,8 +8373,8 @@
      "score": 0.2,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [1/3 seeds, sd 5.14]",
-       "v": 3.6363636363636362,
+       "d": "rate[measured] > 5.0 Hz  [0/3 seeds, sd 0]",
+       "v": 0.0,
        "ok": false
       },
       {
@@ -9206,8 +9206,8 @@
    "verified": false,
    "graded": 0.6882722776654007,
    "graded_ci": [
-    0.6755653309865569,
-    0.695857708270042
+    0.6758147362222997,
+    0.6961675205419064
    ],
    "specificity": 0.24565544608648057,
    "holdout_gap": null,
@@ -9312,8 +9312,8 @@
      "score": 0.2,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [0/3 seeds, sd 0]",
-       "v": 0.0,
+       "d": "rate[measured] > 5.0 Hz  [1/3 seeds, sd 91.7]",
+       "v": 64.84848484848484,
        "ok": false
       },
       {
@@ -10146,7 +10146,7 @@
    "graded": 0.6860485028084463,
    "graded_ci": [
     0.6756562936798094,
-    0.7180397236949104
+    0.7180558550053845
    ],
    "specificity": 0.20844280240831967,
    "holdout_gap": null,
@@ -10251,8 +10251,8 @@
      "score": 0.0,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [1/3 seeds, sd 5.37]",
-       "v": 4.242424242424241,
+       "d": "rate[measured] > 5.0 Hz  [0/3 seeds, sd 1.55]",
+       "v": 2.121212121212121,
        "ok": false
       },
       {
@@ -11084,8 +11084,8 @@
    "verified": false,
    "graded": 0.7270399043003638,
    "graded_ci": [
-    0.7074201855039339,
-    0.7665880670305557
+    0.7084737126280634,
+    0.7685289251134968
    ],
    "specificity": 0.23506431308155445,
    "holdout_gap": null,
@@ -11190,8 +11190,8 @@
      "score": 0.0,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [0/3 seeds, sd 1.29]",
-       "v": 0.9090909090909091,
+       "d": "rate[measured] > 5.0 Hz  [1/3 seeds, sd 204]",
+       "v": 146.06060606060603,
        "ok": false
       },
       {
@@ -12021,10 +12021,10 @@
    "hard": 0.6681299603174603,
    "seeds": 3,
    "verified": false,
-   "graded": 0.7607722670094064,
+   "graded": 0.7609110673631708,
    "graded_ci": [
-    0.7406778737649388,
-    0.7774853677111242
+    0.7406891443484468,
+    0.7776213150007777
    ],
    "specificity": 0.33118500273672696,
    "holdout_gap": null,
@@ -12129,8 +12129,8 @@
      "score": 0.4,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [2/3 seeds, sd 99.8]",
-       "v": 137.57575757575756,
+       "d": "rate[measured] > 5.0 Hz  [2/3 seeds, sd 74.8]",
+       "v": 106.06060606060605,
        "ok": false
       },
       {
@@ -12957,15 +12957,15 @@
    "gain": 0.7,
    "w_syn": 0.275,
    "core": 0.9,
-   "hard": 0.6805142195767195,
+   "hard": 0.6721808862433862,
    "seeds": 3,
    "verified": false,
-   "graded": 0.7485537587796817,
+   "graded": 0.7441119509049868,
    "graded_ci": [
-    0.7352344181224431,
-    0.7589381518290607
+    0.7296776177339641,
+    0.7558360515019903
    ],
-   "specificity": 0.34143404488232076,
+   "specificity": 0.3345374931581829,
    "holdout_gap": null,
    "division": null,
    "n_free_parameters": null,
@@ -13065,12 +13065,12 @@
     },
     "dose_response": {
      "passed": false,
-     "score": 0.8,
+     "score": 0.6,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 18.9]",
-       "v": 162.1212121212121,
-       "ok": true
+       "d": "rate[measured] > 5.0 Hz  [2/3 seeds, sd 70.3]",
+       "v": 97.87878787878788,
+       "ok": false
       },
       {
        "d": "rate[weak] > 1.0 Hz  [2/3 seeds, sd 3.4]",
@@ -14838,10 +14838,10 @@
    "hard": 0.6465112433862434,
    "seeds": 3,
    "verified": false,
-   "graded": 0.763938344471688,
+   "graded": 0.7626293914384473,
    "graded_ci": [
-    0.7528551407772041,
-    0.775477293955292
+    0.751538367190674,
+    0.7738947930371465
    ],
    "specificity": 0.33053503010399565,
    "holdout_gap": null,
@@ -14946,8 +14946,8 @@
      "score": 0.6,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 19.7]",
-       "v": 377.57575757575756,
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 4.94]",
+       "v": 16.666666666666664,
        "ok": true
       },
       {
@@ -15779,8 +15779,8 @@
    "verified": false,
    "graded": 0.7043522678790288,
    "graded_ci": [
-    0.6952916179719404,
-    0.7160827793322266
+    0.6952752735668501,
+    0.716071554509413
    ],
    "specificity": 0.2848522167487685,
    "holdout_gap": null,
@@ -15885,8 +15885,8 @@
      "score": 1.0,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 61]",
-       "v": 159.99999999999997,
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 36.9]",
+       "v": 116.06060606060606,
        "ok": true
       },
       {
@@ -16716,10 +16716,10 @@
    "hard": 0.5914066776135741,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6540029781033552,
+   "graded": 0.6540027420248207,
    "graded_ci": [
-    0.6399950688819809,
-    0.665634796342852
+    0.6399949662498163,
+    0.6656345607089422
    ],
    "specificity": null,
    "holdout_gap": null,
@@ -16824,8 +16824,8 @@
      "score": 0.8,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 21.1]",
-       "v": 221.5151515151515,
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 18.5]",
+       "v": 216.96969696969697,
        "ok": true
       },
       {
@@ -17839,10 +17839,10 @@
    "hard": 0.566023535851122,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6357678496166361,
+   "graded": 0.6357782933444052,
    "graded_ci": [
-    0.6214147477173816,
-    0.6468210191532903
+    0.6214150461708774,
+    0.6468312027462705
    ],
    "specificity": null,
    "holdout_gap": null,
@@ -17947,8 +17947,8 @@
      "score": 0.8,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 73.5]",
-       "v": 193.9393939393939,
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 18.3]",
+       "v": 233.9393939393939,
        "ok": true
       },
       {
@@ -18962,10 +18962,10 @@
    "hard": 0.5612821565407772,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6149445140516361,
+   "graded": 0.6149448033815946,
    "graded_ci": [
-    0.6035641803939179,
-    0.6221659812552991
+    0.60356444482531,
+    0.622166271429792
    ],
    "specificity": null,
    "holdout_gap": null,
@@ -19070,8 +19070,8 @@
      "score": 0.8,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 22.1]",
-       "v": 240.0,
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 14.9]",
+       "v": 244.54545454545453,
        "ok": true
       },
       {
@@ -20085,10 +20085,10 @@
    "hard": 0.579816639299398,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6569577776743288,
+   "graded": 0.6569644502192197,
    "graded_ci": [
-    0.6435796973891162,
-    0.6651835774250017
+    0.6435863699340071,
+    0.6652023182879053
    ],
    "specificity": 0.21938025210084036,
    "holdout_gap": null,
@@ -20193,8 +20193,8 @@
      "score": 0.8,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 71.4]",
-       "v": 162.4242424242424,
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 63.4]",
+       "v": 201.21212121212116,
        "ok": true
       },
       {
@@ -21208,10 +21208,10 @@
    "hard": 0.590503557744937,
    "seeds": 3,
    "verified": false,
-   "graded": 0.6968606157669693,
+   "graded": 0.6968607110653205,
    "graded_ci": [
-    0.687287234148275,
-    0.7045623611751064
+    0.6872872929039867,
+    0.7045625868936377
    ],
    "specificity": 0.277515172735761,
    "holdout_gap": null,
@@ -21316,8 +21316,8 @@
      "score": 0.8,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 24.4]",
-       "v": 255.4545454545454,
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 20.3]",
+       "v": 256.6666666666667,
        "ok": true
       },
       {
@@ -22439,8 +22439,8 @@
      "score": 0.8,
      "checks": [
       {
-       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 85.7]",
-       "v": 156.06060606060603,
+       "d": "rate[measured] > 5.0 Hz  [3/3 seeds, sd 49.1]",
+       "v": 176.66666666666666,
        "ok": true
       },
       {
@@ -23301,7 +23301,7 @@
    "name": "dose_response",
    "title": "Proboscis response scales with sugar intensity",
    "tier": "hard",
-   "description": "Real flies extend the proboscis more reliably and more strongly as sucrose concentration rises; GRN firing rate encodes concentration. A model whose MN9 output is all-or-nothing (saturating at the refractory limit the moment any input arrives) has lost that gradation. Weak drive (20 Hz on the sugar GRNs) should give a clearly smaller MN9 response than strong drive (100 Hz), and both should be above baseline. The 100 Hz \"strong\" drive is the Shiu et al. 2024 convention; the one recorded number for a labellar sugar GRN is ~40 spikes per 500 ms (\u224880 Hz) at 100 mM sucrose (Zhang, Aikin, Li & Montell 2016, Neuron 91:863), so a third condition drives the GRNs at that measured rate and asks only that the pathway still conducts.",
+   "description": "Real flies extend the proboscis more reliably and more strongly as sucrose concentration rises; GRN firing rate encodes concentration. A model whose MN9 output is all-or-nothing (saturating at the refractory limit the moment any input arrives) has lost that gradation. Weak drive (20 Hz on the sugar GRNs) should give a clearly smaller MN9 response than strong drive (100 Hz), and both should be above baseline. The 100 Hz \"strong\" drive is the Shiu et al. 2024 convention; the one recorded number for a labellar sugar GRN is ~32-33 spikes per 500 ms (\u224865 Hz) at 100 mM sucrose (Zhang, Aikin, Li & Montell 2016, Neuron 91:863, Fig. 1C, 0 % HPC), so a third condition drives the GRNs at that measured rate and asks only that the pathway still conducts. (Until 2026-10-25 this read ~40 spikes / 80 Hz, which the figure does not show.)",
    "citation": "Dethier 1976; Dahanukar et al. 2007 (Neuron); Zhang, Aikin, Li & Montell 2016 (Neuron 91:863; doi:10.1016/j.neuron.2016.07.013); Shiu et al. 2024"
   },
   {
