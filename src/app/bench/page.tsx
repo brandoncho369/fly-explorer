@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 };
 
 const REPO = "https://github.com/brandoncho369/flybench";
+const PREPRINT = "https://doi.org/10.5281/zenodo.23678526";
 const snap = snapshot as unknown as Snapshot;
 const problems = validateSnapshot(snap);
 if (problems.length) throw new Error("leaderboard.json is inconsistent:\n" + problems.join("\n"));
@@ -36,6 +37,7 @@ export default function Bench() {
             <Link href="/limits" className="hover:text-white">limits</Link>
             <a href="#leaderboard" className="hover:text-white">leaderboard</a>
             <a href="#tasks" className="hover:text-white">tasks</a>
+            <a href={PREPRINT} className="hover:text-white">preprint</a>
             <a href={REPO} className="hover:text-white">github</a>
           </div>
         </nav>
